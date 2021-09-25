@@ -1,7 +1,7 @@
 import cv2
 import sys
 
-cascPath = sys.argv[0]
+cascPath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 
 video_capture = cv2.VideoCapture(0)
@@ -17,7 +17,7 @@ while True:
         scaleFactor=1.1,
         minNeighbors=5,
         minSize=(30, 30),
-        flags=cv2.cv.CV_HAAR_SCALE_IMAGE
+        flags=cv2.FONT_HERSHEY_SIMPLEX
     )
 
     # Draw a rectangle around the faces
