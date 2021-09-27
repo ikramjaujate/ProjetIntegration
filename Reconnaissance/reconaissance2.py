@@ -4,6 +4,7 @@ import numpy as np
 import os # pour importer toutes les images d'un coup
 import datetime
 
+
 # charger les images et les convertir en RVB 
 #imgIkram = face_recognition.load_image_file("C:\ProjetIntegration-1\Reconnaissance\ikram.JPG")
 #imgIkram = cv2.cvtColor(imgIkram,cv2.COLOR_BGR2RGB)
@@ -27,17 +28,6 @@ def findEncodings(images):
         encodeList.append(encode)
     return encodeList
 
-def markAttendance(name):
-    with open('Attendance.csv','r+') as f:
-        myDataList = f.readlines()
-        nameList =[]
-        for line in myDataList:
-            entry = line.split(',')
-            nameList.append(entry[0])
-        if name not in  line:
-            now = datetime.now()
-            dt_string = now.strftime("%H:%M:%S")
-            f.writelines(f'n{name},{dt_string}')
 
 encodeListKnown = findEncodings(images)
 print('Encodings Complete')
@@ -61,7 +51,13 @@ while True:
 
         if faceDis[matchIndex]< 0.50:
             name = className[matchIndex].upper()
-            markAttendance(name)
+            #print(name)
+            y1,x2,y2,x1 = faceLoc
+            y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
+            cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
+            cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
+            cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+            
         
         else: 
             name = 'Unknown'
