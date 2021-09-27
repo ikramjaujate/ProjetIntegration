@@ -4,7 +4,7 @@ import cv2
 
 video_capture = cv2.VideoCapture(0)
 
-ikram_image = fr.load_image_file("/Users/ikramjaujate/Desktop/ProjetIntegration-1/Reconnaissance/ikram.JPG")
+ikram_image = fr.load_image_file("C:\ProjetIntegration-1\Reconnaissance\ikram.JPG")
 ikram_face_encoding = fr.face_encodings(ikram_image)[0]
 
 known_face_encondings = [ikram_face_encoding]
