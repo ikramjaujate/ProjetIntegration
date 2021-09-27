@@ -5,10 +5,6 @@ import os # pour importer toutes les images d'un coup
 import datetime
 
 
-# charger les images et les convertir en RVB 
-#imgIkram = face_recognition.load_image_file("C:\ProjetIntegration-1\Reconnaissance\ikram.JPG")
-#imgIkram = cv2.cvtColor(imgIkram,cv2.COLOR_BGR2RGB)
-
 path = './Reconnaissance/images'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
@@ -58,7 +54,6 @@ while True:
             cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
             cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
             
-        
         else: 
             name = 'Unknown'
             #print(name)
@@ -71,9 +66,3 @@ while True:
     cv2.imshow('Webcam',img)
     cv2.waitKey(1)
 
-# chercher les visages dans les images
-
-#faceLoc = face_recognition.face_locations(imgIkram)[0]
-#encodeElon = face_recognition.face_encodings(imgIkram)[0]
-#cv2.rectangle(imgIkram,(faceLoc[3],faceLoc[0]),(faceLoc[1],faceLoc[2]),(255,0,255),2) # top, right, bottom, left
- 
