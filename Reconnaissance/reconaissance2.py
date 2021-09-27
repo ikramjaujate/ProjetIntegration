@@ -8,7 +8,7 @@ import datetime
 #imgIkram = face_recognition.load_image_file("C:\ProjetIntegration-1\Reconnaissance\ikram.JPG")
 #imgIkram = cv2.cvtColor(imgIkram,cv2.COLOR_BGR2RGB)
 
-path = 'C:\ProjetIntegration-1\Reconnaissance\images'
+path = './Reconnaissance/images'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
 myList = os.listdir(path)
