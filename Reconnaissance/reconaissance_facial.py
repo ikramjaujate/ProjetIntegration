@@ -15,6 +15,7 @@ for x,cl in enumerate(myList):
         images.append(curImg)
         className.append(os.path.splitext(cl)[0])
 
+
 #les encoder
 def findEncodings(images):
     encodeList = []
@@ -30,6 +31,13 @@ print('Encodings Complete')
 
 # capture vidéo
 cap = cv2.VideoCapture(0)
+
+# Convertir les resolutions 
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
+
+out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+
 while True:
     success, img = cap.read()
     imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
@@ -44,6 +52,7 @@ while True:
         faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
 
         matchIndex = np.argmin(faceDis)
+        
 
         if faceDis[matchIndex]< 0.50:
             name = className[matchIndex].upper()
@@ -62,7 +71,8 @@ while True:
             cv2.rectangle(img,(x1,y1),(x2,y2),(0,0,255),2)
             cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,0,255),cv2.FILLED)
             cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
-        
+    
+    out.write(img)
     cv2.imshow('Webcam',img)
     cv2.waitKey(1)
 
