@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // {/* <i className="bi bi-person-circle" style={{color:'red', fontSize:'2em'}}></i> */}
 const CameraInfo = ({name, color, notification}) => {
     return (
-        <div class="row p-1 m-2 bg-light shadow-sm rounded">
+        <div class="row p-1 m-2 bg-light rounded">
             <div class="col-md-4 align-self-center">{name}</div>
             <div class="col-md-2 offset-md-5 rounded" style={{backgroundColor:color}}>  
                 {/* <i class="bi bi-bell" style={{color:"white", fontSize:'100%'}}></i> */}

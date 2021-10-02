@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const LayoutGrade = ({name, color, members, allowed_camera, refused_camera}) => {
     return (
         <div className="row p-1 justify-content-center">
-            <div className="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-1 bg-light shadow-sm rounded row" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div className="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-1 bg-light shadow-sm rounded row" type="button" data-bs-toggle="modal" data-bs-target="#gradeModal">
                 <div className="col-sm-3 rounded" style={{backgroundColor:color}}>
                     <i className="bi bi-person" style={{color:'white', fontSize:'350%'}}></i>
                 </div>
