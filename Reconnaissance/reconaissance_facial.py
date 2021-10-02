@@ -8,7 +8,9 @@ import datetime
 path = './Reconnaissance/images'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
-myList = os.listdir(path)
+
+myList = [x for x in os.listdir(path) if x.endswith('.jpg')]
+print(myList)
 print("Nombre de classes détectées",len(myList))
 for x,cl in enumerate(myList):
         curImg = cv2.imread(f'{path}/{cl}')
@@ -20,9 +22,11 @@ for x,cl in enumerate(myList):
 def findEncodings(images):
     encodeList = []
     for img in images:
+        print(img)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         encode = face_recognition.face_encodings(img)[0]
         encodeList.append(encode)
+
     return encodeList
 
 
