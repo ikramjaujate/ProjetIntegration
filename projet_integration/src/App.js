@@ -1,11 +1,23 @@
 import './css/App.css';
-import Navbar from './components/Navbar.js';
+import Secretary from './Secretary.js';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'; 
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            Accueil {/*Page Cécile*/}
+          </Route>
+        </Switch>
+        <Switch>
+          <Route exact path="/secretary">
+            <Secretary/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
