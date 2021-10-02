@@ -1,14 +1,24 @@
 const http = require('http');
-
+const express = require('express')
+const app = express()
 const {Client}= require('pg')
+const cors = require('cors')
 
 const client = new Client({
   host: '127.0.0.1',
   port: 5432,
   user: 'postgres',
-  password: 'coda',
+  password: '19992003i',
   database: 'ProjetIntegration'
 })
+
+app.listen(3001, () => {
+  console.log("running on port 3001");
+})
+
+app.use(express.json())
+app.use(cors())  //to avoid CORS policy
+
 
 
 client.connect(err => {
@@ -19,27 +29,11 @@ client.connect(err => {
   }
 })
 
-photo=[];
-
-client  
-  .query('SELECT * FROM photo')
-  .then(res => 
-    res.rows.forEach( row => {
-    photo.push(row);
-      //console.log(photo);
-  }))
-    
-    
-    
-  .catch(e => console.error(e.stack))
-  .then(() => client.end())
-  console.log(photo)
-
-/*
-var res = await client.query("SELECT * FROM photo");
-res.rows.forEach(row=>{
-    console.log(row);
-});
-await client.end();
-*/
-
+app.get('/api/users/photo', (request, response) => {
+  client.query('SELECT * FROM photo', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+})
