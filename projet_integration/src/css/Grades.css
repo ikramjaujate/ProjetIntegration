@@ -1,3 +1,17 @@
 .add-user:hover {
     color: #358539;
 }
+
+::-webkit-scrollbar {
+	width: 6px; 
+}
+::-webkit-scrollbar-thumb {
+	background: #b1acaa; 
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { 
+	background: #696969;
+}
+::-webkit-scrollbar-thumb:active {
+	background: #2A2A2A;
+}

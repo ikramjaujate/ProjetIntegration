@@ -16,9 +16,9 @@
   }
 
   /* hiding scrollbar */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     display: none;
-  }
+  } */
   
   .navbar {
     position: fixed;

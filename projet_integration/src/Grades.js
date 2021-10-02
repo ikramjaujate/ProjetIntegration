@@ -2,10 +2,11 @@ import'bootstrap/dist/css/bootstrap.min.css';
 import'bootstrap/dist/js/bootstrap.bundle.min';
 // import 'materialize-css/dist/css/materialize.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import 'mdb-ui-kit/css/mdb.min.css';
+// import 'mdb-ui-kit/css/mdb.min.css';
 
 import './css/Grades.css';
 import LayoutGrade from './components/LayoutGrade';
+import CameraInfo from './components/CameraInfo';
 import {useEffect, useState} from "react" ;
 
 function Grades() {
@@ -43,49 +44,40 @@ function Grades() {
                     </div>
                 </div>  
 
+                {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Launch demo modal
+                </button> */}
 
-                {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Launch static backdrop modal
-                </button>
-
-                <div class="modal-dialog modal-dialog-centered" id="staticBackdrop">
-                    <div class="modal-dialog">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-header row">
+                            <h5 class="p-1 modal-title shadow-sm rounded col-sm-8 align-self-center offset-sm-2" style={{backgroundColor:'#BBDEFB', color:"white", textAlign:"center"}} id="exampleModalLabel">Bénéficaire</h5>
+                            {/* <button type="button" class="btn-close col-sm-1" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
                         <div class="modal-body">
-                            ...
+
+                            <div class="container-fluid">
+                                <CameraInfo color="#90e093" name="CAM1" notification={false}/>
+                                <CameraInfo color="#90e093" name="CAM2" notification={false}/>
+                                <CameraInfo color="#ff6060" name="CAM3" notification={false}/>
+                                <CameraInfo color="#ff6060" name="CAM4" notification={true}/>
+                                <CameraInfo color="#ff6060" name="CAM5" notification={true}/>
+                                <CameraInfo color="#90e093" name="CAM6" notification={false}/>
+                                <CameraInfo color="#90e093" name="CAM7" notification={false}/>
+                                <CameraInfo color="#ff6060" name="CAM8" notification={false}/>
+                                <CameraInfo color="#ff6060" name="CAM9" notification={false}/>
+                                <CameraInfo color="#ff6060" name="CAM10" notification={true}/>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Understood</button>
+                            {/* <button type="button" class="btn btn-primary">Save changes</button> */}
                         </div>
                         </div>
                     </div>
-                </div> */}
-
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-                    <div id="myModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Modal Header</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Some text in the modal.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                        </div>
-
-                    </div>
-                    </div>
+                </div>
 
             </div>
         </div>
