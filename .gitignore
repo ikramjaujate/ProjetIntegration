@@ -47,6 +47,9 @@
 .venv
 venv
 
+#node modules
+
+*node_modules
 # Kernel Module Compile Results
 *.mod*
 *.cmd
