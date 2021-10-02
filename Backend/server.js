@@ -1,14 +1,45 @@
 const http = require('http');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const {Client}= require('pg')
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
-});
+const client = new Client({
+  host: '127.0.0.1',
+  port: 5432,
+  user: 'postgres',
+  password: 'coda',
+  database: 'ProjetIntegration'
+})
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+
+client.connect(err => {
+  if (err) {
+    console.error('connection error', err.stack)
+  } else {
+    console.log('connected')
+  }
+})
+
+photo=[];
+
+client  
+  .query('SELECT * FROM photo')
+  .then(res => 
+    res.rows.forEach( row => {
+    photo.push(row);
+      //console.log(photo);
+  }))
+    
+    
+    
+  .catch(e => console.error(e.stack))
+  .then(() => client.end())
+  console.log(photo)
+
+/*
+var res = await client.query("SELECT * FROM photo");
+res.rows.forEach(row=>{
+    console.log(row);
 });
+await client.end();
+*/
+
