@@ -10,6 +10,20 @@ import CameraInfo from './components/CameraInfo';
 import {useEffect, useState} from "react" ;
 
 function Grades() {
+    const listGrades = [{id:'dir', name : 'Directeur', color:'#B2DFDB', members:'2', allowedCamera:'14', refusedCamera:'0'}, 
+    {id:'pers', name : 'Personnel', color:'#F8BBD0', members:'18', allowedCamera:'10', refusedCamera:'4'},
+    {id:'benef', name : 'Bénéficiaire', color:'#BBDEFB', members:'82', allowedCamera:'3', refusedCamera:'11'}];
+
+    const listCameras = [{name:"CAM1", allowed:true, notification:false},
+    {name:"CAM2", allowed:true, notification:false},
+    {name:"CAM3", allowed:false, notification:false},
+    {name:"CAM4", allowed:false, notification:true},
+    {name:"CAM5", allowed:false, notification:true},
+    {name:"CAM6", allowed:true, notification:false},
+    {name:"CAM7", allowed:true, notification:false},
+    {name:"CAM8", allowed:true, notification:false},
+    {name:"CAM9", allowed:false, notification:true},
+    {name:"CAM10", allowed:false, notification:false}] ;
 
     // var myModal = document.getElementById('myModal') ;
     // var myInput = document.getElementById('myInput') ;
@@ -37,9 +51,12 @@ function Grades() {
     return (
         <div>
             <div>
-                <LayoutGrade name ="Directeur" color="#B2DFDB" members="2" allowed_camera="14" refused_camera="0"/>
+                {listGrades.map(grade => (
+                    <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedCamera} refused_camera={grade.refusedCamera}/>
+                ))}
+                {/* <LayoutGrade name ="Directeur" color="#B2DFDB" members="2" allowed_camera="14" refused_camera="0"/>
                 <LayoutGrade name ="Personnel" color="#F8BBD0" members="18" allowed_camera="10" refused_camera="4"/>
-                <LayoutGrade name ="Bénéficiaire" color="#BBDEFB" members="82" allowed_camera="3" refused_camera="11"/>
+                <LayoutGrade name ="Bénéficiaire" color="#BBDEFB" members="82" allowed_camera="3" refused_camera="11"/> */}
 
                 <div className="row p-1 justify-content-center">
                     <div className="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-1 bg-light shadow-sm rounded row">
@@ -71,16 +88,19 @@ function Grades() {
                         <div className="modal-body">
 
                             <div className="container-fluid">
-                                <CameraInfo color="#90e093" name="CAM1" notification={false}/>
-                                <CameraInfo color="#90e093" name="CAM2" notification={false}/>
-                                <CameraInfo color="#ff6060" name="CAM3" notification={false}/>
-                                <CameraInfo color="#ff6060" name="CAM4" notification={true}/>
-                                <CameraInfo color="#ff6060" name="CAM5" notification={true}/>
-                                <CameraInfo color="#90e093" name="CAM6" notification={false}/>
-                                <CameraInfo color="#90e093" name="CAM7" notification={false}/>
-                                <CameraInfo color="#ff6060" name="CAM8" notification={false}/>
-                                <CameraInfo color="#ff6060" name="CAM9" notification={false}/>
-                                <CameraInfo color="#ff6060" name="CAM10" notification={true}/>
+                                {listCameras.map(camera => (
+                                    <CameraInfo allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
+                                ))}
+                                {/* <CameraInfo allowed={true} name="CAM1" notification={false}/>
+                                <CameraInfo allowed={true} name="CAM2" notification={false}/>
+                                <CameraInfo allowed={false} name="CAM3" notification={false}/>
+                                <CameraInfo allowed={false} name="CAM4" notification={true}/>
+                                <CameraInfo allowed={false} name="CAM5" notification={true}/>
+                                <CameraInfo allowed={true} name="CAM6" notification={false}/>
+                                <CameraInfo allowed={true} name="CAM7" notification={false}/>
+                                <CameraInfo allowed={false} name="CAM8" notification={false}/>
+                                <CameraInfo allowed={false} name="CAM9" notification={false}/>
+                                <CameraInfo allowed={false} name="CAM10" notification={true}/> */}
                             </div>
 
                         </div>
