@@ -1,3 +1,12 @@
+:root {
+    --color1 : #B2DFDB ;
+    --color2 : #F8BBD0 ;
+    --color3 : #BBDEFB ;
+    --x : #BDBDBD;
+    --camerAllow : #90E093 ;
+    --cameraRefuse : #FF6060 ;
+}
+
 .add-user:hover {
     color: #358539;
 }

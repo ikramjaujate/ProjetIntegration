@@ -41,24 +41,24 @@ function Grades() {
                             </div>
                             <div className="p-0 col-sm-12 align-self-end" style={{color:"#BDBDBD"}}>0 membre</div>
                         </div>
-                        {/* <i class="bi bi-plus-circle-fill green-text text-lighten-2"></i> */}
+                        {/* <i className="bi bi-plus-circle-fill green-text text-lighten-2"></i> */}
                     </div>
                 </div>  
 
-                {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gradeModal">
+                {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gradeModal">
                 Launch demo modal
                 </button> */}
 
-                <div class="modal fade" id="gradeModal" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                        <div class="modal-header row">
-                            <h5 class="p-1 modal-title shadow-sm rounded col-sm-8 align-self-center offset-sm-2" style={{backgroundColor:'#BBDEFB', color:"white", textAlign:"center"}} id="gradeModalLabel">Bénéficaire</h5>
-                            {/* <button type="button" class="btn-close col-sm-1" data-bs-dismiss="modal" aria-label="Close"></button> */}
+                <div className="modal fade" id="gradeModal" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                        <div className="modal-content">
+                        <div className="modal-header row">
+                            <h5 className="p-1 modal-title shadow-sm rounded col-sm-8 align-self-center offset-sm-2" style={{backgroundColor:'#BBDEFB', color:"white", textAlign:"center"}} id="gradeModalLabel">Bénéficaire</h5>
+                            {/* <button type="button" className="btn-close col-sm-1" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
 
-                            <div class="container-fluid">
+                            <div className="container-fluid">
                                 <CameraInfo color="#90e093" name="CAM1" notification={false}/>
                                 <CameraInfo color="#90e093" name="CAM2" notification={false}/>
                                 <CameraInfo color="#ff6060" name="CAM3" notification={false}/>
@@ -72,50 +72,57 @@ function Grades() {
                             </div>
 
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            {/* <button type="button" class="btn btn-primary">Save changes</button> */}
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            {/* <button type="button" className="btn btn-primary">Save changes</button> */}
                         </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="modal fade" id="addGradeModal" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                        <div class="modal-header row">
-                            <h5 class="p-1 modal-title col-sm-8 align-self-center offset-sm-2" style={{textAlign:"center"}} id="addGradeModalLabel">Ajouter un grade</h5>
-                            {/* <button type="button" class="btn-close col-sm-1" data-bs-dismiss="modal" aria-label="Close"></button> */}
+                <div className="modal fade" id="addGradeModal" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal modal-dialog-centered modal-dialog-scrollable">
+                        <div className="modal-content">
+                        <div className="modal-header row">
+                            <h5 className="p-1 modal-title col-sm-8 align-self-center offset-sm-2" style={{textAlign:"center"}} id="addGradeModalLabel">Ajouter un grade</h5>
+                            {/* <button type="button" className="btn-close col-sm-1" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
 
-                            <div class="container-fluid">
-                                <div class="row bg-light rounded">
-                                    <div class="col-md-4 p-1 m-2 bg-light rounded">
-                                        <label for="name-grade" class="col-form-label">Nom : </label>
+                            <div className="container-fluid">
+                                <div className="row bg-light rounded">
+                                    <div className="col-md-4 p-1 m-2 bg-light rounded">
+                                        <label for="name-grade" className="col-form-label">Nom : </label>
                                     </div>
-                                    <div class="p-1 m-2 col-md-4 bg-light rounded">
-                                        <input type="text" class="col-sm-4 form-control" id="name-grade" />
+                                    <div className="p-1 m-2 col-md-4 bg-light rounded">
+                                        <input type="text" className="col-sm-4 form-control" id="name-grade" />
                                     </div>
                                 </div>
-                                <div class="row bg-light rounded">
-                                    <div class="col-md-4 p-1 m-2 bg-light rounded">
-                                        <label for="color-grade" class="col-form-label">Couleur : </label>
+                                <div className="row bg-light rounded">
+                                    <div className="col-md-4 p-1 m-2 bg-light rounded">
+                                        <label for="color-grade" className="col-form-label">Couleur : </label>
                                     </div>
-                                    <div class="p-1 m-2 col-md-4 bg-light rounded">
-                                        <input type="text" class="col-sm-4 form-control" id="color-grade" />
+                                    <div className="p-1 m-2 col-md-4 bg-light rounded row">
+                                        {/* <input type="text" className="col-sm-4 form-control" id="color-grade" /> */}
+                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#B2DFDB"}}></i></div>
+                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#F8BBD0"}}></i></div>
+                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#BBDEFB"}}></i></div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        <div class="modal-footer justify-content-evenly">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary">Sauvegarder</button>
+                        <div className="modal-footer justify-content-evenly">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="button" className="btn btn-primary">Sauvegarder</button>
                         </div>
                         </div>
                     </div>
                 </div>
+
+                <div><i type="button" className="bi bi-square-fill" style={{color:"#B2DFDB"}}></i></div>
+                <div><i type="button" className="bi bi-square-fill" style={{color:"#F8BBD0"}}></i></div>
+                <div><i type="button" className="bi bi-square-fill" style={{color:"#BBDEFB"}}></i></div>
 
             </div>
         </div>

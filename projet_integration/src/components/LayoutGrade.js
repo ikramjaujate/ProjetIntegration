@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import '../css/Grades.css';
 
 // {/* <i className="bi bi-person-circle" style={{color:'red', fontSize:'2em'}}></i> */}
 const LayoutGrade = ({name, color, members, allowed_camera, refused_camera}) => {
