@@ -6,9 +6,6 @@ const cors = require('cors') ;
 const mysql = require('mysql');
 
 
-
-
-
 const client = new Client({
   host: '127.0.0.1',
   port: 5432,
@@ -20,10 +17,8 @@ const client = new Client({
 app.listen(3001, () => {
   console.log("running on port 3001");
 })
-
 app.use(express.json()) ;
 app.use(cors()) ;  //to avoid CORS policy
-
 
 
 client.connect(err => {
@@ -89,6 +84,7 @@ app.get('/api/grades/members', (request, response) => {
         response.status(200).json(results.rows);
     })
 }) ;
+
 
 /**
  * Récupère les actions de chacune des caméras pour un grade donné

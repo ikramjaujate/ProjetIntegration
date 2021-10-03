@@ -1,14 +1,12 @@
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import '../css/Grades.css';
 
 
-// {/* <i className="bi bi-person-circle" style={{color:'red', fontSize:'2em'}}></i> */}
 const CameraInfo = ({name, allowed, notification}) => {
     return (
         <div className="row p-1 m-2 bg-light rounded">
             <div className="col-md-4 align-self-center">{name}</div>
             <div className="col-md-2 offset-md-5 rounded" style={{backgroundColor:allowed ? "#90E093" : "#FF6060" }}>  
-                {/* <i className="bi bi-bell" style={{color:"white", fontSize:'100%'}}></i> */}
                 <i className="bi bi-bell" style={{color:notification ? "white" : allowed ? "#90E093" : "#FF6060" , fontSize:'100%'}}></i>
             </div>
         </div>
