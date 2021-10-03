@@ -2,9 +2,9 @@
     --color1 : #B2DFDB ;
     --color2 : #F8BBD0 ;
     --color3 : #BBDEFB ;
-    --x : #BDBDBD;
-    --camerAllow : #90E093 ;
-    --cameraRefuse : #FF6060 ;
+    --bg-cadres : #BDBDBD;
+    --camera-allow : #90E093 ;
+    --camera-refuse : #FF6060 ;
 }
 
 .add-user:hover {

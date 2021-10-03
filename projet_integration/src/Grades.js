@@ -22,6 +22,18 @@ function Grades() {
     //         })
 	// }, []);
 
+
+    /**
+     * Assigne une couleur au grade qui est en train d'être créé
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {string} newColor  Couleur sélectionnée pour le grade
+     */
+    const chooseColor = (newColor) => {
+        document.getElementById('final-color').style.color= newColor;
+    }
+
+    
     return (
         <div>
             <div>
@@ -102,11 +114,12 @@ function Grades() {
                                     <div className="col-md-4 p-1 m-2 bg-light rounded">
                                         <label for="color-grade" className="col-form-label">Couleur : </label>
                                     </div>
-                                    <div className="p-1 m-2 col-md-4 bg-light rounded row">
+                                    <div className="p-0 m-2 col-md-6 bg-light rounded row">
                                         {/* <input type="text" className="col-sm-4 form-control" id="color-grade" /> */}
-                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#B2DFDB"}}></i></div>
-                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#F8BBD0"}}></i></div>
-                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#BBDEFB"}}></i></div>
+                                        <div className="col-md-5"><i id="final-color" className="bi bi-square-fill" style={{color:"#BDBDBD", fontSize:"175%"}}></i></div>
+                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#B2DFDB"}} onClick={() => chooseColor("#B2DFDB")}></i></div>
+                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#F8BBD0"}} onClick={() => chooseColor("#F8BBD0")}></i></div>
+                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#BBDEFB"}} onClick={() => chooseColor("#BBDEFB")}></i></div>
                                     </div>
                                 </div>
                             </div>
@@ -120,9 +133,9 @@ function Grades() {
                     </div>
                 </div>
 
-                <div><i type="button" className="bi bi-square-fill" style={{color:"#B2DFDB"}}></i></div>
+                {/* <div><i type="button" className="bi bi-square-fill" style={{color:"#B2DFDB"}}></i></div>
                 <div><i type="button" className="bi bi-square-fill" style={{color:"#F8BBD0"}}></i></div>
-                <div><i type="button" className="bi bi-square-fill" style={{color:"#BBDEFB"}}></i></div>
+                <div><i type="button" className="bi bi-square-fill" style={{color:"#BBDEFB"}}></i></div> */}
 
             </div>
         </div>
