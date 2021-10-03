@@ -12,6 +12,7 @@ import {useEffect, useState} from "react" ;
 function Grades() {
 
     const [informationsGrade, setInformationsGrade] = useState([]);
+    const [informationsCameras, setinformationsCameras] = useState([]);
 
     const listGrades = [{id:'dir', name : 'Directeur', color:'#B2DFDB', members:'2', allowedCamera:'14', refusedCamera:'0'}, 
     {id:'pers', name : 'Personnel', color:'#F8BBD0', members:'18', allowedCamera:'10', refusedCamera:'4'},
@@ -48,10 +49,7 @@ function Grades() {
                 return result.json();
             })
             .then(dataMembers => {
-                //console.log("donnees1 : ", dataCamera);
-                //console.log("donnees2 : ", dataMembers);
-                dataCamera.map(element => element["membres"] = dataMembers.filter(elem =>elem.id === element.id)[0].members) ;
-                console.log('data', dataCamera);
+                dataCamera.map(grade => grade["members"] = dataMembers.filter(gradeMembers =>gradeMembers.id === grade.id)[0].members) ;
                 setInformationsGrade(dataCamera) ;
             });
         });
@@ -69,12 +67,38 @@ function Grades() {
         document.getElementById('final-color').style.color= newColor;
     }
 
+    /**
+     * Adapte le nom et la couleur du grade sur lequel on souhaite avoir des détails
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {string} mainColor  Couleur du grade sélectionné
+     * @param {string} mainName   Nom du grade sélectionné
+     */
+    const openCameraInfo = (mainColor, mainName, grade) => {
+        document.getElementById('gradeModalLabel').style.backgroundColor= mainColor;
+        document.getElementById('gradeModalLabel').innerHTML= mainName;
+
+        var informations = { method: 'GET',
+               headers: {'Content-Type': 'application/json'},
+        };
+
+        fetch(`http://localhost:3001/api/grades/${grade}/cameras`, informations)
+        .then(result => {
+            return result.json();
+        })
+        .then(dataCameras => {
+            setinformationsCameras(dataCameras) ;
+        });
+    }
+
     
     return (
         <div>
             <div>
-                {listGrades.map(grade => (
-                    <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedCamera} refused_camera={grade.refusedCamera}/>
+                {informationsGrade && informationsGrade.map(grade => (
+                    <div type="button" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
+                        <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
+                    </div>
                 ))}
 
                 <div className="row p-1 justify-content-center">
@@ -107,9 +131,12 @@ function Grades() {
                         <div className="modal-body">
 
                             <div className="container-fluid">
-                                {listCameras.map(camera => (
+                                {informationsCameras && informationsCameras.map(camera => (
                                     <CameraInfo allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
                                 ))}
+                                {/* {listCameras.map(camera => (
+                                    <CameraInfo allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
+                                ))} */}
                             </div>
 
                         </div>
