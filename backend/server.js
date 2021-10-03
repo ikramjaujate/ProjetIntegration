@@ -24,22 +24,63 @@ app.use(cors()) ;  //to avoid CORS policy
 client.connect(err => {
   if (err) {
     console.error('connection error', err.stack);
-  } else {
+  } 
+  else {
     console.log('connected');
-    client.query('SELECT * FROM test', (error, results) => {
-        if (error) {
-          throw error;
-        }
-        console.log("results : ", results.rows);
-      })
   }
 }) ;
 
-app.get('/api/users/photo', (request, response) => {
-  client.query('SELECT * FROM photo', (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
-  })
+
+
+/**
+ * Récupère les informations des différents grades, comme leur nom, leur couleur associée, ainsi
+ * que le nombre de caméras autorisées et refusées
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ */ 
+app.get('/api/grades', (request, response) => {
+
+    let query = "select PRM.id, PRM.name, PRM.color, \
+	   (select count(*) \
+		from camera as CA \
+		join access as AC on CA.id = AC.idCamera \
+	    join profile as PR on AC.idProfile = PR.id \
+	    where PR.id = PRM.id and AC.allowed = true ) as allowedCamera, \
+		\
+		(select count(*) \
+		from camera as CA \
+		join access as AC on CA.id = AC.idCamera \
+	    join profile as PR on AC.idProfile = PR.id \
+	    where PR.id = PRM.id and AC.allowed = false ) as refusededCamera \
+    from profile as PRM ;" ;
+
+    client.query(query, (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json(results.rows);
+    })
+}) ;
+
+
+/**
+ * Récupère le nombre de membres appartenant à un certain grade
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ */ 
+app.get('/api/grades/members', (request, response) => {
+
+    let query = "select PR.id, count(ME.idMember) as members \
+    from profile as PR \
+    join member as ME on PR.id = ME.idProfile \
+    group by PR.id ;" ;
+
+    client.query(query, (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json(results.rows);
+    })
 }) ;
