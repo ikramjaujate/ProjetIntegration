@@ -42,6 +42,9 @@
 *.idb
 *.pdb
 
+.venv
+.idea
+.DS_Store
 # Kernel Module Compile Results
 *.mod*
 *.cmd
