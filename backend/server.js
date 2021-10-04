@@ -139,10 +139,11 @@ app.get('/api/grades/members', (request, response) => {
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @method GET
  */ 
- app.put('/api/grades/colors', (request, response) => {
+ app.get('/api/grades/colors', (request, response) => {
 
     let query = "select * \
     from color;" ;
+
     client.query(query, (error, results) => {
         if (error) {
             throw error;

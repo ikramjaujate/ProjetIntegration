@@ -17,7 +17,8 @@ function Grades() {
   
 
     /**
-     * Récupère au chargement de la page les informations concernant les différents grades
+     * Récupère au chargement de la page les informations concernant les différents grades,
+     * ainsi que les différentes couleurs existantes pour la création/modification de grade
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -35,24 +36,17 @@ function Grades() {
                 return result.json();
             })
             .then(dataMembers => {
-                console.log("camera : ", dataCamera, " members : ", dataMembers);
                 dataCamera.map(grade => grade["members"] = dataMembers.filter(gradeMembers =>gradeMembers.id === grade.id)[0].members) ;
                 setInformationsGrade(dataCamera) ;
             });
         });
 
-        fetch(`http://localhost:3001/api/grades`, informations)
+        fetch(`http://localhost:3001/api/grades/colors`, informations)
         .then(result => {
             return result.json();
         })
-        .then(dataCamera => {
-            fetch(`http://localhost:3001/api/grades/members`, informations)
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                console.log("data : ", data) ;
-            });
+        .then(data => {
+            setColorGrades(data);
         });
     
 	}, []);
@@ -99,8 +93,6 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
      const createGrade = () => {
-        console.log("nom : ", document.getElementById("name-grade").value);
-        console.log("couleur : ", document.getElementById("final-color").style.color);
 
         let newName = document.getElementById("name-grade").value ;
         let newColor = document.getElementById("final-color").style.color ;
@@ -112,7 +104,6 @@ function Grades() {
             body: JSON.stringify({name:newName, color:newColor})
         })
         .then((res)=> {
-            console.log("res : ", res);
             return res;
         })
     }
@@ -187,9 +178,9 @@ function Grades() {
                                     </div>
                                     <div className="p-0 m-2 col-md-6 bg-light rounded row">
                                         <div className="col-md-5"><i id="final-color" className="bi bi-square-fill" style={{color:"#BDBDBD", fontSize:"175%"}}></i></div>
-                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#B2DFDB"}} onClick={() => chooseColor("#B2DFDB")}></i></div>
-                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#F8BBD0"}} onClick={() => chooseColor("#F8BBD0")}></i></div>
-                                        <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:"#BBDEFB"}} onClick={() => chooseColor("#BBDEFB")}></i></div>
+                                        {colorGrades && colorGrades.map(color => (
+                                            <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:color.colorcode}} onClick={() => chooseColor(color.colorcode)}></i></div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
