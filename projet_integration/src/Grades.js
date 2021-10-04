@@ -13,6 +13,7 @@ function Grades() {
 
     const [informationsGrade, setInformationsGrade] = useState([]);
     const [informationsCameras, setinformationsCameras] = useState([]);
+    const [colorGrades, setColorGrades] = useState([]);
   
 
     /**
@@ -34,8 +35,23 @@ function Grades() {
                 return result.json();
             })
             .then(dataMembers => {
+                console.log("camera : ", dataCamera, " members : ", dataMembers);
                 dataCamera.map(grade => grade["members"] = dataMembers.filter(gradeMembers =>gradeMembers.id === grade.id)[0].members) ;
                 setInformationsGrade(dataCamera) ;
+            });
+        });
+
+        fetch(`http://localhost:3001/api/grades`, informations)
+        .then(result => {
+            return result.json();
+        })
+        .then(dataCamera => {
+            fetch(`http://localhost:3001/api/grades/members`, informations)
+            .then(result => {
+                return result.json();
+            })
+            .then(data => {
+                console.log("data : ", data) ;
             });
         });
     
@@ -75,6 +91,30 @@ function Grades() {
         .then(dataCameras => {
             setinformationsCameras(dataCameras) ;
         });
+    }
+
+    /**
+     * Créer un nouveau grade
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     const createGrade = () => {
+        console.log("nom : ", document.getElementById("name-grade").value);
+        console.log("couleur : ", document.getElementById("final-color").style.color);
+
+        let newName = document.getElementById("name-grade").value ;
+        let newColor = document.getElementById("final-color").style.color ;
+        fetch ("http://localhost:3001/api/grades",{
+            method: "PUT",
+            headers:{
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({name:newName, color:newColor})
+        })
+        .then((res)=> {
+            console.log("res : ", res);
+            return res;
+        })
     }
 
     
@@ -157,12 +197,12 @@ function Grades() {
                         </div>
                         <div className="modal-footer justify-content-evenly">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="button" className="btn btn-primary">Sauvegarder</button>
+                            <button type="button" className="btn btn-primary" onClick={() => createGrade()}>Créer</button>
                         </div>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     );

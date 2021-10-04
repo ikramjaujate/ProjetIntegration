@@ -74,7 +74,7 @@ app.get('/api/grades/members', (request, response) => {
 
     let query = "select PR.id, count(ME.idMember) as members \
     from profile as PR \
-    join member as ME on PR.id = ME.idProfile \
+    left join member as ME on PR.id = ME.idProfile \
     group by PR.id ;" ;
 
     client.query(query, (error, results) => {
@@ -102,6 +102,48 @@ app.get('/api/grades/members', (request, response) => {
     join camera as CA on AC.idCamera = CA.id \
     where idProfile = ($1)" ;
     client.query(query, [idGrade], (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json(results.rows);
+    })
+}) ;
+
+
+/**
+ * Crée un nouveau grade
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ * @param {integer} name nom du nouveau grade
+ * @param {integer} color couleur attachée à ce nouveau grade
+ */ 
+ app.put('/api/grades', (request, response) => {
+
+    const name = request.body.name;
+    const color = request.body.color;
+
+    let query = "insert into profile (name, color) \
+    VALUES (($1), ($2))" ;
+    client.query(query, [name, color], (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json(results.rows);
+    })
+}) ;
+
+/**
+ * Récupère les différentes couleurs existantes pour la création/modification de grade
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ */ 
+ app.put('/api/grades/colors', (request, response) => {
+
+    let query = "select * \
+    from color;" ;
+    client.query(query, (error, results) => {
         if (error) {
             throw error;
         }
