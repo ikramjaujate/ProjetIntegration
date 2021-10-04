@@ -143,7 +143,11 @@ app.get('/api/grades/members', (request, response) => {
  app.get('/api/grades/colors', (request, response) => {
 
     let query = "select * \
-    from color;" ;
+    from color \
+    where idColor not in (select CO.idColor \
+                        from color as CO \
+                        join profile as PR on CO.idColor = PR.idColor \
+                        group by CO.idColor, CO.colorCode);" ;
 
     client.query(query, (error, results) => {
         if (error) {

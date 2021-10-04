@@ -177,10 +177,10 @@ function Grades() {
                                         <label for="color-grade" className="col-form-label">Couleur : </label>
                                     </div>
                                     <div className="p-0 m-2 col-md-6 bg-light rounded row">
-                                        <div className="col-md-5"><i id="final-color" className="bi bi-square-fill" style={{color:"#BDBDBD", fontSize:"175%"}}></i></div>
                                         {colorGrades && colorGrades.map(color => (
                                             <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:color.colorcode}} onClick={() => chooseColor(color.colorcode)}></i></div>
                                         ))}
+                                        <div className="col-md-12"><i id="final-color" className="bi bi-square-fill" style={{color:"#BDBDBD", fontSize:"175%"}}></i></div>
                                     </div>
                                 </div>
                             </div>
