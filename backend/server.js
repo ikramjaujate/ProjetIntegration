@@ -41,7 +41,7 @@ client.connect(err => {
  */ 
 app.get('/api/grades', (request, response) => {
 
-    let query = "select PRM.id, PRM.name, PRM.color, \
+    let query = "select PRM.id, PRM.name, CO.colorCode as color, \
 	   (select count(*) \
 		from camera as CA \
 		join access as AC on CA.id = AC.idCamera \
@@ -53,7 +53,8 @@ app.get('/api/grades', (request, response) => {
 		join access as AC on CA.id = AC.idCamera \
 	    join profile as PR on AC.idProfile = PR.id \
 	    where PR.id = PRM.id and AC.allowed = false ) as refusedCamera \
-    from profile as PRM ;" ;
+    from profile as PRM \
+    join color as CO on PRM.idColor = CO.idColor;" ;
 
     client.query(query, (error, results) => {
         if (error) {
