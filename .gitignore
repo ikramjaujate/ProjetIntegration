@@ -46,7 +46,10 @@
 #Python
 .venv
 venv
+.idea
+node modules
 
+*node_modules
 # Kernel Module Compile Results
 *.mod*
 *.cmd
