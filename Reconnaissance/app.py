@@ -5,7 +5,7 @@ from flask.wrappers import Response
 import numpy as np
 import os # pour importer toutes les images d'un coup
 import datetime
-
+import datetime
 app = Flask(__name__)
 
 path = './Reconnaissance/images'
@@ -44,11 +44,13 @@ cap = cv2.VideoCapture(0)
 def index():
     return "Message par default"
 
-def gen():
+def gen(captur):
     frame_width = int(cap.get(3))
     frame_height = int(cap.get(4))
-
+    print(captur)
     out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+    
+
     while True:
         success, img = cap.read()
         imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
@@ -56,7 +58,11 @@ def gen():
 
         facesCurFrame = face_recognition.face_locations(imgS)
         encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
-
+        if(captur=='photo'): 
+            img_name = "image-client/frame_.png"
+            cv2.imwrite(img_name, imgS)
+            print(" written!")
+        
         
         for encodeFace,faceLoc in zip(encodesCurFrame,facesCurFrame):
             matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
@@ -82,7 +88,7 @@ def gen():
                 cv2.rectangle(img,(x1,y1),(x2,y2),(0,0,255),2)
                 cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,0,255),cv2.FILLED)
                 cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
-                
+                    
         
         out.write(img)
         # encode OpenCV raw frame to jpg and displaying it
@@ -93,10 +99,40 @@ def gen():
         #cv2.imshow('Webcam',img)
         #cv2.waitKey(1)
 
+
+img_counter = 0
+
+def phot():
+    global img_counter 
+    if cap.isOpened():
+       
+        success, img = cap.read()
+        imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
+        imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
+        img_name = "image-client/frame_{}.png".format(datetime.time())
+        cv2.imwrite(img_name, imgS)
+        print("{} written!".format(img_counter))
+        img_counter += 1
+        cap.release()
+
+
+
+
+
 @app.route('/video')
 def video():
     global cap
-    return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/video/<captur>')
+def photo(captur):
+    global cap
+    #return Response(gen(captur), mimetype='multipart/x-mixed-replace; boundary=frame')
+    #return render_template('test.html')
+    return 'nothing'
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='6060',debug=True)
+
+

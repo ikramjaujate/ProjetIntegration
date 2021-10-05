@@ -15,10 +15,16 @@
   <h1>test</h1>
     <section class="streaming">
         <h3>streaming caméra IP Foscam FI8905W via pi nautilus</h3>
-        <img src= "http://192.168.0.200:6060/video" width="640" height="480" title="Foscam FI8905W"/>
+        <img src= "http://192.168.1.43:6060/video" width="640" height="480" title="Foscam FI8905W"/>
         </section>
   
 </div>
+
+<form action="http://192.168.1.43:6060/video/photo" method="get">
+  
+</form>
+<button type="submit" name="takePhoto" onclick="window.location.href='http://192.168.1.43:6060/video/photo'; return false">prend photo</button>
+
 
 <script>
 </script>
