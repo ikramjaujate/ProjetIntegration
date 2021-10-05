@@ -7,6 +7,7 @@ export default class UploadFiles extends Component {
     this.selectFiles = this.selectFiles.bind(this);
     this.upload = this.upload.bind(this);
     this.uploadFiles = this.uploadFiles.bind(this);
+    this.previewImages= [];
 
     this.state = {
       selectedFiles: undefined,
@@ -91,7 +92,7 @@ export default class UploadFiles extends Component {
   }
 
   render() {
-    const { selectedFiles, progressInfos, message, fileInfos } = this.state;
+    const { selectedFiles, previewImages, progressInfos, message, fileInfos } = this.state;
 
     return (
       <div>
@@ -113,6 +114,14 @@ export default class UploadFiles extends Component {
               </div>
             </div>
           ))}
+
+          {previewImages && (
+          <div>
+            {previewImages.map((img, i) => {
+              return <img className="preview" src={img} alt={"image-" + i}  key={i}/>;
+            })}
+          </div>
+        )}
 
         <div className="row my-3">
           <div className="col-8">
@@ -149,6 +158,7 @@ export default class UploadFiles extends Component {
               fileInfos.map((file, index) => (
                 <li className="list-group-item" key={index}>
                   <a href={file.url}>{file.name}</a>
+                  <img src={file.url} alt={file.name} height="80px" />
                 </li>
               ))}
           </ul>
