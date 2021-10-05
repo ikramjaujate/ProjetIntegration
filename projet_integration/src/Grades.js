@@ -58,13 +58,14 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {string} newColor  Couleur sélectionnée pour le grade
      */
-    const chooseColor = (newColor) => {
+    const chooseColor = (idColor, newColor) => {
         document.getElementById('final-color').style.color= newColor;
+        document.getElementById('final-color').value = idColor;
     }
 
 
     /**
-     * Adapte le nom et la couleur du grade sur lequel on souhaite avoir des détails
+     * Adapte le nom et la couleur du modal pour le grade sur lequel on souhaite avoir des détails
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {string} mainColor  Couleur du grade sélectionné
@@ -95,13 +96,14 @@ function Grades() {
      const createGrade = () => {
 
         let newName = document.getElementById("name-grade").value ;
-        let newColor = document.getElementById("final-color").style.color ;
+        console.log("value : ", document.getElementById("final-color").value);
+        let newColor = document.getElementById("final-color").value ;
         fetch ("http://localhost:3001/api/grades",{
             method: "PUT",
             headers:{
                 "Content-type": "application/json"
             },
-            body: JSON.stringify({name:newName, color:newColor})
+            body: JSON.stringify({name:newName, idcolor:newColor})
         })
         .then((res)=> {
             return res;
@@ -156,7 +158,7 @@ function Grades() {
                 </div>
 
                 <div className="modal fade" id="addGradeModal" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div className="modal-content">
                         <div className="modal-header row">
                             <h5 className="p-1 modal-title col-sm-8 align-self-center offset-sm-2" style={{textAlign:"center"}} id="addGradeModalLabel">Ajouter un grade</h5>
@@ -164,31 +166,57 @@ function Grades() {
                         <div className="modal-body">
 
                             <div className="container-fluid">
-                                <div className="row bg-light rounded">
-                                    <div className="col-md-4 p-1 m-2 bg-light rounded">
-                                        <label for="name-grade" className="col-form-label">Nom : </label>
+                                {/* <div className="row bg-light rounded">
+                                    <div className="col-md-11 p-0 m-1 bg-light rounded"> 
+                                        <label id="name-grade-label" for="name-grade" className="col-form-label">Nom</label>
                                     </div>
-                                    <div className="p-1 m-2 col-md-4 bg-light rounded">
+                                    <div className="p-0 m-1 col-md-11 bg-light rounded">
                                         <input type="text" className="col-sm-4 form-control" id="name-grade" />
                                     </div>
                                 </div>
                                 <div className="row bg-light rounded">
-                                    <div className="col-md-4 p-1 m-2 bg-light rounded">
-                                        <label for="color-grade" className="col-form-label">Couleur : </label>
+                                    <div className="col-md-11 p-0 m-1 bg-light rounded">
+                                        <label id="color-grade-label" for="color-grade" className="col-form-label">Couleur</label>
                                     </div>
-                                    <div className="p-0 m-2 col-md-6 bg-light rounded row">
-                                        {colorGrades && colorGrades.map(color => (
-                                            <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:color.colorcode}} onClick={() => chooseColor(color.colorcode)}></i></div>
-                                        ))}
+                                    <div id="frame-colors" className="p-0 m-0 col-md-11 rounded row">
                                         <div className="col-md-12"><i id="final-color" className="bi bi-square-fill" style={{color:"#BDBDBD", fontSize:"175%"}}></i></div>
+                                        {colorGrades && colorGrades.map(color => (
+                                            <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:color.colorcode}} onClick={() => chooseColor(color.idcolor, color.colorcode)}></i></div>
+                                        ))}
+                                    </div>
+                                </div> */}
+
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="col-md-11 p-0 m-1 frame-grade-label"> 
+                                            <label id="name-grade-label" for="name-grade" className="col-form-label">Nom</label>
+                                        </div>
+                                        <div className="p-0 m-1 col-md-10" id="frame-name-grade-input">
+                                            <input type="text" className="form-control" id="name-grade" />
+                                        </div>
+                                        {/* <div className="p-0 m-1 col-md-10">
+                                            <input type="text" className="form-control" id="name-grade" />
+                                        </div> */}
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="col-md-11 p-0 m-1 frame-grade-label">
+                                            <label id="color-grade-label" for="color-grade" className="col-form-label">Couleur</label>
+                                        </div>
+                                        <div id="frame-colors" className="p-0 m-0 col-md-11 rounded row">
+                                            <div className="col-md-12"><i id="final-color" className="bi bi-square-fill" style={{color:"#BDBDBD", fontSize:"175%"}}></i></div>
+                                            {colorGrades && colorGrades.map(color => (
+                                                <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:color.colorcode}} onClick={() => chooseColor(color.idcolor, color.colorcode)}></i></div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
 
                         </div>
-                        <div className="modal-footer justify-content-evenly">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="button" className="btn btn-primary" onClick={() => createGrade()}>Créer</button>
+                        <div className="modal-footer row justify-content-between">
+                            <button type="button" className="btn btn-secondary col-md-5 create-grade-button" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}}>Annuler <i class="bi bi-x-circle"></i></button>
+                            <button type="button" className="btn col-md-5 create-grade-button" style={{backgroundColor:"#4DAAB3", color:"white"}} onClick={() => createGrade()}>Créer <i class="bi bi-plus-circle"></i></button>
                         </div>
                         </div>
                     </div>

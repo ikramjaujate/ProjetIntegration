@@ -122,11 +122,11 @@ app.get('/api/grades/members', (request, response) => {
  app.put('/api/grades', (request, response) => {
 
     const name = request.body.name;
-    const color = request.body.color;
+    const idColor = request.body.idcolor;
 
-    let query = "insert into profile (name, color) \
+    let query = "insert into profile (name, idColor) \
     VALUES (($1), ($2))" ;
-    client.query(query, [name, color], (error, results) => {
+    client.query(query, [name, idColor], (error, results) => {
         if (error) {
             throw error;
         }

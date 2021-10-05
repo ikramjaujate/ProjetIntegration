@@ -5,6 +5,11 @@
     --writing : #BDBDBD;
     --camera-allow : #90E093 ;
     --camera-refuse : #FF6060 ;
+    --writing : #686868 ;
+}
+
+body {
+    color: var(--writing) ;
 }
 
 .add-user:hover {
@@ -31,4 +36,34 @@
 
 #gradeModal .m-2 {
     margin : 0.5rem 0.5rem 0.8rem 0.5rem!important;
+}
+
+#name-grade-label {
+    padding: 0px 5px 0px 5px!important;
+}
+
+#name-grade {
+    padding: 3px 10.125px 3px 10.125px!important;
+}
+
+#color-grade-label {
+    padding: 0px 5px 0px 5px!important;
+}
+
+#frame-colors {
+    margin: 0px 5px 11px 5px!important;
+    /* background-color:white; */
+}
+
+.frame-grade-label {
+    border-bottom: 1px solid #959494;
+    padding: 0px 0px 7px 0px!important;
+}
+
+.create-grade-button {
+    margin: 0.25rem 0.75rem 0.25rem 0.75rem;
+}
+
+#frame-name-grade-input {
+    margin-top: 0.75rem!important;
 }
