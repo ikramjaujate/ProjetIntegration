@@ -4,7 +4,8 @@ import React from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
-//import UploadService from "../services/file-upload.service";
+import UploadFiles from './components/File-upload.js';
+
 
 
 function Secretary() {
@@ -13,9 +14,7 @@ function Secretary() {
             <Navbar/>
             <div>          
                 <Popup trigger={ <button className="add-user">Ajouter utilisateur (+)</button>} position="center" modal nested>
-                    <div>Choisissez les photos :</div>
-                    <input type="file"/>
-                    <button className="save-user">Enregistrer</button>
+                    <UploadFiles/>
                 </Popup>
             </div>
         </div>
