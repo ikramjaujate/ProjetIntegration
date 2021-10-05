@@ -6,6 +6,7 @@
     --camera-allow : #90E093 ;
     --camera-refuse : #FF6060 ;
     --writing : #686868 ;
+    --empty-color : #BDBDBD ;
 }
 
 body {

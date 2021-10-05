@@ -23,6 +23,18 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     useEffect(()=> {
+        getGrades() ;
+        getColor() ;
+
+	}, []);
+
+
+    /**
+     * Récupère les informations concernant les différents grades
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+    const getGrades = () => {
         var informations = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
@@ -40,7 +52,18 @@ function Grades() {
                 setInformationsGrade(dataCamera) ;
             });
         });
+    }
 
+
+    /**
+     * Récupère les différentes couleurs existantes pour la création/modification de grade
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+    const getColor = () => {
+        var informations = { method: 'GET',
+               headers: {'Content-Type': 'application/json'},
+        };
         fetch(`http://localhost:3001/api/grades/colors`, informations)
         .then(result => {
             return result.json();
@@ -48,8 +71,7 @@ function Grades() {
         .then(data => {
             setColorGrades(data);
         });
-    
-	}, []);
+    }
 
 
     /**
@@ -96,7 +118,6 @@ function Grades() {
      const createGrade = () => {
 
         let newName = document.getElementById("name-grade").value ;
-        console.log("value : ", document.getElementById("final-color").value);
         let newColor = document.getElementById("final-color").value ;
         fetch ("http://localhost:3001/api/grades",{
             method: "PUT",
@@ -108,6 +129,11 @@ function Grades() {
         .then((res)=> {
             return res;
         })
+        .then(data => {
+            getGrades() ;
+            getColor() ;
+            chooseColor("empty", "var(--empty-color)") ;
+        });
     }
 
     
@@ -140,6 +166,7 @@ function Grades() {
                         <div className="modal-content">
                         <div className="modal-header row">
                             <h5 className="p-1 modal-title shadow-sm rounded col-sm-8 align-self-center offset-sm-2" style={{backgroundColor:'#F8F9FA', color:"white", textAlign:"center"}} id="gradeModalLabel">Chargement</h5>
+
                         </div>
                         <div className="modal-body">
 
@@ -203,9 +230,13 @@ function Grades() {
                                             <label id="color-grade-label" for="color-grade" className="col-form-label">Couleur</label>
                                         </div>
                                         <div id="frame-colors" className="p-0 m-0 col-md-11 rounded row">
-                                            <div className="col-md-12"><i id="final-color" className="bi bi-square-fill" style={{color:"#BDBDBD", fontSize:"175%"}}></i></div>
+                                            <div className="col-md-12">
+                                                <i id="final-color" className="bi bi-square-fill" style={{color:"var(--empty-color)", fontSize:"175%"}}></i>
+                                            </div>
                                             {colorGrades && colorGrades.map(color => (
-                                                <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:color.colorcode}} onClick={() => chooseColor(color.idcolor, color.colorcode)}></i></div>
+                                                <div className="col-md-1">
+                                                    <i type="button" className="bi bi-square-fill" style={{color:color.colorcode}} onClick={() => chooseColor(color.idcolor, color.colorcode)}></i>
+                                                </div>
                                             ))}
                                         </div>
                                     </div>
