@@ -119,21 +119,27 @@ function Grades() {
 
         let newName = document.getElementById("name-grade").value ;
         let newColor = document.getElementById("final-color").value ;
-        fetch ("http://localhost:3001/api/grades",{
-            method: "PUT",
-            headers:{
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({name:newName, idcolor:newColor})
-        })
-        .then((res)=> {
-            return res;
-        })
-        .then(data => {
-            getGrades() ;
-            getColor() ;
-            chooseColor("empty", "var(--empty-color)") ;
-        });
+        if (newName === "" || newColor === "empty") {
+            console.log("faux") ;
+        }
+        else {
+            fetch ("http://localhost:3001/api/grades",{
+                method: "PUT",
+                headers:{
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({name:newName, idcolor:newColor})
+            })
+            .then((res)=> {
+                return res;
+            })
+            .then(data => {
+                getGrades() ;
+                getColor() ;
+                chooseColor("empty", "var(--empty-color)") ;
+                document.getElementById("name-grade").value = "" ;
+            });
+        }
     }
 
     
@@ -193,26 +199,6 @@ function Grades() {
                         <div className="modal-body">
 
                             <div className="container-fluid">
-                                {/* <div className="row bg-light rounded">
-                                    <div className="col-md-11 p-0 m-1 bg-light rounded"> 
-                                        <label id="name-grade-label" for="name-grade" className="col-form-label">Nom</label>
-                                    </div>
-                                    <div className="p-0 m-1 col-md-11 bg-light rounded">
-                                        <input type="text" className="col-sm-4 form-control" id="name-grade" />
-                                    </div>
-                                </div>
-                                <div className="row bg-light rounded">
-                                    <div className="col-md-11 p-0 m-1 bg-light rounded">
-                                        <label id="color-grade-label" for="color-grade" className="col-form-label">Couleur</label>
-                                    </div>
-                                    <div id="frame-colors" className="p-0 m-0 col-md-11 rounded row">
-                                        <div className="col-md-12"><i id="final-color" className="bi bi-square-fill" style={{color:"#BDBDBD", fontSize:"175%"}}></i></div>
-                                        {colorGrades && colorGrades.map(color => (
-                                            <div className="col-md-1"><i type="button" className="bi bi-square-fill" style={{color:color.colorcode}} onClick={() => chooseColor(color.idcolor, color.colorcode)}></i></div>
-                                        ))}
-                                    </div>
-                                </div> */}
-
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="col-md-11 p-0 m-1 frame-grade-label"> 
@@ -221,9 +207,6 @@ function Grades() {
                                         <div className="p-0 m-1 col-md-10" id="frame-name-grade-input">
                                             <input type="text" className="form-control" id="name-grade" />
                                         </div>
-                                        {/* <div className="p-0 m-1 col-md-10">
-                                            <input type="text" className="form-control" id="name-grade" />
-                                        </div> */}
                                     </div>
                                     <div className="col-md-6">
                                         <div className="col-md-11 p-0 m-1 frame-grade-label">
@@ -231,7 +214,7 @@ function Grades() {
                                         </div>
                                         <div id="frame-colors" className="p-0 m-0 col-md-11 rounded row">
                                             <div className="col-md-12">
-                                                <i id="final-color" className="bi bi-square-fill" style={{color:"var(--empty-color)", fontSize:"175%"}}></i>
+                                                <i id="final-color" className="bi bi-square-fill" value="empty" style={{color:"var(--empty-color)", fontSize:"175%"}}></i>
                                             </div>
                                             {colorGrades && colorGrades.map(color => (
                                                 <div className="col-md-1">
