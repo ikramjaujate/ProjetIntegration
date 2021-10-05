@@ -38,16 +38,17 @@ print('Encodings Complete')
 cap = cv2.VideoCapture(0)
 
 # Convertir les resolutions 
-frame_width = int(cap.get(3))
-frame_height = int(cap.get(4))
 
-out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
 
 @app.route('/')
 def index():
     return "Message par default"
 
 def gen():
+    frame_width = int(cap.get(3))
+    frame_height = int(cap.get(4))
+
+    out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
     while True:
         success, img = cap.read()
         imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
@@ -81,6 +82,7 @@ def gen():
                 cv2.rectangle(img,(x1,y1),(x2,y2),(0,0,255),2)
                 cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,0,255),cv2.FILLED)
                 cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+                
         
         out.write(img)
         # encode OpenCV raw frame to jpg and displaying it
