@@ -21,7 +21,7 @@ body {
 }
 
 .navbar-main {
-  position: absolute;
+  position: fixed;
   background-color: var(--bg-primary);
   transition: width 600ms ease;
   overflow: scroll;
@@ -76,6 +76,7 @@ body {
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar-main {
+    position: fixed;
     bottom: 0;
     width: 100vw;
     height: 4rem;
