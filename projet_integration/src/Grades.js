@@ -196,12 +196,12 @@ function Grades() {
     return (
         <div>
             <div>
-                <div id="description-page" className="container row justify-content-center shadow-sm" style={{backgroundColor:"#f3f3f3"}}>
+                <div id="desription-page" className="row justify-content-center shadow-sm">
                     <div id="title-description" className="col-sm-12">Grade</div>
-                    <div id="description" className="col-sm-12">Cette page vous permet de créer des grades !</div>
+                    <div id="description" className="col-sm-12">Cette page vous permet de créer des grades ! </div>
                 </div>
 
-
+                {/* <div id="title-page" className="row">Récapitulatif des grades</div> */}
                 {informationsGrade && informationsGrade.map(grade => (
                     <div type="button" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
                         <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
@@ -209,16 +209,16 @@ function Grades() {
                 ))}
 
                 <div className="row p-1 justify-content-center">
-                    <div className="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-1 bg-light shadow-sm rounded row">
+                    <div id="big-layout-add" className="bg-person col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-1 bg-light shadow-sm rounded row">
                         <div className='col-sm-3 rounded' style={{backgroundColor:'#E0E0E0'}}>
                             <i className="bi bi-person" style={{color:'white', fontSize:'350%'}}></i>
                         </div>
                         <div className="col-sm-6 align-self-center" style={{color:"#BDBDBD", fontSize:'175%'}}>Nouveau</div>
                         <div className="p-0 col-sm-3 col row" style={{fontSize:'65%', margin:'0px', textAlign:'left'}}>
                             <div>
-                                <i type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" className="p-0 bi bi-plus-circle-fill align-self-start add-user" style={{color:"#81C784", fontSize:'280%', left:'120px', position:'relative',top:'-39px'}}></i>
+                                <i type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" className="p-0 bi bi-plus-circle-fill align-self-start add-user" style={{color:"rgb(144, 224, 147)", fontSize:'280%', left:'120px', position:'relative',top:'-39px'}}></i>
                             </div>
-                            <div className="p-0 col-sm-12 align-self-end" style={{color:"#BDBDBD"}}>0 membre</div>
+                            <div className="p-0 col-sm-12 align-self-end" style={{color:"#BDBDBD"}}></div>
                         </div>
                     </div>
                 </div>  
@@ -240,7 +240,7 @@ function Grades() {
 
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                         </div>
                         </div>
                     </div>
@@ -287,8 +287,8 @@ function Grades() {
 
                         </div>
                         <div className="modal-footer row justify-content-between">
-                            <button type="button" className="btn btn-secondary col-md-5 create-grade-button" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}}>Annuler <i class="bi bi-x-circle"></i></button>
-                            <button type="button" className="btn col-md-5 create-grade-button" style={{backgroundColor:"#4DAAB3", color:"white"}} onClick={() => createGrade()}>Créer <i class="bi bi-plus-circle"></i></button>
+                            <button type="button" className="btn btn-secondary col-md-5 create-grade-button" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}}>Annuler </button>
+                            <button type="button" className="btn col-md-5 create-grade-button" style={{backgroundColor:"#4DAAB3", color:"white"}} onClick={() => createGrade()}>Créer </button>
                         </div>
                         </div>
                     </div>

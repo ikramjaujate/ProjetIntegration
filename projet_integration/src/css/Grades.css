@@ -13,6 +13,10 @@
 body {
     color: var(--writing) ;
 }
+/* Cacher scrollbar horizontal */
+html::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
+html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
+
 
 .add-user:hover {
     color: #358539;
@@ -79,18 +83,45 @@ body {
 /* text-shadow: 0 0 2px black; */
 
 #desription-page {
-    background-color: rgb(243, 243, 243);
-    margin: 0px 0px 47px 108px;
+    background-color: #4DAAB3;
+    margin: 0px 0px 55px 0px;
     padding: 24px 0px 44px 0px;
 }
 
 #title-description{
     text-align: center;
     font-size: 2.3rem;
-    color:#4DAAB3
+    color:white;
 }
 #description{
     text-align: center;
     font-size: 0.7rem;
-    color:#4DAAB3;
+    color:white;
+}
+
+#title-page {
+    margin: 3rem 0rem 2rem 5rem;
+    font-size: 1.5rem;
+}
+
+.bg-person {
+    text-align: center;
+}
+
+.big-layout-grade {
+    margin: 0px 0px 10px 0px;
+}
+
+#big-layout-add {
+    margin: 0px 0px 60px 0px;
+}
+
+.camera-allowed {
+    font-size: 1.2rem;
+    color:#90e093;
+}
+
+.camera-refused {
+    font-size: 1.2rem;
+    color:#ff6060;
 }
