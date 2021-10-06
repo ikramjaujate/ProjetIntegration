@@ -24,8 +24,7 @@
     position: absolute;
     background-color: var(--bg-primary);
     transition: width 600ms ease;
-    overflow: scroll;
-   
+    overflow: scroll;   
   }
   
   .navbar-nav {
@@ -35,15 +34,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+   
   }
   
   .nav-item {
     width: 100%;
-  }
-  
-  .nav-item:last-child {
-    margin-top: auto;
   }
   
   .nav-link-main {
@@ -70,6 +65,10 @@
     width: 2rem;
     min-width: 2rem;
     margin: 0 1.5rem;
+  }
+
+  .nav-item:last-child {
+    bottom: 0;
   }
 
   
@@ -118,7 +117,7 @@
     .navbar-main {
       top: 0;
       width: 6rem;
-      height: 100vh;
+      height: 100rem;
     }
   
     .navbar-main:hover {
