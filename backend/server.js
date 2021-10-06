@@ -17,5 +17,5 @@ initRoutes(app);
 
 let port = 8080;  //listen on port 8080 for incoming requests.
 app.listen(port, () => {
-  console.log(`Private app running at localhost:${port}`);
+  console.log(`Running at localhost:${port}`);
 });

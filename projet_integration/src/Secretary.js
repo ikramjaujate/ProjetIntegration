@@ -14,7 +14,7 @@ function Secretary() {
             <Navbar/>
             <div>          
                 <Popup trigger={ <button className="add-user">Ajouter utilisateur (+)</button>} position="center" modal nested>
-                    <h1>Nouvel utilisateur:</h1>
+                    {/*<h1>Nouvel utilisateur:</h1>
                     <form action="#">
                     <label for="f-name">Prénom:</label><br/>
                     <input type="text" id="f-name" name="fname"  placeholder="Nom"/><br/>
@@ -25,11 +25,11 @@ function Secretary() {
                         <option>Patient</option>
                         <option>Directeur</option>
                         <option>Personnel</option>
-                    </select><br/><br/>
-                    <Popup trigger={<button>Ajouter</button>} position="center" modal nested>
-                        <UploadFiles/>
-                    </Popup>
-                    </form> 
+                    </select><br/><br/>*/}
+                    
+                    <UploadFiles/>
+                    
+                    {/*</form> */}
                 </Popup>
             </div>
         </div>
