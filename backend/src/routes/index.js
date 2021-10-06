@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../controller/file.controller");
-/*const app = express();
+
+const app = express();
 const port = 3001;
 const knex = require('knex');
 const cors = require('cors');
@@ -41,7 +42,7 @@ app.get('/Tables', (req, res) => {
           console.log(err);
       });
 });
-*/
+
 let routes = (app) => {
   router.post("/upload", controller.upload);
   router.get("/files", controller.getListFiles);
