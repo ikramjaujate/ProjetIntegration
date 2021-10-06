@@ -10,7 +10,7 @@ images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
 
 myList = [x for x in os.listdir(path) if x.endswith('.jpg')]
-print(myList)
+#print(myList)
 print("Nombre de classes détectées",len(myList))
 for x,cl in enumerate(myList):
         curImg = cv2.imread(f'{path}/{cl}')
@@ -34,7 +34,7 @@ encodeListKnown = findEncodings(images)
 print('Encodings Complete')
 
 # capture vidéo
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('http://192.168.1.43:9999/')
 
 # Convertir les resolutions 
 frame_width = int(cap.get(3))

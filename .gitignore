@@ -47,7 +47,9 @@
 .venv
 venv
 .idea
-node modules
+
+#node modules
+
 
 *node_modules
 # Kernel Module Compile Results
@@ -58,3 +60,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+*outpy.avi
