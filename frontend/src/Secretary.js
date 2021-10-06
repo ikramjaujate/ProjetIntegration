@@ -36,8 +36,6 @@ function Secretary() {
            
     );
   }
-
-  // https://react-popup.elazizi.com/react-modal/
   
   export default Secretary;
   
