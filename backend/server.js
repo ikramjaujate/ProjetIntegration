@@ -54,7 +54,8 @@ app.get('/api/grades', (request, response) => {
 	    join profile as PR on AC.idProfile = PR.id \
 	    where PR.id = PRM.id and AC.allowed = false ) as refusedCamera \
     from profile as PRM \
-    join color as CO on PRM.idColor = CO.idColor;" ;
+    join color as CO on PRM.idColor = CO.idColor \
+    order by PRM.id ;" ;
 
     client.query(query, (error, results) => {
         if (error) {
@@ -126,11 +127,41 @@ app.get('/api/grades/members', (request, response) => {
 
     let query = "insert into profile (name, idColor) \
     VALUES (($1), ($2))" ;
-    client.query(query, [name, idColor], (error, results) => {
+    //Requête1 Creer le grade
+    client.query(query, [name, idColor], (error, results1) => {
         if (error) {
             throw error;
         }
-        response.status(200).json(results.rows);
+        
+        //Requête2 - Récupérer son id
+        let query2 = "select max(profile.id) as idGrade from profile";
+        client.query(query2, (error, results2) => {
+            if (error) {
+                throw error;
+            }
+
+            //Requête3 - Récupérer le nombre de caméra maximum
+            let query3 = "select count(*) as numberCamera from camera" ;
+            client.query(query3, (error, results3) => {
+                if (error) {
+                    throw error;
+                }   
+
+                //Requête4 - Créer les actions pour chacune des caméras pour le grade 
+                let query4 = "insert into access (idProfile, idCamera, allowed, notification) \
+                VALUES (($1), ($2), 'false', 'false')" ;
+                let idgrade=results2.rows[0].idgrade ;
+                let nbrcamera = results3.rows[0].numbercamera;
+                for (let idCamera=1; idCamera<parseInt(nbrcamera)+1 ; idCamera++) {
+                    client.query(query4, [idgrade, idCamera], (error, results4) => {
+                        if (error) {
+                            throw error;
+                        }
+                    })
+                }
+                response.status(200).json(results1.rows);
+            })
+        })
     })
 }) ;
 

@@ -1,20 +1,45 @@
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap/dist/css/bootstrap.css';
 import'bootstrap/dist/css/bootstrap.min.css';
+import'bootstrap/dist/js/bootstrap.min.js';
 import'bootstrap/dist/js/bootstrap.bundle.min';
-// import 'materialize-css/dist/css/materialize.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-// import 'mdb-ui-kit/css/mdb.min.css';
+import { Popover, Toast } from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
+
+
 
 import './css/Grades.css';
 import LayoutGrade from './components/LayoutGrade';
 import CameraInfo from './components/CameraInfo';
 import {useEffect, useState} from "react" ;
 
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 function Grades() {
 
     const [informationsGrade, setInformationsGrade] = useState([]);
     const [informationsCameras, setinformationsCameras] = useState([]);
     const [colorGrades, setColorGrades] = useState([]);
-  
+
+    const notify = () => toast("Wow so easy!");
+
+    /**
+     * Initialise les éléments Bootstrap nécessaire au design de la page ;
+     * PopOver 
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     useEffect(()=> {
+        Array.from(document.querySelectorAll('button[data-bs-toggle="popover"]'))
+        .forEach(popoverNode => new Popover(popoverNode)) ;
+        Array.from(document.querySelectorAll('.toast'))
+        .forEach(toastNode => new Toast(toastNode))
+
+	}, []);
+
 
     /**
      * Récupère au chargement de la page les informations concernant les différents grades,
@@ -25,7 +50,6 @@ function Grades() {
     useEffect(()=> {
         getGrades() ;
         getColor() ;
-
 	}, []);
 
 
@@ -81,8 +105,8 @@ function Grades() {
      * @param {string} newColor  Couleur sélectionnée pour le grade
      */
     const chooseColor = (idColor, newColor) => {
-        document.getElementById('final-color').style.color= newColor;
-        document.getElementById('final-color').value = idColor;
+        document.getElementsByClassName('final-color')[0].style.color= newColor;
+        document.getElementsByClassName('final-color')[0].id = idColor;
     }
 
 
@@ -118,11 +142,30 @@ function Grades() {
      const createGrade = () => {
 
         let newName = document.getElementById("name-grade").value ;
-        let newColor = document.getElementById("final-color").value ;
+        let newColor = document.getElementsByClassName("final-color")[0].id ;
+        console.log("color : ", newColor);
         if (newName === "" || newColor === "empty") {
-            console.log("faux") ;
+            if (newName === "") {
+                document.getElementById("name-grade").style.border = "1px solid var(--error)";
+                document.getElementById("error-name").innerHTML = "Veuillez choisir un nom";
+            }
+            else {
+                document.getElementById("name-grade").style.border = "1px solid #ced4da";
+                document.getElementById("error-name").innerHTML = "";
+            }
+
+            if (newColor === "empty") {
+                document.getElementById("error-color").innerHTML = "Veuillez choisir une couleur";
+            }
+            else {
+                document.getElementById("error-color").innerHTML = "";
+            }
         }
         else {
+            document.getElementById("name-grade").style.border = "1px solid #ced4da";
+            document.getElementById("error-name").innerHTML = "";
+            document.getElementById("error-color").innerHTML = "";
+
             fetch ("http://localhost:3001/api/grades",{
                 method: "PUT",
                 headers:{
@@ -138,6 +181,7 @@ function Grades() {
                 getColor() ;
                 chooseColor("empty", "var(--empty-color)") ;
                 document.getElementById("name-grade").value = "" ;
+                notify() ;
             });
         }
     }
@@ -214,7 +258,7 @@ function Grades() {
                                         </div>
                                         <div id="frame-colors" className="p-0 m-0 col-md-11 rounded row">
                                             <div className="col-md-12">
-                                                <i id="final-color" className="bi bi-square-fill" value="empty" style={{color:"var(--empty-color)", fontSize:"175%"}}></i>
+                                            <i id="empty" className="final-color bi bi-square-fill" style={{color:"var(--empty-color)", fontSize:"175%"}}></i>
                                             </div>
                                             {colorGrades && colorGrades.map(color => (
                                                 <div className="col-md-1">
@@ -223,6 +267,8 @@ function Grades() {
                                             ))}
                                         </div>
                                     </div>
+                                    <div id="error-name" className="col-md-6 errorMessage"></div>
+                                    <div id="error-color" className="col-md-6 errorMessage"></div>
                                 </div>
 
                             </div>
@@ -235,6 +281,24 @@ function Grades() {
                         </div>
                     </div>
                 </div>
+
+                {/* <button type="button" class="btn btn-secondary me-2" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Top popover">
+                    Popover on top
+                    </button>
+
+                    <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+                    <div class="toast show bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Bootstrap</strong>
+                        <small>11 mins ago</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Hello, world! This is a toast message.
+                    </div>
+                    </div> */}
+                    <button onClick={notify}>Notify!</button>
+        <ToastContainer />
 
             </div>
         </div>
