@@ -62,3 +62,7 @@ Mkfile.old
 dkms.conf
 
 *outpy.avi
+node_modules/
+
+package-lock.json
+package-lock.json
