@@ -72,7 +72,7 @@ def gen(captur):
            
             img_name = "image-client/frame_{}.png".format(str(d))
 
-            cv2.imwrite(img_name, imgS)
+            cv2.imwrite(img_name, img)
             print(" written!")
         
         
