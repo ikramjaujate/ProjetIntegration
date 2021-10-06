@@ -11,6 +11,14 @@ import UploadFiles from './components/File-upload.js';
 function Secretary() {
     return (
         <div className="secretary-page">
+            <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
             <Navbar/>
             <div>          
                 <Popup trigger={ <button className="add-user">Ajouter utilisateur (+)</button>} position="center" modal nested>
@@ -31,6 +39,14 @@ function Secretary() {
                     
                     </form>
                 </Popup>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
+                <div>AZEAZEEAZEAZEAZEAAZEAA</div><br/><br/><br/>
             </div>
         </div>
            
