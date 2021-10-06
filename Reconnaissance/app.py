@@ -4,9 +4,10 @@ import cv2
 from flask.wrappers import Response
 import numpy as np
 import os # pour importer toutes les images d'un coup
-import datetime
-import datetime
+from datetime import datetime
+import time
 app = Flask(__name__)
+
 
 path = './Reconnaissance/images'
 images = []     # listes contenant toutes les images
@@ -59,7 +60,18 @@ def gen(captur):
         facesCurFrame = face_recognition.face_locations(imgS)
         encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
         if(captur=='photo'): 
-            img_name = "image-client/frame_.png"
+            '''
+            print(datetime.date.today())
+            s = "16/08/2013 09:51:43"
+            d = datetime.strptime(s, "%d/%m/%Y %H:%M:%S")
+            print(time.mktime(d.timetuple()))'''
+           
+            now = str(datetime.now())
+            now = now[0:19]
+            d = datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
+           
+            img_name = "image-client/frame_{}.png".format(str(d))
+
             cv2.imwrite(img_name, imgS)
             print(" written!")
         
@@ -127,9 +139,9 @@ def video():
 @app.route('/video/<captur>')
 def photo(captur):
     global cap
-    #return Response(gen(captur), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(captur), mimetype='multipart/x-mixed-replace; boundary=frame')
     #return render_template('test.html')
-    return 'nothing'
+    #return 'nothing'
 
 
 if __name__ == '__main__':
