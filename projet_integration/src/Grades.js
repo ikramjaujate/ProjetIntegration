@@ -23,12 +23,19 @@ function Grades() {
     const [informationsGrade, setInformationsGrade] = useState([]);
     const [informationsCameras, setinformationsCameras] = useState([]);
     const [colorGrades, setColorGrades] = useState([]);
-
-    const notify = () => toast("Wow so easy!");
+    const optionsToast = {
+        autoClose: 8000,
+        position: "bottom-right",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true
+    };
+    
 
     /**
      * Initialise les éléments Bootstrap nécessaire au design de la page ;
-     * PopOver 
+     * PopOver - toast
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -143,7 +150,6 @@ function Grades() {
 
         let newName = document.getElementById("name-grade").value ;
         let newColor = document.getElementsByClassName("final-color")[0].id ;
-        console.log("color : ", newColor);
         if (newName === "" || newColor === "empty") {
             if (newName === "") {
                 document.getElementById("name-grade").style.border = "1px solid var(--error)";
@@ -181,7 +187,7 @@ function Grades() {
                 getColor() ;
                 chooseColor("empty", "var(--empty-color)") ;
                 document.getElementById("name-grade").value = "" ;
-                notify() ;
+                toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
             });
         }
     }
@@ -190,6 +196,12 @@ function Grades() {
     return (
         <div>
             <div>
+                <div id="description-page" className="container row justify-content-center shadow-sm" style={{backgroundColor:"#f3f3f3"}}>
+                    <div id="title-description" className="col-sm-12">Grade</div>
+                    <div id="description" className="col-sm-12">Cette page vous permet de créer des grades !</div>
+                </div>
+
+
                 {informationsGrade && informationsGrade.map(grade => (
                     <div type="button" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
                         <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
@@ -281,24 +293,7 @@ function Grades() {
                         </div>
                     </div>
                 </div>
-
-                {/* <button type="button" class="btn btn-secondary me-2" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Top popover">
-                    Popover on top
-                    </button>
-
-                    <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-                    <div class="toast show bg-light" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <strong class="me-auto">Bootstrap</strong>
-                        <small>11 mins ago</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        Hello, world! This is a toast message.
-                    </div>
-                    </div> */}
-                    <button onClick={notify}>Notify!</button>
-        <ToastContainer />
+                <ToastContainer style={{fontSize:"0.6rem"}}/>
 
             </div>
         </div>
