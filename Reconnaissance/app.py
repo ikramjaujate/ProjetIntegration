@@ -48,6 +48,7 @@ def index():
     return "Message par default"
 
 def gen(captur):
+    cap = cv2.VideoCapture(0)
     frame_width = int(cap.get(3))
     frame_height = int(cap.get(4))
     print(captur)
@@ -56,13 +57,7 @@ def gen(captur):
 
     while True:
         success, img = cap.read()
-        imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
-        imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
-
-        facesCurFrame = face_recognition.face_locations(imgS)
-        encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
         if(captur=='photo'): 
-
             
             now = str(datetime.now())
             now = now[0:19]
@@ -74,8 +69,15 @@ def gen(captur):
             print(" written!")
         
             captur = "vid"
-        
+            break
             
+            
+        
+        imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
+        imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
+
+        facesCurFrame = face_recognition.face_locations(imgS)
+        encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
         
         for encodeFace,faceLoc in zip(encodesCurFrame,facesCurFrame):
             matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
