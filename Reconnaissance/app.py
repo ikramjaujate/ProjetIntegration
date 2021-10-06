@@ -1,4 +1,5 @@
 from flask import Flask, Response, render_template
+from flask_cors import CORS
 import face_recognition
 import cv2
 from flask.wrappers import Response
@@ -8,6 +9,7 @@ from datetime import datetime
 import time
 app = Flask(__name__)
 
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 path = './Reconnaissance/images'
 images = []     # listes contenant toutes les images
@@ -60,21 +62,20 @@ def gen(captur):
         facesCurFrame = face_recognition.face_locations(imgS)
         encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
         if(captur=='photo'): 
-            '''
-            print(datetime.date.today())
-            s = "16/08/2013 09:51:43"
-            d = datetime.strptime(s, "%d/%m/%Y %H:%M:%S")
-            print(time.mktime(d.timetuple()))'''
-           
+
+            
             now = str(datetime.now())
             now = now[0:19]
             d = datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
            
-            img_name = "image-client/frame_{}.png".format(str(d))
+            img_name = "image-client/frame_{}.jpeg".format(str(d))
 
             cv2.imwrite(img_name, img)
             print(" written!")
         
+            captur = "vid"
+        
+            
         
         for encodeFace,faceLoc in zip(encodesCurFrame,facesCurFrame):
             matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
@@ -108,26 +109,6 @@ def gen(captur):
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-        #cv2.imshow('Webcam',img)
-        #cv2.waitKey(1)
-
-
-img_counter = 0
-
-def phot():
-    global img_counter 
-    if cap.isOpened():
-       
-        success, img = cap.read()
-        imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
-        imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
-        img_name = "image-client/frame_{}.png".format(datetime.time())
-        cv2.imwrite(img_name, imgS)
-        print("{} written!".format(img_counter))
-        img_counter += 1
-        cap.release()
-
-
 
 
 
@@ -136,12 +117,11 @@ def video():
     global cap
     return Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/video/<captur>')
-def photo(captur):
+@app.route('/photo')
+def photo():
     global cap
-    return Response(gen(captur), mimetype='multipart/x-mixed-replace; boundary=frame')
-    #return render_template('test.html')
-    #return 'nothing'
+    return Response(gen('photo'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
+
 
 
 if __name__ == '__main__':
