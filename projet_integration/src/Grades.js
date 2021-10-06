@@ -209,15 +209,17 @@ function Grades() {
                 ))}
 
                 <div className="row p-1 justify-content-center">
-                    <div id="big-layout-add" className="bg-person col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-1 bg-light shadow-sm rounded row">
-                        <div className='col-sm-3 rounded' style={{backgroundColor:'#E0E0E0'}}>
+                    <div type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" id="big-layout-add" className="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-1 bg-light shadow-sm rounded row">
+                        <div className='bg-person col-sm-3 rounded' style={{backgroundColor:'#E0E0E0'}}>
+                            {/* <i type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" className="p-0 bi bi-plus-circle-fill add-user" style={{color:"rgb(144, 224, 147)", fontSize:'280%', position:'absolute'}}></i> */}
                             <i className="bi bi-person" style={{color:'white', fontSize:'350%'}}></i>
+                            
                         </div>
                         <div className="col-sm-6 align-self-center" style={{color:"#BDBDBD", fontSize:'175%'}}>Nouveau</div>
                         <div className="p-0 col-sm-3 col row" style={{fontSize:'65%', margin:'0px', textAlign:'left'}}>
-                            <div>
+                            {/* <div>
                                 <i type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" className="p-0 bi bi-plus-circle-fill align-self-start add-user" style={{color:"rgb(144, 224, 147)", fontSize:'280%', left:'120px', position:'relative',top:'-39px'}}></i>
-                            </div>
+                            </div> */}
                             <div className="p-0 col-sm-12 align-self-end" style={{color:"#BDBDBD"}}></div>
                         </div>
                     </div>

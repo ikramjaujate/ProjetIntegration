@@ -17,7 +17,7 @@ const LayoutGrade = ({name, color, members, allowed_camera, refused_camera}) => 
                     <div className="p-0 col-sm-6">
                         {refused_camera} <i className="bi bi-camera-video-fill" style={{color:'#ff6060'}}></i>
                     </div>
-                    <div className="p-0 col-sm-12">{members} {{members} > 1 ? `membres` : `membre`}</div>
+                    <div className="p-0 col-sm-12">{members} {members > 1 ? `membres` : `membre`}</div>
                 </div>
             </div>
         </div>
