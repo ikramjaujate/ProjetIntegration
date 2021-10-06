@@ -142,7 +142,8 @@ function Grades() {
     }
 
     /**
-     * Créer un nouveau grade
+     * Créer un nouveau grade, en vérifiant au préalable si les informations demandées
+     * sont complètes
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -201,7 +202,6 @@ function Grades() {
                     <div id="description" className="col-sm-12">Cette page vous permet de créer des grades ! </div>
                 </div>
 
-                {/* <div id="title-page" className="row">Récapitulatif des grades</div> */}
                 {informationsGrade && informationsGrade.map(grade => (
                     <div type="button" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
                         <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
@@ -217,9 +217,6 @@ function Grades() {
                         </div>
                         <div className="col-sm-6 align-self-center" style={{color:"#BDBDBD", fontSize:'175%'}}>Nouveau</div>
                         <div className="p-0 col-sm-3 col row" style={{fontSize:'65%', margin:'0px', textAlign:'left'}}>
-                            {/* <div>
-                                <i type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" className="p-0 bi bi-plus-circle-fill align-self-start add-user" style={{color:"rgb(144, 224, 147)", fontSize:'280%', left:'120px', position:'relative',top:'-39px'}}></i>
-                            </div> */}
                             <div className="p-0 col-sm-12 align-self-end" style={{color:"#BDBDBD"}}></div>
                         </div>
                     </div>

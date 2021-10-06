@@ -83,9 +83,9 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 /* text-shadow: 0 0 2px black; */
 
 #desription-page {
-    background-color: #4DAAB3;
-    margin: 0px 0px 55px 0px;
-    padding: 24px 0px 44px 0px;
+    background-color: #85a4a9;
+    margin: 0rem 16rem 2rem 17rem;
+    padding: 0rem 0rem 2rem 0rem;
 }
 
 #title-description{
