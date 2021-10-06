@@ -37,15 +37,12 @@ client.connect(err => {
  * @method GET
  **/
 
-client.query('select numero from camera', (err, result) => {
-  console.log("coucou")
-  console.log(result)
-  if(err) throw err ;
+app.get('/api/etatCam', (req, res) =>{
+  
+  client.query('select * from camera', (err, result) => {
 
-// app.get('/api/etatCam', (req, res) =>{
-  
-  
-//     res.send(result);
+    if(err) throw err ;
+    res.send(result.rows);
    
   })
-// })
+})
