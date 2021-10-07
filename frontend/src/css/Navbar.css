@@ -21,7 +21,7 @@ body {
 }
 
 .navbar-main {
-  position: absolute;
+  position: fixed;
   background-color: var(--bg-primary);
   transition: width 600ms ease;
   overflow: scroll;
@@ -79,7 +79,7 @@ body {
     bottom: 0;
     width: 100vw;
     height: 4rem;
-    display: flex;
+    display: fixed;
     flex-direction: row;
   }
 
@@ -118,7 +118,7 @@ body {
   .navbar-main {
     top: 0;
     width: 6rem;
-    height: 100vh;
+    height: 100%;
   }
 
   .navbar-main:hover {
