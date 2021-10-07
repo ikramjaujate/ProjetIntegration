@@ -36,7 +36,7 @@ const Camera =()=>{
       </select>
       <div id='cercle'></div>
       <div id='live'>
-      <img src= "http://192.168.0.200:6060/video" width='100%'height="100%" title="Foscam FI8905W"/>
+      <img src= "http://172.20.10.4:6060/video" width='100%'height="100%" title="Foscam FI8905W"/>
       </div>
      
       <div id='photo'>
