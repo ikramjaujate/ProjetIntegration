@@ -83,20 +83,20 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 /* text-shadow: 0 0 2px black; */
 
 #desription-page {
-    background-color: #85a4a9;
-    margin: 0rem 16rem 2rem 17rem;
-    padding: 0rem 0rem 2rem 0rem;
+    background-color: white;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
 }
 
 #title-description{
     text-align: center;
     font-size: 2.3rem;
-    color:white;
+    color:#68a7ad;
 }
 #description{
     text-align: center;
     font-size: 0.7rem;
-    color:white;
+    color:#68a7ad;
 }
 
 #title-page {
@@ -124,4 +124,9 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 .camera-refused {
     font-size: 1.2rem;
     color:#ff6060;
+}
+
+#layout-add {
+    margin-bottom: 1rem;
+    margin-top:1rem;
 }

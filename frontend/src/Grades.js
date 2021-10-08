@@ -196,22 +196,26 @@ function Grades() {
     
     return (
         <div>
-            <div>
-                <div id="desription-page" className="row justify-content-center shadow-sm">
+            <div className="row">
+                {/* <div id="desription-page" className="col-sm-6 row justify-content-center shadow-sm">
+                    <div id="title-description" className="col-sm-12">Grade</div>
+                    <div id="description" className="col-sm-12">Cette page vous permet de créer des grades ! </div>
+                </div> */}
+                <div id="desription-page" className="col-sm-7 offset-sm-3 row justify-content-center shadow-sm">
                     <div id="title-description" className="col-sm-12">Grade</div>
                     <div id="description" className="col-sm-12">Cette page vous permet de créer des grades ! </div>
                 </div>
 
                 {informationsGrade && informationsGrade.map(grade => (
-                    <div type="button" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
-                        <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
+                    <div className="col-sm-11 offset-sm-1" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
+                        <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}/>
                     </div>
                 ))}
 
-                <div className="row p-1 justify-content-center">
-                    <div type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" id="big-layout-add" className="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-1 bg-light shadow-sm rounded row">
+                <div id="layout-add" className="row p-1 justify-content-center col-sm-1 offset-sm-6">
+                    {/* <div type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" id="big-layout-add" className="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-1 bg-light shadow-sm rounded row">
                         <div className='bg-person col-sm-3 rounded' style={{backgroundColor:'#E0E0E0'}}>
-                            {/* <i type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" className="p-0 bi bi-plus-circle-fill add-user" style={{color:"rgb(144, 224, 147)", fontSize:'280%', position:'absolute'}}></i> */}
+                            <i type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" className="p-0 bi bi-plus-circle-fill add-user" style={{color:"rgb(144, 224, 147)", fontSize:'280%', position:'absolute'}}></i> 
                             <i className="bi bi-person" style={{color:'white', fontSize:'350%'}}></i>
                             
                         </div>
@@ -219,10 +223,16 @@ function Grades() {
                         <div className="p-0 col-sm-3 col row" style={{fontSize:'65%', margin:'0px', textAlign:'left'}}>
                             <div className="p-0 col-sm-12 align-self-end" style={{color:"#BDBDBD"}}></div>
                         </div>
-                    </div>
+                    </div> */}
+                    <i className="p-0 bi bi-plus-circle-fill add-user col-sm-1" type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" style={{color:"rgb(144, 224, 147)", fontSize:'280%'}}></i>
+
                 </div>  
 
-                <div className="modal fade" id="gradeModal" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
+                
+
+            </div>
+
+            <div className="modal fade" id="gradeModal" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div className="modal-content">
                         <div className="modal-header row">
@@ -246,7 +256,7 @@ function Grades() {
                 </div>
 
                 <div className="modal fade" id="addGradeModal" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div className="modal-content">
                         <div className="modal-header row">
                             <h5 className="p-1 modal-title col-sm-8 align-self-center offset-sm-2" style={{textAlign:"center"}} id="addGradeModalLabel">Ajouter un grade</h5>
@@ -283,7 +293,6 @@ function Grades() {
                                 </div>
 
                             </div>
-
                         </div>
                         <div className="modal-footer row justify-content-between">
                             <button type="button" className="btn btn-secondary col-md-5 create-grade-button" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}}>Annuler </button>
@@ -294,7 +303,6 @@ function Grades() {
                 </div>
                 <ToastContainer style={{fontSize:"0.6rem"}}/>
 
-            </div>
         </div>
     );
   }
