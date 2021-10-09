@@ -23,14 +23,15 @@ pwm_gpio = 12
 frequence = 50
 GPIO.setup(pwm_gpio, GPIO.OUT)
 pwm = GPIO.PWM(pwm_gpio, frequence)
+def close() : 
+    #initialiser a 0°
+    pwm.start(angle_to_percent(0))
+    time.sleep(1)
 
-#initialiser a 0°
-pwm.start(angle_to_percent(0))
-time.sleep(1)
-
-#ouvrir la porte ( 110)°
-pwm.ChangeDutyCycle(angle_to_percent(90))
-time.sleep(1)
+def open() : 
+    #ouvrir la porte ( 110)°
+    pwm.ChangeDutyCycle(angle_to_percent(90))
+    time.sleep(1)
 
 
 #fermer le gpio
