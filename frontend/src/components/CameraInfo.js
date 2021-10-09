@@ -1,4 +1,3 @@
-//import PropTypes from 'prop-types';
 import '../css/Grades.css';
 
 
@@ -12,14 +11,5 @@ const CameraInfo = ({name, allowed, notification}) => {
         </div>
     );
 }
-
-// CameraInfo.propTypes = {
-//     className : PropTypes.string,
-//     id_div : PropTypes.string,
-//     id_elem : PropTypes.string,
-//     name : PropTypes.string,
-//     value : PropTypes.string,
-//     onClick : PropTypes.func,
-// }
 
 export default CameraInfo;

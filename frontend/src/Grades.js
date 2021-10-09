@@ -118,6 +118,32 @@ function Grades() {
 
 
     /**
+     * Suppression des messages d'erreurs
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     const deleteErrorMsg = () => {
+        document.getElementById("name-grade").style.border = "1px solid #ced4da";
+        document.getElementById("error-name").innerHTML = "";
+        document.getElementById("error-color").innerHTML = "";
+        var styleElem = document.head.appendChild(document.createElement("style"));
+        styleElem.innerHTML = "#empty:before {border:none}";
+    }
+
+    /**
+     * Remise à 0 des informations spécifiées pour la création d'un grade
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     const resetCreation = () => {
+        deleteErrorMsg() ;
+        document.getElementsByClassName("final-color")[0].id = "empty" ;
+        document.getElementById("empty").style.color = "var(--empty-color)";
+        document.getElementById("name-grade").value = "";
+    }
+
+
+    /**
      * Adapte le nom et la couleur du modal pour le grade sur lequel on souhaite avoir des détails
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
@@ -163,15 +189,15 @@ function Grades() {
 
             if (newColor === "empty") {
                 document.getElementById("error-color").innerHTML = "Veuillez choisir une couleur";
+                var styleElem = document.head.appendChild(document.createElement("style"));
+                styleElem.innerHTML = "#empty:before {border:1px solid red}";
             }
             else {
                 document.getElementById("error-color").innerHTML = "";
             }
         }
         else {
-            document.getElementById("name-grade").style.border = "1px solid #ced4da";
-            document.getElementById("error-name").innerHTML = "";
-            document.getElementById("error-color").innerHTML = "";
+            deleteErrorMsg() ;
 
             fetch ("http://localhost:3001/api/grades",{
                 method: "PUT",
@@ -197,8 +223,9 @@ function Grades() {
     return (
         <div>
 
-            <div className="row">
-                <div id="desription-page" className="row justify-content-center shadow-sm col-8 col-sm-10 col-md-9 col-lg-7 col-xl-7 col-xxl-7 offset-2 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-3 offset-xxl-3">
+            <div className="row justify-content-center">
+                {/* <div id="desription-page" className="row justify-content-center shadow-sm col-8 col-sm-10 col-md-9 col-lg-7 col-xl-7 col-xxl-7 offset-2 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-3 offset-xxl-3"> */}
+                <div id="desription-page" className="row col-8 col-sm-10 col-md-9 col-lg-7 col-xl-7 col-xxl-7">
                 {/* <div id="desription-page" className="row justify-content-center shadow-sm col-sm-2 offset-sm-3 "> */}
                     <div id="title-description" className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">Grade</div>
                     <div id="description" className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">Cette page vous permet de créer des grades !</div>
@@ -254,6 +281,7 @@ function Grades() {
                                         </div>
                                         <div className="p-0 m-1 col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-10" id="frame-name-grade-input">
                                             <input type="text" className="form-control" id="name-grade" />
+                                            {/* <i class="bi bi-exclamation-circle" style={{color:"red"}}></i> */}
                                         </div>
                                     </div>
                                     <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-3 order-md-2">
@@ -278,7 +306,7 @@ function Grades() {
                             </div>
                         </div>
                         <div className="modal-footer row justify-content-between">
-                            <button type="button" className="btn btn-secondary creation-grade-button col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}}>Annuler </button>
+                            <button type="button" className="btn btn-secondary creation-grade-button col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}} onClick={resetCreation}>Annuler </button>
                             <button type="button" className="btn creation-grade-button col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" style={{backgroundColor:"#4DAAB3", color:"white"}} onClick={() => createGrade()}>Créer </button>
                         </div>
                         </div>

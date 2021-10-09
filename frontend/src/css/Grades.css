@@ -21,7 +21,8 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 #desription-page {
     background-color: white;
     margin-bottom: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
 }
 
 #title-description{
@@ -64,6 +65,9 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 }
 .add-user:hover {
     color: #358539;
+}
+.add-user:active {
+    color: #246927;
 }
 
 ::-webkit-scrollbar {
@@ -121,7 +125,12 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 .errorMessage {
     color:var(--error) ;
     font-size: 0.6rem;
-    padding: 0px 0px 0px 25px!important;
+}
+#error-color {
+    padding: 0.3rem 0rem 0rem 1.5rem!important;
+}
+#error-name {
+    padding: 0.3rem 0rem 0rem 1.1rem!important;
 }
 
 /* text-shadow: 0 0 2px black; */
@@ -160,6 +169,9 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     margin-top:1rem;
 }
 
+#empty:before{
+    border-radius: 7px;
+}
 
 
 @media only screen and (max-width: 992px) {
@@ -169,7 +181,7 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 @media only screen and (max-width: 767px) {
     .informations{font-size: 84%;}
     .name-grade{font-size: 150%;}
-    .errorMessage{margin: 0.1rem 0rem 0.2rem 0.2rem;}
+    #error-color{margin: 0rem 0rem 0.5rem 0rem;}
 }
 @media only screen and (max-width: 635px) {
    .icon-person {font-size: 311%;}
