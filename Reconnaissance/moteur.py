@@ -6,7 +6,6 @@ import time
 def angle_to_percent (angle) :
     if angle > 180 or angle < 0 :
         return False
-
     start = 4
     end = 12.5 # car 1°  = +/- 1.75%
     ratio = (end - start)/180 #Calcul le ratio d'angle en %
