@@ -218,13 +218,13 @@ function Grades() {
             <div className="modal fade" id="gradeModal" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div className="modal-content">
-                        <div className="modal-header row">
-                            <h5 className="p-1 modal-title shadow-sm rounded col-sm-8 align-self-center offset-sm-2" style={{backgroundColor:'#F8F9FA', color:"white", textAlign:"center"}} id="gradeModalLabel">Chargement</h5>
+                        <div className="modal-header row justify-content-center">
+                            <h5 className="p-1 modal-title shadow-sm rounded align-self-center col-11 col-sm-10 col-md-10 col-lg-9 col-xl-9 col-xxl-9" style={{backgroundColor:'#F8F9FA', color:"white", textAlign:"center"}} id="gradeModalLabel">Chargement</h5>
 
                         </div>
                         <div className="modal-body">
 
-                            <div className="row">
+                            <div className="row justify-content-center">
                                 {informationsCameras && informationsCameras.map(camera => (
                                     <CameraInfo allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
                                 ))}
@@ -248,38 +248,38 @@ function Grades() {
 
                             <div className="container-fluid">
                                 <div className="row">
-                                    <div className="col-md-6">
-                                        <div className="col-md-11 p-0 m-1 frame-grade-label"> 
+                                    <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-1">
+                                        <div className="p-0 m-1 frame-grade-label col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 col-xxl-11"> 
                                             <label id="name-grade-label" for="name-grade" className="col-form-label">Nom</label>
                                         </div>
-                                        <div className="p-0 m-1 col-md-10" id="frame-name-grade-input">
+                                        <div className="p-0 m-1 col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-10" id="frame-name-grade-input">
                                             <input type="text" className="form-control" id="name-grade" />
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
-                                        <div className="col-md-11 p-0 m-1 frame-grade-label">
+                                    <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-3 order-md-2">
+                                        <div className="p-0 m-1 frame-grade-label col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 col-xxl-11">
                                             <label id="color-grade-label" for="color-grade" className="col-form-label">Couleur</label>
                                         </div>
-                                        <div id="frame-colors" className="p-0 m-0 col-md-11 rounded row">
-                                            <div className="col-md-12">
-                                            <i id="empty" className="final-color bi bi-square-fill" style={{color:"var(--empty-color)", fontSize:"175%"}}></i>
+                                        <div id="frame-colors" className="p-0 m-0 rounded row col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 col-xxl-11">
+                                            <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 container-final-color">
+                                                <i id="empty" className="final-color bi bi-square-fill" style={{color:"var(--empty-color)", fontSize:"175%"}}></i>
                                             </div>
                                             {colorGrades && colorGrades.map(color => (
-                                                <div className="col-md-1">
+                                                <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1 container-choosing-color">
                                                     <i type="button" className="bi bi-square-fill" style={{color:color.colorcode}} onClick={() => chooseColor(color.idcolor, color.colorcode)}></i>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
-                                    <div id="error-name" className="col-md-6 errorMessage"></div>
-                                    <div id="error-color" className="col-md-6 errorMessage"></div>
+                                    <div id="error-name" className="errorMessage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-2 order-md-3"></div>
+                                    <div id="error-color" className="errorMessage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-4"></div>
                                 </div>
 
                             </div>
                         </div>
                         <div className="modal-footer row justify-content-between">
-                            <button type="button" className="btn btn-secondary col-md-5 create-grade-button" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}}>Annuler </button>
-                            <button type="button" className="btn col-md-5 create-grade-button" style={{backgroundColor:"#4DAAB3", color:"white"}} onClick={() => createGrade()}>Créer </button>
+                            <button type="button" className="btn btn-secondary creation-grade-button col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}}>Annuler </button>
+                            <button type="button" className="btn creation-grade-button col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" style={{backgroundColor:"#4DAAB3", color:"white"}} onClick={() => createGrade()}>Créer </button>
                         </div>
                         </div>
                     </div>

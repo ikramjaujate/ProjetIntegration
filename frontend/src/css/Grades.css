@@ -48,6 +48,16 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 }
 /**/
 
+
+/*Modal détail*/
+#gradeModal .modal-body {
+    padding:0rem!important;
+}
+.bg-notification {
+    text-align: center;
+}
+/**/
+
 .add-user {
     color:rgb(144, 224, 147);
     font-size:280%;
@@ -100,7 +110,7 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     padding: 0px 0px 7px 0px!important;
 }
 
-.create-grade-button {
+.creation-grade-button {
     margin: 0.25rem 0.75rem 0.25rem 0.75rem;
 }
 
@@ -152,10 +162,14 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 
 
 
+@media only screen and (max-width: 992px) {
+    .modal-body {padding: 0rem;}
+}
 
 @media only screen and (max-width: 767px) {
     .informations{font-size: 84%;}
     .name-grade{font-size: 150%;}
+    .errorMessage{margin: 0.1rem 0rem 0.2rem 0.2rem;}
 }
 @media only screen and (max-width: 635px) {
    .icon-person {font-size: 311%;}
@@ -168,6 +182,15 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .icon-person {font-size: 350%;}
     .name-grade {margin: 0.4rem 0rem 0.2rem 0rem;
         padding: 0rem 0rem 0rem 0.2rem;}
+    #addGradeModalLabel {font-size: 1rem;}
+    .modal-header{padding:0.3rem 0.3rem;}
+    #name-grade-label{font-size:0.8rem}
+    #color-grade-label{font-size:0.8rem}
+    .final-color{font-size: 154%;}
+    .container-final-color{padding: 0rem 0rem 0rem 0.3rem;}
+    .container-choosing-color{padding: 0rem 1rem 0rem 0.3rem;}
+    .creation-grade-button{font-size: 0.8rem;}
+    .card-grade{margin-bottom: 0.2rem;}
 }
 
 @media only screen and (max-width: 420px) {
@@ -177,6 +200,7 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .add-user {font-size: 230%;}
     #layout-add {margin-bottom: 0.7rem;
         margin-top: 0.3rem;}
+    #gradeModal .m-2 {margin: 0.3rem 0.5rem 0.3rem 0.5rem!important;}
 
 }
 
