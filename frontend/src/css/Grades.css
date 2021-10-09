@@ -17,7 +17,41 @@ body {
 html::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 
+/*Banniere page description*/
+#desription-page {
+    background-color: white;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+}
 
+#title-description{
+    text-align: center;
+    font-size: 2.3rem;
+    color:#68a7ad;
+}
+#description{
+    text-align: center;
+    font-size: 0.7rem;
+    color:#68a7ad;
+}
+/**/
+
+/**/
+.name-grade{
+    font-size:175%;
+}
+
+.icon-person {
+    /* font-size: 311%; */
+    color:white;
+    font-size:350%;
+}
+/**/
+
+.add-user {
+    color:rgb(144, 224, 147);
+    font-size:280%;
+}
 .add-user:hover {
     color: #358539;
 }
@@ -82,22 +116,7 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 
 /* text-shadow: 0 0 2px black; */
 
-#desription-page {
-    background-color: white;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-}
 
-#title-description{
-    text-align: center;
-    font-size: 2.3rem;
-    color:#68a7ad;
-}
-#description{
-    text-align: center;
-    font-size: 0.7rem;
-    color:#68a7ad;
-}
 
 #title-page {
     margin: 3rem 0rem 2rem 5rem;
@@ -129,4 +148,39 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 #layout-add {
     margin-bottom: 1rem;
     margin-top:1rem;
+}
+
+
+
+
+@media only screen and (max-width: 767px) {
+    .informations{font-size: 84%;}
+    .name-grade{font-size: 150%;}
+}
+@media only screen and (max-width: 635px) {
+   .icon-person {font-size: 311%;}
+}
+
+@media only screen and (max-width: 576px) {
+    #title-description{font-size: 1.8rem;}
+    #description{font-size: 0.6rem;}
+    #desription-page{padding-bottom: 1rem;}
+    .icon-person {font-size: 350%;}
+    .name-grade {margin: 0.4rem 0rem 0.2rem 0rem;
+        padding: 0rem 0rem 0rem 0.2rem;}
+}
+
+@media only screen and (max-width: 420px) {
+    .informations {font-size: 75%;}
+    .name-grade{font-size: 118%;}
+    .icon-person {font-size: 293%;}
+    .add-user {font-size: 230%;}
+    #layout-add {margin-bottom: 0.7rem;
+        margin-top: 0.3rem;}
+
+}
+
+@media only screen and (max-width: 350px) {
+    .informations {font-size: 68%;}
+    .name-grade{font-size: 110%;}
 }
