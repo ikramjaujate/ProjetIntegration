@@ -43,7 +43,7 @@ function Grades() {
         Array.from(document.querySelectorAll('button[data-bs-toggle="popover"]'))
         .forEach(popoverNode => new Popover(popoverNode)) ;
         Array.from(document.querySelectorAll('.toast'))
-        .forEach(toastNode => new Toast(toastNode))
+        .forEach(toastNode => new Toast(toastNode));
 
 	}, []);
 
@@ -137,8 +137,9 @@ function Grades() {
      */
      const resetCreation = () => {
         deleteErrorMsg() ;
-        document.getElementsByClassName("final-color")[0].id = "empty" ;
-        document.getElementById("empty").style.color = "var(--empty-color)";
+        // document.getElementsByClassName("final-color")[0].id = "empty" ;
+        // document.getElementById("empty").style.color = "var(--empty-color)";
+        chooseColor("empty", "var(--empty-color)")
         document.getElementById("name-grade").value = "";
     }
 
@@ -212,8 +213,9 @@ function Grades() {
             .then(data => {
                 getGrades() ;
                 getColor() ;
-                chooseColor("empty", "var(--empty-color)") ;
-                document.getElementById("name-grade").value = "" ;
+                //chooseColor("empty", "var(--empty-color)") ;
+                resetCreation() ;
+                //modal close
                 toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
             });
         }
@@ -265,7 +267,7 @@ function Grades() {
                     </div>
                 </div>
 
-                <div className="modal fade" id="addGradeModal" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
+                <div className="modal fade" id="addGradeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div className="modal-content">
                         <div className="modal-header row">
@@ -280,7 +282,7 @@ function Grades() {
                                             <label id="name-grade-label" for="name-grade" className="col-form-label">Nom</label>
                                         </div>
                                         <div className="p-0 m-1 col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-10" id="frame-name-grade-input">
-                                            <input type="text" className="form-control" id="name-grade" />
+                                            <input maxlength="10" type="text" className="form-control" id="name-grade" />
                                             {/* <i class="bi bi-exclamation-circle" style={{color:"red"}}></i> */}
                                         </div>
                                     </div>
