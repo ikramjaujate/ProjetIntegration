@@ -5,17 +5,13 @@ import'bootstrap/dist/js/bootstrap.min.js';
 import'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Popover, Toast } from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './css/Grades.css';
 import LayoutGrade from './components/LayoutGrade';
 import CameraInfo from './components/CameraInfo';
 import {useEffect, useState} from "react" ;
-
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 function Grades() {
@@ -43,8 +39,7 @@ function Grades() {
         Array.from(document.querySelectorAll('button[data-bs-toggle="popover"]'))
         .forEach(popoverNode => new Popover(popoverNode)) ;
         Array.from(document.querySelectorAll('.toast'))
-        .forEach(toastNode => new Toast(toastNode))
-
+        .forEach(toastNode => new Toast(toastNode));
 	}, []);
 
 
@@ -66,7 +61,7 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const getGrades = () => {
-        var informations = { method: 'GET',
+        let informations = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
         fetch(`http://localhost:3001/api/grades`, informations)
@@ -92,7 +87,7 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const getColor = () => {
-        var informations = { method: 'GET',
+        let informations = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
         fetch(`http://localhost:3001/api/grades/colors`, informations)
@@ -118,6 +113,36 @@ function Grades() {
 
 
     /**
+     * Suppression des messages d'erreurs
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     const deleteErrorMsg = (nameError, colorError) => {
+        if (nameError) {
+            document.getElementById("name-grade").style.border = "1px solid #ced4da";
+            document.getElementById("error-name").innerHTML = "";
+        }
+        if (colorError) {
+            document.getElementById("error-color").innerHTML = "";
+            let styleElem = document.head.appendChild(document.createElement("style"));
+            styleElem.innerHTML = "#empty:before {border:none}";
+        }
+    }
+
+
+    /**
+     * Remise à 0 des informations spécifiées pour la création d'un grade
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     const resetCreation = () => {
+        deleteErrorMsg(true, true) ;
+        chooseColor("empty", "var(--empty-color)")
+        document.getElementById("name-grade").value = "";
+    }
+
+
+    /**
      * Adapte le nom et la couleur du modal pour le grade sur lequel on souhaite avoir des détails
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
@@ -128,7 +153,7 @@ function Grades() {
         document.getElementById('gradeModalLabel').style.backgroundColor= mainColor;
         document.getElementById('gradeModalLabel').innerHTML= mainName;
 
-        var informations = { method: 'GET',
+        let informations = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
 
@@ -151,27 +176,32 @@ function Grades() {
 
         let newName = document.getElementById("name-grade").value ;
         let newColor = document.getElementsByClassName("final-color")[0].id ;
-        if (newName === "" || newColor === "empty") {
-            if (newName === "") {
-                document.getElementById("name-grade").style.border = "1px solid var(--error)";
-                document.getElementById("error-name").innerHTML = "Veuillez choisir un nom";
-            }
-            else {
-                document.getElementById("name-grade").style.border = "1px solid #ced4da";
-                document.getElementById("error-name").innerHTML = "";
-            }
-
-            if (newColor === "empty") {
-                document.getElementById("error-color").innerHTML = "Veuillez choisir une couleur";
-            }
-            else {
-                document.getElementById("error-color").innerHTML = "";
-            }
+        let newNameok = false, newColorok = false ;
+        if (newName === "") {
+            document.getElementById("name-grade").style.border = "1px solid var(--error)";
+            document.getElementById("error-name").innerHTML = "Veuillez choisir un nom";
+        }
+        else if (informationsGrade.map(element => element.name).indexOf(newName) !== -1) {
+            document.getElementById("name-grade").style.border = "1px solid var(--error)";
+            document.getElementById("error-name").innerHTML = "Ce nom existe déjà";
         }
         else {
-            document.getElementById("name-grade").style.border = "1px solid #ced4da";
-            document.getElementById("error-name").innerHTML = "";
-            document.getElementById("error-color").innerHTML = "";
+            deleteErrorMsg(true, false);
+            newNameok = true ;
+        }
+        
+        if (newColor === "empty") {
+            document.getElementById("error-color").innerHTML = "Veuillez choisir une couleur";
+            let styleElem = document.head.appendChild(document.createElement("style"));
+            styleElem.innerHTML = "#empty:before {border:1px solid red}";
+        }
+        else {
+            deleteErrorMsg(false, true);
+            newColorok = true ;
+        }
+
+        if (newColorok && newNameok) {
+            deleteErrorMsg(true, true) ;
 
             fetch ("http://localhost:3001/api/grades",{
                 method: "PUT",
@@ -181,120 +211,134 @@ function Grades() {
                 body: JSON.stringify({name:newName, idcolor:newColor})
             })
             .then((res)=> {
-                return res;
+                return res.json();
             })
             .then(data => {
                 getGrades() ;
                 getColor() ;
-                chooseColor("empty", "var(--empty-color)") ;
-                document.getElementById("name-grade").value = "" ;
+                resetCreation() ;
+                document.getElementById("cancel-creation").click() ;
+                console.log("data = ", data);
                 toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
             });
+           
         }
     }
+
+
+    /**
+     * Ajout d'une bordure autour de la couleur sélectionnée
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     const highlithColor = (idColor) => {
+        
+        let styleElemNewColor = document.head.appendChild(document.createElement("style"));
+        styleElemNewColor.innerHTML = `#little-square-${idColor}:before {border:1px solid var(--frame-choice-color); border-radius:4px;}`;
+
+        let styleElemOldColor = document.head.appendChild(document.createElement("style"));
+        let oldIdColor = document.getElementsByClassName("final-color")[0].id ;
+        styleElemOldColor.innerHTML = `#little-square-${oldIdColor}:before {border:none;}`;
+        
+    }
+
 
     
     return (
         <div>
-            <div>
-                <div id="desription-page" className="row justify-content-center shadow-sm">
-                    <div id="title-description" className="col-sm-12">Grade</div>
-                    <div id="description" className="col-sm-12">Cette page vous permet de créer des grades ! </div>
+
+            <div className="row justify-content-center">
+                {/* <div id="desription-page" className="row justify-content-center shadow-sm col-8 col-sm-10 col-md-9 col-lg-7 col-xl-7 col-xxl-7 offset-2 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-3 offset-xxl-3"> */}
+                <div id="desription-page" className="row col-8 col-sm-10 col-md-9 col-lg-7 col-xl-7 col-xxl-7">
+                {/* <div id="desription-page" className="row justify-content-center shadow-sm col-sm-2 offset-sm-3 "> */}
+                    <div id="title-description" className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">Grade</div>
+                    <div id="description" className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">Cette page vous permet de créer des grades !</div>
                 </div>
 
                 {informationsGrade && informationsGrade.map(grade => (
-                    <div type="button" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
-                        <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
+                        <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}/>
                     </div>
                 ))}
 
-                <div className="row p-1 justify-content-center">
-                    <div type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" id="big-layout-add" className="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-1 bg-light shadow-sm rounded row">
-                        <div className='bg-person col-sm-3 rounded' style={{backgroundColor:'#E0E0E0'}}>
-                            {/* <i type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal" className="p-0 bi bi-plus-circle-fill add-user" style={{color:"rgb(144, 224, 147)", fontSize:'280%', position:'absolute'}}></i> */}
-                            <i className="bi bi-person" style={{color:'white', fontSize:'350%'}}></i>
-                            
-                        </div>
-                        <div className="col-sm-6 align-self-center" style={{color:"#BDBDBD", fontSize:'175%'}}>Nouveau</div>
-                        <div className="p-0 col-sm-3 col row" style={{fontSize:'65%', margin:'0px', textAlign:'left'}}>
-                            <div className="p-0 col-sm-12 align-self-end" style={{color:"#BDBDBD"}}></div>
-                        </div>
-                    </div>
+                <div id="layout-add" className="text-center p-1 row justify-content-center col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                    <i className="p-0 bi bi-plus-circle-fill add-user col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1" type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
                 </div>  
-
-                <div className="modal fade" id="gradeModal" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                        <div className="modal-content">
-                        <div className="modal-header row">
-                            <h5 className="p-1 modal-title shadow-sm rounded col-sm-8 align-self-center offset-sm-2" style={{backgroundColor:'#F8F9FA', color:"white", textAlign:"center"}} id="gradeModalLabel">Chargement</h5>
-
-                        </div>
-                        <div className="modal-body">
-
-                            <div className="container-fluid">
-                                {informationsCameras && informationsCameras.map(camera => (
-                                    <CameraInfo allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
-                                ))}
-                            </div>
-
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="modal fade" id="addGradeModal" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div className="modal-content">
-                        <div className="modal-header row">
-                            <h5 className="p-1 modal-title col-sm-8 align-self-center offset-sm-2" style={{textAlign:"center"}} id="addGradeModalLabel">Ajouter un grade</h5>
-                        </div>
-                        <div className="modal-body">
-
-                            <div className="container-fluid">
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <div className="col-md-11 p-0 m-1 frame-grade-label"> 
-                                            <label id="name-grade-label" for="name-grade" className="col-form-label">Nom</label>
-                                        </div>
-                                        <div className="p-0 m-1 col-md-10" id="frame-name-grade-input">
-                                            <input type="text" className="form-control" id="name-grade" />
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="col-md-11 p-0 m-1 frame-grade-label">
-                                            <label id="color-grade-label" for="color-grade" className="col-form-label">Couleur</label>
-                                        </div>
-                                        <div id="frame-colors" className="p-0 m-0 col-md-11 rounded row">
-                                            <div className="col-md-12">
-                                            <i id="empty" className="final-color bi bi-square-fill" style={{color:"var(--empty-color)", fontSize:"175%"}}></i>
-                                            </div>
-                                            {colorGrades && colorGrades.map(color => (
-                                                <div className="col-md-1">
-                                                    <i type="button" className="bi bi-square-fill" style={{color:color.colorcode}} onClick={() => chooseColor(color.idcolor, color.colorcode)}></i>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                    <div id="error-name" className="col-md-6 errorMessage"></div>
-                                    <div id="error-color" className="col-md-6 errorMessage"></div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div className="modal-footer row justify-content-between">
-                            <button type="button" className="btn btn-secondary col-md-5 create-grade-button" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}}>Annuler </button>
-                            <button type="button" className="btn col-md-5 create-grade-button" style={{backgroundColor:"#4DAAB3", color:"white"}} onClick={() => createGrade()}>Créer </button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <ToastContainer style={{fontSize:"0.6rem"}}/>
-
             </div>
+
+            <div className="modal fade" id="gradeModal" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                    <div className="modal-header row justify-content-center">
+                        <h5 className="p-1 modal-title shadow-sm rounded align-self-center col-11 col-sm-10 col-md-10 col-lg-9 col-xl-9 col-xxl-9" style={{backgroundColor:'#F8F9FA', color:"white", textAlign:"center"}} id="gradeModalLabel">Chargement</h5>
+
+                    </div>
+                    <div className="modal-body">
+
+                        <div className="row justify-content-center">
+                            {informationsCameras && informationsCameras.map(camera => (
+                                <CameraInfo allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
+                            ))}
+                        </div>
+
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal fade" id="addGradeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                    <div className="modal-header row">
+                        <h5 className="p-1 modal-title col-sm-8 align-self-center offset-sm-2" style={{textAlign:"center"}} id="addGradeModalLabel">Ajouter un grade</h5>
+                    </div>
+                    <div className="modal-body">
+
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-1">
+                                    <div className="p-0 m-1 frame-grade-label col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 col-xxl-11"> 
+                                        <label id="name-grade-label" for="name-grade" className="col-form-label">Nom</label>
+                                    </div>
+                                    <div className="p-0 m-1 col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-10" id="frame-name-grade-input">
+                                        <input maxlength="10" type="text" className="form-control" id="name-grade" />
+                                        {/* <i class="bi bi-exclamation-circle" style={{color:"red"}}></i> */}
+                                    </div>
+                                </div>
+                                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-3 order-md-2">
+                                    <div className="p-0 m-1 frame-grade-label col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 col-xxl-11">
+                                        <label id="color-grade-label" for="color-grade" className="col-form-label">Couleur</label>
+                                    </div>
+                                    <div id="frame-colors" className="p-0 m-0 rounded row col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 col-xxl-11">
+                                        <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 container-final-color">
+                                            <i id="empty" className="final-color bi bi-square-fill" style={{color:"var(--empty-color)", fontSize:"175%"}}></i>
+                                        </div>
+                                        {colorGrades && colorGrades.map(color => (
+                                            <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1 container-choosing-color">
+                                                {/* <i type="button" className={`bi bi-square-fill ${color.idcolor}`} style={{color:color.colorcode}} onClick={() => highlithColor(color.idcolor), () => chooseColor(color.idcolor, color.colorcode)}></i> */}
+                                                <i type="button" id={`little-square-${color.idcolor}`} className={`bi bi-square-fill ${color.idcolor}`} style={{color:color.colorcode}} onClick={() => {highlithColor(color.idcolor);chooseColor(color.idcolor, color.colorcode)}}></i>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div id="error-name" className="errorMessage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-2 order-md-3"></div>
+                                <div id="error-color" className="errorMessage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-4"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="modal-footer row justify-content-between">
+                        <button id="cancel-creation" type="button" className="btn btn-secondary creation-grade-button col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}} onClick={resetCreation}>Annuler </button>
+                        <button type="button" className="btn creation-grade-button col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" style={{backgroundColor:"#4DAAB3", color:"white"}} onClick={() => createGrade()}>Créer </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <ToastContainer style={{fontSize:"0.6rem"}}/>
+
         </div>
     );
   }
