@@ -248,11 +248,9 @@ function Grades() {
         <div>
 
             <div className="row justify-content-center">
-                {/* <div id="desription-page" className="row justify-content-center shadow-sm col-8 col-sm-10 col-md-9 col-lg-7 col-xl-7 col-xxl-7 offset-2 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-3 offset-xxl-3"> */}
                 <div id="desription-page" className="row col-8 col-sm-10 col-md-9 col-lg-7 col-xl-7 col-xxl-7">
-                {/* <div id="desription-page" className="row justify-content-center shadow-sm col-sm-2 offset-sm-3 "> */}
                     <div id="title-description" className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">Grade</div>
-                    <div id="description" className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">Cette page vous permet de créer des grades !</div>
+                    <div id="description" className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">Cette page vous permet de créer des grades, <br /> ainsi que de voir les détails de ces <br /> derniers !</div>
                 </div>
 
                 {informationsGrade && informationsGrade.map(grade => (

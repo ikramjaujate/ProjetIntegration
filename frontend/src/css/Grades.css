@@ -21,9 +21,9 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 /*Banniere page description*/
 #desription-page {
     background-color: white;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding-bottom: 1rem;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
 }
 
 #title-description{
