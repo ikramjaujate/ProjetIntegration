@@ -273,22 +273,23 @@ function Grades() {
             <div className="modal fade" id="gradeModal" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
-                    <div className="modal-header row justify-content-center">
-                        <h5 className="p-1 modal-title shadow-sm rounded align-self-center col-11 col-sm-10 col-md-10 col-lg-9 col-xl-9 col-xxl-9" style={{backgroundColor:'#F8F9FA', color:"white", textAlign:"center"}} id="gradeModalLabel">Chargement</h5>
+                        <div className="modal-header row justify-content-center">
+                            <h5 className="p-1 modal-title shadow-sm rounded align-self-center col-11 col-sm-10 col-md-10 col-lg-9 col-xl-9 col-xxl-9" id="gradeModalLabel">Chargement</h5>
 
-                    </div>
-                    <div className="modal-body">
-
-                        <div className="row justify-content-center">
-                            {informationsCameras && informationsCameras.map(camera => (
-                                <CameraInfo allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
-                            ))}
                         </div>
+                        <div className="modal-body">
 
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    </div>
+                            <div className="row justify-content-center">
+                                {informationsCameras && informationsCameras.map(camera => (
+                                    <CameraInfo allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
+                                ))}
+                            </div>
+
+                        </div>
+                        <div className="modal-footer row justify-content-between">
+                            <button type="button" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal">Fermer</button>
+                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5">Modifier</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -297,7 +298,7 @@ function Grades() {
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                     <div className="modal-header row">
-                        <h5 className="p-1 modal-title col-sm-8 align-self-center offset-sm-2" style={{textAlign:"center"}} id="addGradeModalLabel">Ajouter un grade</h5>
+                        <h5 className="p-1 modal-title col-sm-8 align-self-center offset-sm-2" id="addGradeModalLabel">Ajouter un grade</h5>
                     </div>
                     <div className="modal-body">
 
@@ -335,8 +336,8 @@ function Grades() {
                         </div>
                     </div>
                     <div className="modal-footer row justify-content-between">
-                        <button id="cancel-creation" type="button" className="btn btn-secondary creation-grade-button col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" style={{backgroundColor:"#3A3E45", color:"white"}} onClick={resetCreation}>Annuler </button>
-                        <button type="button" className="btn creation-grade-button col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" style={{backgroundColor:"#4DAAB3", color:"white"}} onClick={() => createGrade()}>Créer </button>
+                        <button id="cancel-creation" type="button" className="btn creation-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" onClick={resetCreation}>Annuler </button>
+                        <button type="button" className="btn creation-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => createGrade()}>Créer </button>
                     </div>
                     </div>
                 </div>

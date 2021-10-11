@@ -9,14 +9,17 @@
     --empty-color : #BDBDBD ;
     --error : red ;
     --frame-choice-color:#5c5c5c;
+    --principal-color:#68a7ad;
+    --add-user:rgb(144, 224, 147);
+    --add-user-hover: #358539 ;
+    --add-user-active: #246927 ;
+    --border:#959494;
+    --text-loading:#F8F9FA;
 }
-
 body {
     color: var(--writing) ;
 }
-/* Cacher scrollbar horizontal */
-html::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
-html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
+
 
 /*Banniere page description*/
 #desription-page {
@@ -25,52 +28,174 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     padding-bottom: 1rem;
     padding-top: 0.5rem;
 }
-
 #title-description{
     text-align: center;
     font-size: 2.3rem;
-    color:#68a7ad;
+    color:var(--principal-color);
 }
 #description{
     text-align: center;
     font-size: 0.7rem;
-    color:#68a7ad;
+    color:var(--principal-color);
 }
 /**/
 
-/**/
+
+/*Carte chaque grades*/
 .name-grade{
     font-size:175%;
 }
-
 .icon-person {
     /* font-size: 311%; */
     color:white;
     font-size:350%;
 }
+.bg-person {
+    text-align: center;
+}
+.layout-nbr-camera {
+    font-size:97%;
+    margin:0px;
+    text-align:left;
+}
+.allowed-camera {
+    color:var(--camera-allow);
+}
+.refused-camera {
+    color:var(--camera-refuse);
+}
 /**/
 
 
-/*Modal détail*/
+/*Modal détail caméras*/
 #gradeModal .modal-body {
     padding:0rem!important;
+    /* padding: 1rem 5rem 1rem 5rem; */
+}
+#gradeModal .m-2 {
+    margin : 0.5rem 0.5rem 0.8rem 0.5rem!important;
 }
 .bg-notification {
     text-align: center;
 }
+.icon-notification {
+    font-size:100%;
+}
+.modification-grade-button {
+    margin: 0.25rem 0.75rem 0.25rem 0.75rem;
+}
+#gradeModalLabel {
+    background-color:var(--text-loading);
+    color:white;
+    text-align:center;
+}
+.bouton-close {
+    background-color:#3A3E45;
+    color:white;
+}
+.bouton-close:hover {
+    background-color:#2f3135;
+    color:white;
+}
+.bouton-action{
+    background-color:#4DAAB3;
+    color:white;
+}
+.bouton-action:hover {
+    background-color:#48949b;
+    color:white;
+}
 /**/
 
+
+/*Création grade*/
+#layout-add {
+    margin-bottom: 1rem;
+    margin-top:1rem;
+}
 .add-user {
-    color:rgb(144, 224, 147);
+    color:var(--add-user);
     font-size:280%;
 }
 .add-user:hover {
-    color: #358539;
+    color: var(--add-user-hover);
 }
 .add-user:active {
-    color: #246927;
+    color: var(--add-user-active);
 }
 
+
+#name-grade-label {
+    padding: 0px 5px 0px 5px!important;
+}
+#name-grade {
+    padding: 3px 10.125px 3px 10.125px!important;
+}
+#color-grade-label {
+    padding: 0px 5px 0px 5px!important;
+}
+#frame-colors {
+    margin: 0px 5px 11px 5px!important;
+    /* background-color:white; */
+}
+.frame-grade-label {
+    border-bottom: 1px solid var(--border);
+    padding: 0px 0px 7px 0px!important;
+}
+.creation-grade-button {
+    margin: 0.25rem 0.75rem 0.25rem 0.75rem;
+}
+#frame-name-grade-input {
+    margin-top: 0.75rem!important;
+}
+#empty:before{
+    border-radius: 7px;
+}
+#addGradeModalLabel{
+    text-align:center;
+}
+/**/
+
+
+/*Messages d'erreur*/
+.errorMessage {
+    color:var(--error) ;
+    font-size: 0.6rem;
+}
+#error-color {
+    padding: 0.3rem 0rem 0rem 1.5rem!important;
+}
+#error-name {
+    padding: 0.3rem 0rem 0rem 1.1rem!important;
+}
+/**/
+
+
+
+/*??*/
+/* #title-page {
+    margin: 3rem 0rem 2rem 5rem;
+    font-size: 1.5rem;
+} */
+/* .big-layout-grade {
+    margin: 0px 0px 10px 0px;
+} */
+/* #big-layout-add {
+    margin: 0px 0px 60px 0px;
+} */
+
+/* .camera-allowed {
+    font-size: 1.2rem;
+    color:#90e093;
+} */
+
+/* .camera-refused {
+    font-size: 1.2rem;
+    color:#ff6060;
+} */
+
+
+/*Design global (scrolbar)*/
 ::-webkit-scrollbar {
 	width: 6px; 
 }
@@ -84,97 +209,12 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 ::-webkit-scrollbar-thumb:active {
 	background: #2A2A2A;
 }
-
-#gradeModal .modal-body {
-    padding: 1rem 5rem 1rem 5rem;
-}
-
-#gradeModal .m-2 {
-    margin : 0.5rem 0.5rem 0.8rem 0.5rem!important;
-}
-
-#name-grade-label {
-    padding: 0px 5px 0px 5px!important;
-}
-
-#name-grade {
-    padding: 3px 10.125px 3px 10.125px!important;
-}
-
-#color-grade-label {
-    padding: 0px 5px 0px 5px!important;
-}
-
-#frame-colors {
-    margin: 0px 5px 11px 5px!important;
-    /* background-color:white; */
-}
-
-.frame-grade-label {
-    border-bottom: 1px solid #959494;
-    padding: 0px 0px 7px 0px!important;
-}
-
-.creation-grade-button {
-    margin: 0.25rem 0.75rem 0.25rem 0.75rem;
-}
-
-#frame-name-grade-input {
-    margin-top: 0.75rem!important;
-}
-
-.errorMessage {
-    color:var(--error) ;
-    font-size: 0.6rem;
-}
-#error-color {
-    padding: 0.3rem 0rem 0rem 1.5rem!important;
-}
-#error-name {
-    padding: 0.3rem 0rem 0rem 1.1rem!important;
-}
-
-/* text-shadow: 0 0 2px black; */
+html::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
+html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
+/**/
 
 
-
-#title-page {
-    margin: 3rem 0rem 2rem 5rem;
-    font-size: 1.5rem;
-}
-
-.bg-person {
-    text-align: center;
-}
-
-.big-layout-grade {
-    margin: 0px 0px 10px 0px;
-}
-
-#big-layout-add {
-    margin: 0px 0px 60px 0px;
-}
-
-.camera-allowed {
-    font-size: 1.2rem;
-    color:#90e093;
-}
-
-.camera-refused {
-    font-size: 1.2rem;
-    color:#ff6060;
-}
-
-#layout-add {
-    margin-bottom: 1rem;
-    margin-top:1rem;
-}
-
-#empty:before{
-    border-radius: 7px;
-}
-
-
+/*Responsive*/
 @media only screen and (max-width: 1250px) {
     .name-grade {font-size: 159%;}
 }
@@ -228,3 +268,4 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .informations {font-size: 64%;}
     .name-grade{font-size: 100%;}
 }
+/**/
