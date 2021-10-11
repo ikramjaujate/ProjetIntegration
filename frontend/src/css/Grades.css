@@ -21,7 +21,7 @@ body {
 }
 
 
-/*Banniere page description*/
+/*Banner description of the page*/
 #desription-page {
     background-color: white;
     margin-bottom: 1rem;
@@ -41,7 +41,7 @@ body {
 /**/
 
 
-/*Carte chaque grades*/
+/*Frame grade*/
 .name-grade{
     font-size:175%;
 }
@@ -67,7 +67,7 @@ body {
 /**/
 
 
-/*Modal détail caméras*/
+/*Modal details cameras*/
 #gradeModal .modal-body {
     padding:0rem!important;
     /* padding: 1rem 5rem 1rem 5rem; */
@@ -108,7 +108,7 @@ body {
 /**/
 
 
-/*Création grade*/
+/*Creation of a grade*/
 #layout-add {
     margin-bottom: 1rem;
     margin-top:1rem;
@@ -154,6 +154,31 @@ body {
 #addGradeModalLabel{
     text-align:center;
 }
+/**/
+
+
+/*Modication of camera's action*/
+#close-modify {
+    display:none;
+}
+#modifyGradeModalLabel {
+    text-align: center;
+    color:white;
+}
+.form-check-input:checked {
+    background-color: var(--camera-allow);
+    border-color: var(--camera-allow);
+}
+.form-switch .form-check-input {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+.form-check-input {
+    background-color: var(--camera-refuse);
+    border: none;
+}
+/* .form-check-input:active {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+} */
 /**/
 
 

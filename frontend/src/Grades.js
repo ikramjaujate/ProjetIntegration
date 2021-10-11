@@ -19,6 +19,8 @@ function Grades() {
     const [informationsGrade, setInformationsGrade] = useState([]);
     const [informationsCameras, setinformationsCameras] = useState([]);
     const [colorGrades, setColorGrades] = useState([]);
+    const [currentColor, setCurrentColor] = useState("");
+    const [currentGrade, setCurrentGrade] = useState("");
     const optionsToast = {
         autoClose: 8000,
         position: "bottom-right",
@@ -154,6 +156,9 @@ function Grades() {
         document.getElementById('gradeModalLabel').style.backgroundColor= mainColor;
         document.getElementById('gradeModalLabel').innerHTML= mainName;
 
+        setCurrentColor(mainColor);
+        setCurrentGrade(mainName);
+
         let informations = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
@@ -163,6 +168,7 @@ function Grades() {
             return result.json();
         })
         .then(dataCameras => {
+            console.log("datacamera : ", dataCameras);
             setinformationsCameras(dataCameras) ;
         });
     }
@@ -216,6 +222,7 @@ function Grades() {
             })
             .then(data => {
                 resetCreation() ;
+                document.getElementById("cancel-creation").click() ;
                 console.log("data = ", data);
                 if (data.message === "ok") {
                     getGrades() ;
@@ -225,7 +232,6 @@ function Grades() {
                 else {
                     toast.error("Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous.", optionsToast);
                 }
-                document.getElementById("cancel-creation").click() ;
             });
            
         }
@@ -236,6 +242,7 @@ function Grades() {
      * Ajout d'une bordure autour de la couleur sélectionnée
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {integer} idColor  Identifiant de la couleur sélectionnée
      */
      const highlithColor = (idColor) => {
         
@@ -245,9 +252,19 @@ function Grades() {
         let styleElemOldColor = document.head.appendChild(document.createElement("style"));
         let oldIdColor = document.getElementsByClassName("final-color")[0].id ;
         styleElemOldColor.innerHTML = `#little-square-${oldIdColor}:before {border:none;}`;
-        
     }
 
+
+    /**
+     * Activer le bouton qui permet de fermer son modal
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {string} idButton  Identifiant du bouton à activer
+     */
+     const activateButton = (idButton) => {
+        document.getElementById(idButton).click() ;
+        
+    }
 
     
     return (
@@ -261,7 +278,7 @@ function Grades() {
 
                 {informationsGrade && informationsGrade.map(grade => (
                     <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
-                        <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}/>
+                        <LayoutGrade key={`prop-${grade.id}`} name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
                     </div>
                 ))}
 
@@ -281,14 +298,14 @@ function Grades() {
 
                             <div className="row justify-content-center">
                                 {informationsCameras && informationsCameras.map(camera => (
-                                    <CameraInfo allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
+                                    <CameraInfo key={`prop-${camera.idAccess}`} allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
                                 ))}
                             </div>
 
                         </div>
                         <div className="modal-footer row justify-content-between">
-                            <button type="button" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal">Fermer</button>
-                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5">Modifier</button>
+                            <button type="button" id="close-informations" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
+                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => activateButton("close-informations")}>Modifier</button>
                         </div>
                     </div>
                 </div>
@@ -342,7 +359,44 @@ function Grades() {
                     </div>
                 </div>
             </div>
-            <ToastContainer style={{fontSize:"0.6rem"}}/>
+
+            <div className="modal fade" id="modifyGradeModal" tabindex="-1" aria-labelledby="modifyGradeModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                        <div className="modal-header row justify-content-center">
+                            <h5 className="p-1 modal-title shadow-sm rounded align-self-center col-11 col-sm-10 col-md-10 col-lg-9 col-xl-9 col-xxl-9" id="modifyGradeModalLabel" style={{backgroundColor:currentColor}}>{currentGrade}</h5>
+
+                        </div>
+                        <div className="modal-body">
+
+                            <div className="row justify-content-center">
+                                {informationsCameras && informationsCameras.map(camera => (
+                                    // <CameraInfo key={`prop-${camera.idAccess}`} allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
+                                    <div className="row p-1 m-2 bg-light rounded col-9 col-sm-8 col-md-9 col-lg-7 col-xl-7 col-xxl-7">
+                                        <div className="align-self-center col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">{camera.name}</div>
+                                        <div className="align-self-center col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                                            </div>
+                                        </div>
+                                        <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
+                                            <i className="bi bi-bell icon-notification" style={{color:camera.notification ? "white" : camera.allowed ? "var(--camera-allow)" : "var(--camera-refuse)"}}></i>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                        </div>
+                        <div className="modal-footer row justify-content-between">
+                            <button type="button" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#gradeModal" data-bs-toggle="modal" onClick={() => activateButton("close-modify")}>Annuler</button>
+                            <button type="button" id="close-modify" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
+                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#gradeModal" data-bs-toggle="modal" onClick={() => activateButton("close-modify")}>Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ToastContainer style={{fontSize:"0.6rem"}}/>           
 
         </div>
     );
