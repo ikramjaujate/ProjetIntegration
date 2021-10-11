@@ -154,26 +154,27 @@ app.get('/api/grades/members', (request, response) => {
                 let idgrade=results2.rows[0].idgrade ;
                 let nbrcamera = results3.rows[0].numbercamera;
                 for (let idCamera=1; idCamera<parseInt(nbrcamera)+1 ; idCamera++) {
-                    // try {
-                    //     client.query(query4, [idgrade, idCamera], (error, results4) => {
-                    //         console.log("error ififif'' ", error) ;
-                    //         console.log("cv");
-                    //     })
-                    //     throw 'salit';
-                    //   } 
-                    //   catch (err) {
-                    //     console.log("error 4 ", err) ;
-                    //     response.send({message:'ko'});
-                    //   }
-                    client.query(query4, [idgrade, idCamera], (error, results4) => {
-                        if (error) {
-                            throw error;
-                        }
-                    })
+                    try {
+                        client.query(query4, [idgrade, idCamera], (error, results4) => {
+                            console.log("error ififif'' ", error) ;
+                            console.log("cv");
+                        })
+                        throw 'salit';
+                      } 
+                      catch (err) {
+                        console.log("error 4 ", err) ;
+                        response.send({message:'ko'});
+                        return ;
+                      }
+                    // client.query(query4, [idgrade, idCamera], (error, results4) => {
+                    //     if (error) {
+                    //         throw error;
+                    //     }
+                    // })
                     
                 }
                 //response.status(200).json(results1.rows);
-                response.send(results1);
+                response.send({message:'ok'});
             })
         })
     })

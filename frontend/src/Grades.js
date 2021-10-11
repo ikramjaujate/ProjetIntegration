@@ -25,7 +25,8 @@ function Grades() {
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        draggable: true
+        draggable: true, 
+        theme:"light"
     };
     
 
@@ -214,12 +215,17 @@ function Grades() {
                 return res.json();
             })
             .then(data => {
-                getGrades() ;
-                getColor() ;
                 resetCreation() ;
-                document.getElementById("cancel-creation").click() ;
                 console.log("data = ", data);
-                toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
+                if (data.message === "ok") {
+                    getGrades() ;
+                    getColor() ;
+                    toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
+                }
+                else {
+                    toast.error("Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous.", optionsToast);
+                }
+                document.getElementById("cancel-creation").click() ;
             });
            
         }
