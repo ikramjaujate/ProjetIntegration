@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './css/Grades.css';
 import LayoutGrade from './components/LayoutGrade';
 import CameraInfo from './components/CameraInfo';
+import ActionsCameras from './components/ActionsCameras';
 import {useEffect, useState} from "react" ;
 
 
@@ -372,17 +373,18 @@ function Grades() {
                             <div className="row justify-content-center">
                                 {informationsCameras && informationsCameras.map(camera => (
                                     // <CameraInfo key={`prop-${camera.idAccess}`} allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
-                                    <div className="row p-1 m-2 bg-light rounded col-9 col-sm-8 col-md-9 col-lg-7 col-xl-7 col-xxl-7">
-                                        <div className="align-self-center col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">{camera.name}</div>
-                                        <div className="align-self-center col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                                            </div>
-                                        </div>
-                                        <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
-                                            <i className="bi bi-bell icon-notification" style={{color:camera.notification ? "white" : camera.allowed ? "var(--camera-allow)" : "var(--camera-refuse)"}}></i>
-                                        </div>
-                                    </div>
+                                    // <div className="row p-1 m-2 bg-light rounded col-9 col-sm-8 col-md-9 col-lg-7 col-xl-7 col-xxl-7">
+                                    //     <div className="align-self-center col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">{camera.name}</div>
+                                    //     <div className="align-self-center col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
+                                    //         <div class="form-check form-switch">
+                                    //             <input class="form-check-input" type="checkbox" role="switch" checked={camera.allowed ? true : false}/>
+                                    //         </div>
+                                    //     </div>
+                                    //     <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
+                                    //         <i className="bi bi-bell icon-notification" style={{color:camera.notification ? "white" : camera.allowed ? "var(--camera-allow)" : "var(--camera-refuse)"}}></i>
+                                    //     </div>
+                                    // </div>
+                                    <ActionsCameras name={camera.name} allowed={camera.allowed} notification={camera.notification}></ActionsCameras>
                                 ))}
                             </div>
 
