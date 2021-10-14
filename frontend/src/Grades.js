@@ -267,6 +267,44 @@ function Grades() {
         
     }
 
+
+    
+    /**
+     * Changer l'état de la notification (désactiver ou activer)
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     const changeNotification = () => {
+        console.log("change");        
+    }
+
+    /**
+     * Activer le bouton qui permet de fermer son modal
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {string} idButton  Identifiant du bouton à activer
+     */
+     const test = (grade) => {
+
+        let allSwitches = document.getElementsByClassName("form-check-input") ;
+        for (let i=0 ; i<allSwitches.length ; i++) {
+            allSwitches[i].checkd = false ;
+            console.log("all : ", allSwitches[i]);
+        }
+
+        console.log(grade); 
+        console.log(document.getElementsByClassName("switch-action-" + grade));
+        let switches = document.getElementsByClassName("switch-action-" + grade) ;
+        for (let i=0 ; i<switches.length ; i++) {
+            console.log("switch : ",i, " ", switches[i].className);
+            console.log("comparaison : ", switches[i].className.includes("switch-authorized"));
+            if (switches[i].className.includes("switch-authorized")){
+                console.log("i : ", document.getElementsByClassName("switch-action-" + grade)[i]);
+                document.getElementsByClassName("switch-action-" + grade)[i].checked = true ;
+            }
+        }      
+    }
+
     
     return (
         <div>
@@ -306,7 +344,7 @@ function Grades() {
                         </div>
                         <div className="modal-footer row justify-content-between">
                             <button type="button" id="close-informations" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
-                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => activateButton("close-informations")}>Modifier</button>
+                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");}}>Modifier</button>
                         </div>
                     </div>
                 </div>
@@ -372,19 +410,20 @@ function Grades() {
 
                             <div className="row justify-content-center">
                                 {informationsCameras && informationsCameras.map(camera => (
-                                    // <CameraInfo key={`prop-${camera.idAccess}`} allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
-                                    // <div className="row p-1 m-2 bg-light rounded col-9 col-sm-8 col-md-9 col-lg-7 col-xl-7 col-xxl-7">
-                                    //     <div className="align-self-center col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">{camera.name}</div>
-                                    //     <div className="align-self-center col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
-                                    //         <div class="form-check form-switch">
-                                    //             <input class="form-check-input" type="checkbox" role="switch" checked={camera.allowed ? true : false}/>
-                                    //         </div>
-                                    //     </div>
-                                    //     <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
-                                    //         <i className="bi bi-bell icon-notification" style={{color:camera.notification ? "white" : camera.allowed ? "var(--camera-allow)" : "var(--camera-refuse)"}}></i>
-                                    //     </div>
-                                    // </div>
-                                    <ActionsCameras name={camera.name} allowed={camera.allowed} notification={camera.notification}></ActionsCameras>
+                                    // <ActionsCameras name={camera.name} allowed={camera.allowed} notification={camera.notification}></ActionsCameras>
+                                    <div className="row p-1 m-2 bg-light rounded col-9 col-sm-8 col-md-9 col-lg-7 col-xl-7 col-xxl-7" id="layoutActionsCameras">
+                                        <div className="align-self-center col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">{camera.name}</div>
+                                        <div className="align-self-center col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
+                                            <div class="form-check form-switch">
+                                                {/* <input class={`form-check-input switch-action-${currentGrade} ${camera.allowed ? "switch-authorized" : ""}`} defaultChecked type="checkbox" role="switch" /> */}
+                                                {camera.allowed ? <input class={`form-check-input`} defaultChecked type="checkbox" role="switch" /> : <input class={`form-check-input`}  type="checkbox" role="switch" />}
+                                            </div>
+                                        </div>
+                                        <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
+                                            {/* <i className={`bi ${notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} style={{color:notification ? "white" : allowed ? "var(--camera-allow)" : "var(--camera-refuse)"}}></i> */}
+                                            <i type="button" className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} style={{color:camera.notification ? "var(--notification-on)" : "var(--notification-off)"}} onClick={() => changeNotification()}></i>
+                                        </div>
+                                    </div>
                                 ))}
                             </div>
 
