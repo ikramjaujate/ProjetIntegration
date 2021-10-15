@@ -22,6 +22,7 @@ function Grades() {
     const [colorGrades, setColorGrades] = useState([]);
     const [currentColor, setCurrentColor] = useState("");
     const [currentGrade, setCurrentGrade] = useState("");
+    const [currentIdGrade, setCurrentIdGrade] = useState("");
     const optionsToast = {
         autoClose: 8000,
         position: "bottom-right",
@@ -31,6 +32,9 @@ function Grades() {
         draggable: true, 
         theme:"light"
     };
+    let newActions = {} ;
+    let newNotifications = {} ;
+    const errorMsgClient = "Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous." ;
     
 
     /**
@@ -159,6 +163,7 @@ function Grades() {
 
         setCurrentColor(mainColor);
         setCurrentGrade(mainName);
+        setCurrentIdGrade(grade);
 
         let informations = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
@@ -171,6 +176,8 @@ function Grades() {
         .then(dataCameras => {
             console.log("datacamera : ", dataCameras);
             setinformationsCameras(dataCameras) ;
+            //informationsCameras = dataCameras ;
+            console.log("informations changées");
         });
     }
 
@@ -231,7 +238,7 @@ function Grades() {
                     toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
                 }
                 else {
-                    toast.error("Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous.", optionsToast);
+                    toast.error(errorMsgClient, optionsToast);
                 }
             });
            
@@ -274,8 +281,22 @@ function Grades() {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-     const changeNotification = () => {
-        console.log("change");        
+     const changeNotification = (idCamera, notification) => {
+
+        console.log("notif : ", notification);
+        if (idCamera in newNotifications) {
+            document.getElementById("notification-" + idCamera).className = notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
+            delete newNotifications[idCamera];
+            console.log("revient à l'ancienne")
+        }
+        else {
+            document.getElementById("notification-" + idCamera).className = notification ? "bi bi-bell-slash-fill" : "bi bi-bell-fill" ;
+            newNotifications[idCamera] = !notification ;
+            console.log("change d'état : ", !notification);
+            console.log("newnotif : ", newNotifications);
+        }
+        console.log("change : ", newNotifications);  
+        //document.getElementsByClassName("notification-" + idCamera)[0].className = "" ;
     }
 
     /**
@@ -303,6 +324,58 @@ function Grades() {
                 document.getElementsByClassName("switch-action-" + grade)[i].checked = true ;
             }
         }      
+    }
+
+    /**
+     * Changer l'action d'une caméra
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {string} identtifier  Identifiant du switch html qui vient d'être switch
+     */
+     const changeAction = (identtifier) => {
+
+        let action = document.getElementsByClassName("action-" + identtifier)[0].checked ; 
+        if (identtifier in newActions) {
+            delete newActions[identtifier];
+        }
+        else {
+            newActions[identtifier] = action ; 
+        }
+        console.log("new action : ", newActions);
+    }
+
+    /**
+     * Sauvegarder les nouvelles actions d'une caméra
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     const saveAction = () => {
+
+        console.log("sauver") ;
+        let grade = currentGrade ;
+        let informations = { method: 'POST',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({actions : newActions, notifications : newNotifications})
+        };
+
+        fetch(`http://localhost:3001/api/grades/${currentIdGrade}/acces`, informations)
+        .then(result => {
+            return result.json();
+        })
+        .then(data => {
+            console.log("data : ", data);
+            activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
+            newActions = [] ;
+            newNotifications = [] ;
+            if (data.message === "ok") {
+                getGrades() ;
+                toast.success("Vous venez de modifier les actions des caméras du grade " + grade + " !", optionsToast);
+            }
+            else {
+                toast.error(errorMsgClient, optionsToast);
+            }
+        });
+
     }
 
     
@@ -344,7 +417,7 @@ function Grades() {
                         </div>
                         <div className="modal-footer row justify-content-between">
                             <button type="button" id="close-informations" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
-                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");}}>Modifier</button>
+                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations")}}>Modifier</button>
                         </div>
                     </div>
                 </div>
@@ -416,12 +489,13 @@ function Grades() {
                                         <div className="align-self-center col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
                                             <div class="form-check form-switch">
                                                 {/* <input class={`form-check-input switch-action-${currentGrade} ${camera.allowed ? "switch-authorized" : ""}`} defaultChecked type="checkbox" role="switch" /> */}
-                                                {camera.allowed ? <input class={`form-check-input`} defaultChecked type="checkbox" role="switch" /> : <input class={`form-check-input`}  type="checkbox" role="switch" />}
+                                                {camera.allowed ? <input class={`form-check-input action-${camera.idcamera}`} defaultChecked type="checkbox" role="switch" onChange={() => changeAction(camera.idcamera)}/> : <input class={`form-check-input action-${camera.idcamera}`}  type="checkbox" role="switch" onChange={() => changeAction(camera.idcamera)}/>}
                                             </div>
                                         </div>
                                         <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
                                             {/* <i className={`bi ${notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} style={{color:notification ? "white" : allowed ? "var(--camera-allow)" : "var(--camera-refuse)"}}></i> */}
-                                            <i type="button" className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} style={{color:camera.notification ? "var(--notification-on)" : "var(--notification-off)"}} onClick={() => changeNotification()}></i>
+                                            {/* <i type="button" id={`notification-${camera.idcamera}`} className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} style={{color:camera.notification ? "var(--notification-on)" : "var(--notification-off)"}} onClick={() => changeNotification(camera.idcamera, camera.notification)}></i> */}
+                                            <i type="button" id={`notification-${camera.idcamera}`} className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} onClick={() => changeNotification(camera.idcamera, camera.notification)}></i>
                                         </div>
                                     </div>
                                 ))}
@@ -431,7 +505,7 @@ function Grades() {
                         <div className="modal-footer row justify-content-between">
                             <button type="button" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#gradeModal" data-bs-toggle="modal" onClick={() => activateButton("close-modify")}>Annuler</button>
                             <button type="button" id="close-modify" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
-                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#gradeModal" data-bs-toggle="modal" onClick={() => activateButton("close-modify")}>Enregistrer</button>
+                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => {saveAction();}}>Enregistrer</button>
                         </div>
                     </div>
                 </div>

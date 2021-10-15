@@ -100,7 +100,7 @@ app.get('/api/grades/members', (request, response) => {
 
     const idGrade = request.params.idGrade;
 
-    let query = "select idAccess, idProfile, CA.name, allowed, notification \
+    let query = "select idAccess, idCamera, CA.name, allowed, notification \
     from access as AC \
     join camera as CA on AC.idCamera = CA.id \
     where idProfile = ($1)" ;
@@ -203,3 +203,40 @@ app.get('/api/grades/members', (request, response) => {
     })
 }) ;
 
+
+/**
+ * Modifie les actions des caméras pour un grade donné
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ * @param {integer} idGrade identifiant du grade pour lequel on souhaite récupérer des informations
+ */ 
+ app.post('/api/grades/:idGrade/acces', (request, response) => {
+
+    const idGrade = request.params.idGrade;
+    const actions = request.body.actions ;
+    const notifications = request.body.notifications ;
+    let query = "update access \
+    set allowed = ($1) \
+    where idprofile = ($2) and idcamera = ($3) " ;
+    for (let camera in actions) {
+        client.query(query, [actions[camera], idGrade, camera], (error, results) => {
+            if (error) {
+                throw error;
+            }
+            
+        })
+    }
+    let query2 = "update access \
+    set notification = ($1) \
+    where idprofile = ($2) and idcamera = ($3) " ;
+    for (let camera in notifications) {
+        client.query(query2, [notifications[camera], idGrade, camera], (error, results) => {
+            if (error) {
+                throw error;
+            }
+            
+        })
+    }
+    response.send({message:'ok'});
+}) ;
