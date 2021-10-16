@@ -4,8 +4,29 @@ import { useEffect, useState } from "react";
 
 function Capture() {
     //event.preventDefault()
-    console.log("toto")
+    console.log("capture")
     fetch("http://0.0.0.0:6060/photo")
+
+}
+function Eteindre(){
+    console.log("éteindre")
+    fetch("http://0.0.0.0:6060/shutdown", {
+        headers : {
+            'Access-Control-Allow-Origin' : '*'
+        },
+        mode : 'no-cors'
+    })
+
+}
+function Allumer(){
+    console.log("up")
+    fetch("http://0.0.0.0:6060/up", {
+        headers : {
+            'Access-Control-Allow-Origin' : '*'
+        },
+        mode : 'no-cors'
+    })
+    window.location = "/camera"
 
 }
 function Camera() {
@@ -23,6 +44,10 @@ function Camera() {
 
 
                     <button class="btn btn-primary m-5" type="button" onClick={Capture}>prend photo</button>
+                    <button class="btn btn-primary m-5" onClick={Allumer} type="button" name="start" value="Eteindre">up</button>
+                    <button class="btn btn-primary m-5" onClick={Eteindre} type="button" name="stop" value="Eteindre">Éteindre</button>
+
+                    
                 </div >
             </div>
         </>
