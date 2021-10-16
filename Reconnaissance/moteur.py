@@ -9,17 +9,57 @@ from datetime import datetime
 import time
 app = Flask(__name__)
 
-import moteur
-moteur.close() 
+import RPi.GPIO as GPIO
+import time
+
+
+#Set function to calculate percent from angle
+def angle_to_percent (angle) :
+    if angle > 180 or angle < 0 :
+        return False
+
+    start = 4
+    end = 12.5
+    ratio = (end - start)/180 #Calcul ratio from angle to percent
+
+    angle_as_percent = angle * ratio
+
+    return start + angle_as_percent
+
+
+
+
+#start PWM running, but with value of 0 (pulse off)
+
+'''
+print ("Turning back to 90 degrees for 2 seconds")
+servo1.ChangeDutyCycle(12)
+time.sleep(0.5)
+servo1.ChangeDutyCycle(0)
+time.sleep(3)
+
+#turn back to 0 degrees
+print ("Turning back to 0 degrees")
+servo1.ChangeDutyCycle(2)
+time.sleep(0.5)
+servo1.ChangeDutyCycle(0)'''
+    
+
+
+
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-path = './Reconnaissance/images'
+path = './images'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
 
 myList = [x for x in os.listdir(path) if x.endswith('.jpg')]
+cap = cv2.VideoCapture("0")
 
+cap.set(3,680)
+
+cap.set(4,680)
 print("Nombre de classes détectées",len(myList))
 for x,cl in enumerate(myList):
         curImg = cv2.imread(f'{path}/{cl}')
@@ -34,14 +74,15 @@ def findEncodings(images):
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         encode = face_recognition.face_encodings(img)[0]
         encodeList.append(encode)
+        
+        
 
     return encodeList
 
-
+flag = True
 encodeListKnown = findEncodings(images)
 print('Encodings Complete')
 
-cap = cv2.VideoCapture(0)
 
 # Convertir les resolutions 
 
@@ -55,9 +96,33 @@ def gen(captur):
     frame_width = int(cap.get(3))
     frame_height = int(cap.get(4))
     print(captur)
-    out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
     
+    #Défénition du GPIO
+    GPIO.setmode(GPIO.BOARD)
+    # Set pin 11 as an output, and set servo1 as pin 11 as PWM
+    GPIO.setup(12,GPIO.OUT)
+    servo1 = GPIO.PWM(12,50) # Note 11 is pin, 50 = 50Hz pulse
+    servo1.start(0)
+    
+    
+    out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+    temps =round(time.time())-20
+    tempsFermeture =round(time.time())-20
+    
+    '''
+    print ("Turning back to 90 degrees for 2 seconds")
+    servo1.ChangeDutyCycle(12)
+    time.sleep(0.5)
+    servo1.ChangeDutyCycle(0)
+    time.sleep(3)
 
+    #turn back to 0 degrees
+    print ("Turning back to 0 degrees")
+    servo1.ChangeDutyCycle(2)
+    time.sleep(0.5)
+    servo1.ChangeDutyCycle(0)
+    '''
+    
     while True:
         success, img = cap.read()
         if(captur=='photo'): 
@@ -81,6 +146,14 @@ def gen(captur):
 
         facesCurFrame = face_recognition.face_locations(imgS)
         encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
+        if (round(time.time()) >= tempsFermeture+10) :
+                
+            servo1.ChangeDutyCycle(2)
+            time.sleep(0.5)
+            servo1.ChangeDutyCycle(0)
+            print("je referme")
+
+
         
         for encodeFace,faceLoc in zip(encodesCurFrame,facesCurFrame):
             matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
@@ -88,9 +161,19 @@ def gen(captur):
 
             matchIndex = np.argmin(faceDis)
             
+                
 
             if faceDis[matchIndex]< 0.50:
-                moteur.open()
+                if (round(time.time()) >= temps +20) :
+                    servo1.ChangeDutyCycle(12)
+                    time.sleep(0.5)
+                    servo1.ChangeDutyCycle(0)
+                    tempsFermeture =round(time.time())
+                    
+                    temps = round(time.time())
+                    print("la porte s'ouvre")
+                    time.sleep(0.5)
+                
                 name = className[matchIndex].upper()
                 #print(name)
                 y1,x2,y2,x1 = faceLoc
@@ -98,8 +181,7 @@ def gen(captur):
                 cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
                 cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
                 cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
-                time.sleep(5)
-                moteur.close()
+                #time.sleep(5)
                 
             else: 
                 name = 'Unknown'
@@ -118,6 +200,9 @@ def gen(captur):
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+    servo1.stop()
+    GPIO.cleanup()
+
 
 
 @app.route('/video')
@@ -134,5 +219,3 @@ def photo():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='6060',debug=True)
-
-
