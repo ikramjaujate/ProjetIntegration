@@ -84,7 +84,8 @@ function Grades() {
                 return result.json();
             })
             .then(dataMembers => {
-                dataCamera.map(grade => grade["members"] = dataMembers.filter(gradeMembers =>gradeMembers.id === grade.id)[0].members) ;
+                //dataCamera.map(grade => grade.members = data)
+                dataCamera.map(grade => grade.members = dataMembers.filter(gradeMembers =>gradeMembers.id_grade === grade.id_grade)[0].members) ;
                 setInformationsGrade(dataCamera) ;
             });
         });
@@ -196,7 +197,7 @@ function Grades() {
             document.getElementById("name-grade").style.border = "1px solid var(--error)";
             document.getElementById("error-name").innerHTML = "Veuillez choisir un nom";
         }
-        else if (informationsGrade.map(element => element.name).indexOf(newName) !== -1) {
+        else if (informationsGrade.map(element => element.name_grade).indexOf(newName) !== -1) {
             document.getElementById("name-grade").style.border = "1px solid var(--error)";
             document.getElementById("error-name").innerHTML = "Ce nom existe déjà";
         }
@@ -397,8 +398,8 @@ function Grades() {
                 </div>
 
                 {informationsGrade && informationsGrade.map(grade => (
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
-                        <LayoutGrade key={`prop-${grade.id}`} name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" onClick={() => openCameraInfo(grade.color, grade.name_grade, grade.id_grade)}>
+                        <LayoutGrade key={`prop-${grade.id_grade}`} name ={grade.name_grade} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
                     </div>
                 ))}
 
@@ -420,7 +421,7 @@ function Grades() {
 
                             <div className="row justify-content-center">
                                 {informationsCameras && informationsCameras.map(camera => (
-                                    <CameraInfo key={`prop-${camera.idAccess}`} allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
+                                    <CameraInfo key={`prop-${camera.id_permission}`} allowed={camera.allowed} name={camera.name_camera} notification={camera.notification}/>
                                 ))}
                             </div>
 
@@ -462,8 +463,8 @@ function Grades() {
                                         </div>
                                         {colorGrades && colorGrades.map(color => (
                                             <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1 container-choosing-color">
-                                                {/* <i type="button" className={`bi bi-square-fill ${color.idcolor}`} style={{color:color.colorcode}} onClick={() => highlithColor(color.idcolor), () => chooseColor(color.idcolor, color.colorcode)}></i> */}
-                                                <i type="button" id={`little-square-${color.idcolor}`} className={`bi bi-square-fill ${color.idcolor}`} style={{color:color.colorcode}} onClick={() => {highlithColor(color.idcolor);chooseColor(color.idcolor, color.colorcode)}}></i>
+                                                {/* <i type="button" className={`bi bi-square-fill ${color.id_color}`} style={{color:color.name-color}} onClick={() => highlithColor(color.id_color), () => chooseColor(color.id_color, color.name_color)}></i> */}
+                                                <i type="button" id={`little-square-${color.id_color}`} className={`bi bi-square-fill ${color.id_color}`} style={{color:color.name_color}} onClick={() => {highlithColor(color.id_color);chooseColor(color.id_color, color.name_color)}}></i>
                                             </div>
                                         ))}
                                     </div>
@@ -493,17 +494,17 @@ function Grades() {
 
                             <div className="row justify-content-center">
                                 {informationsCameras && informationsCameras.map(camera => (
-                                    // <ActionsCameras name={camera.name} allowed={camera.allowed} notification={camera.notification}></ActionsCameras>
+                                    // <ActionsCameras name={camera.name_camera} allowed={camera.allowed} notification={camera.notification}></ActionsCameras>
                                     <div className="row p-1 m-2 bg-light rounded col-9 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" id="layoutActionsCameras">
-                                        <div className="align-self-center col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">{camera.name}</div>
+                                        <div className="align-self-center col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">{camera.name_camera}</div>
                                         <div className="align-self-center col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4"> 
                                             <div class="form-check form-switch">
                                                 {/* <input class={`form-check-input switch-action-${currentGrade} ${camera.allowed ? "switch-authorized" : ""}`} defaultChecked type="checkbox" role="switch" /> */}
-                                                {camera.allowed ? <input class={`form-check-input action-${camera.idcamera}`} defaultChecked type="checkbox" role="switch" onChange={() => changeAction(camera.idcamera)}/> : <input class={`form-check-input action-${camera.idcamera}`}  type="checkbox" role="switch" onChange={() => changeAction(camera.idcamera)}/>}
+                                                {camera.allowed ? <input class={`form-check-input action-${camera.id_camera}`} defaultChecked type="checkbox" role="switch" onChange={() => changeAction(camera.id_camera)}/> : <input class={`form-check-input action-${camera.id_camera}`}  type="checkbox" role="switch" onChange={() => changeAction(camera.id_camera)}/>}
                                             </div>
                                         </div>
                                         <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
-                                            <i type="button" id={`notification-${camera.idcamera}`} className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} onClick={() => changeNotification(camera.idcamera, camera.notification)}></i>
+                                            <i type="button" id={`notification-${camera.id_camera}`} className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} onClick={() => changeNotification(camera.id_camera, camera.notification)}></i>
                                         </div>
                                     </div>
                                 ))}
