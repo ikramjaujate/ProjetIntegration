@@ -337,7 +337,7 @@ function Grades() {
     }
 
     /**
-     * Save new camera action and new presence/absence of notification
+     * Save new camera action and new presence/absence of notification for a grade
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -366,6 +366,17 @@ function Grades() {
             }
         });
 
+    }
+
+    const cancelModification = () => {
+        console.log("cc");
+        activateButton("close-modify");
+        if (Object.keys(newActions).length > 0 || Object.keys(newNotifications).length > 0) {
+            activateButton("open-confirmation");
+        }
+        else {
+            activateButton("open-desc-grade-1");
+        }
     }
 
     
@@ -491,9 +502,34 @@ function Grades() {
 
                         </div>
                         <div className="modal-footer row justify-content-between">
-                            <button type="button" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#gradeModal" data-bs-toggle="modal" onClick={() => activateButton("close-modify")}>Annuler</button>
-                            <button type="button" id="close-modify" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
+                            <button type="button" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => cancelModification()}>Annuler</button>
+                            <button type="button" id="open-desc-grade-1" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir sur desc grade</button>
+                            <button type="button" id="close-modify" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
+                            <button type="button" id="open-confirmation" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-toggle="modal" data-bs-target="#confirmationCancelModal">Cancel</button>
                             <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => {saveAction();}}>Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal fade" id="confirmationCancelModal" tabindex="-1" aria-labelledby="confirmationCancelModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                        <div className="modal-body">
+
+                            <div className="row justify-content-center container" style={{textAlign:"center"}}>
+                                <i class="bi bi-x-circle" style={{color:"#f44336", fontSize: "465%"}}></i>
+                                <h4>Voulez-vous vraiment annuler ? </h4>
+                                <p>Toutes vos modifications seront perdues.</p>
+                            </div>
+
+                        </div>
+                        <div className="modal-footer row justify-content-between">
+                            <button type="button" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => {activateButton("close-cancel");activateButton("open-modify-grade")}}>Non</button>
+                            <button type="button" id="open-desc-grade-2" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir desc grades</button>
+                            <button type="button" id="open-modify-grade" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal">Revenir modif grades</button>
+                            <button type="button" id="close-cancel" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer tout</button>
+                            <button type="button" className="btn modification-grade-button bouton-warning col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => {activateButton("close-cancel");activateButton("open-desc-grade-2")}}>Oui</button>
                         </div>
                     </div>
                 </div>

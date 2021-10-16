@@ -160,7 +160,7 @@ body {
 
 
 /*Modication of camera's action*/
-#close-modify {
+.hidden-btn {
     display:none;
 }
 #modifyGradeModalLabel {
@@ -186,6 +186,14 @@ body {
 }
 .bi-bell-slash-fill {
     color:var(--notification-off) ;
+}
+.bouton-warning{
+    background-color: #f44336 ;
+    color:white;
+}
+.bouton-warning:hover {
+    background-color:#d83e33;
+    color:white;
 }
 /**/
 
