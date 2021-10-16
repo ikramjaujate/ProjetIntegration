@@ -103,7 +103,7 @@ app.get('/api/grades/members', (request, response) => {
     let query = "select PE.id_permission, PE.id_camera, CA.name_camera, allowed, notification \
     from permission as PE \
     join camera as CA on PE.id_camera = CA.id_camera \
-    where id_grade = 1" ;
+    where id_grade = ($1)" ;
     client.query(query, [idGrade], (error, results) => {
         if (error) {
             throw error;
@@ -151,8 +151,8 @@ app.get('/api/grades/members', (request, response) => {
                 //Requête4 - Créer les actions pour chacune des caméras pour le grade 
                 let query4 = "insert into permission (id_grade, id_camera, allowed, notification) \
                 VALUES (($1), ($2), 'false', 'false')" ;
-                let idgrade=results2.rows[0].idgrade ;
-                let nbrcamera = results3.rows[0].numbercamera;
+                let idgrade=results2.rows[0].id_grade ;
+                let nbrcamera = results3.rows[0].number_camera;
                 for (let idCamera=1; idCamera<parseInt(nbrcamera)+1 ; idCamera++) {
                     // try {
                     //     client.query(query4, [idgrade, idCamera], (error, results4) => {
