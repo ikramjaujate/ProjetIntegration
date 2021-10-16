@@ -74,7 +74,7 @@ function Grades() {
                 return result.json();
             })
             .then(dataMembers => {
-                dataCamera.map(grade => grade["members"] = dataMembers.filter(gradeMembers =>gradeMembers.id === grade.id)[0].members) ;
+                dataCamera.map(grade => grade.members = dataMembers.filter(gradeMembers =>gradeMembers.id_grade === grade.id_grade)[0].members) ;
                 setInformationsGrade(dataCamera) ;
             });
         });
@@ -254,8 +254,8 @@ function Grades() {
                 </div>
 
                 {informationsGrade && informationsGrade.map(grade => (
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}>
-                        <LayoutGrade name ={grade.name} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} onClick={() => openCameraInfo(grade.color, grade.name, grade.id)}/>
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" onClick={() => openCameraInfo(grade.color, grade.name_grade, grade.id_grade)}>
+                        <LayoutGrade key={`prop-${grade.id_grade}`} name ={grade.name_grade} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
                     </div>
                 ))}
 
@@ -275,7 +275,7 @@ function Grades() {
 
                         <div className="row justify-content-center">
                             {informationsCameras && informationsCameras.map(camera => (
-                                <CameraInfo allowed={camera.allowed} name={camera.name} notification={camera.notification}/>
+                                <CameraInfo key={`prop-${camera.id_permission}`} allowed={camera.allowed} name={camera.name_camera} notification={camera.notification}/>
                             ))}
                         </div>
 
@@ -316,8 +316,8 @@ function Grades() {
                                         </div>
                                         {colorGrades && colorGrades.map(color => (
                                             <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1 container-choosing-color">
-                                                {/* <i type="button" className={`bi bi-square-fill ${color.idcolor}`} style={{color:color.colorcode}} onClick={() => highlithColor(color.idcolor), () => chooseColor(color.idcolor, color.colorcode)}></i> */}
-                                                <i type="button" id={`little-square-${color.idcolor}`} className={`bi bi-square-fill ${color.idcolor}`} style={{color:color.colorcode}} onClick={() => {highlithColor(color.idcolor);chooseColor(color.idcolor, color.colorcode)}}></i>
+                                                 {/* <i type="button" className={`bi bi-square-fill ${color.id_color}`} style={{color:color.name-color}} onClick={() => highlithColor(color.id_color), () => chooseColor(color.id_color, color.name_color)}></i> */}
+                                                <i type="button" id={`little-square-${color.id_color}`} className={`bi bi-square-fill ${color.id_color}`} style={{color:color.name_color}} onClick={() => {highlithColor(color.id_color);chooseColor(color.id_color, color.name_color)}}></i>
                                             </div>
                                         ))}
                                     </div>
