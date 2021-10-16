@@ -4,10 +4,9 @@ import '../css/Grades.css';
 const ActionsCameras = ({name, allowed, notification}) => {
 
     /**
-     * Ajout d'une bordure autour de la couleur sélectionnée
+     * Add a border around the selected color
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @param {integer} idColor  Identifiant de la couleur sélectionnée
      */
      const cc = () => {
         

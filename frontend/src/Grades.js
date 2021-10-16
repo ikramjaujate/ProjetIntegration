@@ -38,8 +38,8 @@ function Grades() {
     
 
     /**
-     * Initialise les éléments Bootstrap nécessaire au design de la page ;
-     * PopOver - toast
+     * Initializes the Bootstrap elements necessary for the design of the page;
+     * PopOver - Toast
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -52,8 +52,8 @@ function Grades() {
 
 
     /**
-     * Récupère au chargement de la page les informations concernant les différents grades,
-     * ainsi que les différentes couleurs existantes pour la création/modification de grade
+     * Retrieves at page load the information concerning the different grades, as well 
+     * as the different existing colors for the creation/modification of grade
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -64,7 +64,7 @@ function Grades() {
 
 
     /**
-     * Récupère les informations concernant les différents grades
+     * Get information about the different grades
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -90,7 +90,7 @@ function Grades() {
 
 
     /**
-     * Récupère les différentes couleurs existantes pour la création/modification de grade
+     * Get the different existing colors for grade creation/modification
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -109,7 +109,7 @@ function Grades() {
 
 
     /**
-     * Assigne une couleur au grade qui est en train d'être créé
+     * Assigns a color to the grade that is being created
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {string} newColor  Couleur sélectionnée pour le grade
@@ -121,7 +121,7 @@ function Grades() {
 
 
     /**
-     * Suppression des messages d'erreurs
+     * Suppression of error messages at the creation of a grade
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -139,7 +139,7 @@ function Grades() {
 
 
     /**
-     * Remise à 0 des informations spécifiées pour la création d'un grade
+     * Reset of the information specified for the creation of a grade
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -151,11 +151,12 @@ function Grades() {
 
 
     /**
-     * Adapte le nom et la couleur du modal pour le grade sur lequel on souhaite avoir des détails
+     * Adapt the name and color of the modal for the grade on which you want to have details
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @param {string} mainColor  Couleur du grade sélectionné
-     * @param {string} mainName   Nom du grade sélectionné
+     * @param {string} mainColor  Color of the selected grade
+     * @param {string} mainName   Name of the selected grade
+     * @param {integer} grade     Identifier of the selected grade
      */
     const openCameraInfo = (mainColor, mainName, grade) => {
         document.getElementById('gradeModalLabel').style.backgroundColor= mainColor;
@@ -174,16 +175,13 @@ function Grades() {
             return result.json();
         })
         .then(dataCameras => {
-            console.log("datacamera : ", dataCameras);
             setinformationsCameras(dataCameras) ;
-            //informationsCameras = dataCameras ;
-            console.log("informations changées");
         });
     }
 
+
     /**
-     * Créer un nouveau grade, en vérifiant au préalable si les informations demandées
-     * sont complètes
+     * Create a new grade, checking beforehand that the information requested is complete
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -231,7 +229,6 @@ function Grades() {
             .then(data => {
                 resetCreation() ;
                 document.getElementById("cancel-creation").click() ;
-                console.log("data = ", data);
                 if (data.message === "ok") {
                     getGrades() ;
                     getColor() ;
@@ -240,17 +237,16 @@ function Grades() {
                 else {
                     toast.error(errorMsgClient, optionsToast);
                 }
-            });
-           
+            });    
         }
     }
 
 
     /**
-     * Ajout d'une bordure autour de la couleur sélectionnée
+     * Add a border around the selected color
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @param {integer} idColor  Identifiant de la couleur sélectionnée
+     * @param {integer} idColor  Identifier of the selected color
      */
      const highlithColor = (idColor) => {
         
@@ -264,10 +260,10 @@ function Grades() {
 
 
     /**
-     * Activer le bouton qui permet de fermer son modal
+     * Activate the button that allows you to close your modal
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @param {string} idButton  Identifiant du bouton à activer
+     * @param {string} idButton  Identifier of the button to be activated
      */
      const activateButton = (idButton) => {
         document.getElementById(idButton).click() ;
@@ -277,33 +273,30 @@ function Grades() {
 
     
     /**
-     * Changer l'état de la notification (désactiver ou activer)
+     * Change the notification status (disable or enable)
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {integer} idCamera  Identifier of the button camera
+     * @param {boolean} notification  Presence of a notification or not
      */
      const changeNotification = (idCamera, notification) => {
 
-        console.log("notif : ", notification);
         if (idCamera in newNotifications) {
             document.getElementById("notification-" + idCamera).className = notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
             delete newNotifications[idCamera];
-            console.log("revient à l'ancienne")
         }
         else {
             document.getElementById("notification-" + idCamera).className = notification ? "bi bi-bell-slash-fill" : "bi bi-bell-fill" ;
             newNotifications[idCamera] = !notification ;
-            console.log("change d'état : ", !notification);
-            console.log("newnotif : ", newNotifications);
         }
-        console.log("change : ", newNotifications);  
         //document.getElementsByClassName("notification-" + idCamera)[0].className = "" ;
     }
 
     /**
-     * Activer le bouton qui permet de fermer son modal
+     * Change the action of the camera to adapt for the grade we want details
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @param {string} idButton  Identifiant du bouton à activer
+     * @param {integer} grade  Grade identifier
      */
      const test = (grade) => {
 
@@ -327,31 +320,29 @@ function Grades() {
     }
 
     /**
-     * Changer l'action d'une caméra
+     * Change the action of a camera
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @param {string} identtifier  Identifiant du switch html qui vient d'être switch
+     * @param {string} identifier  Identifier of the html switch that has just been switched
      */
-     const changeAction = (identtifier) => {
+     const changeAction = (identifier) => {
 
-        let action = document.getElementsByClassName("action-" + identtifier)[0].checked ; 
-        if (identtifier in newActions) {
-            delete newActions[identtifier];
+        let action = document.getElementsByClassName("action-" + identifier)[0].checked ; 
+        if (identifier in newActions) {
+            delete newActions[identifier];
         }
         else {
-            newActions[identtifier] = action ; 
+            newActions[identifier] = action ; 
         }
-        console.log("new action : ", newActions);
     }
 
     /**
-     * Sauvegarder les nouvelles actions d'une caméra
+     * Save new camera action and new presence/absence of notification
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
      const saveAction = () => {
 
-        console.log("sauver") ;
         let grade = currentGrade ;
         let informations = { method: 'POST',
                headers: {'Content-Type': 'application/json'},
@@ -363,7 +354,6 @@ function Grades() {
             return result.json();
         })
         .then(data => {
-            console.log("data : ", data);
             activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
             newActions = [] ;
             newNotifications = [] ;
@@ -493,8 +483,6 @@ function Grades() {
                                             </div>
                                         </div>
                                         <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
-                                            {/* <i className={`bi ${notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} style={{color:notification ? "white" : allowed ? "var(--camera-allow)" : "var(--camera-refuse)"}}></i> */}
-                                            {/* <i type="button" id={`notification-${camera.idcamera}`} className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} style={{color:camera.notification ? "var(--notification-on)" : "var(--notification-off)"}} onClick={() => changeNotification(camera.idcamera, camera.notification)}></i> */}
                                             <i type="button" id={`notification-${camera.idcamera}`} className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} onClick={() => changeNotification(camera.idcamera, camera.notification)}></i>
                                         </div>
                                     </div>

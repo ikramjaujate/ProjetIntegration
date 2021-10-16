@@ -34,8 +34,8 @@ client.connect(err => {
 
 
 /**
- * Récupère les informations des différents grades, comme leur nom, leur couleur associée, ainsi
- * que le nombre de caméras autorisées et refusées
+ * Recovers information about the different grades, such as their name, their associated color, 
+ * as well as the number of authorized and refused cameras
  * 
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @method GET
@@ -68,7 +68,7 @@ app.get('/api/grades', (request, response) => {
 
 
 /**
- * Récupère le nombre de membres appartenant à un certain grade
+ * Retrieves the number of members for a grade
  * 
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @method GET
@@ -90,11 +90,11 @@ app.get('/api/grades/members', (request, response) => {
 
 
 /**
- * Récupère les actions de chacune des caméras pour un grade donné
+ * Retrieves the actions of each camera for a grade
  * 
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @method GET
- * @param {integer} idGrade identifiant du grade pour lequel on souhaite récupérer des informations
+ * @param {integer} idGrade identifier of the grade for which we want to retrieve information
  */ 
  app.get('/api/grades/:idGrade/cameras', (request, response) => {
 
@@ -114,12 +114,12 @@ app.get('/api/grades/members', (request, response) => {
 
 
 /**
- * Crée un nouveau grade
+ * Creates a new grade
  * 
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @method GET
- * @param {integer} name nom du nouveau grade
- * @param {integer} color couleur attachée à ce nouveau grade
+ * @param {integer} name name of the new grade
+ * @param {integer} color color of the new grade
  */ 
  app.put('/api/grades', (request, response, next) => {
 
@@ -128,27 +128,27 @@ app.get('/api/grades/members', (request, response) => {
 
     let query = "insert into profile (name, idColor) \
     VALUES (($1), ($2))" ;
-    //Requête1 Creer le grade
+    //Requête1 Create grade
     client.query(query, [name, idColor], (error, results1) => {
         if (error) {
             throw error;
         }
         
-        //Requête2 - Récupérer son id
+        //Requête2 - Get his id
         let query2 = "select max(profile.id) as idGrade from profile";
         client.query(query2, (error, results2) => {
             if (error) {
                 throw error;
             }
 
-            //Requête3 - Récupérer le nombre de caméra maximum
+            //Requête3 - Get max number of camera
             let query3 = "select count(*) as numberCamera from camera" ;
             client.query(query3, (error, results3) => {
                 if (error) {
                     throw error;
                 }   
 
-                //Requête4 - Créer les actions pour chacune des caméras pour le grade 
+                //Requête4 - Create action for each camera for the grade
                 let query4 = "insert into access (idProfile, idCamera, allowed, notification) \
                 VALUES (($1), ($2), 'false', 'false')" ;
                 let idgrade=results2.rows[0].idgrade ;
@@ -181,7 +181,7 @@ app.get('/api/grades/members', (request, response) => {
 }) ;
 
 /**
- * Récupère les différentes couleurs existantes pour la création/modification de grade
+ * Get the different existing colors for grade creation/modification
  * 
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @method GET
@@ -205,11 +205,13 @@ app.get('/api/grades/members', (request, response) => {
 
 
 /**
- * Modifie les actions des caméras pour un grade donné
+ * Modifies the actions of the cameras for a grade
  * 
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
- * @method GET
- * @param {integer} idGrade identifiant du grade pour lequel on souhaite récupérer des informations
+ * @method POST
+ * @param {integer} idGrade identifier of the grade for which we want to get the information
+ * @param {dictionnary} actions  contains a dictionary with the camera ID as key and the new camera action as value (= opposite of the old value)
+ * @param {dictionnary} notifications contains a dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
  */ 
  app.post('/api/grades/:idGrade/acces', (request, response) => {
 
@@ -224,7 +226,6 @@ app.get('/api/grades/members', (request, response) => {
             if (error) {
                 throw error;
             }
-            
         })
     }
     let query2 = "update access \
@@ -234,8 +235,7 @@ app.get('/api/grades/members', (request, response) => {
         client.query(query2, [notifications[camera], idGrade, camera], (error, results) => {
             if (error) {
                 throw error;
-            }
-            
+            }  
         })
     }
     response.send({message:'ok'});
