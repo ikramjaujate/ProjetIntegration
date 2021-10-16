@@ -181,7 +181,7 @@ function Grades() {
             document.getElementById("name-grade").style.border = "1px solid var(--error)";
             document.getElementById("error-name").innerHTML = "Veuillez choisir un nom";
         }
-        else if (informationsGrade.map(element => element.name).indexOf(newName) !== -1) {
+        else if (informationsGrade.map(element => element.name_grade).indexOf(newName) !== -1) {
             document.getElementById("name-grade").style.border = "1px solid var(--error)";
             document.getElementById("error-name").innerHTML = "Ce nom existe déjà";
         }
