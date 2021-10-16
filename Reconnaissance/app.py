@@ -1,4 +1,4 @@
-from flask import Flask, Response, render_template
+from flask import Flask, Response, render_template, request
 from flask_cors import CORS
 import face_recognition
 import cv2
@@ -8,9 +8,6 @@ import os # pour importer toutes les images d'un coup
 from datetime import datetime
 import time
 app = Flask(__name__)
-
-import moteur
-moteur.close() 
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -42,6 +39,7 @@ encodeListKnown = findEncodings(images)
 print('Encodings Complete')
 
 cap = cv2.VideoCapture(0)
+flag = 0
 
 # Convertir les resolutions 
 
@@ -57,9 +55,13 @@ def gen(captur):
     print(captur)
     out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
     
+    
 
     while True:
         success, img = cap.read()
+        #print(flag)
+        
+
         if(captur=='photo'): 
             
             now = str(datetime.now())
@@ -74,7 +76,7 @@ def gen(captur):
             captur = "vid"
             break
             
-            
+        
         
         imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
         imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
@@ -87,10 +89,12 @@ def gen(captur):
             faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
 
             matchIndex = np.argmin(faceDis)
-            
+
+            if flag == 1:
+                cap.release()
+
 
             if faceDis[matchIndex]< 0.50:
-                moteur.open()
                 name = className[matchIndex].upper()
                 #print(name)
                 y1,x2,y2,x1 = faceLoc
@@ -98,8 +102,8 @@ def gen(captur):
                 cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
                 cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
                 cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
-                time.sleep(5)
-                moteur.close()
+
+                
                 
             else: 
                 name = 'Unknown'
@@ -109,6 +113,8 @@ def gen(captur):
                 cv2.rectangle(img,(x1,y1),(x2,y2),(0,0,255),2)
                 cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,0,255),cv2.FILLED)
                 cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+
+                
                     
         
         out.write(img)
@@ -117,7 +123,6 @@ def gen(captur):
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
 
 
 @app.route('/video')
@@ -130,9 +135,23 @@ def photo():
     global cap
     return Response(gen('photo'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
 
-
+@app.route('/shutdown')
+def shutdown():
+    global flag, cap
+    flag = 1
+    return True
+    
+@app.route('/up')
+def up():
+    global flag
+    cap = cv2.VideoCapture(0)
+    flag = 0
+    return False
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='6060',debug=True)
+
+
+
 
 
