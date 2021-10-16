@@ -4,7 +4,7 @@ import'bootstrap/dist/css/bootstrap.min.css';
 import'bootstrap/dist/js/bootstrap.min.js';
 import'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Popover, Toast } from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
+import { Popover, Toast, Tooltip } from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -48,6 +48,8 @@ function Grades() {
         .forEach(popoverNode => new Popover(popoverNode)) ;
         Array.from(document.querySelectorAll('.toast'))
         .forEach(toastNode => new Toast(toastNode));
+        Array.from(document.querySelectorAll('button[data-bs-toggle="tooltip"]'))
+        .forEach(tooltipNode => new Tooltip(tooltipNode))
 	}, []);
 
 
@@ -369,7 +371,6 @@ function Grades() {
     }
 
     const cancelModification = () => {
-        console.log("cc");
         activateButton("close-modify");
         if (Object.keys(newActions).length > 0 || Object.keys(newNotifications).length > 0) {
             activateButton("open-confirmation");
@@ -378,6 +379,12 @@ function Grades() {
             activateButton("open-desc-grade-1");
         }
     }
+
+
+    useEffect(()=> {
+        console.log("a changé");
+
+	}, [informationsCameras]);
 
     
     return (
@@ -396,7 +403,9 @@ function Grades() {
                 ))}
 
                 <div id="layout-add" className="text-center p-1 row justify-content-center col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                    <i className="p-0 bi bi-plus-circle-fill add-user col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1" type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
+                    <span data-toggle="tooltip" data-placement="top" title="Créer un grade">
+                        <i className="p-0 bi bi-plus-circle-fill add-user col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1" type="button" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
+                    </span>
                 </div>  
             </div>
 
@@ -485,9 +494,9 @@ function Grades() {
                             <div className="row justify-content-center">
                                 {informationsCameras && informationsCameras.map(camera => (
                                     // <ActionsCameras name={camera.name} allowed={camera.allowed} notification={camera.notification}></ActionsCameras>
-                                    <div className="row p-1 m-2 bg-light rounded col-9 col-sm-8 col-md-9 col-lg-7 col-xl-7 col-xxl-7" id="layoutActionsCameras">
+                                    <div className="row p-1 m-2 bg-light rounded col-9 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" id="layoutActionsCameras">
                                         <div className="align-self-center col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">{camera.name}</div>
-                                        <div className="align-self-center col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
+                                        <div className="align-self-center col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4"> 
                                             <div class="form-check form-switch">
                                                 {/* <input class={`form-check-input switch-action-${currentGrade} ${camera.allowed ? "switch-authorized" : ""}`} defaultChecked type="checkbox" role="switch" /> */}
                                                 {camera.allowed ? <input class={`form-check-input action-${camera.idcamera}`} defaultChecked type="checkbox" role="switch" onChange={() => changeAction(camera.idcamera)}/> : <input class={`form-check-input action-${camera.idcamera}`}  type="checkbox" role="switch" onChange={() => changeAction(camera.idcamera)}/>}
@@ -529,13 +538,13 @@ function Grades() {
                             <button type="button" id="open-desc-grade-2" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir desc grades</button>
                             <button type="button" id="open-modify-grade" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal">Revenir modif grades</button>
                             <button type="button" id="close-cancel" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer tout</button>
-                            <button type="button" className="btn modification-grade-button bouton-warning col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => {activateButton("close-cancel");activateButton("open-desc-grade-2")}}>Oui</button>
+                            <button type="button" className="btn modification-grade-button bouton-warning col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => {activateButton("close-cancel");activateButton("open-desc-grade-2");setinformationsCameras(informationsCameras)}}>Oui</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <ToastContainer style={{fontSize:"0.6rem"}}/>           
+            <ToastContainer style={{fontSize:"0.6rem"}}/>      
 
         </div>
     );

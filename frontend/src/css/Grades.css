@@ -75,7 +75,7 @@ body {
     /* padding: 1rem 5rem 1rem 5rem; */
 }
 #gradeModal .m-2 {
-    margin : 0.5rem 0.5rem 0.8rem 0.5rem!important;
+    margin : 0.5rem 0.5rem 0.3rem 0.5rem!important;
 }
 .bg-notification {
     text-align: center;
@@ -195,7 +195,6 @@ body {
     background-color:#d83e33;
     color:white;
 }
-/**/
 
 
 /*Messages d'erreur*/
