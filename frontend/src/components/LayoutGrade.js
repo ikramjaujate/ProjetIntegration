@@ -4,7 +4,7 @@ const LayoutGrade = ({name, color, members, allowed_camera, refused_camera}) => 
 
     return (
         <div className="row p-1 justify-content-center card-grade">
-            <div id="big-layout-person" type="button" className="p-1 bg-light shadow-sm rounded row col-10 col-sm-10 col-md-9 col-lg-7 col-xl-6 col-xxl-6" data-bs-toggle="modal" data-bs-target="#gradeModal">
+            <div type="button" className="p-1 bg-light shadow-sm rounded row col-10 col-sm-10 col-md-9 col-lg-7 col-xl-6 col-xxl-6" data-bs-toggle="modal" data-bs-target="#gradeModal">
                 <div className="rounded bg-person col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3" style={{backgroundColor:color}} >
                     <i className="bi bi-person icon-person"></i>
                 </div>

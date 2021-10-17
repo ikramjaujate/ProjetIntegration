@@ -79,11 +79,12 @@ body {
 }
 .bg-notification {
     text-align: center;
+    padding: 0px;
 }
 .icon-notification {
     font-size:100%;
 }
-.modification-grade-button {
+.modal-button {
     margin: 0.25rem 0.75rem 0.25rem 0.75rem;
 }
 #gradeModalLabel {
@@ -106,6 +107,9 @@ body {
 .bouton-action:hover {
     background-color:#48949b;
     color:white;
+}
+.layoutActionsCameras {
+    margin: 0.3rem!important;
 }
 /**/
 
@@ -144,9 +148,7 @@ body {
     border-bottom: 1px solid var(--border);
     padding: 0px 0px 7px 0px!important;
 }
-.creation-grade-button {
-    margin: 0.25rem 0.75rem 0.25rem 0.75rem;
-}
+
 #frame-name-grade-input {
     margin-top: 0.75rem!important;
 }
@@ -203,6 +205,8 @@ body {
     color:white;
 }
 
+/**/
+
 
 /*Messages d'erreur*/
 .errorMessage {
@@ -214,6 +218,14 @@ body {
 }
 #error-name {
     padding: 0.3rem 0rem 0rem 1.1rem!important;
+}
+#icon-cancel{
+    color:#f44336; 
+    font-size: 465%;
+}
+.layout-modal-cancel{
+    text-align:center;
+    margin:0px;
 }
 /**/
 
@@ -296,8 +308,14 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .final-color{font-size: 154%;}
     .container-final-color{padding: 0rem 0rem 0rem 0.3rem;}
     .container-choosing-color{padding: 0rem 1rem 0rem 0.3rem;}
-    .creation-grade-button{font-size: 0.8rem;}
+    .modal-button{font-size: 0.8rem;}
     .card-grade{margin-bottom: 0.2rem;}
+}
+
+@media only screen and (max-width: 550px) {
+    #icon-cancel{font-size: 365%;}
+    .layout-modal-cancel h4 {font-size: 1.2rem;}
+    .layout-modal-cancel p {font-size: 0.8rem;}
 }
 
 @media only screen and (max-width: 420px) {
@@ -308,11 +326,24 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     #layout-add {margin-bottom: 0.7rem;
         margin-top: 0.3rem;}
     #gradeModal .m-2 {margin: 0.3rem 0.5rem 0.3rem 0.5rem!important;}
+    .name-camera-grade{font-size: 0.8rem;}
+    .modal-button{font-size: 0.8rem;}
+}
 
+@media only screen and (max-width: 380px) {
+    .layout-modal-cancel {padding:0px}
+    .switch-camera-grade {padding: 0px;}
+    .name-camera-grade {font-size: 0.7rem;}
 }
 
 @media only screen and (max-width: 350px) {
     .informations {font-size: 64%;}
     .name-grade{font-size: 100%;}
+    .input-switch{width:1.8rem!important;}
+    #modifyGradeModal .bi {font-size: 0.8rem;}
+
+    #gradeModal .modal-footer{padding: 0rem 1.2rem 0rem 0.75rem;}
+    .modal-button {padding: 0.2rem 0.75rem 0.2rem 0.75rem;
+        margin: 0.25rem 0.75rem 0.1rem 0.75rem;}
 }
 /**/
