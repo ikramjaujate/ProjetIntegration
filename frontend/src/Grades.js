@@ -7,6 +7,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Popover, Toast, Tooltip } from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {ChromePicker} from 'react-color' ;
 
 import './css/Grades.css';
 import LayoutGrade from './components/LayoutGrade';
@@ -35,7 +36,9 @@ function Grades() {
     let newActions = {} ;
     let newNotifications = {} ;
     const errorMsgClient = "Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous." ;
-    
+    const [colorCreation, setColorCreation] = useState('red');
+    const [showColorPicker, setShowColorPicker] = useState(false);
+
 
     /**
      * Initializes the Bootstrap elements necessary for the design of the page;
@@ -396,6 +399,13 @@ function Grades() {
         newNotifications = {} ;
     }
 
+
+    const changeColorCreation = (cc) => {
+        console.log("var : ", document.getElementsByClassName("chrome-picker")[0]) ;//updatedColor ;
+        //setColorCreation(updatedColor)
+    }
+
+
     
     return (
         <div>
@@ -459,7 +469,7 @@ function Grades() {
                                     </div>
                                     <div className="p-0 m-1 col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-10" id="frame-name-grade-input">
                                         <input maxlength="10" type="text" className="form-control" id="name-grade" />
-                                        {/* <i class="bi bi-exclamation-circle" style={{color:"red"}}></i> */}
+                                        {/* <i className="bi bi-exclamation-circle" style={{color:"red"}}></i> */}
                                     </div>
                                 </div>
                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-3 order-md-2">
@@ -476,6 +486,10 @@ function Grades() {
                                                 <i type="button" id={`little-square-${color.id_color}`} className={`bi bi-square-fill ${color.id_color}`} style={{color:color.name_color}} onClick={() => {highlithColor(color.id_color);chooseColor(color.id_color, color.name_color)}}></i>
                                             </div>
                                         ))}
+                                        <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1 container-choosing-color">
+                                            <i type="button" id={`little-square-selection`} className={`bi bi-plus-square square-selection`} style={{color:colorCreation}} onClick={() => setShowColorPicker(showColorPicker => !showColorPicker)}></i>
+                                            {showColorPicker && (<ChromePicker color={colorCreation} onChange={updatedColor => setColorCreation(updatedColor.hex)}></ChromePicker>)}
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="error-name" className="errorMessage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 order-2 order-md-3"></div>
@@ -507,10 +521,10 @@ function Grades() {
                                     <div className="row p-1 m-2 bg-light rounded col-9 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" id="layoutActionsCameras">
                                         <div className="align-self-center col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">{camera.name_camera}</div>
                                         <div className="align-self-center col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4"> 
-                                            <div class="form-check form-switch">
-                                                {/* <input class={`form-check-input switch-action-${currentGrade} ${camera.allowed ? "switch-authorized" : ""}`} defaultChecked type="checkbox" role="switch" /> */}
-                                                {camera.allowed ? <input class={`form-check-input kiki action-${currentIdGrade}-${camera.id_camera}`} defaultChecked type="checkbox" role="switch" onChange={() => changeAction(camera.id_camera)}/> : 
-                                                                  <input class={`form-check-input kiki action-${currentIdGrade}-${camera.id_camera}`}  type="checkbox" role="switch" onChange={() => changeAction(camera.id_camera)}/>}
+                                            <div className="form-check form-switch">
+                                                {/* <input className={`form-check-input switch-action-${currentGrade} ${camera.allowed ? "switch-authorized" : ""}`} defaultChecked type="checkbox" role="switch" /> */}
+                                                {camera.allowed ? <input className={`form-check-input kiki action-${currentIdGrade}-${camera.id_camera}`} defaultChecked type="checkbox" role="switch" onChange={() => changeAction(camera.id_camera)}/> : 
+                                                                  <input className={`form-check-input kiki action-${currentIdGrade}-${camera.id_camera}`}  type="checkbox" role="switch" onChange={() => changeAction(camera.id_camera)}/>}
                                             </div>
                                         </div>
                                         <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
@@ -539,7 +553,7 @@ function Grades() {
                         <div className="modal-body">
 
                             <div className="row justify-content-center container" style={{textAlign:"center"}}>
-                                <i class="bi bi-x-circle" style={{color:"#f44336", fontSize: "465%"}}></i>
+                                <i className="bi bi-x-circle" style={{color:"#f44336", fontSize: "465%"}}></i>
                                 <h4>Voulez-vous vraiment annuler ? </h4>
                                 <p>Toutes vos modifications seront perdues.</p>
                             </div>

@@ -156,6 +156,13 @@ body {
 #addGradeModalLabel{
     text-align:center;
 }
+.chrome-picker {
+    position:fixed!important;
+}
+/* .square-selection:before{
+    border: 1px solid grey;
+    border-radius: 4px;
+} */
 /**/
 
 
