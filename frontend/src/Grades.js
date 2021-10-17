@@ -303,7 +303,6 @@ function Grades() {
      * @param {string} identifier  Identifier of the html switch that has just been switched
      */
      const changeAction = (identifier) => {
-
         let action = document.getElementsByClassName("action-" + currentIdGrade + "-" + identifier)[0].checked ; 
         if (identifier in newActions) {
             delete newActions[identifier];
@@ -313,7 +312,7 @@ function Grades() {
         }
     }
 
-    
+
     /**
      * Save new camera action and new presence/absence of notification for a grade
      * 
@@ -333,8 +332,8 @@ function Grades() {
         })
         .then(data => {
             activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
-            newActions = [] ;
-            newNotifications = [] ;
+            newActions = {} ;
+            newNotifications = {} ;
             if (data.message === "ok") {
                 getGrades() ;
                 openCameraInfo(currentColor,currentGrade,currentIdGrade) ;
@@ -347,6 +346,12 @@ function Grades() {
 
     }
 
+    /**
+     * Cancel the modification and verify first if anything have been modify
+     * (if it is the case, ask a confirmation to cancel)
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const cancelModification = () => {
         activateButton("close-modify");
         if (Object.keys(newActions).length > 0 || Object.keys(newNotifications).length > 0) {
@@ -365,10 +370,30 @@ function Grades() {
      */
     const resetModal = () => {
         for (let camera in informationsCameras) {
-            document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = informationsCameras[camera].allowed;
-            document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = informationsCameras[camera].notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
+            if (informationsCameras[camera].id_camera in newActions) {
+                document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = newActions[camera];
+            }
+            else {document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = informationsCameras[camera].allowed;}
+            if (informationsCameras[camera].id_camera in newNotifications) {
+                document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = newNotifications[camera] ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";
+            }
+            else {document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = informationsCameras[camera].notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";}
             
         }
+    }
+
+
+    /**
+     * Don't save the modifications that have been made on the actions and notification
+     * of camera
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+    const deleteModification = () => {
+        activateButton("close-cancel");
+        activateButton("open-desc-grade-2");
+        newActions = {} ;
+        newNotifications = {} ;
     }
 
     
@@ -525,7 +550,7 @@ function Grades() {
                             <button type="button" id="open-desc-grade-2" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir desc grades</button>
                             <button type="button" id="open-modify-grade" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal">Revenir modif grades</button>
                             <button type="button" id="close-cancel" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer tout</button>
-                            <button type="button" className="btn modification-grade-button bouton-warning col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => {activateButton("close-cancel");activateButton("open-desc-grade-2");}}>Oui</button>
+                            <button type="button" className="btn modification-grade-button bouton-warning col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => {deleteModification()}}>Oui</button>
                         </div>
                     </div>
                 </div>
