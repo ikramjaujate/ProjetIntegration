@@ -30,7 +30,7 @@ function Grades() {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true, 
-        theme:"light"
+        theme:"colored"
     };
     let newActions = {} ;
     let newNotifications = {} ;
@@ -285,42 +285,16 @@ function Grades() {
      const changeNotification = (idCamera, notification) => {
 
         if (idCamera in newNotifications) {
-            document.getElementById("notification-" + idCamera).className = notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
+            document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
             delete newNotifications[idCamera];
         }
         else {
-            document.getElementById("notification-" + idCamera).className = notification ? "bi bi-bell-slash-fill" : "bi bi-bell-fill" ;
+            document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-slash-fill" : "bi bi-bell-fill" ;
             newNotifications[idCamera] = !notification ;
         }
         //document.getElementsByClassName("notification-" + idCamera)[0].className = "" ;
     }
 
-    /**
-     * Change the action of the camera to adapt for the grade we want details
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @param {integer} grade  Grade identifier
-     */
-     const test = (grade) => {
-
-        let allSwitches = document.getElementsByClassName("form-check-input") ;
-        for (let i=0 ; i<allSwitches.length ; i++) {
-            allSwitches[i].checkd = false ;
-            console.log("all : ", allSwitches[i]);
-        }
-
-        console.log(grade); 
-        console.log(document.getElementsByClassName("switch-action-" + grade));
-        let switches = document.getElementsByClassName("switch-action-" + grade) ;
-        for (let i=0 ; i<switches.length ; i++) {
-            console.log("switch : ",i, " ", switches[i].className);
-            console.log("comparaison : ", switches[i].className.includes("switch-authorized"));
-            if (switches[i].className.includes("switch-authorized")){
-                console.log("i : ", document.getElementsByClassName("switch-action-" + grade)[i]);
-                document.getElementsByClassName("switch-action-" + grade)[i].checked = true ;
-            }
-        }      
-    }
 
     /**
      * Change the action of a camera
@@ -330,7 +304,7 @@ function Grades() {
      */
      const changeAction = (identifier) => {
 
-        let action = document.getElementsByClassName("action-" + identifier)[0].checked ; 
+        let action = document.getElementsByClassName("action-" + currentIdGrade + "-" + identifier)[0].checked ; 
         if (identifier in newActions) {
             delete newActions[identifier];
         }
@@ -339,6 +313,7 @@ function Grades() {
         }
     }
 
+    
     /**
      * Save new camera action and new presence/absence of notification for a grade
      * 
@@ -362,6 +337,7 @@ function Grades() {
             newNotifications = [] ;
             if (data.message === "ok") {
                 getGrades() ;
+                openCameraInfo(currentColor,currentGrade,currentIdGrade) ;
                 toast.success("Vous venez de modifier les actions des caméras du grade " + grade + " !", optionsToast);
             }
             else {
@@ -382,10 +358,18 @@ function Grades() {
     }
 
 
-    useEffect(()=> {
-        console.log("a changé");
-
-	}, [informationsCameras]);
+    /**
+     * Update the action's camera when opening the modifu modal
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+    const resetModal = () => {
+        for (let camera in informationsCameras) {
+            document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = informationsCameras[camera].allowed;
+            document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = informationsCameras[camera].notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
+            
+        }
+    }
 
     
     return (
@@ -428,7 +412,7 @@ function Grades() {
                         </div>
                         <div className="modal-footer row justify-content-between">
                             <button type="button" id="close-informations" className="btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
-                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations")}}>Modifier</button>
+                            <button type="button" className="btn modification-grade-button bouton-action col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");resetModal();}}>Modifier</button>
                         </div>
                     </div>
                 </div>
@@ -500,11 +484,13 @@ function Grades() {
                                         <div className="align-self-center col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4"> 
                                             <div class="form-check form-switch">
                                                 {/* <input class={`form-check-input switch-action-${currentGrade} ${camera.allowed ? "switch-authorized" : ""}`} defaultChecked type="checkbox" role="switch" /> */}
-                                                {camera.allowed ? <input class={`form-check-input action-${camera.id_camera}`} defaultChecked type="checkbox" role="switch" onChange={() => changeAction(camera.id_camera)}/> : <input class={`form-check-input action-${camera.id_camera}`}  type="checkbox" role="switch" onChange={() => changeAction(camera.id_camera)}/>}
+                                                {camera.allowed ? <input class={`form-check-input kiki action-${currentIdGrade}-${camera.id_camera}`} defaultChecked type="checkbox" role="switch" onChange={() => changeAction(camera.id_camera)}/> : 
+                                                                  <input class={`form-check-input kiki action-${currentIdGrade}-${camera.id_camera}`}  type="checkbox" role="switch" onChange={() => changeAction(camera.id_camera)}/>}
                                             </div>
                                         </div>
                                         <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
-                                            <i type="button" id={`notification-${camera.id_camera}`} className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} onClick={() => changeNotification(camera.id_camera, camera.notification)}></i>
+                                            {/* <i type="button" id={`notification-${currentIdGrade}-${camera.id_camera}`} className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} onClick={() => changeNotification(camera.id_camera, camera.notification)}></i> */}
+                                            <i type="button" id={`notification-${currentIdGrade}-${camera.id_camera}`} className={`bi bi-bell-slash-fill`} onClick={() => changeNotification(camera.id_camera, camera.notification)}></i>
                                         </div>
                                     </div>
                                 ))}
@@ -539,7 +525,7 @@ function Grades() {
                             <button type="button" id="open-desc-grade-2" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir desc grades</button>
                             <button type="button" id="open-modify-grade" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal">Revenir modif grades</button>
                             <button type="button" id="close-cancel" className="btn hidden-btn modification-grade-button bouton-close col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" data-bs-dismiss="modal" aria-label="Close">Fermer tout</button>
-                            <button type="button" className="btn modification-grade-button bouton-warning col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => {activateButton("close-cancel");activateButton("open-desc-grade-2");setinformationsCameras(informationsCameras)}}>Oui</button>
+                            <button type="button" className="btn modification-grade-button bouton-warning col-11 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5" onClick={() => {activateButton("close-cancel");activateButton("open-desc-grade-2");}}>Oui</button>
                         </div>
                     </div>
                 </div>
