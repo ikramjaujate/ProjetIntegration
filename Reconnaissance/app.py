@@ -59,8 +59,6 @@ def gen(captur):
 
     while True:
         success, img = cap.read()
-        #print(flag)
-        
 
         if(captur=='photo'): 
             
@@ -76,8 +74,13 @@ def gen(captur):
             captur = "vid"
             break
             
-        
-        
+
+        if flag == 1:
+            #flag = 0
+            cap.release()
+                
+                
+
         imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
         imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
 
@@ -90,9 +93,7 @@ def gen(captur):
 
             matchIndex = np.argmin(faceDis)
 
-            if flag == 1:
-                cap.release()
-
+            
 
             if faceDis[matchIndex]< 0.50:
                 name = className[matchIndex].upper()
@@ -143,9 +144,10 @@ def shutdown():
     
 @app.route('/up')
 def up():
-    global flag
-    cap = cv2.VideoCapture(0)
+    
+    global flag, cap
     flag = 0
+    cap = cv2.VideoCapture(0)
     return False
 
 if __name__ == '__main__':
