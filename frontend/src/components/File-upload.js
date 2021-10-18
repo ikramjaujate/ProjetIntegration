@@ -69,7 +69,8 @@ export default class UploadFiles extends Component {
       });
   }
 
-  uploadFiles() {
+  uploadFiles(event) {
+    event.preventDefault();
     const selectedFiles = this.state.selectedFiles;
 
     let _progressInfos = [];
@@ -115,13 +116,13 @@ export default class UploadFiles extends Component {
             </div>
           ))}
 
-          {previewImages && (
+         {/* {previewImages && (
           <div>
             {previewImages.map((img, i) => {
               return <img className="preview" src={img} alt={"image-" + i}  key={i}/>;
             })}
           </div>
-        )}
+          )} */}
 
         <div className="row my-3">
           <div className="col-8">
@@ -135,8 +136,9 @@ export default class UploadFiles extends Component {
               className="btn btn-success btn-sm"
               disabled={!selectedFiles}
               onClick={this.uploadFiles}
+              type="submit"
             >
-              Upload
+              Enregistrer
             </button>
           </div>
         </div>
@@ -151,7 +153,7 @@ export default class UploadFiles extends Component {
           </div>
         )}
 
-        <div className="card">
+        {/*<div className="card">
           <div className="card-header">List of Files</div>
           <ul className="list-group list-group-flush">
             {fileInfos &&
@@ -162,7 +164,7 @@ export default class UploadFiles extends Component {
                 </li>
               ))}
           </ul>
-        </div>
+              </div>*/}
       </div>
     );
   }
