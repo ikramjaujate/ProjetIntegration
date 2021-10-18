@@ -30,7 +30,7 @@ function Allumer(){
 
 }
 function Camera() {
-
+    
 
     return (
         <>
