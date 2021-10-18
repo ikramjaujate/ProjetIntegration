@@ -23,6 +23,7 @@ const client = new Client({
     user: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE,
+    port : 5432,
 });
 
 client.connect(err => {
@@ -39,7 +40,7 @@ app.put('/api/client', (req, res) => {
   const firstName = req.body.FirstName
   const lastName = req.body.LastName
   const grade = req.body.Grade
-  let pgQuery = 'insert into "client" (idclient, nom, prenom, grade) values (3, ($1), ($2), ($3))' ;
+  let pgQuery = 'insert into client (idclient, nom, prenom, grade) values (3, ($1), ($2), ($3))' ;
   client.query(pgQuery, [firstName, lastName, grade], (err, result) => {
     console.log(err, result)
     client.end()
