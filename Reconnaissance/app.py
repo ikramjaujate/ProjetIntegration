@@ -129,7 +129,11 @@ def gen(captur):
 @app.route('/video')
 def video():
     global cap
-    return Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
+    res = Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
+    #new_headers = [('Cache-Control', 'no-store')]
+    #new_headers = [('Cache-Control', 'no-cache')]
+    res.headers['Cache-Control'] = 'no-store'
+    return res
 
 @app.route('/photo')
 def photo():
@@ -140,15 +144,14 @@ def photo():
 def shutdown():
     global flag, cap
     flag = 1
-    return True
+    return ""
     
 @app.route('/up')
 def up():
-    
     global flag, cap
     flag = 0
-    cap = cv2.VideoCapture(0)
-    return False
+    #cap = cv2.VideoCapture(0)
+    return ""
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='6060',debug=True)
