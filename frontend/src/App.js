@@ -3,11 +3,12 @@ import './css/App.css';
 import Navbar from './components/Navbar.js';
 import Grades from './Grades';
 import Camera  from './components/Camera';
+import Modification from './components/Modification';
 function App() {
   return (
     <Router>
       <div className="App">
-      <Navbar/>
+      {/*<Navbar/>*/}
         <div className="content">
           <Switch>
 
@@ -16,6 +17,9 @@ function App() {
             </Route>
             <Route exact path="/camera"> 
               <Camera/>
+            </Route>
+            <Route exact path="/modification"> 
+              <Modification/>
             </Route>
 
           </Switch>
