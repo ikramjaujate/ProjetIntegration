@@ -15,7 +15,7 @@ const ActionsCameras = ({name_camera, id_camera, notification, changeAction, cha
 
 
     return (
-        <div className="layoutActionsCameras row p-1 m-2 bg-light rounded col-9 col-sm-9 col-md-10 col-lg-5 col-xl-5 col-xxl-5">
+        <div className="layout-actions-cameras row p-1 m-2 bg-light rounded col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
             <div className="name-camera-grade col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 col-xxl-7">{name_camera}</div>
             <div className="switch-camera-grade col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
                 <div className="form-check form-switch">

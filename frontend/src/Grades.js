@@ -439,41 +439,21 @@ function Grades() {
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-header row justify-content-center">
-                            <h5 className="modal-title p-1 shadow-sm rounded col-10 col-sm-10 col-md-10 col-lg-9 col-xl-9 col-xxl-9" id="gradeModalLabel">Chargement</h5>
+                            <h5 className="modal-title p-1 shadow-sm rounded col-10 col-sm-11 col-md-11 col-lg-9 col-xl-9 col-xxl-9" id="gradeModalLabel">Chargement</h5>
                         </div>
                         <div className="modal-body">
                             <div className="row justify-content-center">
-                                {/* <div className="row col-10 col-sm-10 col-md-10 col-lg-10 col-xl-9 col-xxl-10" style={{fontSize: "0.7rem", }}>
-                                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" style={{textAlign:"end"}}>
-                                        accès autorisés : <i type="button" className={`bi bi-square-fill`} style={{color:"var(--camera-allow)", fontSize: "0.95rem"}}></i>
-                                    </div>
-                                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" style={{textAlign:"end"}}>
-                                        accès refusés : <i type="button" className={`bi bi-square-fill`} style={{color:"var(--camera-refuse)", fontSize: "0.95rem"}}></i>
-                                    </div> 
-                                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" style={{margin: "0.3rem 0rem 0rem 0rem",textAlign:"end"}}>
-                                        activation d'une alerte de présence : <i className="bi bi-bell icon-notification" style={{backgroundColor:"#7a7a7a", color:"white", padding: "0.0375rem 0.15rem 0.0375rem 0.15rem", borderRadius:"4px"}}></i>
-                                    </div>
-                                </div> */}
-                                <div className="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 col-xxl-9" style={{fontSize: "0.7rem", }}>
+                                <div className="layout-legend col-10 col-sm-10 col-md-10 col-lg-9 col-xl-9 col-xxl-9">
                                     <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                                        <i type="button" className={`bi bi-square-fill`} style={{color:"var(--camera-allow)", fontSize: "0.95rem"}}></i> : accès autorisés
+                                        <i className="bi bi-square-fill" style={{color:"var(--camera-allow)", fontSize: "0.95rem"}}></i> : accès autorisés
                                     </div>
                                     <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                                        <i type="button" className={`bi bi-square-fill`} style={{color:"var(--camera-refuse)", fontSize: "0.95rem"}}></i> : accès refusés
+                                        <i className="bi bi-square-fill" style={{color:"var(--camera-refuse)", fontSize: "0.95rem"}}></i> : accès refusés
                                     </div> 
                                     <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" style={{margin: "0.3rem 0rem 0rem 0rem"}}>
-                                        <i className="bi bi-bell icon-notification" style={{backgroundColor:"#7a7a7a", color:"white", padding: "0.0375rem 0.15rem 0.0375rem 0.15rem", borderRadius:"4px"}}></i> : activation d'une alerte de présence
+                                        <i className="bi bi-bell icon-notification" style={{fontSize: "0.7rem", backgroundColor:"#7a7a7a", color:"white", padding: "0.0375rem 0.15rem 0.0375rem 0.15rem", borderRadius:"4px"}}></i> : activation d'une alerte de présence
                                     </div>
                                 </div>
-                                {/* <div className="row col-9 col-sm-9 col-md-12 col-lg-11 col-xl-9 col-xxl-9" style={{fontSize: "0.7rem", }}>
-                                    <div className="col-12 col-sm-12 col-md-4 col-lg-12 col-xl-12 col-xxl-12">
-                                        <i type="button" className={`bi bi-square-fill`} style={{color:"var(--camera-allow)", fontSize: "0.95rem"}}></i> : accès autorisés
-                                    
-                                        <i type="button" className={`bi bi-square-fill`} style={{color:"var(--camera-refuse)", fontSize: "0.95rem"}}></i> : accès refusés
-                                    
-                                        <i className="bi bi-bell icon-notification" style={{backgroundColor:"#7a7a7a", color:"white", padding: "0.0375rem 0.15rem 0.0375rem 0.15rem", borderRadius:"4px"}}></i> : activation d'une alerte de présence
-                                    </div>
-                                </div> */}
                             </div>
                             <div className="row justify-content-center">
                                 {informationsCameras && informationsCameras.map(camera => (
@@ -546,28 +526,39 @@ function Grades() {
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-header row justify-content-center">
-                            <h5 id="modifyGradeModalLabel" className="modal-title p-1 shadow-sm rounded col-10 col-sm-10 col-md-10 col-lg-9 col-xl-9 col-xxl-9" style={{backgroundColor:currentColor}}>{currentGrade}</h5>
+                            <h5 id="modifyGradeModalLabel" className="modal-title p-1 shadow-sm rounded col-10 col-sm-11 col-md-11 col-lg-9 col-xl-9 col-xxl-9" style={{backgroundColor:currentColor}}>{currentGrade}</h5>
                         </div>
                         <div className="modal-body">
-                            <div className="row justify-content-center">
-                                {informationsCameras && informationsCameras.map(camera => (
-                                    // <ActionsCameras name={camera.name_camera} allowed={camera.allowed} notification={camera.notification}></ActionsCameras>
-                                    // <div className="layoutActionsCameras row p-1 m-2 bg-light rounded col-9 col-sm-9 col-md-10 col-lg-5 col-xl-5 col-xxl-5">
-                                    //     <div className="name-camera-grade col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 col-xxl-7">{camera.name_camera}</div>
-                                    //     <div className="switch-camera-grade col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
-                                    //         <div className="form-check form-switch">
-                                    //             {/* <input className={`form-check-input switch-action-${currentGrade} ${camera.allowed ? "switch-authorized" : ""}`} defaultChecked type="checkbox" role="switch" /> */}
-                                    //             {camera.allowed ? <input type="checkbox" className={`form-check-input input-switch action-${currentIdGrade}-${camera.id_camera}`} defaultChecked role="switch" onChange={() => changeAction(camera.id_camera)}/> : 
-                                    //                               <input type="checkbox" className={`form-check-input input-switch action-${currentIdGrade}-${camera.id_camera}`} role="switch" onChange={() => changeAction(camera.id_camera)}/>}
-                                    //         </div>
-                                    //     </div>
-                                    //     <div className="rounded col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
-                                    //         {/* <i type="button" id={`notification-${currentIdGrade}-${camera.id_camera}`} className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} onClick={() => changeNotification(camera.id_camera, camera.notification)}></i> */}
-                                    //         <i type="button" id={`notification-${currentIdGrade}-${camera.id_camera}`} className={`bi bi-bell-slash-fill`} onClick={() => changeNotification(camera.id_camera, camera.notification)}></i>
-                                    //     </div>
-                                    // </div>
+                            <div className="row justify-content-around">
+                                {/* </div> 
+                                <ActionsCameras name={camera.name_camera} allowed={camera.allowed} notification={camera.notification}></ActionsCameras>
+                                    <div className="layout-actions-cameras row p-1 m-2 bg-light rounded col-9 col-sm-9 col-md-10 col-lg-5 col-xl-5 col-xxl-5">
+                                        <div className="name-camera-grade col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 col-xxl-7">{camera.name_camera}</div>
+                                        <div className="switch-camera-grade col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
+                                            <div className="form-check form-switch">
+                                                {camera.allowed ? <input type="checkbox" className={`form-check-input input-switch action-${currentIdGrade}-${camera.id_camera}`} defaultChecked role="switch" onChange={() => changeAction(camera.id_camera)}/> : 
+                                                                <input type="checkbox" className={`form-check-input input-switch action-${currentIdGrade}-${camera.id_camera}`} role="switch" onChange={() => changeAction(camera.id_camera)}/>}
+                                            </div>
+                                        </div>
+                                        <div className="rounded col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
+                                            <i type="button" id={`notification-${currentIdGrade}-${camera.id_camera}`} className={`bi bi-bell-slash-fill`} onClick={() => changeNotification(camera.id_camera, camera.notification)}></i>
+                                        </div>
+                                    </div> */}
+                                {/* {informationsCameras && informationsCameras.map(camera => (
                                     <ActionsCameras name_camera={camera.name_camera} id_camera={camera.id_camera} notification={camera.notification} changeAction={changeAction} changeNotification={changeNotification} allowed={camera.allowed} currentIdGrade={currentIdGrade} />
-                                ))}
+                                ))} */}
+
+
+                                <div className="row justify-content-center col-11 col-sm-11 col-md-11 col-lg-6 col-xl-6 col-xxl-6">
+                                    {informationsCameras && informationsCameras.filter(element => informationsCameras.indexOf(element) < (informationsCameras.length)/2).map(camera => (
+                                        <ActionsCameras name_camera={camera.name_camera} id_camera={camera.id_camera} notification={camera.notification} changeAction={changeAction} changeNotification={changeNotification} allowed={camera.allowed} currentIdGrade={currentIdGrade} />
+                                    ))}
+                                </div>
+                                <div className="row justify-content-center col-11 col-sm-11 col-md-11 col-lg-6 col-xl-6 col-xxl-6">
+                                    {informationsCameras && informationsCameras.filter(element => informationsCameras.indexOf(element) >= (informationsCameras.length)/2).map(camera => (
+                                        <ActionsCameras name_camera={camera.name_camera} id_camera={camera.id_camera} notification={camera.notification} changeAction={changeAction} changeNotification={changeNotification} allowed={camera.allowed} currentIdGrade={currentIdGrade} />
+                                    ))}
+                                </div>
                             </div>
                         </div>
                         <div className="modal-footer row justify-content-between">

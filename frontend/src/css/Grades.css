@@ -10,6 +10,7 @@
     --error : red ;
     --frame-choice-color:#5c5c5c;
     --principal-color:#457eaf;
+    --principal-color-hover:#3a6a94;
     --add-user:rgb(144, 224, 147);
     --add-user-hover: #358539 ;
     --add-user-active: #246927 ;
@@ -17,6 +18,8 @@
     --text-loading:#F8F9FA;
     --notification-on:#ffd150;
     --notification-off:#686868;
+    --close-button:#777c85 ; /*ou #969697*/
+    --close-button-hover:#62666d ; 
 }
 body {
     color: var(--writing) ;
@@ -93,23 +96,28 @@ body {
     text-align:center;
 }
 .bouton-close {
-    background-color:#3A3E45;
+    background-color:var(--close-button);
     color:white;
 }
 .bouton-close:hover {
-    background-color:#2f3135;
+    background-color:var(--close-button-hover);
     color:white;
 }
 .bouton-action{
-    background-color:#4DAAB3;
+    background-color:var(--principal-color);
     color:white;
 }
 .bouton-action:hover {
-    background-color:#48949b;
+    background-color:var(--principal-color-hover);
     color:white;
 }
-.layoutActionsCameras {
+.layout-actions-cameras {
     margin: 0.3rem!important;
+}
+.layout-legend {
+    font-size: 0.7rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.3rem;
 }
 /**/
 
@@ -280,6 +288,7 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 
 @media only screen and (max-width: 992px) {
     .modal-body {padding: 0rem;}
+    .layout-legend {padding: 0.5rem 0rem 0.3rem 0.1rem;}
 }
 
 @media only screen and (max-width: 767px) {
@@ -310,6 +319,7 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .container-choosing-color{padding: 0rem 1rem 0rem 0.3rem;}
     .modal-button{font-size: 0.8rem;}
     .card-grade{margin-bottom: 0.2rem;}
+    .layout-legend { padding: 0.2rem 0rem 0.3rem 0.3rem;}
 }
 
 @media only screen and (max-width: 550px) {
@@ -328,6 +338,7 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     #gradeModal .m-2 {margin: 0.3rem 0.5rem 0.3rem 0.5rem!important;}
     .name-camera-grade{font-size: 0.8rem;}
     .modal-button{font-size: 0.8rem;}
+    .layout-legend{font-size: 0.6rem;}
 }
 
 @media only screen and (max-width: 380px) {
@@ -341,9 +352,9 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .name-grade{font-size: 100%;}
     .input-switch{width:1.8rem!important;}
     #modifyGradeModal .bi {font-size: 0.8rem;}
-
     #gradeModal .modal-footer{padding: 0rem 1.2rem 0rem 0.75rem;}
     .modal-button {padding: 0.2rem 0.75rem 0.2rem 0.75rem;
         margin: 0.25rem 0.75rem 0.1rem 0.75rem;}
+    .layout-legend {font-size: 0.54rem;}
 }
 /**/
