@@ -1,7 +1,7 @@
 import '../css/Grades.css';
 
 
-const ActionsCameras = ({name, allowed, notification}) => {
+const ActionsCameras = ({name_camera, id_camera, notification, changeAction, changeNotification, allowed, currentIdGrade}) => {
 
     /**
      * Add a border around the selected color
@@ -15,16 +15,18 @@ const ActionsCameras = ({name, allowed, notification}) => {
 
 
     return (
-        <div className="row p-1 m-2 bg-light rounded col-9 col-sm-8 col-md-9 col-lg-7 col-xl-7 col-xxl-7">
-            <div className="align-self-center col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">{name}</div>
-            <div className="align-self-center col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" checked={allowed ? true : false}/>
+        <div className="layoutActionsCameras row p-1 m-2 bg-light rounded col-9 col-sm-9 col-md-10 col-lg-5 col-xl-5 col-xxl-5">
+            <div className="name-camera-grade col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 col-xxl-7">{name_camera}</div>
+            <div className="switch-camera-grade col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"> 
+                <div className="form-check form-switch">
+                    {/* <input className={`form-check-input switch-action-${currentGrade} ${camera.allowed ? "switch-authorized" : ""}`} defaultChecked type="checkbox" role="switch" /> */}
+                    {allowed ? <input type="checkbox" className={`form-check-input input-switch action-${currentIdGrade}-${id_camera}`} defaultChecked role="switch" onChange={() => changeAction(id_camera)}/> : 
+                                        <input type="checkbox" className={`form-check-input input-switch action-${currentIdGrade}-${id_camera}`} role="switch" onChange={() => changeAction(id_camera)}/>}
                 </div>
             </div>
-            <div className="rounded bg-notification col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
-                {/* <i className={`bi ${notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} style={{color:notification ? "white" : allowed ? "var(--camera-allow)" : "var(--camera-refuse)"}}></i> */}
-                <i type="button" className={`bi ${notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} style={{color:notification ? "var(--notification-on)" : "var(--notification-off)"}} onClick={() => cc()}></i>
+            <div className="rounded col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">  
+                {/* <i type="button" id={`notification-${currentIdGrade}-${camera.id_camera}`} className={`bi ${camera.notification ? "bi-bell-fill" : "bi-bell-slash-fill"}`} onClick={() => changeNotification(camera.id_camera, camera.notification)}></i> */}
+                <i type="button" id={`notification-${currentIdGrade}-${id_camera}`} className={`bi bi-bell-slash-fill`} onClick={() => changeNotification(id_camera, notification)}></i>
             </div>
         </div>
     );

@@ -11,6 +11,7 @@ import {ChromePicker} from 'react-color' ;
 
 import './css/Grades.css';
 import {useEffect, useState} from "react" ;
+import VariablesGrade from './VariablesGrade' ;
 
 
 // export const one = () => {
@@ -31,29 +32,7 @@ import {useEffect, useState} from "react" ;
 //         }
 //     }
 
-function TestComponent() {
-    const [informationsGrade, setInformationsGrade] = useState([]);
-    const [informationsCameras, setinformationsCameras] = useState(null);
-    const [colorGrades, setColorGrades] = useState([]);
-    const [currentColor, setCurrentColor] = useState("");
-    const [currentGrade, setCurrentGrade] = useState("");
-    const [currentIdGrade, setCurrentIdGrade] = useState("");
-    const optionsToast = {
-        autoClose: 8000,
-        position: "bottom-right",
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true, 
-        theme:"colored"
-    };
-    let newActions = {} ;
-    let newNotifications = {} ;
-    const errorMsgClient = "Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous." ;
-    const [colorCreation, setColorCreation] = useState('red');
-    const [showColorPicker, setShowColorPicker] = useState(false);
-};
-export default TestComponent;
+
 
 /**
      * Get information about the different grades
