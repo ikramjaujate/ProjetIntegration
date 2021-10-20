@@ -1,25 +1,51 @@
 const http = require('http');
+require("dotenv").config();
 const express = require('express') ;
 const app = express() ;
 const {Client}= require('pg') ;
 const cors = require('cors') ;
 const mysql = require('mysql');
+const router = express.Router();
+const controller = require("./src/controller/file.controller");
+const { request, response } = require('express');
+const port = 3001;
 
-
+/*const client = new Client({
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE,
+    port : 5432,
+});*/
 
 const client = new Client({
-  host: '127.0.0.1',
+    host: '127.0.0.1',
+    port: 5432,
+    user: 'postgres',
+    password: '123',
+    database: 'ProjetIntegration'
+  })
+
+/*const client = new Client({
+  host: 'localhost',
   port: 5432,
   user: 'postgres',
-  password: '123',
-  database: 'ProjetIntegration'
-})
+  password: 'cookies',
+  database: 'integration'
+})*/
 
-app.listen(3001, () => {
-  console.log("running on port 3001");
-})
+app.listen(port, () => {
+    console.log(`App running on port ${port}.`)
+  })
+
 app.use(express.json()) ;
-app.use(cors()) ;  //to avoid CORS policy
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
+    res.setHeader('Access-Control-Allow-Credentials', 'true')
+    next();
+  });
 
 
 client.connect(err => {
@@ -202,17 +228,66 @@ app.get('/api/grades/members', (request, response) => {
     })
 }) ;
 
-//AUTHOR : Aurélien
-// for saving pictures in local repo on the Resp
+/**
+ * 
+ * @author : Aurélien
+ * @method : PUT
+ * 
+ */
 
-/*global.__basedir = __dirname;
+app.put('/api/client', (req, res) => {  
+    const firstName = req.body.FirstName
+    const lastName = req.body.LastName
+    const grade = req.body.Grade
+    console.log(grade)
+    let query = 'insert into member (id_grade, first_name, last_name) values (($1), ($2), ($3))' ;
+    client.query(query, [grade, firstName, lastName], (error, result) => {
+        
+    })
+  })
+  
+ /**
+ * 
+ * @author : Aurélien
+ * @method : GET
+ * 
+ */
+ 
+  app.get('/api/gradesInfos', (request, response) => {
+    let query = "select id_grade, name_grade from grade";
+    
+    client.query(query, (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json(results.rows);
+    })
+  }) ;
+  
+  
+/**
+ * 
+ * @author : Aurélien
+ * 
+ */
+
+ /*let routes = (app) => {
+    router.post("/upload", controller.upload);
+    router.get("/files", controller.getListFiles);
+    router.get("/files/:name", controller.download);
+  
+    app.use(router);
+  };
+  
+  module.exports = routes;
+global.__basedir = __dirname;
 
 const initRoutes = require("./src/routes");
 
 app.use(express.urlencoded({ extended: true }));
 initRoutes(app);
 
-let port = 8080;  //listen on port 8080 for incoming requests.
+let port2 = 8080;  //listen on port 8080 for incoming requests.
 app.listen(port, () => {
-  console.log(`Running at localhost:${port}`);
+  console.log(`Running at localhost:${port2}`);
 });*/

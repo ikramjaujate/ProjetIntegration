@@ -33,7 +33,7 @@ function Secretary() {
     }
 
     const getGrade = () => {
-        Axios.get(`http://localhost:3001/api/grades`).then((response)=> {
+        Axios.get(`http://localhost:3001/api/gradesInfos`).then((response)=> {
             setGradesList(response.data)
         }).then( () => {
         })

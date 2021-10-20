@@ -1,4 +1,3 @@
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './css/App.css';
 import Navbar from './components/Navbar.js';
 import Grades from './Grades';
@@ -11,7 +10,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-      {/*<Navbar/>*/}
         <div className="content">
           <Switch>
 
@@ -27,11 +25,8 @@ function App() {
             <Route exact path="/secretary">
               <Secretary/>
             </Route>
-            <Route exact path="/bootstrap">
-              <Bootstrap />
-            </Route>
-
           </Switch>
+        </div>
       </div>
     </Router>
   );
