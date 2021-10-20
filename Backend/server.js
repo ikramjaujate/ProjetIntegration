@@ -243,7 +243,9 @@ app.put('/api/client', (req, res) => {
     console.log(grade)
     let query = 'insert into member (id_grade, first_name, last_name) values (($1), ($2), ($3))' ;
     client.query(query, [grade, firstName, lastName], (error, result) => {
-        
+        if (error) {
+            throw error;
+        }
     })
   })
   

@@ -20,7 +20,7 @@ function Secretary() {
 	}, []);
 
     const submitClient = () => {
-        console.log(clientGrade)
+        console.log("client : ", clientGrade)
         Axios.put(`http://localhost:3001/api/client`, {
             FirstName : clientFirstName,
             LastName : clientLastName,
@@ -54,7 +54,7 @@ function Secretary() {
     return (
         <div className="secretary-page">
             <Navbar/>
-            <div>          
+            <div id="layout-user">          
                 <Popup trigger={ <button className="add-user">Ajouter utilisateur (+)</button>} position="center" modal nested>
                     <h1>Nouvel utilisateur:</h1>
                     <form onSubmit={submitClient}>
