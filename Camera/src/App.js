@@ -1,5 +1,5 @@
 import Navbar from './component/Navbar.js';
-import Camera from './Cam';
+import Camera from '../../frontend/src/Cam';
 function App() {
   return (
     <div className="App">
