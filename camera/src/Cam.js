@@ -44,7 +44,7 @@ const Camera =()=>{
         <div class="col offset-sm-3" >
           <select id="select">
             {etatCam&&etatCam.map(camera=>
-            <option className='option'>Caméra numéro : {camera.status}</option>
+            <option className='option'>CAM {camera.id_camera} : {camera.name_camera}</option>
             )}
           </select>
         </div>
@@ -53,8 +53,6 @@ const Camera =()=>{
       {/* Cadre du live */}
       <div class="row justify-content-center"> 
         <fieldset class="col offset-sm-3" id="cadre_live">
-
-          <legend >Maison</legend>
           <img alt='visu_live'src= "http://192.168.0.200:6060/video" width="200" height="300" title="Foscam FI8905W" />
         </fieldset>
       </div>
