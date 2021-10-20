@@ -1,114 +1,32 @@
-@media only screen and (max-width: 1200px) {
-.btn{
-  background-color: #c71818!important;;
-  border-radius:50% !important;
-  /* margin-right:-30px !important; */
-  
-}
+
 #cadre_live{
   border:double; 
   border-color: #928c8c; 
   width:500px;
   height:300px;
-
-}
-.row{
-  margin-top:20px !important;
-}
-
-#select{
-  border-radius : 20px;
-  background-color: rgb(135, 138, 141);
-  color:#e0ecf7;
-  border-color:#e0ecf7;
-}
-
-}
-@media only screen and (max-width: 600px) {
- 
-.btn{
-  background-color: hsl(123, 75%, 41%) !important;
-  border-radius:50% !important;
-  margin-top:-890px !important;
-}
-#cadre_bouton_photo{
-  margin-left:120px;
-}
-#cadre_bouton_video{
-  margin-right:-120px;
-}
-#cadre_live{
-  border:double; 
-  border-color: #928c8c; 
-  width:500px;
-  height:300px;
-
-}
-.row{
-  margin-top:20px !important;
-}
-
-#select{
-  border-radius : 20px;
-  background-color: rgb(135, 138, 141);
-  color:#e0ecf7;
-  border-color:#e0ecf7;
-}
   
+  }
+  
+
+.row{
+  margin-top:20px !important;
+  }
+#select{
+  /* margin-top:4px ; */
+  border-radius : 20px;
+  background-color: rgb(135, 138, 141);
+  color:#e0ecf7;
+  border-color:#e0ecf7;
+}
 #text{
-  text-align: center;
-  margin-bottom: 50px;
-}
-}
-@media only screen and (min-width: 1200px) {
-  .btn{
-    background-color: #832ae9 !important;
-    border-radius:50% !important;
-    margin-top:-800 !important;
-    margin-right:60px !important;
-}
   
-#cadre_live{
-  border:double; 
-  border-color: #928c8c; 
-  width:500px;
-  height:300px;
+  background-color: #f4f753 !important;
+  color:white;
+  border-radius: 20px;
+  Text-align:center;
 
 }
-.row{
-  margin-top:20px !important;
-}
-
-#select{
-  margin-top: 10px;
-  border-radius : 20px;
-  background-color: rgb(135, 138, 141);
-  color:#e0ecf7;
-  border-color:#e0ecf7;
-}
-}
-
-.btn{
-  background-color: #832ae9 !important;
-  border-radius:50% !important;
- 
-}
-
-#cadre_live{
-border:double; 
-border-color: #928c8c; 
-width:500px;
-height:300px;
-
-}
-.row{
-margin-top:20px !important;
-}
-
-#select{
-margin-top: 10px;
-border-radius : 20px;
-background-color: rgb(135, 138, 141);
-color:#e0ecf7;
-border-color:#e0ecf7;
+.form-control{
+  margin-top: 35px;
+  background-color: #6db4d4 !important;
 }
