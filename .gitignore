@@ -52,6 +52,9 @@ venv
 
 
 *node_modules
+.idea
+
+apicapture
 # Kernel Module Compile Results
 *.mod*
 *.cmd
