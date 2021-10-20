@@ -22,7 +22,7 @@ const client = new Client({
     host: '127.0.0.1',
     port: 5432,
     user: 'postgres',
-    password: '123',
+    password: 'p',
     database: 'ProjetIntegration'
   })
 
@@ -330,3 +330,22 @@ app.listen(port, () => {
     }
     response.send({message:'ok'});
 }) ;
+
+
+
+/**
+ * Récupère à l'aide d'un GET toutes les caméra et leur état 
+ * @author Cécile Bonnet <c.bonnet@gmail.com>
+ * @method GET
+ **/
+
+ app.get('/api/etatCam', (req, res) =>{
+  
+    client.query('select * from camera', (err, result) => {
+      console.log(result.rows)
+  
+      if(err) throw err ;
+      res.send(result.rows);
+     
+    })
+  })

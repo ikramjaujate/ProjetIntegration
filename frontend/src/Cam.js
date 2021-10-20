@@ -1,12 +1,13 @@
 
 import { useEffect, useState } from 'react';
 import './css/Cam.css';
+import Navbar from './components/Navbar.js';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import photo from'./Image/photo.png'; 
 // import camera from './Image/camera.png';
 
-const Camera =()=>{
+const Acceuil =()=>{
   const[etatCam, setEtatCam] = useState(null)
 
   useEffect(()=>{
@@ -33,6 +34,9 @@ const Camera =()=>{
 
   }
   return(
+    <div>
+
+    <Navbar/>
     
     <div className='container'>
       {/* Choix de la caméra */}
@@ -79,6 +83,7 @@ const Camera =()=>{
         </div>
       </div>
     </div>
+    </div>
           
        
    
@@ -88,4 +93,4 @@ const Camera =()=>{
   )
 }
 
-export default Camera; 
+export default Acceuil; 
