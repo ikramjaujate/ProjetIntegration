@@ -65,3 +65,9 @@ dkms.conf
 node_modules/
 
 package-lock.json
+node_modules/
+.env
+package-lock.json
+package-lock.json
+package.json
+package.json

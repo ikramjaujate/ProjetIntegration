@@ -202,3 +202,17 @@ app.get('/api/grades/members', (request, response) => {
     })
 }) ;
 
+//AUTHOR : Aurélien
+// for saving pictures in local repo on the Resp
+
+/*global.__basedir = __dirname;
+
+const initRoutes = require("./src/routes");
+
+app.use(express.urlencoded({ extended: true }));
+initRoutes(app);
+
+let port = 8080;  //listen on port 8080 for incoming requests.
+app.listen(port, () => {
+  console.log(`Running at localhost:${port}`);
+});*/
