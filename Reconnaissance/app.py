@@ -1,4 +1,4 @@
-from flask import Flask, Response, render_template
+from flask import Flask, Response, render_template, request
 from flask_cors import CORS
 import face_recognition
 import cv2
@@ -39,6 +39,7 @@ encodeListKnown = findEncodings(images)
 print('Encodings Complete')
 
 cap = cv2.VideoCapture(0)
+flag = 0
 
 # Convertir les resolutions 
 
@@ -54,9 +55,11 @@ def gen(captur):
     print(captur)
     out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
     
+    
 
     while True:
         success, img = cap.read()
+
         if(captur=='photo'): 
             
             now = str(datetime.now())
@@ -71,8 +74,13 @@ def gen(captur):
             captur = "vid"
             break
             
-            
-        
+
+        if flag == 1:
+            #flag = 0
+            cap.release()
+                
+                
+
         imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
         imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
 
@@ -84,6 +92,7 @@ def gen(captur):
             faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
 
             matchIndex = np.argmin(faceDis)
+
             
 
             if faceDis[matchIndex]< 0.50:
@@ -94,6 +103,8 @@ def gen(captur):
                 cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
                 cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
                 cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+
+                
                 
             else: 
                 name = 'Unknown'
@@ -103,6 +114,8 @@ def gen(captur):
                 cv2.rectangle(img,(x1,y1),(x2,y2),(0,0,255),2)
                 cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,0,255),cv2.FILLED)
                 cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+
+                
                     
         
         out.write(img)
@@ -113,20 +126,37 @@ def gen(captur):
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
-
 @app.route('/video')
 def video():
     global cap
-    return Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
+    res = Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
+    #new_headers = [('Cache-Control', 'no-store')]
+    #new_headers = [('Cache-Control', 'no-cache')]
+    res.headers['Cache-Control'] = 'no-store'
+    return res
 
 @app.route('/photo')
 def photo():
     global cap
     return Response(gen('photo'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
 
-
+@app.route('/shutdown')
+def shutdown():
+    global flag, cap
+    flag = 1
+    return ""
+    
+@app.route('/up')
+def up():
+    global flag, cap
+    flag = 0
+    #cap = cv2.VideoCapture(0)
+    return ""
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='6060',debug=True)
+
+
+
 
 

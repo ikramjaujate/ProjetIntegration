@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 
-import Camera from './components/Camera';
+import Camera from '../../frontend/src/components/Camera';
 
 function App() {
   return (

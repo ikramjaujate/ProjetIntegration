@@ -3,20 +3,21 @@
     "@chakra-ui/react": "^1.6.8",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "bootstrap": "^5.1.1",
-    "framer-motion": "^4.1.17",
-    "react-router-dom": "^5.3.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
+    "bootstrap": "^5.1.1",
     "bootstrap-icons": "^1.5.0",
+    "connect-domain": "^0.5.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "framer-motion": "^4.1.17",
     "materialize-css": "^1.0.0-rc.2",
     "mysql": "^2.18.1",
     "node": "^16.10.0",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "react-router-dom": "^5.3.0"
   }
 }
