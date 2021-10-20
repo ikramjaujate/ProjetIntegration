@@ -3,17 +3,6 @@ import '../css/Grades.css';
 
 const ActionsCameras = ({name_camera, id_camera, notification, changeAction, changeNotification, allowed, currentIdGrade}) => {
 
-    /**
-     * Add a border around the selected color
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-     const cc = () => {
-        
-        console.log("oui");
-    }
-
-
     return (
         <div className="layout-actions-cameras row p-1 m-2 bg-light rounded col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
             <div className="name-camera-grade col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 col-xxl-7">{name_camera}</div>

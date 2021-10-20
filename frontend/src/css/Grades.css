@@ -91,7 +91,6 @@ body {
     margin: 0.25rem 0.75rem 0.25rem 0.75rem;
 }
 #gradeModalLabel {
-    background-color:var(--text-loading);
     color:white;
     text-align:center;
 }
