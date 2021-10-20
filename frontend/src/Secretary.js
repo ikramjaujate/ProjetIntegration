@@ -9,12 +9,19 @@ import Input from './components/Input';
 import Axios from 'axios'
 
 function Secretary() {
-    const [clientFirstName, setClientFirstName] = useState([]);
-    const [clientLastName, setClientLastName] = useState([]);
-    const [clientGrade, setClientGrade] = useState([]);
+    Axios.defaults.withCredentials = true;
+    const [clientFirstName, setClientFirstName] = useState("");
+    const [clientLastName, setClientLastName] = useState("");
+    const [clientGrade, setClientGrade] = useState("");
+    const [gradesList, setGradesList] = useState([])
+
+    useEffect(()=> {
+        getGrade() ;
+	}, []);
 
     const submitClient = () => {
-        Axios.put('http://localhost:3001/api/client', {
+        console.log(clientGrade)
+        Axios.put(`http://localhost:3001/api/client`, {
             FirstName : clientFirstName,
             LastName : clientLastName,
             Grade : clientGrade
@@ -24,6 +31,25 @@ function Secretary() {
             }
         })
     }
+
+    const getGrade = () => {
+        Axios.get(`http://localhost:3001/api/grades`).then((response)=> {
+            setGradesList(response.data)
+        }).then( () => {
+        })
+    }
+
+    /*const getGrades = () => {
+        var grades = { method: 'GET', headers: {'Content-Type': 'application/json'},};
+        fetch(`http://localhost:3001/api/grades`, grades).then(result => {
+            return result.json();
+        })
+        .then(data => {
+            setGradesList(data)
+        });
+    }*/
+
+    
 
     return (
         <div className="secretary-page">
@@ -39,9 +65,9 @@ function Secretary() {
                     <label for="grade">Grade:</label><br/>
                     <select onChange={(e) => {
                                     setClientGrade(e.target.value)}} name="grade">
-                        <option>Patient</option>
-                        <option>Directeur</option>
-                        <option>Personnel</option>
+                        {gradesList.map((val) => {
+                                return <option value={val.id_grade}>{val.id_grade + ". "}{val.name_grade}</option>
+                        })}
                     </select><br/><br/>
                     <button type="submit">Envoyer</button>
                     <UploadFiles/>

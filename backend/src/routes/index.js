@@ -4,15 +4,14 @@ const controller = require("../controller/file.controller");
 const app = express();
 const port = 3001;
 const {Client}= require('pg') ;
-const cors = require('cors');
 require("dotenv").config();
 
-app.use(cors());
 app.use(express.json())
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
   next();
 });
 
@@ -40,12 +39,20 @@ app.put('/api/client', (req, res) => {
   const firstName = req.body.FirstName
   const lastName = req.body.LastName
   const grade = req.body.Grade
-  let pgQuery = 'insert into client (idclient, nom, prenom, grade) values (3, ($1), ($2), ($3))' ;
-  client.query(pgQuery, [firstName, lastName, grade], (err, result) => {
-    console.log(err, result)
-    client.end()
+  let query = 'insert into member (id_grade, first_name, last_name) values (($1), ($2), ($3))' ;
+  client.query(query, [grade, firstName, lastName], (err, result) => {
   })
 })
+
+app.get('/api/grades', (request, response) => {
+  let query = "select id_grade, name_grade from grade";
+  client.query(query, (error, results) => {
+      if (error) {
+          throw error;
+      }
+      response.status(200).json(results.rows);
+  })
+}) ;
 
 
 
