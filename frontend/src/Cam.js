@@ -48,7 +48,7 @@ const Acceuil =()=>{
         <div class="col offset-sm-3" >
           <select id="select">
             {etatCam&&etatCam.map(camera=>
-            <option className='option'>CAM {camera.id_camera} : {camera.name_camera}</option>
+            <option className='option'>CAM {camera.id_camera} : {camera.name_camera} Status : OFF</option>
             )}
           </select>
         </div>
