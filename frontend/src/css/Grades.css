@@ -236,7 +236,9 @@ body {
 }
 /**/
 
-
+#frame-name-grade-input .form-control {
+    background-color: white !important;
+}
 
 /*??*/
 /* #title-page {
