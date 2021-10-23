@@ -1,12 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Tooltip from "react-bootstrap/Tooltip"
 import OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import ReactDOM from "react-dom";
 import '../css/Modification.css'
 import Popover from "react-bootstrap/Popover"
+import Preloader from "./Pre";
 import EdiText from "react-editext";
 import styled from "styled-components";
 
@@ -38,66 +39,134 @@ function Test() {
     console.log('test ok')
 }
 function Modification() {
+    const [load, upadateLoad] = useState(true);
+    useEffect(() => {
+        setTimeout(() => {
+            upadateLoad(false);
+        }, 1200);
+    }, []);
 
     const [editing, setEditing] = useState(false);
     const [value, setValue] = useState("Ikram Jaujate");
+    var photos = []
+    const [profilePhoto, setProfilePhoto] = useState("")
+    const [hasValue, setHasValue] = useState(null)
+    const [count, setCount] = useState(null)
+
 
     const handleSave = (value) => {
         console.log(value);
         setValue(value);
     };
-    return (
-        <>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                User 1
-            </button>
+    useEffect((idMember) => {
+        idMember = 1
+        let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(`http://localhost:3001/api/membres/${idMember}/photos`, informations)
+            .then(response => response.json())
+            .then(res => {
+                let images = []
+                for (let i in res) {
+                    photos.push(res[i]["pictures"])
+                    setProfilePhoto(res[1]["pictures"])
+                    images.push(<img src={res[0]["pictures"]} alt='' />)
+                    //document.getElementById("image").innerHTML = `<img src=${profilePhoto} alt='' />`
+                    console.log(photos)
+
+                }
+
+                setHasValue(true)
+            })
+        setProfilePhoto(photos[0])
+        console.log(profilePhoto)
+    }, []);
 
 
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
 
-                            <div class="hovereffect">
+    console.log(photos)
+    useEffect((idMember) => {
+        idMember = 1
+        let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(`http://localhost:3001/api/membres/${idMember}/photos/count`, informations)
+            .then(response => response.json())
+            .then(response => {
+                setCount(response[0]["count"])
+                setHasValue(true)
+            });
+    }, []);
+    switch (hasValue) {
+        case null:
+            return (   
+                <Preloader load={load} /> 
+            )
+            break;
 
-                                <ImgContainer>
+        case true:
 
-                                    <img src={'ikram2.jpg'} alt="" />
+            return (
+                <>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        User 1
+                    </button>
 
-                                    <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-                                        <span className="badge nineplus">1+</span>
-                                    </OverlayTrigger>
 
-                                </ImgContainer>
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="hovereffect">
+
+                                        <ImgContainer>
+
+                                            <img src={profilePhoto} alt='' />
+
+                                            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                                                <span className="badge nineplus" >{count}</span>
+                                            </OverlayTrigger>
+
+                                        </ImgContainer>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <EdiText
+                                        value={value}
+                                        type="text"
+                                        onSave={handleSave}
+                                        editing={editing}
+
+                                        buttonsAlign='before'
+                                    />
+
+
+                                </div>
+
                             </div>
-
-
                         </div>
+                    </div >
+                </>
 
-                        <div class="col-xs-2">
-                            <EdiText
-                                value={value}
-                                type="text"
-                                onSave={handleSave}
-                                editing={editing}
-
-                                buttonsAlign='before'
-                            />
-
-
-                        </div>
-
-                    </div>
-                </div>
-            </div >
-        </>
-
-
-    );
-
+            );
+            break;
+        case false:
+            return (
+                <Preloader load={load} />
+            )
+            break;
+        default:
+            break
+    }
 }
 
 export default Modification;
