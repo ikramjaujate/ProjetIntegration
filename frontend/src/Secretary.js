@@ -33,13 +33,6 @@ function Secretary() {
     }
 
     const getGrade = () => {
-        Axios.get(`http://localhost:3001/api/gradesInfos`).then((response)=> {
-            setGradesList(response.data)
-        }).then( () => {
-        })
-    }
-
-    /*const getGrades = () => {
         var grades = { method: 'GET', headers: {'Content-Type': 'application/json'},};
         fetch(`http://localhost:3001/api/grades`, grades).then(result => {
             return result.json();
@@ -47,9 +40,7 @@ function Secretary() {
         .then(data => {
             setGradesList(data)
         });
-    }*/
-
-    
+    }    
 
     return (
         <div className="secretary-page">
