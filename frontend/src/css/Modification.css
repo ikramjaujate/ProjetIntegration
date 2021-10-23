@@ -146,3 +146,8 @@ img{
 .badge.nineplus {
   padding: 2px 7px;
 }
+
+.resize {
+  width: 50%;
+  height: auto;
+}

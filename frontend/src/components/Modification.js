@@ -11,14 +11,7 @@ import Preloader from "./Pre";
 import EdiText from "react-editext";
 import styled from "styled-components";
 
-const popover = (
-    <Popover id="popover-basic">
-        <Popover.Header as="h3">Les photos</Popover.Header>
-        <Popover.Body>
-            Voici un <strong>test</strong>
-        </Popover.Body>
-    </Popover>
-);
+
 
 export const ImgContainer = styled.div`
   width: 100px;
@@ -49,6 +42,7 @@ function Modification() {
     const [editing, setEditing] = useState(false);
     const [value, setValue] = useState("Ikram Jaujate");
     var photos = []
+    const [allPhotos, setAllPhotos] = useState([])
     const [profilePhoto, setProfilePhoto] = useState("")
     const [hasValue, setHasValue] = useState(null)
     const [count, setCount] = useState(null)
@@ -70,16 +64,16 @@ function Modification() {
                 let images = []
                 for (let i in res) {
                     photos.push(res[i]["pictures"])
+                    setAllPhotos([...allPhotos, res[i]["pictures"]])
                     setProfilePhoto(res[1]["pictures"])
-                    images.push(<img src={res[0]["pictures"]} alt='' />)
-                    //document.getElementById("image").innerHTML = `<img src=${profilePhoto} alt='' />`
-                    console.log(photos)
 
                 }
 
                 setHasValue(true)
             })
         setProfilePhoto(photos[0])
+        
+        console.log(allPhotos)
         console.log(profilePhoto)
     }, []);
 
@@ -99,6 +93,7 @@ function Modification() {
                 setHasValue(true)
             });
     }, []);
+    
     switch (hasValue) {
         case null:
             return (   
@@ -107,14 +102,20 @@ function Modification() {
             break;
 
         case true:
-
+            
+            
+            const popover = (
+                <Popover id="popover-basic">
+                    <Popover.Body>
+                    <img class="resize"src={allPhotos[0]} alt='' />   
+                    </Popover.Body>
+                </Popover>
+            );
             return (
                 <>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         User 1
                     </button>
-
-
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -126,9 +127,7 @@ function Modification() {
                                     <div class="hovereffect">
 
                                         <ImgContainer>
-
                                             <img src={profilePhoto} alt='' />
-
                                             <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                                                 <span className="badge nineplus" >{count}</span>
                                             </OverlayTrigger>
