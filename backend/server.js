@@ -46,15 +46,6 @@ client.connect(err => {
   }
 }) ;
 
-
-// route for pictures
-
-
-// let port2 = 8080;
-// app.listen(port2, () => {
-//   console.log(`Running at localhost:${port}`);
-// });
-
 // ROUTE FOR API 
 grade(app, client);
 cameras(app, client);
