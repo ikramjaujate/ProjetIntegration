@@ -1,6 +1,6 @@
 # Prerequisites
 *.d
-
+*.env
 # Object files
 *.o
 *.ko
@@ -22,6 +22,7 @@
 *.la
 *.lo
 
+.vscode
 # Shared objects (inc. Windows DLLs)
 *.dll
 *.so
