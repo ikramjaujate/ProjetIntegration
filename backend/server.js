@@ -1,9 +1,9 @@
 const http = require('http');
 require("dotenv").config();
-var grade =  require('./back-grade.js');
-var members = require('./back-members.js');
-var privatedata = require('./back-privatedata.js');
-var cameras = require('./back-cameras.js');
+var grade =  require('./routes/back-grade.js');
+var members = require('./routes/back-members.js');
+var privatedata = require('./routes/back-privatedata.js');
+var cameras = require('./routes/back-cameras.js');
 const express = require('express') ;
 const app = express() ;
 const {Client}= require('pg') ;
