@@ -106,6 +106,21 @@ module.exports = function (app, client) {
       response.status(200).json(results.rows)
     })
   })
+  app.get('/api/membres/:idMember/photos/count', (request, response) => {
+
+    const idMember = request.params.idMember;
+
+    let query = "select count(distinct(PO.pictures )) \
+  from photos as PO\
+  join member as ME on PO.id_member = ME.id_member  \
+  where ME.id_member = ($1)" ;
+    client.query(query, [idMember], (error, results) => {
+      console.log(results.rows)
+      if (error) {
+      }
+      response.status(200).json(results.rows)
+    })
+  })
 
 
 
