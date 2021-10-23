@@ -486,7 +486,7 @@ function Grades() {
                                             <label id="name-grade-label" className="col-form-label" for="name-grade">Nom</label>
                                         </div>
                                         <div id="frame-name-grade-input" className="p-0 m-1 col-10">
-                                            <input type="text" id="name-grade" className="form-control" maxlength="10" value={textNewNameGrade} style={{border:borderNewNameGrade}} onChange={(e) => {setTextNewNameGrade(e.target.value)}}/>
+                                            <input type="text" id="name-grade" className=" form-control" maxlength="10" value={textNewNameGrade} style={{border:borderNewNameGrade}} onChange={(e) => {setTextNewNameGrade(e.target.value)}}/>
                                             {/* <i className="bi bi-exclamation-circle" style={{color:"red"}}></i> */}
                                         </div>
                                     </div>
