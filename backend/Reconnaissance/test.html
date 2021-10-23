@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="description" content="Webpage description goes here" />
+  <meta charset="utf-8">
+  <title>Change_me</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+    function stopDefAction(evt) {
+      evt.preventDefault();
+    }
+    </script>
+</head>
+
+<body>
+  <h1>test</h1>
+    <section class="streaming">
+        <h3>streaming caméra IP Foscam FI8905W via pi nautilus</h3>
+        <img src= "http://192.168.0.200:6060/video" width="640" height="480" title="Foscam FI8905W"/>
+        </section>
+  
+</div>
+
+<form action="http://192.168.0.200:6060/photo" method="get">
+  
+</form>
+
+<button type="submit" name="takePhoto" onclick="stopDefAction(event);"; return false">prend photo</button>
+
+
+<script>
+</script>
+
+</body>
+</html>
