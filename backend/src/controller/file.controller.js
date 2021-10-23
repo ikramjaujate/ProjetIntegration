@@ -11,19 +11,19 @@ const upload = async (req, res) => {
     }
 
     res.status(200).send({
-      message: "Uploaded the file successfully: " + req.file.originalname,
+      message: "Photo(s) envoyées avec succès: " + req.file.originalname,
     });
   } catch (err) {
     console.log(err);
 
     if (err.code == "LIMIT_FILE_SIZE") {
       return res.status(500).send({
-        message: "File size cannot be larger than 2MB!",
+        message: "La photo ne doit pas dépasser les 2MB!",
       });
     }
 
     res.status(500).send({
-      message: `Could not upload the file: ${req.file.originalname}. ${err}`,
+      message: `Impossible de télécharger la photo : ${req.file.originalname}. ${err}`,
     });
   }
 };
@@ -54,14 +54,20 @@ const getListFiles = (req, res) => {
 const download = (req, res) => {
   const fileName = req.params.name;
   const directoryPath = __basedir + "/resources/";
+  const dir = __basedir + '/test'
+  
+    // first check if directory already exists
+    
+    res.download(directoryPath + fileName, fileName, (err) => {
+      if (err) {
+        res.status(500).send({
+          message: "Could not download the file. " + err,
+        });
+      }
+    });
+    
 
-  res.download(directoryPath + fileName, fileName, (err) => {
-    if (err) {
-      res.status(500).send({
-        message: "Could not download the file. " + err,
-      });
-    }
-  });
+  
 };
 
 module.exports = {
