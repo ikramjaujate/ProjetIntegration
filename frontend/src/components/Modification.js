@@ -8,6 +8,7 @@ import ReactDOM from "react-dom";
 import '../css/Modification.css'
 import Popover from "react-bootstrap/Popover"
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Preloader from "./Pre";
 import EdiText from "react-editext";
 import styled from "styled-components";
@@ -30,17 +31,15 @@ export const ImgContainer = styled.div`
   
 `;
 const optionsToast = {
-    autoClose: 8000,
+    autoClose: 4000,
     position: "bottom-right",
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
-    draggable: true, 
-    theme:"colored"
+    draggable: true,
+    theme: "colored"
 };
-function Test() {
-    console.log('test ok')
-}
+
 function Modification() {
     const [load, upadateLoad] = useState(true);
     useEffect(() => {
@@ -71,15 +70,16 @@ function Modification() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({name, surname})
+            body: JSON.stringify({ name, surname })
         }).then((response) => {
-            if (response.message === "ok") {
-                toast.success("parfait", optionsToast);
+            console.log(response)
+            if (response.status === 200) {
+                toast.success("Vous venez de modifier le nom et prénom de cet utilisateur", optionsToast);
             }
             else {
-                toast.error("error");
+                toast.error("Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous");
             }
-                
+
         })
 
     }
@@ -92,9 +92,9 @@ function Modification() {
         fetch(`http://localhost:3001/api/membres/${idMember}`, informations)
             .then(response => response.json())
             .then(response => {
-                let nom = response[0]["first_name"].replaceAll("\\s+","")
-                let surnom = response[0]["last_name"].replaceAll("\\s+","")
-                let text = nom.replace(/\s+/g, '') + ' '+ surnom.replace(/\s+/g, '');
+                let nom = response[0]["first_name"].replaceAll("\\s+", "")
+                let surnom = response[0]["last_name"].replaceAll("\\s+", "")
+                let text = nom.replace(/\s+/g, '') + ' ' + surnom.replace(/\s+/g, '');
                 text.replace(/\s+/g, '');
                 setName(nom)
                 setSurname(surnom)
@@ -120,12 +120,12 @@ function Modification() {
                     setProfilePhoto(res[1]["pictures"])
 
                 }
-                
+
 
                 setHasValue(true)
             })
         setProfilePhoto(photos[0])
-        
+
         console.log(allPhotos)
         console.log(profilePhoto)
     }, []);
@@ -154,19 +154,20 @@ function Modification() {
         case true:
             const popover = (
                 <Popover id="popover-basic">
-                    <Popover.Body id="popover-test"> 
-                    <img class="resize" src={allPhotos[0]} alt='' />
-                    <img class="resize" src={allPhotos[1]} alt='' />
-                    <img class="resize" src={allPhotos[2]} alt='' />
-                    
+                    <Popover.Body id="popover-test">
+                        <img class="resize" src={allPhotos[0]} alt='' />
+                        <img class="resize" src={allPhotos[1]} alt='' />
+                        <img class="resize" src={allPhotos[2]} alt='' />
+
                     </Popover.Body>
                 </Popover>
             );
-           
-                
-            
+
+
+
             return (
                 <>
+                    <ToastContainer style={{ fontSize: "0.6rem" }} />
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         User 1
                     </button>
