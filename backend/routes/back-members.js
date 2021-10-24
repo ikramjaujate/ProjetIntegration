@@ -177,6 +177,4 @@ module.exports = function (app, client) {
     response.send({ message: 'ok' });
   })
 
-
-
 }
