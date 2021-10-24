@@ -13,8 +13,6 @@ import Preloader from "./Pre";
 import EdiText from "react-editext";
 import styled from "styled-components";
 
-
-
 export const ImgContainer = styled.div`
   width: 100px;
   height: 100px;
@@ -41,6 +39,7 @@ const optionsToast = {
 };
 
 function Modification() {
+
     const [load, upadateLoad] = useState(true);
     useEffect(() => {
         setTimeout(() => {
@@ -58,9 +57,14 @@ function Modification() {
     const [hasValue, setHasValue] = useState(null)
     const [count, setCount] = useState(null)
 
-
-    const handleSave = (e) => {
-        let nameSurname = e.split(/(\s+)/);
+    /**
+     * Change user's first and last name
+     * 
+     * @author Ikram Jaujate <i.jaujateouldkhala@students.ephec.be>
+     * @param {string} member  Identifier of the member
+     */
+    const handleSave = (member) => {
+        let nameSurname = member.split(/(\s+)/);
         const result = nameSurname.filter(word => word.trim().length > 0);
         let name = result[0]
         let surname = result[1]
@@ -83,6 +87,37 @@ function Modification() {
         })
 
     }
+
+    const updatePhoto = () => {
+        let idMember = 1
+        let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(`http://localhost:3001/api/membres/${idMember}/photos`, informations)
+            .then(response => response.json())
+            .then(res => {
+                let images = []
+                for (let i in res) {
+                    photos.push(res[i]["pictures"])
+                    setAllPhotos(photos)
+                    setProfilePhoto(res[0]["pictures"])
+                }
+                setHasValue(true)
+            })
+        setProfilePhoto(photos[0])
+
+        console.log(allPhotos)
+        console.log(profilePhoto)
+    }
+
+    /**
+     * Get user's first and last name
+     * 
+     * @author Ikram Jaujate <i.jaujateouldkhala@students.ephec.be>
+     * @param {string} member  Identifier of the member
+     */
+
     useEffect((idMember) => {
         idMember = 1
         let informations = {
@@ -99,10 +134,16 @@ function Modification() {
                 setName(nom)
                 setSurname(surnom)
                 setCall(text)
-                console.log(text)
                 setHasValue(true)
             });
     }, []);
+
+    /**
+     * Get user's pictures
+     * 
+     * @author Ikram Jaujate <i.jaujateouldkhala@students.ephec.be>
+     * @param {string} member  Identifier of the member
+     */
 
     useEffect((idMember) => {
         idMember = 1
@@ -117,11 +158,8 @@ function Modification() {
                 for (let i in res) {
                     photos.push(res[i]["pictures"])
                     setAllPhotos(photos)
-                    setProfilePhoto(res[1]["pictures"])
-
+                    setProfilePhoto(res[0]["pictures"])
                 }
-
-
                 setHasValue(true)
             })
         setProfilePhoto(photos[0])
@@ -129,6 +167,13 @@ function Modification() {
         console.log(allPhotos)
         console.log(profilePhoto)
     }, []);
+
+    /**
+     * Gets the number of photos owned by this member
+     * 
+     * @author Ikram Jaujate <i.jaujateouldkhala@students.ephec.be>
+     * @param {string} member  Identifier of the member
+     */
 
     useEffect((idMember) => {
         idMember = 1
@@ -144,6 +189,44 @@ function Modification() {
             });
     }, []);
 
+    const countPhoto = () => {
+        let idMember = 1
+        let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(`http://localhost:3001/api/membres/${idMember}/photos/count`, informations)
+            .then(response => response.json())
+            .then(response => {
+                setCount(response[0]["count"])
+                setHasValue(true)
+            });
+    }
+
+    const eliminate =(valeurPhoto) => {
+        let idMember = 1
+        let photo = allPhotos[valeurPhoto]
+        fetch(`http://localhost:3001/api/membres/${idMember}/eliminate/photo`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ photo })
+        }).then((response) => {
+            console.log(response)
+            if (response.status === 200) {
+                toast.success("Vous venez d'effacer la photo", optionsToast);
+                updatePhoto()
+                countPhoto()
+                
+            }
+            else {
+                toast.error("Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous");
+            }
+
+        })
+    }
+
     switch (hasValue) {
         case null:
             return (
@@ -155,7 +238,9 @@ function Modification() {
             const popover = (
                 <Popover id="popover-basic">
                     <Popover.Body id="popover-test">
+                        <i class="bi bi-x-circle pr-2 mb-3" onClick={() => eliminate(0)}></i>
                         <img class="resize" src={allPhotos[0]} alt='' />
+                        <i class="bi bi-x-circle" onClick={() => eliminate(1)}></i>
                         <img class="resize" src={allPhotos[1]} alt='' />
                         <img class="resize" src={allPhotos[2]} alt='' />
 

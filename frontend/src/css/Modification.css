@@ -147,6 +147,21 @@ img{
   padding: 2px 7px;
 }
 
+.bi-x-circle { 
+  color: transparent; 
+  padding: none;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+}
+.bi-x-circle:hover { 
+  color: red; 
+  padding: none;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+}
+
 .resize {
   width: 30%;
   height: auto;
