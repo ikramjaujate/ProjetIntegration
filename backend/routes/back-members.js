@@ -200,6 +200,30 @@ module.exports = function (app, client) {
     })
     response.send({ message: 'ok' });
   })
+ /**
+   * Retrieves the grade from a member
+   * 
+   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
+   * @method GET
+   * @param {integer} idMember identifier of the member for which we want to retrieve the grade
+   */
+  app.get('/api/membres/:idMember/grade', (request, response) => {
+
+    const idMember = request.params.idMember;
+
+    let query = "select ME.id_member, GRM.id_grade, GRM.name_grade, CO.name_color as color \
+                from grade as GRM \
+                join member as ME on ME.id_grade = GRM.id_grade \
+                join color as CO on GRM.id_color = CO.id_color \
+                where ME.id_member =($1)\
+                order by GRM.id_grade ;"
+    client.query(query, [idMember], (error, results) => {
+      if (error) {
+      }
+      response.status(200).json(results.rows)
+    })
+  })
+
 
 
 }
