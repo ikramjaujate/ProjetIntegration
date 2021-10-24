@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 function Bootstrap() {
     return (
-        <div class="row- row-cols-2 row-cols-md-2 g-2">
+        <div class="row row-cols-2 row-cols-md-2 g-2">
             <div class="col">
                 <div class="card">
                 <img src="..." class="card-img-top" alt="..."/>

@@ -14,13 +14,14 @@ function Secretary() {
     const [clientLastName, setClientLastName] = useState("");
     const [clientGrade, setClientGrade] = useState("");
     const [gradesList, setGradesList] = useState([])
+    
 
     useEffect(()=> {
         getGrade() ;
 	}, []);
 
-    const submitClient = () => {
-        console.log(clientGrade)
+    const submitClient = (e) => {
+        //e.preventDefault();
         Axios.put(`http://localhost:3001/api/client`, {
             FirstName : clientFirstName,
             LastName : clientLastName,
@@ -40,7 +41,14 @@ function Secretary() {
         .then(data => {
             setGradesList(data)
         });
-    }    
+    } 
+    
+    function noRefresh (event) {
+        event.preventDefault();
+      };
+
+
+    
 
     return (
         <div className="secretary-page">
@@ -61,15 +69,17 @@ function Secretary() {
                         })}
                     </select><br/><br/>
                     <button type="submit">Envoyer</button>
-                    <UploadFiles/>
-                    
+                    {/*<Popup trigger={<button type="submit">Ajouter</button>} modal nested>
+                        <UploadFiles/>
+                    </Popup>*/}
                     </form>
+                    <UploadFiles />
                 </Popup>
             </div>
         </div>
            
     );
-  }
-  
-  export default Secretary;
+  } 
+
+export default Secretary;
   

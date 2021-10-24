@@ -12,8 +12,8 @@ export default class UploadFiles extends Component {
     this.state = {
       selectedFiles: undefined,
       progressInfos: [],
+      clientInfos: [],
       message: [],
-
       fileInfos: [],
     };
   }
@@ -27,6 +27,8 @@ export default class UploadFiles extends Component {
   }
 
   selectFiles(event) {
+    //HERE
+    
     this.setState({
       progressInfos: [],
       selectedFiles: event.target.files,
@@ -93,7 +95,7 @@ export default class UploadFiles extends Component {
   }
 
   render() {
-    const { selectedFiles, progressInfos, message } = this.state;
+    const { selectedFiles, progressInfos, message} = this.state;
 
     return (
       <div>

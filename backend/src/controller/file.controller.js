@@ -53,11 +53,7 @@ const getListFiles = (req, res) => {
 
 const download = (req, res) => {
   const fileName = req.params.name;
-  const directoryPath = __basedir + "/resources/";
-  const dir = __basedir + '/test'
-  
-    // first check if directory already exists
-    
+  const directoryPath = __basedir + "/resources/";      
     res.download(directoryPath + fileName, fileName, (err) => {
       if (err) {
         res.status(500).send({
@@ -65,9 +61,6 @@ const download = (req, res) => {
         });
       }
     });
-    
-
-  
 };
 
 module.exports = {

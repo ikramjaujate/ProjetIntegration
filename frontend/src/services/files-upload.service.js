@@ -5,7 +5,6 @@ class FileUploadService {
         let formData = new FormData(); // passing onUploadProgress to exposes progress events. This progress event are expensive (change detection for each event)
 
         formData.append("file", file);
-
         return http.post("/upload", formData, { // POST method to send files
             headers: {
                 "Content-Type": "multipart/form-data"
