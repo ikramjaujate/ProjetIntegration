@@ -1,5 +1,5 @@
 from flask import Flask, Response, render_template, request
-from flask_cors import CORS
+#from flask_cors import CORS
 import face_recognition
 import cv2
 from flask.wrappers import Response
@@ -9,9 +9,9 @@ from datetime import datetime
 import time
 app = Flask(__name__)
 
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+#cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-path = './Reconnaissance/images'
+path = './backend/Reconnaissance/images'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
 
