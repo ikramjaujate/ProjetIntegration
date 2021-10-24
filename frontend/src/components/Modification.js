@@ -64,10 +64,11 @@ function Modification() {
                 let images = []
                 for (let i in res) {
                     photos.push(res[i]["pictures"])
-                    setAllPhotos([...allPhotos, res[i]["pictures"]])
+                    setAllPhotos(photos)
                     setProfilePhoto(res[1]["pictures"])
 
                 }
+                
 
                 setHasValue(true)
             })
@@ -93,24 +94,28 @@ function Modification() {
                 setHasValue(true)
             });
     }, []);
-    
+
     switch (hasValue) {
         case null:
-            return (   
-                <Preloader load={load} /> 
+            return (
+                <Preloader load={load} />
             )
             break;
 
         case true:
-            
-            
             const popover = (
                 <Popover id="popover-basic">
-                    <Popover.Body>
-                    <img class="resize"src={allPhotos[0]} alt='' />   
+                    <Popover.Body id="popover-test"> 
+                    <img class="resize" src={allPhotos[0]} alt='' />
+                    <img class="resize" src={allPhotos[1]} alt='' />
+                    <img class="resize" src={allPhotos[2]} alt='' />
+                    
                     </Popover.Body>
                 </Popover>
             );
+           
+                
+            
             return (
                 <>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">

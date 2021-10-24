@@ -148,6 +148,7 @@ img{
 }
 
 .resize {
-  width: 50%;
+  width: 30%;
   height: auto;
+  padding-right: 13px;
 }
