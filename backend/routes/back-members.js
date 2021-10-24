@@ -177,4 +177,29 @@ module.exports = function (app, client) {
     response.send({ message: 'ok' });
   })
 
+  /**
+   * Eliminate picture of a member
+   * 
+   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
+   * @method PUT
+   * @param {integer} idMember identifier of the member for which we want to eliminate photo
+   */
+
+   app.delete('/api/membres/:idMember/eliminate/photo', (request, response) => {
+
+    const idMember = request.params.idMember;
+    const photo = request.body.photo
+
+    let query = "delete from photos \
+    where id_member = ($1) and pictures = ($2)" ;
+
+    client.query(query, [idMember, photo], (error, results) => {
+      if (error) {
+      }
+      response.status(200)
+    })
+    response.send({ message: 'ok' });
+  })
+
+
 }
