@@ -86,6 +86,29 @@ module.exports = function (app, client) {
   })
 
   /**
+   * Retrieves name and surname from a member
+   * 
+   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
+   * @method GET
+   * @param {integer} idMember identifier of the member for which we want to retrieve information
+   */
+
+   app.get('/api/membres/:idMember/name', (request, response) => {
+
+    const idMember = request.params.idMember;
+
+    let query = "select first_name, last_name  \
+  from member \
+  where id_member = ($1)" ;
+    client.query(query, [idMember], (error, results) => {
+      if (error) {
+      }
+      response.status(200).json(results.rows)
+    })
+  })
+  
+
+  /**
    * Retrieves only the pictures from a member
    * 
    * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
@@ -106,6 +129,7 @@ module.exports = function (app, client) {
       response.status(200).json(results.rows)
     })
   })
+
   app.get('/api/membres/:idMember/photos/count', (request, response) => {
 
     const idMember = request.params.idMember;
@@ -120,6 +144,30 @@ module.exports = function (app, client) {
       }
       response.status(200).json(results.rows)
     })
+  })
+
+  /**
+   * Retrieves name and surname from a member
+   * 
+   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
+   * @method PUT
+   * @param {integer} idMember identifier of the member for which we want to retrieve information
+   */
+
+   app.put('/api/membres/:idMember/update', (request, response) => {
+
+    const idMember = request.params.idMember;
+    const name = request.body.name
+    const surname = request.body.surname
+
+    let query = "update member set first_name = ($2) , last_name = ($3)  \ \
+    where id_member = ($1)" ;
+    client.query(query, [idMember, name, surname], (error, results) => {
+      if (error) {
+      }
+      response.status(200)
+    })
+    response.send({message:'ok'});
   })
 
 
