@@ -93,7 +93,7 @@ module.exports = function (app, client) {
    * @param {integer} idMember identifier of the member for which we want to retrieve information
    */
 
-   app.get('/api/membres/:idMember/name', (request, response) => {
+  app.get('/api/membres/:idMember/name', (request, response) => {
 
     const idMember = request.params.idMember;
 
@@ -106,7 +106,6 @@ module.exports = function (app, client) {
       response.status(200).json(results.rows)
     })
   })
-  
 
   /**
    * Retrieves only the pictures from a member
@@ -130,6 +129,14 @@ module.exports = function (app, client) {
     })
   })
 
+  /**
+   * Counts the number of photos owned by the member.
+   * 
+   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
+   * @method GET
+   * @param {integer} idMember identifier of the member for which we want to retrieve information
+   */
+
   app.get('/api/membres/:idMember/photos/count', (request, response) => {
 
     const idMember = request.params.idMember;
@@ -147,14 +154,14 @@ module.exports = function (app, client) {
   })
 
   /**
-   * Retrieves name and surname from a member
+   * Modify the first and last name of the designated member
    * 
    * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
    * @method PUT
    * @param {integer} idMember identifier of the member for which we want to retrieve information
    */
 
-   app.put('/api/membres/:idMember/update', (request, response) => {
+  app.put('/api/membres/:idMember/update', (request, response) => {
 
     const idMember = request.params.idMember;
     const name = request.body.name
@@ -167,7 +174,7 @@ module.exports = function (app, client) {
       }
       response.status(200)
     })
-    response.send({message:'ok'});
+    response.send({ message: 'ok' });
   })
 
 
