@@ -38,16 +38,21 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 
 #staticBackdrop .modal-body {
     margin-top: 20px;
-    margin-left: 50px;
-    margin-bottom: 0px;
+    margin-left: 30px;
+    margin-bottom: 0%;
+    padding: 0%;
+
 }
+
 
 #staticBackdrop .m-2 {
     margin : 0.5rem 0.5rem 0.8rem 0.5rem!important;
 }
 
+
 #staticBackdrop .modal-header {
     border: 0 none;
+    padding: 5px;
 }
 button[editext='cancel-button']:hover {
 
@@ -84,17 +89,40 @@ background: none;
 font-size: 25px;
 
 }
+p{
+  margin-top: 10px;
+  font-size: 20px;
+  padding: 0%;
+  font-weight: bolder;
+}
+.tool{
+  margin-left: 40px
+
+}
+.tooltip{
+  margin-right: 1%;
+  border-width: 30px;
+  border-color: black;
+}
+
   
   div[editext='view-container'] {
     background: #ffffff;
-    padding: 15px;
+    padding: 10px;
+
+    border-radius: 5px;
+    color: rgb(26, 13, 13);
+  }
+  div[editext='edit-container'] {
+    background: #ffffff;
+    padding: 10px;
 
     border-radius: 5px;
     color: rgb(26, 13, 13);
   }
   button[editext='edit-button']{
     color: rgb(32, 4, 4);
-    padding: 0;
+    padding: 5px;
     margin-right: 0;
     width: 50px;
     border: none;
@@ -111,12 +139,16 @@ font-size: 25px;
     color: #18140c;
     font-weight: bold;
     border-radius: 20px;
+    
 
     border: 0 none;
     
   }
+  .hovereffect{
+    padding-left: 20px;
+  }
   input[editext="input"] {
-    width: 50%;
+    width: 60%;
     height: 20%;
     border: 0;
     /*border: 1px solid rgb(212, 212, 212);*/
@@ -142,6 +174,10 @@ img{
   border-radius: 50%;
   background: #1b1901;
   color: white;
+}
+.badge:hover{
+  background: white;
+  color: #1b1901;
 }
 .badge.nineplus {
   padding: 2px 7px;

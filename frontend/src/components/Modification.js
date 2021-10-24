@@ -2,10 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import React, { useState, useEffect } from "react";
-import Tooltip from "react-bootstrap/Tooltip"
+
 import OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import ReactDOM from "react-dom";
 import '../css/Modification.css'
+import { Tooltip } from 'reactstrap';
 import Popover from "react-bootstrap/Popover"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -56,6 +57,12 @@ function Modification() {
     const [profilePhoto, setProfilePhoto] = useState("")
     const [hasValue, setHasValue] = useState(null)
     const [count, setCount] = useState(null)
+    const [color, setColor] = useState("")
+    const [nameGrade, setNameGrade] = useState("")
+    const [valueGrade, setValueGrade] = useState("")
+    const [tooltipOpen, setTooltipOpen] = useState(false);
+
+    const toggle = () => setTooltipOpen(!tooltipOpen);
 
     /**
      * Change user's first and last name
@@ -87,6 +94,25 @@ function Modification() {
         })
 
     }
+
+    useEffect((idMember) => {
+        idMember = 1
+        let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(`http://localhost:3001/api/membres/${idMember}/grade`, informations)
+            .then(response => response.json())
+            .then(response => {
+                setNameGrade(response[0]["name_grade"])
+                setColor(response[0]["color"])
+                setValueGrade(response["id_grade"])
+                //console.log(color, nameGrade, valueGrade)
+                setHasValue(true)
+
+            });
+
+    }, []);
 
     const updatePhoto = () => {
         let idMember = 1
@@ -203,7 +229,7 @@ function Modification() {
             });
     }
 
-    const eliminate =(valeurPhoto) => {
+    const eliminate = (valeurPhoto) => {
         let idMember = 1
         let photo = allPhotos[valeurPhoto]
         fetch(`http://localhost:3001/api/membres/${idMember}/eliminate/photo`, {
@@ -218,7 +244,7 @@ function Modification() {
                 toast.success("Vous venez d'effacer la photo", optionsToast);
                 updatePhoto()
                 countPhoto()
-                
+
             }
             else {
                 toast.error("Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous");
@@ -232,7 +258,7 @@ function Modification() {
             return (
                 <Preloader load={load} />
             )
-            break;
+
 
         case true:
             const popover = (
@@ -253,13 +279,14 @@ function Modification() {
             return (
                 <>
                     <ToastContainer style={{ fontSize: "0.6rem" }} />
+
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         User 1
                     </button>
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
+                            <div class="modal-content" style={{ backgroundColor: color }}>
+                                <div class="modal-header" style={{ backgroundColor: color }}>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -274,11 +301,34 @@ function Modification() {
 
                                         </ImgContainer>
                                     </div>
+                                    <div class="container">
+                                        <div class="row justify-content-md-center">
+                                            <div class="col-lg-9">
+                                                <p> Cet utilisateur est  {nameGrade}</p>
+                                            </div>
+                                            <div class="col">
+                                                <div class="tool">
+
+                                                    <i id="tooltip" className="bi bi-app" style={{ color: 'black', 'background' : color, fontSize: "100%", "textAlign": "right" }}></i>
+                                                    <Tooltip placement="left" style={{ 'fontSize': "15px" }} isOpen={tooltipOpen} target="tooltip" toggle={toggle}>
+                                                        {nameGrade}
+                                                    </Tooltip>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
 
 
                                 </div>
 
-                                <div class="col-xs-2">
+                                <div class="col-12">
                                     <EdiText
                                         value={call}
                                         type="text"
@@ -297,12 +347,12 @@ function Modification() {
                 </>
 
             );
-            break;
+
         case false:
             return (
                 <Preloader load={load} />
             )
-            break;
+
         default:
             break
     }
