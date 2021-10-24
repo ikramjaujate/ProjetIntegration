@@ -7,6 +7,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import ReactDOM from "react-dom";
 import '../css/Modification.css'
 import Popover from "react-bootstrap/Popover"
+import { ToastContainer, toast } from 'react-toastify';
 import Preloader from "./Pre";
 import EdiText from "react-editext";
 import styled from "styled-components";
@@ -28,6 +29,15 @@ export const ImgContainer = styled.div`
   }
   
 `;
+const optionsToast = {
+    autoClose: 8000,
+    position: "bottom-right",
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true, 
+    theme:"colored"
+};
 function Test() {
     console.log('test ok')
 }
@@ -40,18 +50,60 @@ function Modification() {
     }, []);
 
     const [editing, setEditing] = useState(false);
-    const [value, setValue] = useState("Ikram Jaujate");
+    const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
     var photos = []
+    const [call, setCall] = useState("");
     const [allPhotos, setAllPhotos] = useState([])
     const [profilePhoto, setProfilePhoto] = useState("")
     const [hasValue, setHasValue] = useState(null)
     const [count, setCount] = useState(null)
 
 
-    const handleSave = (value) => {
-        console.log(value);
-        setValue(value);
-    };
+    const handleSave = (e) => {
+        let nameSurname = e.split(/(\s+)/);
+        const result = nameSurname.filter(word => word.trim().length > 0);
+        let name = result[0]
+        let surname = result[1]
+        let idMember = 1
+        fetch(`http://localhost:3001/api/membres/${idMember}/update`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name, surname})
+        }).then((response) => {
+            if (response.message === "ok") {
+                toast.success("parfait", optionsToast);
+            }
+            else {
+                toast.error("error");
+            }
+                
+        })
+
+    }
+    useEffect((idMember) => {
+        idMember = 1
+        let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(`http://localhost:3001/api/membres/${idMember}`, informations)
+            .then(response => response.json())
+            .then(response => {
+                let nom = response[0]["first_name"].replaceAll("\\s+","")
+                let surnom = response[0]["last_name"].replaceAll("\\s+","")
+                let text = nom.replace(/\s+/g, '') + ' '+ surnom.replace(/\s+/g, '');
+                text.replace(/\s+/g, '');
+                setName(nom)
+                setSurname(surnom)
+                setCall(text)
+                console.log(text)
+                setHasValue(true)
+            });
+    }, []);
+
     useEffect((idMember) => {
         idMember = 1
         let informations = {
@@ -78,9 +130,6 @@ function Modification() {
         console.log(profilePhoto)
     }, []);
 
-
-
-    console.log(photos)
     useEffect((idMember) => {
         idMember = 1
         let informations = {
@@ -145,7 +194,7 @@ function Modification() {
 
                                 <div class="col-xs-2">
                                     <EdiText
-                                        value={value}
+                                        value={call}
                                         type="text"
                                         onSave={handleSave}
                                         editing={editing}
