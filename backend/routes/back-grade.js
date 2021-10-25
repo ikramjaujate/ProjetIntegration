@@ -15,6 +15,7 @@ module.exports = function(app,client) {
         from permission as PE \
         join camera as CA on PE.id_camera = CA.id_camera \
         where id_grade = ($1)" ;
+        
         client.query(query, [idGrade], (error, results) => {
             if (error) {
                 throw error;
@@ -49,9 +50,11 @@ module.exports = function(app,client) {
                     order by GRM.id_grade ;"
 
         client.query(query, (error, results) => {
+            
             if (error) {
                 throw error;
             }
+            console.log(results.rows)
             response.status(200).json(results.rows);
         })
     }) ;
