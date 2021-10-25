@@ -1,0 +1,26 @@
+name: TestUnitaires-Backend
+on:
+  push:
+    branches:
+      - Test
+    paths:
+      - 'backend/**'
+env:
+  node-version: 16.10.0
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node ${{ env.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.node-version }}
+      - name: npm install
+        working-directory: ./backend
+        run: |
+          npm install
+      - name: run test
+        working-directory: ./backend
+        run: |
+          npm run test
