@@ -54,7 +54,7 @@ module.exports = function(app,client) {
             if (error) {
                 throw error;
             }
-            console.log(results.rows)
+            //console.log(results.rows)
             response.status(200).json(results.rows);
         })
     }) ;
