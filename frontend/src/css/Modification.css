@@ -89,20 +89,26 @@ background: none;
 font-size: 25px;
 
 }
-p{
-  margin-top: 10px;
+.test{
   font-size: 20px;
+}
+p{
+  font-size: 40px;
   padding: 0%;
   font-weight: bolder;
+  margin-bottom: 0%;
 }
 .tool{
-  margin-left: 40px
-
+ 
+  margin-left: 68.5%;
+}
+.col {
+  margin-bottom: 0%;
 }
 .tooltip{
   margin-right: 1%;
   border-width: 30px;
-  border-color: black;
+  border-color: rgba(43, 37, 37, 0.466);
 }
 
   
@@ -111,7 +117,7 @@ p{
     padding: 10px;
 
     border-radius: 5px;
-    color: rgb(26, 13, 13);
+    color:	#505050;
   }
   div[editext='edit-container'] {
     background: #ffffff;
@@ -121,7 +127,7 @@ p{
     color: rgb(26, 13, 13);
   }
   button[editext='edit-button']{
-    color: rgb(32, 4, 4);
+    color: 	#505050;
     padding: 5px;
     margin-right: 0;
     width: 50px;
@@ -137,10 +143,8 @@ p{
     /** or input[editext="input"] {} */
     background: #ffffff;
     color: #18140c;
-    font-weight: bold;
+    font-weight: normal;
     border-radius: 20px;
-    
-
     border: 0 none;
     
   }

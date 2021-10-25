@@ -284,7 +284,7 @@ function Modification() {
                         User 1
                     </button>
                     <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content" style={{ backgroundColor: color }}>
                                 <div class="modal-header" style={{ backgroundColor: color }}>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -292,70 +292,75 @@ function Modification() {
                                 <div class="modal-body">
 
                                     <div class="hovereffect">
+                                        <div class="row">
+                                            <div class="col">
 
-                                        <ImgContainer>
-                                            <img src={profilePhoto} alt='' />
-                                            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-                                                <span className="badge nineplus" >{count}</span>
-                                            </OverlayTrigger>
+                                                <ImgContainer>
+                                                    <img src={profilePhoto} alt='' />
+                                                    <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                                                        <span className="badge nineplus" >{count}</span>
+                                                    </OverlayTrigger>
 
-                                        </ImgContainer>
-                                    </div>
-                                    <div class="container">
-                                        <div class="row justify-content-md-center">
-                                            <div class="col-lg-9">
-                                                <p> Cet utilisateur est  {nameGrade}</p>
+
+                                                </ImgContainer>
+
+
                                             </div>
                                             <div class="col">
-                                                <div class="tool">
-
-                                                    <i id="tooltip" className="bi bi-app" style={{ color: 'black', 'background' : color, fontSize: "100%", "textAlign": "right" }}></i>
-                                                    <Tooltip placement="left" style={{ 'fontSize': "15px" }} isOpen={tooltipOpen} target="tooltip" toggle={toggle}>
-                                                        {nameGrade}
-                                                    </Tooltip>
-
-                                                </div>
+                                               {/*<p class="test"> {nameGrade.toUpperCase()}</p>*/}
                                             </div>
+                                            </div>
+
+
+
+
                                         </div>
+
+                                        
+                                                    <div class="tool">
+                                                    <p class="test"> {nameGrade.toUpperCase()} <i id="tooltip" className="bi bi-pencil-square" style={{ color: '#707070', 'background': color, fontSize: "80%", "textAlign": "right", "paddingRight": '10px ', "paddingLeft" : "4px" }}></i></p>
+                                                        
+
+
+                                                        {/*<i id="tooltip" className="bi bi-app" style={{ color: 'black', 'background' : color, fontSize: "100%", "textAlign": "right" }}></i>*/}
+                                                        <Tooltip placement="left" style={{ 'fontSize': "15px" }} isOpen={tooltipOpen} target="tooltip" toggle={toggle}>
+                                                            {nameGrade}
+                                                        </Tooltip>
+
+
+                                                   
+                                        </div>
+
                                     </div>
 
+                                    <div class="col-12">
+                                        <EdiText
+                                            value={call}
+                                            type="text"
+                                            onSave={handleSave}
+                                            editing={editing}
+
+                                            buttonsAlign='before'
+                                        />
 
 
-
-
-
-
-
-                                </div>
-
-                                <div class="col-12">
-                                    <EdiText
-                                        value={call}
-                                        type="text"
-                                        onSave={handleSave}
-                                        editing={editing}
-
-                                        buttonsAlign='before'
-                                    />
-
+                                    </div>
 
                                 </div>
-
                             </div>
-                        </div>
-                    </div >
-                </>
+                        </div >
+                    </>
 
-            );
+                    );
 
-        case false:
-            return (
-                <Preloader load={load} />
-            )
+                    case false:
+                    return (
+                    <Preloader load={load} />
+                    )
 
-        default:
-            break
+                    default:
+                    break
     }
 }
 
-export default Modification;
+                    export default Modification;
