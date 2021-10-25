@@ -7,6 +7,11 @@ on:
       - 'backend/**'
 env:
   node-version: 16.10.0
+  POSTGRES_HOST: localhost
+  POSTGRES_PORT: 5432
+  POSTGRES_USERNAME: postgres
+  POSTGRES_PASSWORD: 19992003i
+  POSTGRES_DATABASE: ProjetIntegration
 jobs:    
   test-backend:
     runs-on: ubuntu-latest
@@ -20,14 +25,6 @@ jobs:
         working-directory: ./backend
         run: |
           npm install
-      - name: Connect to PostgreSQL
-        env:
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
-          POSTGRES_USERNAME: postgres
-          POSTGRES_PASSWORD: 19992003i
-          POSTGRES_DATABASE: ProjetIntegration
-          
       - name: run test
         working-directory: ./backend
         run: |
