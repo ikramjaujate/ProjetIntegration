@@ -16,7 +16,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.node-version }}
-
+      - name: npm install
+        working-directory: ./backend
+        run: |
+          npm install
       - name: Connect to PostgreSQL
         # Runs a script that creates a PostgreSQL table, populates
         # the table with data, and then retrieves the data
@@ -28,10 +31,6 @@ jobs:
           POSTGRES_HOST: localhost
           # The default PostgreSQL port
           POSTGRES_PORT: 5432
-      - name: npm install
-        working-directory: ./backend
-        run: |
-          npm install
       - name: run test
         working-directory: ./backend
         run: |
