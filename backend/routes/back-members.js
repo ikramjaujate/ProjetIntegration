@@ -146,7 +146,7 @@ module.exports = function (app, client) {
   join member as ME on PO.id_member = ME.id_member  \
   where ME.id_member = ($1)" ;
     client.query(query, [idMember], (error, results) => {
-      console.log(results.rows)
+      
       if (error) {
       }
       response.status(200).json(results.rows)
