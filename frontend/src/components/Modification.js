@@ -61,6 +61,7 @@ function Modification() {
     const [nameGrade, setNameGrade] = useState("")
     const [valueGrade, setValueGrade] = useState("")
     const [tooltipOpen, setTooltipOpen] = useState(false);
+    const [etatModification, setEtatModification] = useState(0)
 
     const toggle = () => setTooltipOpen(!tooltipOpen);
 
@@ -214,6 +215,9 @@ function Modification() {
                 setHasValue(true)
             });
     }, []);
+    const modificationGrade= () => {
+        setEtatModification(1)
+    }
 
     const countPhoto = () => {
         let idMember = 1
@@ -307,60 +311,60 @@ function Modification() {
 
                                             </div>
                                             <div class="col">
-                                               {/*<p class="test"> {nameGrade.toUpperCase()}</p>*/}
+                                                {/*<p class="test"> {nameGrade.toUpperCase()}</p>*/}
                                             </div>
-                                            </div>
-
-
-
-
                                         </div>
 
-                                        
-                                                    <div class="tool">
-                                                    <p class="test"> {nameGrade.toUpperCase()} <i id="tooltip" className="bi bi-pencil-square" style={{ color: '#707070', 'background': color, fontSize: "80%", "textAlign": "right", "paddingRight": '10px ', "paddingLeft" : "4px" }}></i></p>
-                                                        
 
 
-                                                        {/*<i id="tooltip" className="bi bi-app" style={{ color: 'black', 'background' : color, fontSize: "100%", "textAlign": "right" }}></i>*/}
-                                                        <Tooltip placement="left" style={{ 'fontSize': "15px" }} isOpen={tooltipOpen} target="tooltip" toggle={toggle}>
-                                                            {nameGrade}
-                                                        </Tooltip>
-
-
-                                                   
-                                        </div>
 
                                     </div>
 
-                                    <div class="col-12">
-                                        <EdiText
-                                            value={call}
-                                            type="text"
-                                            onSave={handleSave}
-                                            editing={editing}
 
-                                            buttonsAlign='before'
-                                        />
+                                    <div class="tool">
+                                        {  etatModification === 0 ? <p class="test"> {nameGrade.toUpperCase()} <i onClick={modificationGrade} className="bi bi-pencil-square" style={{ color: '#707070', 'background': color, fontSize: "80%", "textAlign": "right", "paddingRight": '10px ', "paddingLeft": "4px" }}></i></p> 
+                                        : <p>Test</p>
+                                        }
+
+                                        {/*<i id="tooltip" className="bi bi-app" style={{ color: 'black', 'background' : color, fontSize: "100%", "textAlign": "right" }}></i>*/}
+                                        {/*<Tooltip placement="left" style={{ 'fontSize': "15px" }} isOpen={tooltipOpen} target="tooltip" toggle={toggle}>
+                                            {nameGrade}
+                                    </Tooltip>*/}
+
 
 
                                     </div>
 
                                 </div>
+
+                                <div class="col-12">
+                                    <EdiText
+                                        value={call}
+                                        type="text"
+                                        onSave={handleSave}
+                                        editing={editing}
+
+                                        buttonsAlign='before'
+                                    />
+
+
+                                </div>
+
                             </div>
-                        </div >
-                    </>
+                        </div>
+                    </div >
+                </>
 
-                    );
+            );
 
-                    case false:
-                    return (
-                    <Preloader load={load} />
-                    )
+        case false:
+            return (
+                <Preloader load={load} />
+            )
 
-                    default:
-                    break
+        default:
+            break
     }
 }
 
-                    export default Modification;
+export default Modification;
