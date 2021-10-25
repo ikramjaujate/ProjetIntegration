@@ -9,7 +9,7 @@
  app.get('/api/etatCam', (req, res) =>{
   
     client.query('select * from camera', (err, result) => {
-      console.log(result.rows)
+      //console.log(result.rows)
   
       if(err) throw err ;
       res.send(result.rows);
