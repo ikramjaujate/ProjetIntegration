@@ -1,9 +1,10 @@
 const http = require('http');
-require("dotenv").config();
 var grade =  require('./routes/back-grade.js');
 var members = require('./routes/back-members.js');
 var privatedata = require('./routes/back-privatedata.js');
 var cameras = require('./routes/back-cameras.js');
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express') ;
 const app = express() ;
 const {Client}= require('pg') ;
@@ -23,11 +24,11 @@ const port = 3001;
 });*/
 
 const client = new Client({
-    host: '127.0.0.1',
-    port: 5432,
-    user: 'postgres',
-    password: '19992003i',
-    database: 'ProjetIntegration'
+    host: process.env.DATABASE_HOST,
+    port: process.env.DATABASE_PORT,
+    user: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE
   })
 
 /*const client = new Client({
