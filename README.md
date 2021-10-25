@@ -1,3 +1,4 @@
 # ProjetIntegration
 
-![TestUnitaires](https://github.com/ikramjaujate/ProjetIntegration/workflows/TestUnitaires/badge.svg?branch=develop)
+![TestUnitaires-IA](https://github.com/ikramjaujate/ProjetIntegration/workflows/TestUnitaires-IA/badge.svg?branch=develop)
+![TestUnitaires-Backend](https://github.com/ikramjaujate/ProjetIntegration/workflows/TestUnitaires-Backend/badge.svg?branch=develop)
