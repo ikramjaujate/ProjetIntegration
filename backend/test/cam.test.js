@@ -10,6 +10,6 @@ describe('GET /api/etatCam', function() {
     it('Verifier que la requete passe', function(done) {
       request.get('/api/etatCam')
         .expect('Content-Type', /json/)
-        .expect(200, done);
+        .expect(200), done();
     });
   })
