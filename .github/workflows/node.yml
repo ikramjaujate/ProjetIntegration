@@ -27,6 +27,7 @@ jobs:
           POSTGRES_USERNAME: postgres
           POSTGRES_PASSWORD: 19992003i
           POSTGRES_DATABASE: ProjetIntegration
+          
       - name: run test
         working-directory: ./backend
         run: |
