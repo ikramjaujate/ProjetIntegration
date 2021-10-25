@@ -1,13 +1,10 @@
+const app = express() ;
+const {Client}= require('pg') ;
+
 const http = require('http');
-var grade =  require('./routes/back-grade.js');
-var members = require('./routes/back-members.js');
-var privatedata = require('./routes/back-privatedata.js');
-var cameras = require('./routes/back-cameras.js');
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express') ;
-const app = express() ;
-const {Client}= require('pg') ;
 const cors = require('cors') ;
 const mysql = require('mysql');
 const router = express.Router();
@@ -15,13 +12,12 @@ const controller = require("./src/controller/file.controller");
 const { request, response } = require('express');
 const port = 3001;
 
-/*const client = new Client({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE,
-    port : 5432,
-});*/
+/* Different sets of existing APIs */
+var grade =  require('./routes/back-grade.js');
+var members = require('./routes/back-members.js');
+var privatedata = require('./routes/back-privatedata.js');
+var cameras = require('./routes/back-cameras.js');
+
 
 const client = new Client({
     host: process.env.DATABASE_HOST,
@@ -31,13 +27,6 @@ const client = new Client({
     database: process.env.DATABASE
   })
 
-/*const client = new Client({
-  host: 'localhost',
-  port: 5432,
-  user: 'postgres',
-  password: 'cookies',
-  database: 'integration'
-})*/
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
