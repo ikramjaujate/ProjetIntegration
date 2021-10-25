@@ -9,7 +9,7 @@ on:
 env:
   node-version: 16.10.0
 jobs:
-  python-ia:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
