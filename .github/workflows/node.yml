@@ -37,6 +37,6 @@ jobs:
       - name: run test
         working-directory: ./backend
         env:
-          DBURL: "postgres://postgres:19992003i@localhost:5432/ProjetIntegration"
+          DBURL: "postgresql://postgres:19992003i@localhost:5432/ProjetIntegration"
         run: |
           npm run test
