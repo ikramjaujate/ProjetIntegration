@@ -1,10 +1,9 @@
-CREATE USER 'postgres'@'127.0.0.1' IDENTIFIED BY '123';
 
-CREATE DATABASE ProjetIntegration;
+CREATE DATABASE 'ProjetIntegration';
+CREATE USER 'postgres' WITH ENCRYPTED PASSWORD '123';
+GRANT ALL PRIVILEGES ON DATABASE 'ProjetIntegration' TO 'postgres';
 
-GRANT SELECT ON ProjetIntegration.*  TO 'postgres'@'127.0.0.1';
-
-USE ProjetIntegration;
+\c ProjetIntegration;
 
 CREATE TABLE IF NOT EXISTS public.camera
 (
