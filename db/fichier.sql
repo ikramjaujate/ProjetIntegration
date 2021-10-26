@@ -1,7 +1,7 @@
 
-CREATE DATABASE 'ProjetIntegration';
-CREATE USER 'postgres' WITH ENCRYPTED PASSWORD '123';
-GRANT ALL PRIVILEGES ON DATABASE 'ProjetIntegration' TO 'postgres';
+CREATE DATABASE ProjetIntegration;
+CREATE USER postgres WITH ENCRYPTED PASSWORD 123;
+GRANT ALL PRIVILEGES ON DATABASE ProjetIntegration TO postgres;
 
 \c ProjetIntegration;
 
