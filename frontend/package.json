@@ -1,6 +1,7 @@
 {
-  "name": "projet_integration",
+  "name": "frontend",
   "version": "0.1.0",
+  "proxy": "http://localhost:3001",
   "private": true,
   "dependencies": {
     "@popperjs/core": "^2.10.2",
@@ -39,6 +40,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  
   "eslintConfig": {
     "extends": [
       "react-app",

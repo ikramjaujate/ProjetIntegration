@@ -81,6 +81,7 @@ module.exports = function (app, client) {
     client.query(query, [idMember], (error, results) => {
       if (error) {
       }
+      
       response.status(200).json(results.rows)
     })
   })
