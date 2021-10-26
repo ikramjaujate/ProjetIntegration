@@ -30,9 +30,11 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
+    "nyc": "^15.1.0",
     "supertest": "^6.1.6"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test-with-coverage": "nyc --reporter=text mocha"
   }
 }
