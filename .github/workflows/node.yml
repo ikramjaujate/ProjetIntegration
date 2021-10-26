@@ -34,7 +34,7 @@ jobs:
           apt-get update
           apt-get install --yes postgresql-client
   
- test-backend:
+  test-backend:
     runs-on: ubuntu-latest
     needs: [postgres-job]
     steps:
