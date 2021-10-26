@@ -16,7 +16,7 @@ jobs:
         run: |
           npm i -g eslint
           eslint --init
-          eslint .\server.js --fix
+          eslint *.js --fix
 
 
 
