@@ -11,7 +11,7 @@ describe('GET /api/grades/:idGrade/cameras', function() {
     });
   })
 
-/*describe('GET /api/grades/:idGrade/cameras', function() {
+describe('GET /api/grades/:idGrade/cameras', function() {
 it('Voir toutes les informations concernant les cameras pour un grade', function(done) {
     request.get('/api/grades/1/cameras')
     .expect('Content-Type', /json/)
@@ -32,4 +32,4 @@ describe('GET /api/grades', function() {
             assert(response[0].name_grade, 'Directeur');
         }), done();
     });
-})*/
+})
