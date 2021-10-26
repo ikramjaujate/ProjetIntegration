@@ -1,0 +1,21 @@
+name: Linter
+on:
+  push:
+    branches:
+      - develop
+env:
+  node-version: 16.10.0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Installation linter
+        run: |
+          npm i -g eslint
+          eslint --init
+          eslint .\server.js --fix
+
+
+
