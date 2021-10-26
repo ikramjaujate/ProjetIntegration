@@ -7,8 +7,8 @@ on:
 env:
   node-version: 16.10.0
 
-jobs:
-  postgres-job:
+jobs: 
+  test-backend:
 
     runs-on: ubuntu-latest
     container: node:latest
@@ -27,14 +27,11 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
     steps:
       - name: Install PostgreSQL client
         run: |
           apt-get update
-          apt-get install --yes postgresql-client
-  
-  test-backend:
+          apt-get install --yes postgresql-client      
     runs-on: ubuntu-latest
     needs: [postgres-job]
     steps:
