@@ -13,7 +13,7 @@ describe('GET /api/grades/:idGrade/cameras', function() {
 
 describe('GET /api/grades/:idGrade/cameras', function() {
 it('Voir toutes les informations concernant les cameras pour un grade', function(done) {
-    request.get('/api/grades/1/cameras')
+    request.get('/api/grades/999/cameras')
     .expect('Content-Type', /json/)
     .expect(200)
     .then(response => {
