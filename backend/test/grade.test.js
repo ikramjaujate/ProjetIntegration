@@ -21,9 +21,9 @@ it('Voir toutes les informations concernant les cameras pour un grade', function
         
     }), done();
 });
-})*/
+})
 
-/*describe('GET /api/grades', function() {
+describe('GET /api/grades', function() {
     it('Obtenir toutes les informations de tous les grades', function(done) {
         request.get('/api/grades')
         .expect('Content-Type', /json/)
