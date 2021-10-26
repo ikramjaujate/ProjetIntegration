@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - develop
+    paths:
+      - "backend/**"
 
 env:
   node-version: 16.10.0
@@ -44,10 +46,10 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
       - name: npm install
-        working-directory: ../backend
+        working-directory: ./backend
         run: |
           npm install
       - name: run test
-        working-directory: ../backend
+        working-directory: ./backend
         run: |
           npm run test
