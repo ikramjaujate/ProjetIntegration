@@ -28,7 +28,30 @@ VALUES
 ('WC'),
 ('ENTREESUD'),
 ('ENTRENORD');
+CREATE TABLE IF NOT EXISTS public.color
+(
+    id_color SERIAL NOT NULL,
+    name_color char(25) NOT NULL,
+    PRIMARY KEY (id_color)
+);
 
+ALTER TABLE public.color
+    OWNER to postgres;
+
+
+
+INSERT INTO color(name_color)
+VALUES 
+('#B2DFDB'),
+('#F8BBD0'),
+('#BBDEFB'),
+('#FFF9C4'),
+('#FFCCBC'),
+('#C5CAE9'),
+('#BCAAA4'),
+('#E6EE9C'),
+('#FFE0B2'),
+('#E1BEE7');
 CREATE TABLE IF NOT EXISTS public.grade
 (
     id_grade SERIAL NOT NULL,
