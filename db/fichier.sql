@@ -1,10 +1,10 @@
-CREATE USER 'username'@'127.0.0.1' IDENTIFIED BY '123';
+CREATE USER 'postgres'@'127.0.0.1' IDENTIFIED BY '123';
 
-CREATE DATABASE db_test;
+CREATE DATABASE ProjetIntegration;
 
-GRANT SELECT ON db_test.*  TO 'username'@'127.0.0.1';
+GRANT SELECT ON ProjetIntegration.*  TO 'postgres'@'127.0.0.1';
 
-USE db_test;
+USE ProjetIntegration;
 
 CREATE TABLE IF NOT EXISTS public.camera
 (
