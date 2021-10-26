@@ -7,14 +7,14 @@ on:
 env:
   node-version: 16.10.0
 
-jobs: 
-  test-backend:
+jobs:
+  postgres:
 
     runs-on: ubuntu-latest
-    container: node:latest
+
     services:
       postgres:
-        image: postgres:latest
+        image: postgres
         env:
           POSTGRES_DB: ProjetIntegration
           POSTGRES_PASSWORD: 19992003i
@@ -27,12 +27,10 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    steps:
-      - name: Install PostgreSQL client
-        run: |
-          apt-get update
-          apt-get install --yes postgresql-client      
+  
+  test-backend:
     runs-on: ubuntu-latest
+    needs: [postgres-job]
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node ${{ env.node-version }}
