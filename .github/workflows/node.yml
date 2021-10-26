@@ -11,6 +11,7 @@ jobs:
   postgres-job:
 
     runs-on: ubuntu-latest
+    container: node:latest
     services:
       postgres:
         image: postgres:latest
@@ -33,4 +34,3 @@ jobs:
           apt-get update
           apt-get install --yes postgresql-client
   
- 
