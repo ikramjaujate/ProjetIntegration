@@ -11,7 +11,7 @@ describe('GET /api/grades/:idGrade/cameras', function() {
     });
   })
 
-describe('GET /api/grades/:idGrade/cameras', function() {
+/*describe('GET /api/grades/:idGrade/cameras', function() {
 it('Voir toutes les informations concernant les cameras pour un grade', function(done) {
     request.get('/api/grades/1/cameras')
     .expect('Content-Type', /json/)
@@ -21,7 +21,7 @@ it('Voir toutes les informations concernant les cameras pour un grade', function
         
     }), done();
 });
-})
+})*/
 
 describe('GET /api/grades', function() {
     it('Obtenir toutes les informations de tous les grades', function(done) {
