@@ -11,10 +11,10 @@ jobs:
 
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:12
         env:
           POSTGRES_DB: ProjetIntegration
-          POSTGRES_PASSWORD: 123
+          POSTGRES_PASSWORD: '123'
           POSTGRES_USER: postgres
         ports:
           - 5432:5432
@@ -41,7 +41,7 @@ jobs:
           DATABASE_HOST: localhost
           DATABASE: ProjetIntegration
           DATABASE_USERNAME: postgres
-          DATABASE_PASSWORD: 123
+          DATABASE_PASSWORD: '123'
           DATABASE_PORT: 5432
         run: |
           npm run test
