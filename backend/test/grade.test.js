@@ -17,7 +17,7 @@ it('Voir toutes les informations concernant les cameras pour un grade', function
     .expect('Content-Type', /json/)
     .expect(200)
     .then(response => {
-        assert(response[0].name_camera, 'CAFET');
+        assert(response.status, 200);
         
     }), done();
 });
