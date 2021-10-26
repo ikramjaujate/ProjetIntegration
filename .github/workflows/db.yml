@@ -29,6 +29,6 @@ jobs:
       - name: Set up MySQL
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE "db_test";' -u user -p password
+          mysql -e 'CREATE DATABASE "db_test";' -u root -p password
 
 
