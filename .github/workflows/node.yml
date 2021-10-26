@@ -29,8 +29,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-       - name: Run migrations
-          run: psql -f ./db/fichier.sql postgresql://postgres:123@localhost:5432/ProjetIntegration
+      - name: Run migrations
+        run: psql -f ./db/fichier.sql postgresql://postgres:123@localhost:5432/ProjetIntegration
       - name: Installation des dépendences de node
         working-directory: ./backend
         run: |
