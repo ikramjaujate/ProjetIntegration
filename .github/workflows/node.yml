@@ -36,12 +36,7 @@ jobs:
         run: |
           npm install
       - name: run test
-        working-directory: ./backend
-        env: 
-          DATABASE_HOST: localhost
-          DATABASE: ProjetIntegration
-          DATABASE_USERNAME: postgres
-          DATABASE_PASSWORD: '123'
-          DATABASE_PORT: 5432
+        working-directory: ./backend 
         run: |
-          npm run test
+          postgresql://postgres:123@localhost:5432/ProjetIntegration
+          npm run test 
