@@ -23,7 +23,7 @@ it('Voir toutes les informations concernant les cameras pour un grade', function
 });
 })*/
 
-describe('GET /api/grades', function() {
+/*describe('GET /api/grades', function() {
     it('Obtenir toutes les informations de tous les grades', function(done) {
         request.get('/api/grades')
         .expect('Content-Type', /json/)
@@ -32,4 +32,4 @@ describe('GET /api/grades', function() {
             assert(response[0].name_grade, 'Directeur');
         }), done();
     });
-})
+})*/

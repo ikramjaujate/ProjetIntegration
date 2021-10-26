@@ -42,6 +42,5 @@ jobs:
           DATABASE_USERNAME: postgres
           DATABASE_PASSWORD: 123
           DATABASE_PORT: 5432
-
         run: |
           npm run test
