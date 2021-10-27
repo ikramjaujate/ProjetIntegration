@@ -34,7 +34,6 @@
     "supertest": "^6.1.6"
   },
   "scripts": {
-    "test": "mocha",
-    "test-with-coverage": "nyc --reporter=text mocha"
+    "test": "mocha --exit"
   }
 }

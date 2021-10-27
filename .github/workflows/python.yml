@@ -2,7 +2,7 @@ name: TestUnitaires-IA
 on:
   push:
     branches:
-      - Test
+      - develop
 env:
   node-version: 16.10.0
 

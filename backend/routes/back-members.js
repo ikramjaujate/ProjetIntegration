@@ -1,9 +1,9 @@
 
 /**
- * 
+ *
  * @author : Aurélien
  * @method : PUT
- * 
+ *
  */
 module.exports = function (app, client) {
   app.put('/api/client', (req, res) => {

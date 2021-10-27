@@ -1,16 +1,20 @@
-const express = require('express')
-const app = express()
-const { Client } = require('pg')
+"use strict";
 
-// const http = require('http')
-const dotenv = require('dotenv')
-dotenv.config()
-// const cors = require('cors')
-// const mysql = require('mysql')
-// const router = express.Router()
-// const controller = require('./src/controller/file.controller')
-// const { request, response } = require('express')
-const port = 3001
+const express = require("express");
+const {Client} = require("pg");
+const app = express();
+const dotenv = require("dotenv");
+dotenv.config();
+
+// Const http = require('http')
+/*
+ * Const cors = require('cors')
+ * const mysql = require('mysql')
+ * const router = express.Router()
+ * const controller = require('./src/controller/file.controller')
+ * const { request, response } = require('express')
+ */
+const port = 3001;
 
 /* Different sets of existing APIs */
 const grade = require('./routes/back-grade.js')
@@ -55,7 +59,7 @@ client.connect(err => {
 })
 
 // ROUTE FOR API
-grade(app, client)
-cameras(app, client)
-members(app, client)
-privatedata(app, client)
+grade(app, client);
+cameras(app, client);
+members(app, client);
+privatedata(app, client);

@@ -2,7 +2,7 @@ name: Linter
 on:
   push:
     branches:
-      - Test
+      - Workflow
 env:
   node-version: 16.10.0
 
@@ -12,11 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Installation linter
-        working-directory: ./backend
         run: |
           npm i -g eslint
           eslint --init
-          eslint *.js --fix
-
+          eslint ./backend/server.js --fix 
 
 
