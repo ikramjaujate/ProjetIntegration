@@ -8,7 +8,7 @@
 
  app.get('/api/etatCam', (req, res) =>{
   
-    client.query('select * from permission', (err, result) => {
+    client.query('select * from camera', (err, result) => {
       //console.log(result.rows)
   
       if(err) throw err ;
