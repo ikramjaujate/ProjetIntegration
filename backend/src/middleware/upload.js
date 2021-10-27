@@ -1,31 +1,21 @@
 const util = require("util");
-const multer = require("multer"),
-    maxSize = 2 * 1024 * 1024,
+const multer = require("multer");
+const maxSize = 2 * 1024 * 1024;
 
-    storage = multer.diskStorage({
-        "destination": (req, file, cb) => {
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, __basedir + "/resources");
+  },
+  filename: (req, file, cb) => {
+    console.log(file.originalname);
+    cb(null, file.originalname);
+  },
+});
 
-            cb(
-                null,
-                `${__basedir}/resources`
-            );
+let uploadFile = multer({  // to restrict file size
+  storage: storage,
+  limits: { fileSize: maxSize },
+}).single("file");
 
-        },
-        "filename": (req, file, cb) => {
-
-            console.log(file.originalname);
-            cb(
-                null,
-                file.originalname
-            );
-
-        }
-    }),
-
-    uploadFile = multer({ // To restrict file size
-        storage,
-        "limits": {"fileSize": maxSize}
-    }).single("file"),
-
-    uploadFileMiddleware = util.promisify(uploadFile); // Makes the exported middleware object can be used with async-await.
+let uploadFileMiddleware = util.promisify(uploadFile);  // makes the exported middleware object can be used with async-await.
 module.exports = uploadFileMiddleware;

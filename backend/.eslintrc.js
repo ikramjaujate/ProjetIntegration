@@ -16,6 +16,16 @@ module.exports = {
         "no-console" : "off", //éviter les console.log (à terme il faudra le remettre, car console.log destiné au débogage et pas au client)
         "sort-keys": "off", //éviter d'avoir à trier les éléments d'un dictionnaire par ordre alphabétique
         "strict" :"off", //éviter d'avoir à mettre "use strict"; dans les fichiers js
-        "max-len" : "off"
+        "max-len" : "off", //éviter que les lignes de code aient une longueur < 80
+        "func-names" : "off", //éviter de ne pas pouvoir avoir des fonctions sans noms
+        "max-lines-per-function" : "off", //éviter d'avoir des fonctions de maximum 50 lignes
+        "no-multi-str" : "off", //éviter de ne pas pouvoir faire des strings multilignes avec '/' 
+        "array-element-newline" : "off",
+        "guard-for-in" :"off",
+        "function-paren-newline" :"off",
+        "no-magic-numbers" : ["error", { "ignore": [200, 0, 1, 400, 500] }],
+        "prefer-const" : "off", //éviter de devoir mettre des const plutôt que des let
+        "consistent-return" : "off", //éviter de obligatoirement return quelque chose dans une fonction
+        "no-undefined" : "off", //éviter de ne pas pouvoir utiliser undefined
     }
 };

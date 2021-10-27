@@ -7,7 +7,7 @@ env:
   node-version: 16.10.0
 
 jobs:
-  build:
+  linter-backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,6 +15,6 @@ jobs:
         run: |
           npm i -g eslint
           eslint --init
-          eslint ./backend/server.js --fix 
+          eslint eslint ./backend/routes/  ./backend/server.js --fix 
 
 

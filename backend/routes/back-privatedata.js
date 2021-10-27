@@ -1,5 +1,5 @@
-module.exports = function (app, client) {
+module.exports = function () {
 
-    console.log("À remplir");
+    console.log("À remplir app :");
 
 };
