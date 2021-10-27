@@ -12,11 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Installation linter
-        working-directory: ./backend
+        workdir: .
         run: |
           npm i -g eslint
           eslint --init
           eslint *.js --fix
-
 
 
