@@ -1,7 +1,8 @@
 {
-  "name": "projet_integration",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@popperjs/core": "^2.10.2",
     "@testing-library/jest-dom": "^5.14.1",

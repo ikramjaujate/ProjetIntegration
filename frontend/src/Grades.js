@@ -89,12 +89,12 @@ function Grades() {
         let informations = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/grades`, informations)
+        fetch(`/api/grades`, informations)
         .then(result => {
             return result.json();
         })
         .then(dataCamera => {
-            fetch(`http://localhost:3001/api/grades/members`, informations)
+            fetch(`/api/grades/members`, informations)
             .then(result => {
                 return result.json();
             })
@@ -116,7 +116,7 @@ function Grades() {
         let informations = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/grades/colors`, informations)
+        fetch(`/api/grades/colors`, informations)
         .then(result => {
             return result.json();
         })
@@ -188,7 +188,7 @@ function Grades() {
                headers: {'Content-Type': 'application/json'},
         };
 
-        fetch(`http://localhost:3001/api/grades/${grade}/cameras`, informations)
+        fetch(`/api/grades/${grade}/cameras`, informations)
         .then(result => {
             return result.json();
         })
@@ -233,7 +233,7 @@ function Grades() {
         if (newColorok && newNameok) {
             deleteErrorMsg(true, true) ;
 
-            fetch ("http://localhost:3001/api/grades",{
+            fetch ("/api/grades",{
                 method: "PUT",
                 headers:{
                     "Content-type": "application/json"
@@ -339,7 +339,7 @@ function Grades() {
                body: JSON.stringify({actions : newActions, notifications : newNotifications})
         };
 
-        fetch(`http://localhost:3001/api/grades/${currentIdGrade}/acces`, informations)
+        fetch(`/api/grades/${currentIdGrade}/acces`, informations)
         .then(result => {
             return result.json();
         })

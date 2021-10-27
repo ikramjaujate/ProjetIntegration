@@ -21,7 +21,7 @@ function Secretary() {
 
     const submitClient = () => {
         console.log("client : ", clientGrade)
-        Axios.put(`http://localhost:3001/api/client`, {
+        Axios.put(`/api/client`, {
             FirstName : clientFirstName,
             LastName : clientLastName,
             Grade : clientGrade
@@ -33,7 +33,7 @@ function Secretary() {
     }
 
     const getGrade = () => {
-        Axios.get(`http://localhost:3001/api/gradesInfos`).then((response)=> {
+        Axios.get(`/api/gradesInfos`).then((response)=> {
             setGradesList(response.data)
         }).then( () => {
         })
@@ -41,7 +41,7 @@ function Secretary() {
 
     /*const getGrades = () => {
         var grades = { method: 'GET', headers: {'Content-Type': 'application/json'},};
-        fetch(`http://localhost:3001/api/grades`, grades).then(result => {
+        fetch(`/api/grades`, grades).then(result => {
             return result.json();
         })
         .then(data => {

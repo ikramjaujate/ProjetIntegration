@@ -15,7 +15,7 @@ const Acceuil =()=>{
     var etatCamera = {method : 'GET',
           headers:{'Content-type':'application/json'}
           }
-          fetch('http://localhost:3001/api/etatCam', etatCamera)
+          fetch('/api/etatCam', etatCamera)
           .then(response =>{
             // console.log(response.)
               return response.json()
