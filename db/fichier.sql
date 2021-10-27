@@ -123,6 +123,40 @@ VALUES
 (3, 9, false, true),
 (3, 10, false, false);
 
+CREATE TABLE IF NOT EXISTS public.member
+(
+    id_member SERIAL NOT NULL,
+    id_grade INTEGER NOT NULL,
+	first_name CHAR(25) NOT NULL,
+	last_name CHAR(25) NOT NULL,
+	pictures CHAR(1024) NOT NULL,
+    PRIMARY KEY (id_member),
+	FOREIGN KEY (id_grade) REFERENCES grade(id_grade)
+);
+
+ALTER TABLE public.member
+    OWNER to postgres;
+	
+	
+	
+INSERT INTO member(id_grade, first_name, last_name, pictures)
+VALUES 
+(1, 'Jean', 'Ab', 'example.png'),
+(3, 'Louise', 'Cd', 'example.png'),
+(3, 'Marie', 'Ef', 'example.png'),
+(2, 'Luc', 'Gh', 'example.png'),
+(1, 'Alain', 'Ij', 'example.png'),
+(2, 'Henri', 'Kl', 'example.png'),
+(3, 'Eva', 'Mn', 'example.png'),
+(3, 'Clara', 'Op', 'example.png'),
+(3, 'Marion', 'Qr', 'example.png'),
+(2, 'Théo', 'St', 'example.png'),
+(2, 'Julien', 'Uv', 'example.png'),
+(3, 'Clément', 'Wx', 'example.png'),
+(3, 'Laurent', 'Yz', 'example.png'),
+(3, 'Laurence', 'Az', 'example.png'),
+(3, 'Pilou', 'By', 'example.png');
+
 CREATE TABLE public.photos
 (
     id_member INTEGER NOT NULL,
@@ -134,3 +168,13 @@ INSERT INTO photos(id_member, pictures)
 VALUES 
 (1, 'ikram1.jpg'),
 (1, 'ikram2.jpg');
+
+CREATE TABLE IF NOT EXISTS public.personal
+(
+    username char(25) NOT NULL,
+    password char(25) NOT NULL,
+    PRIMARY KEY (username)
+);
+
+ALTER TABLE public.personal
+    OWNER to postgres;
