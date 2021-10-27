@@ -28,6 +28,6 @@
     "supertest": "^6.1.6"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --exit"
   }
 }
