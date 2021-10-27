@@ -18,20 +18,20 @@ const members = require('./routes/back-members.js')
 const privatedata = require('./routes/back-privatedata.js')
 const cameras = require('./routes/back-cameras.js')
 
-/*const client = new Client({
+/* const client = new Client({
   host: process.env.DATABASE_HOST,
   port: process.env.DATABASE_PORT,
   user: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE
-})*/
+}) */
 
 const client = new Client({
-  host: "localhost",
+  host: 'localhost',
   port: 5432,
-  user: "postgres",
+  user: 'postgres',
   password: '123',
-  database: "ProjetIntegration"
+  database: 'ProjetIntegration'
 })
 
 app.listen(port, () => {
