@@ -2,7 +2,7 @@ name: Linter
 on:
   push:
     branches:
-      - workflow-test
+      - develop
 env:
   node-version: 16.10.0
 
