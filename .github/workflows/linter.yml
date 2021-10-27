@@ -27,6 +27,9 @@ jobs:
         working-directory: ./frontend
         run: |
           npm install
+      - name: Installation des dépendences générale
+        run: |
+          npm install
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
         run: npm ci
