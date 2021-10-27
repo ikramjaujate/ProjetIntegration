@@ -160,7 +160,7 @@ VALUES
 CREATE TABLE public.photos
 (
     id_member SERIAL NOT NULL,
-    pictures CHAR(1024) NOT NULL
+    pictures CHAR(1024) NOT NULL,
 	PRIMARY KEY (id_member),
 	FOREIGN KEY (id_member) REFERENCES member(id_member)
 );
