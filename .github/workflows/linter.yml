@@ -12,7 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Installation linter
-        workdir: .
         run: |
           npm i -g eslint
           eslint --init
