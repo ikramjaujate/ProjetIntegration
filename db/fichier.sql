@@ -122,3 +122,15 @@ VALUES
 (3, 8, false, true),
 (3, 9, false, true),
 (3, 10, false, false);
+
+CREATE TABLE public.photos
+(
+    id_member INTEGER NOT NULL,
+    pictures CHAR(1024) NOT NULL,
+	FOREIGN KEY (id_member) REFERENCES member(id_member)
+);
+
+INSERT INTO photos(id_member, pictures)
+VALUES 
+(1, 'ikram1.jpg'),
+(1, 'ikram2.jpg');
