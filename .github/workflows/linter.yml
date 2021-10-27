@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Installation linter
+      - name: Installation linter et lancement
         run: |
           npm i -g eslint
           eslint --init
-          eslint eslint ./backend/routes/  ./backend/server.js --fix 
+          eslint ./backend/routes/ ./backend/server.js --fix 
 
 
