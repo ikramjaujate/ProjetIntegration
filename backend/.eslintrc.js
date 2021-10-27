@@ -15,6 +15,7 @@ module.exports = {
         "padded-blocks" : "off", //éviter d'avoir un espace entre chaque ligne de code
         "no-console" : "off", //éviter les console.log (à terme il faudra le remettre, car console.log destiné au débogage et pas au client)
         "sort-keys": "off", //éviter d'avoir à trier les éléments d'un dictionnaire par ordre alphabétique
-        "strict" :"off" //éviter d'avoir à mettre "use strict"; dans les fichiers js
+        "strict" :"off", //éviter d'avoir à mettre "use strict"; dans les fichiers js
+        "max-len" : "off"
     }
 };
