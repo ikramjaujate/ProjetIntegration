@@ -1,0 +1,209 @@
+:root {
+    --color1 : #B2DFDB ;
+    --color2 : #F8BBD0 ;
+    --color3 : #BBDEFB ;
+    --writing : #BDBDBD;
+    --camera-allow : #90E093 ;
+    --camera-refuse : #FF6060 ;
+    --writing : #686868 ;
+    --empty-color : #BDBDBD ;
+    --error : red ;
+}
+
+body {
+    color: var(--writing) ;
+}
+/* Cacher scrollbar horizontal */
+html::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
+html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
+
+
+.add-user:hover {
+    color: #358539;
+}
+
+::-webkit-scrollbar {
+	width: 6px; 
+}
+::-webkit-scrollbar-thumb {
+	background: #b1acaa; 
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { 
+	background: #696969;
+}
+::-webkit-scrollbar-thumb:active {
+	background: #2A2A2A;
+}
+
+#staticBackdrop .modal-body {
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-bottom: 0%;
+    padding: 0%;
+
+}
+
+
+#staticBackdrop .m-2 {
+    margin : 0.5rem 0.5rem 0.8rem 0.5rem!important;
+}
+
+
+#staticBackdrop .modal-header {
+    border: 0 none;
+    padding: 5px;
+}
+button[editext='cancel-button']:hover {
+
+      background: crimson;
+      color: #fff;
+
+}
+  button[editext='save-button']:hover {
+    
+    background: rgb(12, 58, 8);
+    color: #fff;
+    box-sizing: 20px;
+    
+    
+
+}
+button[editext='save-button'] {
+  margin-left: 10px;
+  margin-bottom: 2px;
+  border-radius: 30px;
+    border: none;
+background: none;
+font-size: 25px;
+
+
+
+}
+button[editext='cancel-button'] {
+  margin-left: 10px;
+  margin-bottom: 2px;
+  border-radius: 30px;
+    border: none;
+background: none;
+font-size: 25px;
+
+}
+.test{
+  font-size: 20px;
+}
+p{
+  font-size: 40px;
+  padding: 0%;
+  font-weight: bolder;
+  margin-bottom: 0%;
+}
+.tool{
+ 
+  margin-left: 68.5%;
+}
+.col {
+  margin-bottom: 0%;
+}
+.tooltip{
+  margin-right: 1%;
+  border-width: 30px;
+  border-color: rgba(43, 37, 37, 0.466);
+}
+
+  
+  div[editext='view-container'] {
+    background: #ffffff;
+    padding: 10px;
+
+    border-radius: 5px;
+    color:	#505050;
+  }
+  div[editext='edit-container'] {
+    background: #ffffff;
+    padding: 10px;
+
+    border-radius: 5px;
+    color: rgb(26, 13, 13);
+  }
+  button[editext='edit-button']{
+    color: 	#505050;
+    padding: 5px;
+    margin-right: 0;
+    width: 50px;
+    border: none;
+    background: none;
+    font-weight: bold;
+    
+  }
+
+  
+  input,
+  textarea {
+    /** or input[editext="input"] {} */
+    background: #ffffff;
+    color: #18140c;
+    font-weight: normal;
+    border-radius: 20px;
+    border: 0 none;
+    
+  }
+  .hovereffect{
+    padding-left: 20px;
+  }
+  input[editext="input"] {
+    width: 60%;
+    height: 20%;
+    border: 0;
+    /*border: 1px solid rgb(212, 212, 212);*/
+    padding: 0.6em;
+    outline: none;
+}
+img{
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+}
+.hovereffect:hover img {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
+  filter: grayscale(1) blur(3px);
+  -webkit-filter: grayscale(1) blur(3px);
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.badge {
+  position: absolute;
+
+  padding: 2px 7px;
+  border-radius: 50%;
+  background: #1b1901;
+  color: white;
+}
+.badge:hover{
+  background: white;
+  color: #1b1901;
+}
+.badge.nineplus {
+  padding: 2px 7px;
+}
+
+.bi-x-circle { 
+  color: transparent; 
+  padding: none;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+}
+.bi-x-circle:hover { 
+  color: red; 
+  padding: none;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+}
+
+.resize {
+  width: 30%;
+  height: auto;
+  padding-right: 13px;
+}
