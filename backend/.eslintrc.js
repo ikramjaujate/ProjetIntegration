@@ -4,9 +4,7 @@ module.exports = {
         "commonjs": true,
         "es2021": true
     },
-    "extends": [
-        "eslint:all"
-    ],
+    "extends": ["eslint:all"],
     "parserOptions": {
         "ecmaVersion": 13
     },
