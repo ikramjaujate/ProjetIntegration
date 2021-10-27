@@ -1,11 +1,17 @@
 const { response } = require("express")
 const express = require('express') ;
+const router = express.Router();
+const controller = require("../src/controller/file.controller");
+
 
 /**
+ * Add a new user with a grade, first name and last name
  * 
- * @author : Aurélien
- * @method : PUT
- * 
+ * @author Aurélien
+ * @method PUT
+ * @param {integer} grade number of the grade
+ * @param {string} first_name first name of the client
+ * @param {string} last_name last name of the client
  */
  module.exports = function(app,client) {
   app.put('/api/client', (req, res) => {  
@@ -20,13 +26,14 @@ const express = require('express') ;
       response.status(200)
       })
     })
-    
-  /**
-   * 
-   * @author : Aurélien
-   * @method : GET
-   * 
-   */
+  
+/**
+ * Get all grades and id corresponding
+ * 
+ * @author : Aurélien
+ * @method : GET
+ * 
+ */
   
     app.get('/api/gradesInfos', (request, response) => {
       let query = "select id_grade, name_grade from grade";
@@ -35,7 +42,16 @@ const express = require('express') ;
           if (error) {
               throw error;
           }
-          response.status(200).json(results.rows);
+        response.status(200).json(results.rows);
       })
     }) ;
+
+    // routes = (app) => {
+    //   router.post("/upload", controller.upload);
+    //   router.get("/files", controller.getListFiles);
+    //   router.get("/files/:name", controller.download);
+    
+    //   app.use(router);
+    //   }  
  }
+

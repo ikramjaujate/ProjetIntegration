@@ -10,7 +10,6 @@ const mysql = require('mysql');
 const router = express.Router();
 const controller = require("./src/controller/file.controller");
 const { request, response } = require('express');
-const routes = require("./routes/back-pictures.js");
 const port = 3001;
 
 global.__basedir = __dirname;
@@ -51,6 +50,6 @@ grade(app, client);
 cameras(app, client);
 members(app, client);
 privatedata(app,client);
-routes(app, client)
+// routes(app, client)
 
 
