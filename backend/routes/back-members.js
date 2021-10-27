@@ -1,67 +1,95 @@
 
 /**
- * 
+ *
  * @author : Aurélien
  * @method : PUT
- * 
+ *
  */
- module.exports = function(app,client) {
- app.put('/api/client', (req, res) => {  
-    const firstName = req.body.FirstName
-    const lastName = req.body.LastName
-    const grade = req.body.Grade
-    console.log(grade)
-    let query = 'insert into member (id_grade, first_name, last_name) values (($1), ($2), ($3))' ;
-    client.query(query, [grade, firstName, lastName], (error, result) => {
-        
-    })
-  })
-  
- /**
- * 
- * @author : Aurélien
- * @method : GET
- * 
- */
- 
-  app.get('/api/gradesInfos', (request, response) => {
-    let query = "select id_grade, name_grade from grade";
-    
-    client.query(query, (error, results) => {
-        if (error) {
-            throw error;
+module.exports = function (app, client) {
+
+    app.put(
+        "/api/client",
+        (req, res) => {
+
+            const firstName = req.body.FirstName,
+                lastName = req.body.LastName,
+                grade = req.body.Grade;
+            console.log(grade);
+            const query = "insert into member (id_grade, first_name, last_name) values (($1), ($2), ($3))";
+            client.query(
+                query,
+                [
+                    grade,
+                    firstName,
+                    lastName
+                ],
+                (error, result) => {
+
+                }
+            );
+
         }
-        response.status(200).json(results.rows);
-    })
-  }) ;
-  
-  
-/**
- * 
- * @author : Aurélien
- * 
- */
+    );
 
- /*let routes = (app) => {
-    router.post("/upload", controller.upload);
-    router.get("/files", controller.getListFiles);
-    router.get("/files/:name", controller.download);
-  
-    app.use(router);
-  };
-  
-  module.exports = routes;
-global.__basedir = __dirname;
+    /**
+     *
+     * @author : Aurélien
+     * @method : GET
+     *
+     */
 
-const initRoutes = require("./src/routes");
+    app.get(
+        "/api/gradesInfos",
+        (request, response) => {
 
-app.use(express.urlencoded({ extended: true }));
-initRoutes(app);
+            const query = "select id_grade, name_grade from grade";
 
-let port2 = 8080;  //listen on port 8080 for incoming requests.
-app.listen(port, () => {
-  console.log(`Running at localhost:${port2}`);
-});*/
+            client.query(
+                query,
+                (error, results) => {
+
+                    if (error) {
+
+                        throw error;
+
+                    }
+                    response.status(200).json(results.rows);
+
+                }
+            );
+
+        }
+    );
 
 
- }
+    /**
+     *
+     * @author : Aurélien
+     *
+     */
+
+    /*
+     *Let routes = (app) => {
+     * router.post("/upload", controller.upload);
+     * router.get("/files", controller.getListFiles);
+     * router.get("/files/:name", controller.download);
+     *
+     * app.use(router);
+     *};
+     *
+     *module.exports = routes;
+     *global.__basedir = __dirname;
+     *
+     *const initRoutes = require("./src/routes");
+     *
+     *app.use(express.urlencoded({ extended: true }));
+     *initRoutes(app);
+     *
+     *let port2 = 8080;  //listen on port 8080 for incoming requests.
+     *app.listen(port, () => {
+     *console.log(`Running at localhost:${port2}`);
+     *});
+     */
+
+
+};
