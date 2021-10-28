@@ -1,4 +1,4 @@
 # ProjetIntegration
 
-![TestUnitaires-IA](https://github.com/ikramjaujate/ProjetIntegration/workflows/TestUnitaires-IA/badge.svg?branch=develop)
-![TestUnitaires-Backend](https://github.com/ikramjaujate/ProjetIntegration/workflows/TestUnitaires-Backend/badge.svg?branch=develop)
+![ReconnaissanceFaciale](https://github.com/ikramjaujate/ProjetIntegration/workflows/ReconnaissanceFaciale/badge.svg?branch=develop)
+![Backend](https://github.com/ikramjaujate/ProjetIntegration/workflows/Backend/badge.svg?branch=develop)
