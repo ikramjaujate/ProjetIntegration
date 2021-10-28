@@ -1,11 +1,11 @@
-name: TestUnitaires-Backend
+name: Backend
 on:
   push:
     branches:
       - develop
 
 jobs:
-  postgres:
+  test-backend:
 
     runs-on: ubuntu-latest
     services:
