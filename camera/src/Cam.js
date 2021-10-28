@@ -52,13 +52,7 @@ const Camera =()=>{
 
       {/* Cadre du live */}
       <div class="row justify-content-center"> 
-<<<<<<< HEAD
-        <fieldset class="col offset-sm-3 " id="cadre_live">
-
-          <legend >Maison</legend>
-=======
         <fieldset class="col offset-sm-3" id="cadre_live">
->>>>>>> 9c55450ab64464d2e9f4285a3760e53298a02161
           <img alt='visu_live'src= "http://192.168.0.200:6060/video" width="200" height="300" title="Foscam FI8905W" />
         </fieldset>
       </div>
