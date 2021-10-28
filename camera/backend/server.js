@@ -7,9 +7,9 @@ const mysql = require('mysql');
 
 const client = new Client({
   host: 'localhost',
-  port: 5433,
+  port: 5432,
   user: 'postgres',
-  password: 'Lafetas1',
+  password: 'p',
   database: 'ProjetIntegration'
 })
 
@@ -40,6 +40,7 @@ client.connect(err => {
 app.get('/api/etatCam', (req, res) =>{
   
   client.query('select * from camera', (err, result) => {
+    console.log(result.rows)
 
     if(err) throw err ;
     res.send(result.rows);
