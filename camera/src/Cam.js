@@ -34,11 +34,11 @@ const Camera =()=>{
   }
   return(
     
-    <div className='container'>
+    <div className=' container'>
       {/* Choix de la caméra */}
-      <div class="row align-items-center custom-line"> 
-        <div class="col-12 col-md-9 col-lg-8 offset-sm-3">
-          <h3 id='text'>Visionnez vos caméras en live</h3>
+      <div class="row"> 
+        <div class="col-12 col-sm-8 col-md-9 col-lg-8 offset-sm-3 offset-md-3">
+          <h3 id='text'>Live cameras </h3>
           
         </div>
         <div class="col offset-sm-3" >
@@ -52,7 +52,7 @@ const Camera =()=>{
 
       {/* Cadre du live */}
       <div class="row justify-content-center"> 
-        <fieldset class="col offset-sm-3" id="cadre_live">
+        <fieldset class="col offset-sm-3 " id="cadre_live">
 
           <legend >Maison</legend>
           <img alt='visu_live'src= "http://192.168.0.200:6060/video" width="200" height="300" title="Foscam FI8905W" />
@@ -61,7 +61,7 @@ const Camera =()=>{
       {/* Boutons */}
       <div class="row justify-content-center">
         {/* Bouton Appareil Photo */}
-        <div class="col-5 col-md-4 col-lg-4 offset-0 offset-md-3 ">
+        <div class="col-5 col-sm-4 col-md-4 col-lg-4 offset-sm-2 offset-0 offset-md-3 ">
           <button type="button" class="form-control" id="cadre_bouton_photo" >
             {/* <img className='logo'src={photo} alt='capturer'id='photo'></img> */}
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#CCFFEE" class="bi bi-camera" viewBox="0 0 16 16">
@@ -71,7 +71,7 @@ const Camera =()=>{
           </button>
         </div>
         {/* Bouton Caméra */}
-        <div class="col-5 col-md-4 col-lg-4 offset-0 offset-md1">
+        <div class="col-5 col-sm-4 col-md-4 col-lg-4 offset-0 offset-md1">
           <button type="button" class="form-control" id="cadre_bouton_video">
            
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#CCFFEE" class="bi bi-camera-video" viewBox="0 0 16 16">

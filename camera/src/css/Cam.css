@@ -1,7 +1,7 @@
 
 #cadre_live{
-  border:double; 
-  border-color: #928c8c; 
+  border:solid 1px; 
+  border-color: #070707; 
   width:500px;
   height:300px;
   
@@ -13,7 +13,7 @@
   }
 #select{
   /* margin-top:4px ; */
-  border-radius : 20px;
+  border-radius : 10PX;
   background-color: rgb(135, 138, 141);
   color:#e0ecf7;
   border-color:#e0ecf7;
