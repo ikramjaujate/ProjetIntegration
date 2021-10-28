@@ -29,7 +29,7 @@ describe('GET /api/membres/:idMembre/photos', function() {
     });
 })
 
-describe('GET /api/membres/:idMembre/photos/count', function() {
+/*describe('GET /api/membres/:idMembre/photos/count', function() {
     it('Obtenir le nombre de photo concernant un membre', function(done) {
         request.get('/api/membres/:idMember/photos/count')
         .expect('Content-Type', /json/)
@@ -38,7 +38,7 @@ describe('GET /api/membres/:idMembre/photos/count', function() {
             assert(response[0].count, 2);
         }), done();
     });
-})
+})*/
 
 /*describe('GET /api/membres/:idMembre/grade', function() {
     it('Obtenir toutes les informations concernant un membre', function(done) {
