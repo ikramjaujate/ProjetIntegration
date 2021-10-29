@@ -16,6 +16,8 @@ import CameraInfo from './components/CameraInfo';
 import ActionsCameras from './components/ActionsCameras';
 import {useEffect, useState} from "react" ;
 import ModalAddGrade from './components/ModalAddGrade';
+import ModalModifyGrade from './components/ModalModifyGrade';
+import ConfirmationCancelModal from './components/ConfirmationCancelModal';
 
 
 function Grades() {
@@ -524,7 +526,7 @@ function Grades() {
             </div> */}
             <ModalAddGrade nameGrade={textNewNameGrade} borderGrade={borderNewNameGrade} colorGrade={finalColor} idColorGrade={finalIdColor} colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} highlithColor={highlithColor} resetCreation={resetCreation} createGrade={createGrade} chooseColor={chooseColor}/>
 
-            <div id="modifyGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyGradeModalLabel" aria-hidden="true">
+            {/* <div id="modifyGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyGradeModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-header row justify-content-center">
@@ -553,9 +555,11 @@ function Grades() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <div id="confirmationCancelModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmationCancelModalLabel" aria-hidden="true">
+            <ModalModifyGrade currentColor={currentColor} currentIdGrade={currentIdGrade} currentGrade={currentGrade} informationsCameras={informationsCameras} changeAction={changeAction} changeNotification={changeNotification} cancelModification={cancelModification} saveAction={saveAction} />
+
+            {/* <div id="confirmationCancelModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmationCancelModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-body">
@@ -574,7 +578,8 @@ function Grades() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+            <ConfirmationCancelModal activateButton={activateButton} deleteModification={deleteModification} />
 
             <ToastContainer style={{fontSize:"0.6rem"}}/>      
 
