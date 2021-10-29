@@ -1,7 +1,7 @@
 import '../css/Grades.css';
 
 
-const ConfirmationCancelModal = ({activateButton, deleteModification}) => {
+const ModalConfirmationCancel = ({activateButton, deleteModification}) => {
 
     return (
         <div id="confirmationCancelModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmationCancelModalLabel" aria-hidden="true">
@@ -27,4 +27,4 @@ const ConfirmationCancelModal = ({activateButton, deleteModification}) => {
     );
 }
 
-export default ConfirmationCancelModal;
+export default ModalConfirmationCancel;

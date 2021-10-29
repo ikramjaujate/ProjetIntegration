@@ -17,7 +17,8 @@ import ActionsCameras from './components/ActionsCameras';
 import {useEffect, useState} from "react" ;
 import ModalAddGrade from './components/ModalAddGrade';
 import ModalModifyGrade from './components/ModalModifyGrade';
-import ConfirmationCancelModal from './components/ConfirmationCancelModal';
+import ModalConfirmationCancel from './components/ModalConfirmationCancel';
+import ModalDetailGrade from './components/ModalDetailGrade';
 
 
 function Grades() {
@@ -441,7 +442,7 @@ function Grades() {
                 </div>  
             </div>
 
-            <div id="gradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
+            {/* <div id="gradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-header row justify-content-center">
@@ -473,7 +474,8 @@ function Grades() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+            <ModalDetailGrade informationsCameras={informationsCameras} colorModalDetails={colorModalDetails} titleModalDetails={titleModalDetails} activateButton={activateButton} resetModal={resetModal} />
 
             {/* <div id="addGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -579,7 +581,7 @@ function Grades() {
                     </div>
                 </div>
             </div> */}
-            <ConfirmationCancelModal activateButton={activateButton} deleteModification={deleteModification} />
+            <ModalConfirmationCancel activateButton={activateButton} deleteModification={deleteModification} />
 
             <ToastContainer style={{fontSize:"0.6rem"}}/>      
 
