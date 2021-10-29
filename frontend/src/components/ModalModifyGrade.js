@@ -2,7 +2,57 @@ import '../css/Grades.css';
 import ActionsCameras from './ActionsCameras';
 
 
-const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, changeAction, changeNotification, cancelModification, saveAction}) => {
+const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, saveAction, newNotifications, newActions, activateButton}) => {
+
+    /**
+     * Change the notification status (disable or enable)
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {integer} idCamera  Identifier of the button camera
+     * @param {boolean} notification  Presence of a notification or not
+     */
+     const changeNotification = (idCamera, notification) => {
+        if (idCamera in newNotifications) {
+            document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
+            delete newNotifications[idCamera];
+        }
+        else {
+            document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-slash-fill" : "bi bi-bell-fill" ;
+            newNotifications[idCamera] = !notification ;
+        }
+    }
+
+    /**
+     * Change the action of a camera
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {string} identifier  Identifier of the html switch that has just been switched
+     */
+     const changeAction = (identifier) => {
+        let action = document.getElementsByClassName("action-" + currentIdGrade + "-" + identifier)[0].checked ; 
+        if (identifier in newActions) {
+            delete newActions[identifier];
+        }
+        else {
+            newActions[identifier] = action ; 
+        }
+    }
+
+    /**
+     * Cancel the modification and verify first if anything have been modify
+     * (if it is the case, ask a confirmation to cancel)
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     const cancelModification = () => {
+        activateButton("close-modify");
+        if (Object.keys(newActions).length > 0 || Object.keys(newNotifications).length > 0) {
+            activateButton("open-confirmation");
+        }
+        else {
+            activateButton("open-desc-grade-1");
+        }
+    }
 
     return (
         <div id="modifyGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyGradeModalLabel" aria-hidden="true">

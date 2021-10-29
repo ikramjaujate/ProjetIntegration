@@ -3,10 +3,26 @@ import {useState} from "react" ;
 import {ChromePicker} from 'react-color' ;
 
 
-const ModalAddGrade = ({nameGrade, borderGrade, colorGrade, IdColorGrade, colors, errorName, errorColor, setNameGrade, highlithColor, resetCreation, createGrade, chooseColor}) => {
+const ModalAddGrade = ({nameGrade, borderGrade, colorGrade, idColorGrade, colors, errorName, errorColor, setNameGrade, resetCreation, createGrade, chooseColor}) => {
 
     const [colorCreation, setColorCreation] = useState('red');
     const [showColorPicker, setShowColorPicker] = useState(false);
+
+    /**
+     * Add a border around the selected color
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {integer} idColor  Identifier of the selected color
+     */
+     const highlithColor = (idColor) => {
+        
+        let styleElemNewColor = document.head.appendChild(document.createElement("style"));
+        styleElemNewColor.innerHTML = `#little-square-${idColor}:before {border:1px solid var(--frame-choice-color); border-radius:4px;}`;
+
+        let styleElemOldColor = document.head.appendChild(document.createElement("style"));
+        let oldIdColor = idColorGrade ;
+        styleElemOldColor.innerHTML = `#little-square-${oldIdColor}:before {border:none;}`;
+    }
 
     return (
         <div id="addGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
@@ -33,7 +49,7 @@ const ModalAddGrade = ({nameGrade, borderGrade, colorGrade, IdColorGrade, colors
                                     </div>
                                     <div id="frame-colors" className="row p-0 m-0 rounded col-11">
                                         <div className="container-final-color col-12">
-                                            <i id={IdColorGrade} className="bi bi-square-fill final-color" style={{color:colorGrade, fontSize:"175%"}}></i>
+                                            <i id={idColorGrade} className="bi bi-square-fill final-color" style={{color:colorGrade, fontSize:"175%"}}></i>
                                         </div>
                                         {colors && colors.map(color => (
                                             <div className="container-choosing-color col-1">

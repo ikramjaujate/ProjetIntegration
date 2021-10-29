@@ -7,13 +7,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Popover, Toast, Tooltip } from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {ChromePicker} from 'react-color' ;
 
 
 import './css/Grades.css';
 import LayoutGrade from './components/LayoutGrade';
-import CameraInfo from './components/CameraInfo';
-import ActionsCameras from './components/ActionsCameras';
 import {useEffect, useState} from "react" ;
 import ModalAddGrade from './components/ModalAddGrade';
 import ModalModifyGrade from './components/ModalModifyGrade';
@@ -41,7 +38,7 @@ function Grades() {
 
     const optionsToast = {
         autoClose: 8000,
-        position: "bottom-right",
+        position: "top-right",
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -52,8 +49,6 @@ function Grades() {
 
     let newActions = {} ;
     let newNotifications = {} ;
-    const [colorCreation, setColorCreation] = useState('red');
-    const [showColorPicker, setShowColorPicker] = useState(false);
 
 
     /**
@@ -264,23 +259,6 @@ function Grades() {
 
 
     /**
-     * Add a border around the selected color
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @param {integer} idColor  Identifier of the selected color
-     */
-     const highlithColor = (idColor) => {
-        
-        let styleElemNewColor = document.head.appendChild(document.createElement("style"));
-        styleElemNewColor.innerHTML = `#little-square-${idColor}:before {border:1px solid var(--frame-choice-color); border-radius:4px;}`;
-
-        let styleElemOldColor = document.head.appendChild(document.createElement("style"));
-        let oldIdColor = finalIdColor ;
-        styleElemOldColor.innerHTML = `#little-square-${oldIdColor}:before {border:none;}`;
-    }
-
-
-    /**
      * Activate the button that allows you to close your modal
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
@@ -288,45 +266,6 @@ function Grades() {
      */
      const activateButton = (idButton) => {
         document.getElementById(idButton).click() ;
-        
-    }
-
-    
-    /**
-     * Change the notification status (disable or enable)
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @param {integer} idCamera  Identifier of the button camera
-     * @param {boolean} notification  Presence of a notification or not
-     */
-     const changeNotification = (idCamera, notification) => {
-
-        if (idCamera in newNotifications) {
-            document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
-            delete newNotifications[idCamera];
-        }
-        else {
-            document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-slash-fill" : "bi bi-bell-fill" ;
-            newNotifications[idCamera] = !notification ;
-        }
-        //document.getElementsByClassName("notification-" + idCamera)[0].className = "" ;
-    }
-
-
-    /**
-     * Change the action of a camera
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @param {string} identifier  Identifier of the html switch that has just been switched
-     */
-     const changeAction = (identifier) => {
-        let action = document.getElementsByClassName("action-" + currentIdGrade + "-" + identifier)[0].checked ; 
-        if (identifier in newActions) {
-            delete newActions[identifier];
-        }
-        else {
-            newActions[identifier] = action ; 
-        }
     }
 
 
@@ -365,24 +304,7 @@ function Grades() {
 
 
     /**
-     * Cancel the modification and verify first if anything have been modify
-     * (if it is the case, ask a confirmation to cancel)
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    const cancelModification = () => {
-        activateButton("close-modify");
-        if (Object.keys(newActions).length > 0 || Object.keys(newNotifications).length > 0) {
-            activateButton("open-confirmation");
-        }
-        else {
-            activateButton("open-desc-grade-1");
-        }
-    }
-
-
-    /**
-     * Update the action's camera when opening the modifu modal
+     * Update the action's camera when opening the modify modal
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -396,7 +318,6 @@ function Grades() {
                 document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = newNotifications[camera] ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";
             }
             else {document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = informationsCameras[camera].notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";}
-            
         }
     }
 
@@ -442,145 +363,9 @@ function Grades() {
                 </div>  
             </div>
 
-            {/* <div id="gradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                        <div className="modal-header row justify-content-center">
-                            <h5 className="modal-title p-1 shadow-sm rounded col-10 col-sm-11 col-lg-9" id="gradeModalLabel" style={{backgroundColor:colorModalDetails}}>{titleModalDetails}</h5>
-                        </div>
-                        <div className="modal-body">
-                            <div className="row justify-content-center">
-                                <div className="layout-legend col-10 col-lg-9">
-                                    <div className="col-12">
-                                        <i className="bi bi-square-fill" style={{color:"var(--camera-allow)", fontSize: "0.95rem"}}></i> : accès autorisés
-                                    </div>
-                                    <div className="col-12">
-                                        <i className="bi bi-square-fill" style={{color:"var(--camera-refuse)", fontSize: "0.95rem"}}></i> : accès refusés
-                                    </div> 
-                                    <div className="col-12" style={{margin: "0.3rem 0rem 0rem 0rem"}}>
-                                        <i className="bi bi-bell icon-notification" style={{fontSize: "0.7rem", backgroundColor:"#7a7a7a", color:"white", padding: "0.0375rem 0.15rem 0.0375rem 0.15rem", borderRadius:"4px"}}></i> : activation d'une alerte de présence
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row justify-content-center">
-                                {informationsCameras && informationsCameras.map(camera => (
-                                    <CameraInfo key={`prop-${camera.id_permission}`} allowed={camera.allowed} name={camera.name_camera} notification={camera.notification}/>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="modal-footer row justify-content-between">
-                            <button type="button" id="close-informations" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
-                            <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");resetModal();}}>Modifier</button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-            <ModalDetailGrade informationsCameras={informationsCameras} colorModalDetails={colorModalDetails} titleModalDetails={titleModalDetails} activateButton={activateButton} resetModal={resetModal} />
-
-            {/* <div id="addGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                        <div className="modal-header row">
-                            <h5 className="modal-title p-1 col-sm-8 offset-sm-2" id="addGradeModalLabel">Ajouter un grade</h5>
-                        </div>
-                        <div className="modal-body">
-                            <div className="container-fluid">
-                                <div className="row">
-                                    <div className="col-12 col-md-6 order-1">
-                                        <div className="frame-grade-label p-0 m-1 col-11"> 
-                                            <label id="name-grade-label" className="col-form-label" for="name-grade">Nom</label>
-                                        </div>
-                                        <div id="frame-name-grade-input" className="p-0 m-1 col-10">
-                                            <input type="text" id="name-grade" className=" form-control" maxlength="10" value={textNewNameGrade} style={{border:borderNewNameGrade}} onChange={(e) => {setTextNewNameGrade(e.target.value)}}/>
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6 order-3 order-md-2">
-                                        <div className="frame-grade-label p-0 m-1 col-11">
-                                            <label id="color-grade-label" for="color-grade" className="col-form-label">Couleur</label>
-                                        </div>
-                                        <div id="frame-colors" className="row p-0 m-0 rounded col-11">
-                                            <div className="container-final-color col-12">
-                                                <i id={finalIdColor} className="bi bi-square-fill final-color" style={{color:finalColor, fontSize:"175%"}}></i>
-                                            </div>
-                                            {colorGrades && colorGrades.map(color => (
-                                                <div className="container-choosing-color col-1">
-                                                    <i type="button" id={`little-square-${color.id_color}`} className={`bi bi-square-fill ${color.id_color}`} style={{color:color.name_color}} onClick={() => {highlithColor(color.id_color);chooseColor(color.id_color, color.name_color)}}></i>
-                                                </div>
-                                            ))}
-                                            <div className="container-choosing-color col-1">
-                                                <i type="button" className={`bi bi-plus-square square-selection`} style={{color:colorCreation}} onClick={() => setShowColorPicker(showColorPicker => !showColorPicker)}></i>
-                                                {showColorPicker && (<ChromePicker color={colorCreation} onChange={updatedColor => setColorCreation(updatedColor.hex)}></ChromePicker>)}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="error-name" className="errorMessage col-12 col-md-6 order-2 order-md-3">{textErrorName}</div>
-                                    <div id="error-color" className="errorMessage col-12 col-md-6 order-4">{textErrorColor}</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div className="modal-footer row justify-content-between">
-                            <button type="button" id="cancel-creation" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" onClick={resetCreation}>Annuler </button>
-                            <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" onClick={() => createGrade()}>Créer </button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-            <ModalAddGrade nameGrade={textNewNameGrade} borderGrade={borderNewNameGrade} colorGrade={finalColor} idColorGrade={finalIdColor} colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} highlithColor={highlithColor} resetCreation={resetCreation} createGrade={createGrade} chooseColor={chooseColor}/>
-
-            {/* <div id="modifyGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyGradeModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                        <div className="modal-header row justify-content-center">
-                            <h5 id="modifyGradeModalLabel" className="modal-title p-1 shadow-sm rounded col-10 col-sm-11 col-lg-9" style={{backgroundColor:currentColor}}>{currentGrade}</h5>
-                        </div>
-                        <div className="modal-body">
-                            <div className="row justify-content-around">
-                                <div className="row justify-content-center col-11 col-lg-6">
-                                    {informationsCameras && informationsCameras.filter(element => informationsCameras.indexOf(element) < (informationsCameras.length)/2).map(camera => (
-                                        <ActionsCameras name_camera={camera.name_camera} id_camera={camera.id_camera} notification={camera.notification} changeAction={changeAction} changeNotification={changeNotification} allowed={camera.allowed} currentIdGrade={currentIdGrade} />
-                                    ))}
-                                </div>
-                                <div className="row justify-content-center col-11 col-lg-6">
-                                    {informationsCameras && informationsCameras.filter(element => informationsCameras.indexOf(element) >= (informationsCameras.length)/2).map(camera => (
-                                        <ActionsCameras name_camera={camera.name_camera} id_camera={camera.id_camera} notification={camera.notification} changeAction={changeAction} changeNotification={changeNotification} allowed={camera.allowed} currentIdGrade={currentIdGrade} />
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="modal-footer row justify-content-between">
-                            <button type="button" className="btn modal-button bouton-close col-11 col-sm-5" onClick={() => cancelModification()}>Annuler</button>
-                            <button type="button" id="open-desc-grade-1" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir sur desc grade</button>
-                            <button type="button" id="close-modify" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
-                            <button type="button" id="open-confirmation" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-toggle="modal" data-bs-target="#confirmationCancelModal">Cancel</button>
-                            <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" onClick={() => {saveAction();}}>Enregistrer</button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-
-            <ModalModifyGrade currentColor={currentColor} currentIdGrade={currentIdGrade} currentGrade={currentGrade} informationsCameras={informationsCameras} changeAction={changeAction} changeNotification={changeNotification} cancelModification={cancelModification} saveAction={saveAction} />
-
-            {/* <div id="confirmationCancelModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmationCancelModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="layout-modal-cancel row justify-content-center container">
-                                <i id="icon-cancel" className="bi bi-x-circle"></i>
-                                <h4>Voulez-vous vraiment annuler ? </h4>
-                                <p>Toutes vos modifications seront perdues.</p>
-                            </div>
-                        </div>
-                        <div className="modal-footer row justify-content-between">
-                            <button type="button" className="btn modal-button bouton-close col-11 col-sm-5" onClick={() => {activateButton("close-cancel");activateButton("open-modify-grade")}}>Non</button>
-                            <button type="button" id="open-desc-grade-2" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir desc grades</button>
-                            <button type="button" id="open-modify-grade" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal">Revenir modif grades</button>
-                            <button type="button" id="close-cancel" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer tout</button>
-                            <button type="button" className="btn modal-button bouton-warning col-11 col-sm-5" onClick={() => {deleteModification()}}>Oui</button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+            <ModalDetailGrade informationsCameras={informationsCameras} colorModalDetails={colorModalDetails} titleModalDetails={titleModalDetails} activateButton={activateButton} resetModal={resetModal} />           
+            <ModalAddGrade nameGrade={textNewNameGrade} borderGrade={borderNewNameGrade} colorGrade={finalColor} idColorGrade={finalIdColor} colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} resetCreation={resetCreation} createGrade={createGrade} chooseColor={chooseColor}/>
+            <ModalModifyGrade currentColor={currentColor} currentIdGrade={currentIdGrade} currentGrade={currentGrade} informationsCameras={informationsCameras} saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}/>
             <ModalConfirmationCancel activateButton={activateButton} deleteModification={deleteModification} />
 
             <ToastContainer style={{fontSize:"0.6rem"}}/>      
