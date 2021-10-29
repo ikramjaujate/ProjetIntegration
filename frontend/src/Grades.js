@@ -15,6 +15,7 @@ import LayoutGrade from './components/LayoutGrade';
 import CameraInfo from './components/CameraInfo';
 import ActionsCameras from './components/ActionsCameras';
 import {useEffect, useState} from "react" ;
+import ModalAddGrade from './components/ModalAddGrade';
 
 
 function Grades() {
@@ -472,7 +473,7 @@ function Grades() {
                 </div>
             </div>
 
-            <div id="addGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
+            {/* <div id="addGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-header row">
@@ -487,7 +488,6 @@ function Grades() {
                                         </div>
                                         <div id="frame-name-grade-input" className="p-0 m-1 col-10">
                                             <input type="text" id="name-grade" className=" form-control" maxlength="10" value={textNewNameGrade} style={{border:borderNewNameGrade}} onChange={(e) => {setTextNewNameGrade(e.target.value)}}/>
-                                            {/* <i className="bi bi-exclamation-circle" style={{color:"red"}}></i> */}
                                         </div>
                                     </div>
                                     <div className="col-12 col-md-6 order-3 order-md-2">
@@ -521,7 +521,8 @@ function Grades() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+            <ModalAddGrade nameGrade={textNewNameGrade} borderGrade={borderNewNameGrade} colorGrade={finalColor} idColorGrade={finalIdColor} colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} highlithColor={highlithColor} resetCreation={resetCreation} createGrade={createGrade} chooseColor={chooseColor}/>
 
             <div id="modifyGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyGradeModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
