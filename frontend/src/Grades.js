@@ -335,24 +335,22 @@ function Grades() {
         newNotifications = {} ;
     }
 
-
-    // const changeColorCreation = (cc) => {
-    //     console.log("var : ", document.getElementsByClassName("chrome-picker")[0]) ;//updatedColor ;
-    //     //setColorCreation(updatedColor)
-    // }
     
     return (
         <div>
 
             <div className="row justify-content-center">
                 <div id="desription-page" className="row col-11 col-sm-10 col-md-9 col-lg-7">
-                    <div id="title-description" className="col-12">Grade</div>
-                    <div id="description" className="col-12">Cette page vous permet de créer des grades, <br /> ainsi que de voir les détails de ces <br /> derniers !</div>
+                    <div id="title-description" className="col-12">Grades</div>
+                    <div id="description" className="col-12">
+                        Cette page vous permet de créer des grades, <br /> ainsi que de voir les détails de ces <br /> derniers !
+                    </div>
                 </div>
 
                 {informationsGrade && informationsGrade.map(grade => (
                     <div className="col-12" onClick={() => openCameraInfo(grade.color, grade.name_grade, grade.id_grade)}>
-                        <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
+                        <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} 
+                            allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
                     </div>
                 ))}
 
@@ -363,9 +361,13 @@ function Grades() {
                 </div>  
             </div>
 
-            <ModalDetailGrade informationsCameras={informationsCameras} colorModalDetails={colorModalDetails} titleModalDetails={titleModalDetails} activateButton={activateButton} resetModal={resetModal} />           
-            <ModalAddGrade nameGrade={textNewNameGrade} borderGrade={borderNewNameGrade} colorGrade={finalColor} idColorGrade={finalIdColor} colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} resetCreation={resetCreation} createGrade={createGrade} chooseColor={chooseColor}/>
-            <ModalModifyGrade currentColor={currentColor} currentIdGrade={currentIdGrade} currentGrade={currentGrade} informationsCameras={informationsCameras} saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}/>
+            <ModalDetailGrade informationsCameras={informationsCameras} colorModalDetails={colorModalDetails} titleModalDetails={titleModalDetails} 
+                activateButton={activateButton} resetModal={resetModal} />           
+            <ModalAddGrade nameGrade={textNewNameGrade} borderGrade={borderNewNameGrade} colorGrade={finalColor} idColorGrade={finalIdColor} 
+                colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} resetCreation={resetCreation} 
+                createGrade={createGrade} chooseColor={chooseColor}/>
+            <ModalModifyGrade currentColor={currentColor} currentIdGrade={currentIdGrade} currentGrade={currentGrade} informationsCameras={informationsCameras} 
+                saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}/>
             <ModalConfirmationCancel activateButton={activateButton} deleteModification={deleteModification} />
 
             <ToastContainer style={{fontSize:"0.6rem"}}/>      

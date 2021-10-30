@@ -1,5 +1,7 @@
 import '../css/Grades.css';
 import CameraInfo from './CameraInfo';
+import TitleModalGrade from './TitleModalGrade' ;
+import ButtonGrade from './ButtonGrade';
 
 
 const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDetails, activateButton, resetModal}) => {
@@ -8,9 +10,10 @@ const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDet
         <div id="gradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div className="modal-content">
-                    <div className="modal-header row justify-content-center">
+                    {/* <div className="modal-header row justify-content-center">
                         <h5 className="modal-title p-1 shadow-sm rounded col-10 col-sm-11 col-lg-9" id="gradeModalLabel" style={{backgroundColor:colorModalDetails}}>{titleModalDetails}</h5>
-                    </div>
+                    </div> */}
+                    <TitleModalGrade id="gradeModalLabel" bgColor={colorModalDetails} text={titleModalDetails} />
                     <div className="modal-body">
                         <div className="row justify-content-center">
                             <div className="layout-legend col-10 col-lg-9">
@@ -32,8 +35,10 @@ const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDet
                         </div>
                     </div>
                     <div className="modal-footer row justify-content-between">
-                        <button type="button" id="close-informations" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
-                        <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");resetModal();}}>Modifier</button>
+                        {/* <button type="button" id="close-informations" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button> */}
+                        {/* <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");resetModal();}}>Modifier</button> */}
+                        <ButtonGrade id="close-informations" className="bouton-close" text="Fermer" dataDismiss="modal" ariaLabel="Close" />
+                        <ButtonGrade className="bouton-action" text="Modifier" targetToggle="#modifyGradeModal" dataToggle="modal" func1={activateButton} param1="close-informations" func2={resetModal} />
                     </div>
                 </div>
             </div>

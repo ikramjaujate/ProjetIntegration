@@ -120,7 +120,9 @@ body {
 }
 /**/
 
-
+.switch-camera-grade .form-switch .form-check-input:hover {
+    cursor:pointer;
+}
 /*Creation of a grade*/
 #layout-add {
     margin-bottom: 1rem;
