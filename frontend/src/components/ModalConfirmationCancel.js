@@ -4,7 +4,6 @@ import ButtonGrade from './ButtonGrade';
 
 const ModalConfirmationCancel = ({activateButton, deleteModification}) => {
 
-    console.log('activatebut : ', activateButton);
     return (
         <div id="confirmationCancelModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmationCancelModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
