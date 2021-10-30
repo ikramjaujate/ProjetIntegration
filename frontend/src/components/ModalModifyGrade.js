@@ -60,9 +60,6 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
         <div id="modifyGradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyGradeModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div className="modal-content">
-                    {/* <div className="modal-header row justify-content-center">
-                        <h5 id="modifyGradeModalLabel" className="modal-title p-1 shadow-sm rounded col-10 col-sm-11 col-lg-9" style={{backgroundColor:currentColor}}>{currentGrade}</h5>
-                    </div> */}
                     <TitleModalGrade id="gradeModalLabel" bgColor={currentColor} text={currentGrade} />
                     <div className="modal-body">
                         <div className="row justify-content-around">
