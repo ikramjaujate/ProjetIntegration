@@ -3,9 +3,6 @@ import '../css/Grades.css';
 
 const ButtonGrade = ({id, className, text, targetToggle, dataToggle, dataDismiss, ariaLabel, func1, param1, func2, param2}) => {
 
-    console.log("func1 : ", func1) ;
-    console.log("func2 : ", func2);
-
     if (func1 === undefined) {
         return (
             <button type="button" id={id} className={`btn modal-button col-11 col-sm-5 ${className}`} data-bs-target={targetToggle} data-bs-toggle={dataToggle} 

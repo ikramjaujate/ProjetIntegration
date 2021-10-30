@@ -105,7 +105,6 @@ function Grades() {
         });
     }
 
-
     /**
      * Get the different existing colors for grade creation/modification
      * 
@@ -154,7 +153,6 @@ function Grades() {
         }
     }
 
-
     /**
      * Reset of the information specified for the creation of a grade
      * 
@@ -165,7 +163,6 @@ function Grades() {
         chooseColor("empty", "var(--empty-color)")
         setTextNewNameGrade("");
     }
-
 
     /**
      * Adapt the name and color of the modal for the grade on which you want to have details
@@ -338,7 +335,6 @@ function Grades() {
     
     return (
         <div>
-
             <div className="row justify-content-center">
                 <div id="desription-page" className="row col-11 col-sm-10 col-md-9 col-lg-7">
                     <div id="title-description" className="col-12">Grades</div>
@@ -371,7 +367,6 @@ function Grades() {
             <ModalConfirmationCancel activateButton={activateButton} deleteModification={deleteModification} />
 
             <ToastContainer style={{fontSize:"0.6rem"}}/>      
-
         </div>
     );
   }
