@@ -81,7 +81,7 @@ function Modification() {
             }
 
         })
-        
+
 
     }
     /**
@@ -127,7 +127,7 @@ function Modification() {
             .then(res => {
                 setAllGrade(res)
             });
-            }
+    }
 
     const updatePhoto = () => {
         let informations = {
@@ -143,6 +143,7 @@ function Modification() {
                     setAllPhotos(photos)
                     setProfilePhoto(res[0]["pictures"])
                 }
+
                 setProfilePhoto(photos[0])
                 setHasValue(true)
             })
@@ -191,14 +192,14 @@ function Modification() {
     const modificationUp = () => {
         setEtatModification(1)
         allGrade.map(grade =>
-            listeGrade[grade.name_grade] = ( grade.color).replace(/\s+/g, '')
+            listeGrade[grade.name_grade] = (grade.color).replace(/\s+/g, '')
         )
         if (nameGrade in listeGrade) {
             delete listeGrade[nameGrade]
         }
-        
+
     }
-    
+
     /**
      * Counts the number of photos owned by the member.
      * 
@@ -234,9 +235,9 @@ function Modification() {
         fetch(`/api/membres/${userNow}/photos`, informations)
             .then(response => response.json())
             .then(res => {
+                setAllPhotos(res)
                 for (let i in res) {
                     photos.push(res[i]["pictures"])
-                    setAllPhotos(photos)
                     setProfilePhoto(res[0]["pictures"])
                 }
                 setHasValue(true)
@@ -245,14 +246,14 @@ function Modification() {
 
     }
 
-    
-   /**
-   * Eliminate picture of a member
-   * 
-   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
-   * @method PUT
-   * @param {integer} idMember identifier of the member for which we want to eliminate photo
-   */
+
+    /**
+    * Eliminate picture of a member
+    * 
+    * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
+    * @method PUT
+    * @param {integer} idMember identifier of the member for which we want to eliminate photo
+    */
 
     const eliminate = (valeurPhoto) => {
         let photo = allPhotos[valeurPhoto]
@@ -276,22 +277,23 @@ function Modification() {
         })
     }
 
-    
+
 
     const popover = (
         <Popover id="popover-basic">
             <Popover.Body id="popover-test">
-                <i class="bi bi-x-circle pr-2 mb-3" onClick={() => eliminate(0)}></i>
-                <img class="resize" src={allPhotos[0]} alt='' />
-                <i class="bi bi-x-circle" onClick={() => eliminate(1)}></i>
-                <img class="resize" src={allPhotos[1]} alt='' />
-                <img class="resize" src={allPhotos[2]} alt='' />
-
+                <div class="row mw-100">
+                    {allPhotos.map(photo =>
+                        <div class="col">
+                            <i class="bi bi-x-circle-fill pr-2 mb-3" onClick={() => eliminate(photo)}></i>
+                            <img class="resize" src={photo.pictures} alt='' />
+                        </div>)}
+                </div>
             </Popover.Body>
         </Popover>
     );
 
-     const changeUser = async (id) => {
+    const changeUser = async (id) => {
         setUserNow(id);
         nomMembre(id);
         gradeMembre(id);
@@ -304,21 +306,20 @@ function Modification() {
         window.location.href = '/modification'
     }
 
-     /**
-     *  Change grade of a member
-     * 
-     * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
-     * @method PUT
-     * @param {integer} idMember identifier of the member for which we want to change the grade
-     */
+    /**
+    *  Change grade of a member
+    * 
+    * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
+    * @method PUT
+    * @param {integer} idMember identifier of the member for which we want to change the grade
+    */
     const modificationChoixGrade = (idGrade) => {
-        console.log("vous avez choisi " + idGrade)
         fetch(`/api/membres/${idGrade}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({userNow })
+            body: JSON.stringify({ userNow })
         }).then((response) => {
             console.log(response)
             if (response.status === 200) {
@@ -337,7 +338,7 @@ function Modification() {
         <>
             <ToastContainer style={{ fontSize: "0.6rem" }} />
 
-            <button type="button" onClick={() => {changeUser(1);}} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button type="button" onClick={() => { changeUser(1); }} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 User 1
             </button>
             <button type="button" onClick={() => changeUser(2)} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -359,6 +360,7 @@ function Modification() {
                             <div class="hovereffect">
 
                                 <div class="row">
+
                                     <div class="col">
 
                                         <ImgContainer>
@@ -376,9 +378,9 @@ function Modification() {
                             </div>
 
                             <div class="tool">
-                                {etatModification === 0 ? <p class="test"> {nameGrade.toUpperCase()} <i onClick={modificationUp} className="bi bi-pencil-square" style={{ color: '#707070', 'background': color,"backgroundSize" : "10px" ,fontSize: "80%", "textAlign": "right", "paddingRight": '10px ', "paddingLeft": "4px" }}></i></p>
-                                    : allGrade.map(grade => ( grade.name_grade !== nameGrade ?
-                                        <i key={grade.name_grade} onClick={() => {modificationChoixGrade(grade.id_grade);}} className="bi bi-person-square" style={{ color:  grade.color, "border" :"10px black",'background': color, fontSize: "100%", "textAlign": "right", "margin" : "10px" }}></i> : ''))
+                                {etatModification === 0 ? <p class="test"> {nameGrade.toUpperCase()} <i onClick={modificationUp} className="bi bi-pencil-square" style={{ color: '#707070', 'background': color, "backgroundSize": "10px", fontSize: "80%", "textAlign": "right", "paddingRight": '10px ', "paddingLeft": "4px" }}></i></p>
+                                    : allGrade.map(grade => (grade.name_grade !== nameGrade ?
+                                        <i key={grade.name_grade} onClick={() => { modificationChoixGrade(grade.id_grade); }} className="bi bi-person-square" style={{ color: grade.color, "border": "10px black", 'background': color, fontSize: "100%", "textAlign": "right", "margin": "10px" }}></i> : ''))
                                 }
                             </div>
 
@@ -395,7 +397,7 @@ function Modification() {
                                 buttonsAlign='before'
                             />
                         </div>
-                        
+
 
                     </div>
                 </div>
