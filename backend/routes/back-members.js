@@ -224,6 +224,30 @@ module.exports = function (app, client) {
       response.status(200).json(results.rows)
     })
   })
+  /**
+   *  Update grade from a member
+   * 
+   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
+   * @method PUT
+   * @param {integer} idMember identifier of the member for which we want to change the grade
+   */
+
+   app.put('/api/membres/:idGrade', (request, response) => {
+
+    const idGrade = request.params.idGrade;
+    const userNow = request.body.userNow
+
+    let query = "update member set id_grade = ($1)   \ \
+    where id_member = ($2)" ;
+    client.query(query, [idGrade, userNow ], (error, results) => {
+      if (error) {
+      }
+      response.status(200)
+    })
+    response.send({ message: 'ok' });
+  })
+
+
 
 
 
