@@ -251,12 +251,12 @@ function Modification() {
     * Eliminate picture of a member
     * 
     * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
-    * @method PUT
+    * @method DELETE
     * @param {integer} idMember identifier of the member for which we want to eliminate photo
     */
 
-    const eliminate = (valeurPhoto) => {
-        let photo = allPhotos[valeurPhoto]
+    const eliminate = (photo) => {
+        console.log(photo)
         fetch(`/api/membres/${userNow}/eliminate/photo`, {
             method: 'DELETE',
             headers: {
@@ -267,8 +267,8 @@ function Modification() {
             console.log(response)
             if (response.status === 200) {
                 toast.success("Vous venez d'effacer la photo", optionsToast);
-                updatePhoto()
-                countPhoto()
+                photoMembre(userNow)
+                countPhoto(userNow)
             }
             else {
                 toast.error("Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous");
@@ -285,7 +285,7 @@ function Modification() {
                 <div class="row mw-100">
                     {allPhotos.map(photo =>
                         <div class="col">
-                            <i class="bi bi-x-circle-fill pr-2 mb-3" onClick={() => eliminate(photo)}></i>
+                            <i class="bi bi-x-circle-fill pr-2 mb-3" onClick={() => eliminate(photo.pictures)}></i>
                             <img class="resize" src={photo.pictures} alt='' />
                         </div>)}
                 </div>
