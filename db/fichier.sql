@@ -5,40 +5,58 @@ GRANT ALL PRIVILEGES ON DATABASE ProjetIntegration TO postgres;
 
 \c ProjetIntegration;
 
+CREATE TABLE IF NOT EXISTS public.status
+(
+    id_status SERIAL NOT NULL,
+    name_status VARCHAR(15) NOT NULL,
+    PRIMARY KEY (id_status)
+);
+
+ALTER TABLE public.status
+    OWNER to postgres;
+
+INSERT INTO status(name_status)
+VALUES 
+('ON'),
+('OFF'),
+('DISCONNECTED');
+
+
 CREATE TABLE IF NOT EXISTS public.camera
 (
     id_camera SERIAL NOT NULL,
-    name_camera varchar(10) NOT NULL,
-    PRIMARY KEY (id_camera)
+    name_camera VARCHAR(10) NOT NULL,
+	id_status INTEGER NOT NULL,
+    PRIMARY KEY (id_camera),
+	FOREIGN KEY (id_status) REFERENCES status(id_status)
 );
 
 ALTER TABLE public.camera
-    OWNER to postgres;
+    OWNER to postgres;	
 	
-	
-INSERT INTO camera(name_camera)
+INSERT INTO camera(name_camera, id_status)
 VALUES 
-('CAFET'),
-('LOUNGE'),
-('SREU1'),
-('SREU2'),
-('SREU3'),
-('SERVERROOM'),
-('ACCEUIL'),
-('WC'),
-('ENTREESUD'),
-('ENTRENORD');
+('CAFET', 1),
+('LOUNGE', 1),
+('SREU1', 2),
+('SREU2', 3),
+('SREU3', 2),
+('SERVERROOM', 3),
+('ACCEUIL', 2),
+('WC', 2),
+('ENTREESUD', 1),
+('ENTRENORD', 1);
+
+
 CREATE TABLE IF NOT EXISTS public.color
 (
     id_color SERIAL NOT NULL,
-    name_color char(25) NOT NULL,
+    name_color VARCHAR(25) NOT NULL,
     PRIMARY KEY (id_color)
 );
 
 ALTER TABLE public.color
     OWNER to postgres;
-
-
 
 INSERT INTO color(name_color)
 VALUES 
@@ -52,10 +70,12 @@ VALUES
 ('#E6EE9C'),
 ('#FFE0B2'),
 ('#E1BEE7');
+
+
 CREATE TABLE IF NOT EXISTS public.grade
 (
     id_grade SERIAL NOT NULL,
-    name_grade varchar(255) NOT NULL,
+    name_grade VARCHAR(255) NOT NULL,
 	id_color integer NOT NULL,
     PRIMARY KEY (id_grade),
 	FOREIGN KEY (id_color) REFERENCES color(id_color)
@@ -63,9 +83,6 @@ CREATE TABLE IF NOT EXISTS public.grade
 
 ALTER TABLE public.grade
     OWNER to postgres;
-	
-	
-	
 	
 INSERT INTO grade(name_grade, id_color)
 VALUES 
@@ -88,7 +105,6 @@ CREATE TABLE IF NOT EXISTS public.permission
 
 ALTER TABLE public.permission
     OWNER to postgres;
-	
 	
 INSERT INTO permission(id_grade, id_camera, allowed, notification)
 VALUES 
@@ -128,9 +144,8 @@ CREATE TABLE IF NOT EXISTS public.member
 (
     id_member SERIAL NOT NULL,
     id_grade INTEGER NOT NULL,
-	first_name CHAR(25) NOT NULL,
-	last_name CHAR(25) NOT NULL,
-	pictures CHAR(1024) NOT NULL,
+	first_name VARCHAR(25) NOT NULL,
+	last_name VARCHAR(25) NOT NULL,
     PRIMARY KEY (id_member),
 	FOREIGN KEY (id_grade) REFERENCES grade(id_grade)
 );
@@ -138,43 +153,48 @@ CREATE TABLE IF NOT EXISTS public.member
 ALTER TABLE public.member
     OWNER to postgres;
 	
-	
-INSERT INTO member(id_grade, first_name, last_name, pictures)
+INSERT INTO member(id_grade, first_name, last_name)
 VALUES 
-(1, 'Jean', 'Ab', 'example.png'),
-(3, 'Louise', 'Cd', 'example.png'),
-(3, 'Marie', 'Ef', 'example.png'),
-(2, 'Luc', 'Gh', 'example.png'),
-(1, 'Alain', 'Ij', 'example.png'),
-(2, 'Henri', 'Kl', 'example.png'),
-(3, 'Eva', 'Mn', 'example.png'),
-(3, 'Clara', 'Op', 'example.png'),
-(3, 'Marion', 'Qr', 'example.png'),
-(2, 'Théo', 'St', 'example.png'),
-(2, 'Julien', 'Uv', 'example.png'),
-(3, 'Clément', 'Wx', 'example.png'),
-(3, 'Laurent', 'Yz', 'example.png'),
-(3, 'Laurence', 'Az', 'example.png'),
-(3, 'Pilou', 'By', 'example.png');
+(1, 'Jean', 'Ab'),
+(3, 'Louise', 'Cd'),
+(3, 'Marie', 'Ef'),
+(2, 'Luc', 'Gh'),
+(1, 'Alain', 'Ij'),
+(2, 'Henri', 'Kl'),
+(3, 'Eva', 'Mn'),
+(3, 'Clara', 'Op'),
+(3, 'Marion', 'Qr'),
+(2, 'Théo', 'St'),
+(2, 'Julien', 'Uv'),
+(3, 'Clément', 'Wx'),
+(3, 'Laurent', 'Yz'),
+(3, 'Laurence', 'Az'),
+(3, 'Pilou', 'By');
+
 
 CREATE TABLE public.photos
 (
     id_member SERIAL NOT NULL,
-    pictures CHAR(1024) NOT NULL,
+    pictures VARCHAR(1024) NOT NULL,
 	FOREIGN KEY (id_member) REFERENCES member(id_member)
 );
 
 INSERT INTO photos(id_member, pictures)
 VALUES 
 (1, 'ikram1.jpg'),
-(1, 'ikram2.jpg');
+(2, 'ikram2.jpg');
+	
 	
 CREATE TABLE IF NOT EXISTS public.personal
 (
-    username char(25) NOT NULL,
-    password char(25) NOT NULL,
+    username VARCHAR(25) NOT NULL,
+    password VARCHAR(25) NOT NULL,
     PRIMARY KEY (username)
 );
 
 ALTER TABLE public.personal
     OWNER to postgres;
+
+
+
+

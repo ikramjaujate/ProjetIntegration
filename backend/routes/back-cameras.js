@@ -16,4 +16,15 @@ module.exports = function(app,client) {
      
     })
   })
- }
+
+app.get('/api/cameras', (req, res) =>{
+
+  let query = "select id_camera, name_camera, name_status \
+  from camera as CA \
+  join status as ST on CA.id_status = ST.id_status" ;
+  client.query(query, (err, result) => {
+      if(err) throw err ;
+      res.send(result.rows);
+    })
+  })
+}
