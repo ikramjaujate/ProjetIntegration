@@ -1,0 +1,13 @@
+.cadreBouton{
+    background-color: hsl(180, 40%, 41%) !important;
+    /* border:grey solid !important ; */
+    color:rgb(5, 5, 5);
+    margin-bottom:20px;
+    border-radius:8px;
+    color:rgb(247, 246, 245);
+    
+}
+.cadreBouton:hover{
+    border:rgb(134, 134, 199) !important;
+    background-color: rgb(162, 162, 167) !important;
+}
