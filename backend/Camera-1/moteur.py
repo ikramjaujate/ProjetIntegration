@@ -6,11 +6,14 @@ from flask.wrappers import Response
 import numpy as np
 import os # pour importer toutes les images d'un coup
 from datetime import datetime
-import time
+
 app = Flask(__name__)
 
+
+# code pour définir le moteur / led
 import RPi.GPIO as GPIO
 import time
+
 
 
 #Set function to calculate percent from angle
@@ -25,26 +28,6 @@ def angle_to_percent (angle) :
     angle_as_percent = angle * ratio
 
     return start + angle_as_percent
-
-
-
-
-#start PWM running, but with value of 0 (pulse off)
-
-'''
-print ("Turning back to 90 degrees for 2 seconds")
-servo1.ChangeDutyCycle(12)
-time.sleep(0.5)
-servo1.ChangeDutyCycle(0)
-time.sleep(3)
-
-#turn back to 0 degrees
-print ("Turning back to 0 degrees")
-servo1.ChangeDutyCycle(2)
-time.sleep(0.5)
-servo1.ChangeDutyCycle(0)'''
-    
-
 
 
 
@@ -103,25 +86,20 @@ def gen(captur):
     GPIO.setup(12,GPIO.OUT)
     servo1 = GPIO.PWM(12,50) # Note 11 is pin, 50 = 50Hz pulse
     servo1.start(0)
+
+    # Définition LED Rouge => refusé
+    LEDRefuse = 7
+    GPIO.setup(LEDRefuse,GPIO.OUT)
     
+     # Définition LED Vert => accepté
+    LEDaccepte = 8
+    GPIO.setup(LEDaccepte,GPIO.OUT)
+  
     
     out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
     temps =round(time.time())-20
     tempsFermeture =round(time.time())-20
-    
-    '''
-    print ("Turning back to 90 degrees for 2 seconds")
-    servo1.ChangeDutyCycle(12)
-    time.sleep(0.5)
-    servo1.ChangeDutyCycle(0)
-    time.sleep(3)
 
-    #turn back to 0 degrees
-    print ("Turning back to 0 degrees")
-    servo1.ChangeDutyCycle(2)
-    time.sleep(0.5)
-    servo1.ChangeDutyCycle(0)
-    '''
     
     while True:
         success, img = cap.read()
@@ -147,8 +125,8 @@ def gen(captur):
         facesCurFrame = face_recognition.face_locations(imgS)
         encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
         if (round(time.time()) >= tempsFermeture+10) :
-                
-            servo1.ChangeDutyCycle(2)
+            GPIO.output(LEDaccepte, GPIO.LOW)  #eteindre la led d'acces  
+            servo1.ChangeDutyCycle(2) #refermer
             time.sleep(0.5)
             servo1.ChangeDutyCycle(0)
             print("je referme")
@@ -165,9 +143,11 @@ def gen(captur):
 
             if faceDis[matchIndex]< 0.50:
                 if (round(time.time()) >= temps +20) :
-                    servo1.ChangeDutyCycle(12)
+                    GPIO.output(LEDRefuse, GPIO.LOW)
+                    GPIO.output(LEDaccepte, GPIO.HIGH)
+                    servo1.ChangeDutyCycle(12) # mettre a 180°
                     time.sleep(0.5)
-                    servo1.ChangeDutyCycle(0)
+                    servo1.ChangeDutyCycle(0) # relacher le moteur
                     tempsFermeture =round(time.time())
                     
                     temps = round(time.time())
@@ -184,6 +164,7 @@ def gen(captur):
                 #time.sleep(5)
                 
             else: 
+                GPIO.output(LEDRefuse, GPIO.HIGH)
                 name = 'Unknown'
                 #print(name)
                 y1,x2,y2,x1 = faceLoc
@@ -204,18 +185,32 @@ def gen(captur):
     GPIO.cleanup()
 
 
-
 @app.route('/video')
 def video():
     global cap
-    return Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
+    res = Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
+    #new_headers = [('Cache-Control', 'no-store')]
+    #new_headers = [('Cache-Control', 'no-cache')]
+    res.headers['Cache-Control'] = 'no-store'
+    return res
 
 @app.route('/photo')
 def photo():
     global cap
     return Response(gen('photo'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
 
-
+@app.route('/shutdown')
+def shutdown():
+    global flag, cap
+    flag = 1
+    return ""
+    
+@app.route('/up')
+def up():
+    global flag, cap
+    flag = 0
+    #cap = cv2.VideoCapture(0)
+    return ""
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='6060',debug=True)
