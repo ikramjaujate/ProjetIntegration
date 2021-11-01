@@ -190,6 +190,7 @@ module.exports = function (app, client) {
 
     const idMember = request.params.idMember;
     const photo = request.body.photo
+    //console.log(photo)
 
     let query = "delete from photos \
     where id_member = ($1) and pictures = ($2)" ;
@@ -197,7 +198,6 @@ module.exports = function (app, client) {
     client.query(query, [idMember, photo], (error, results) => {
       if (error) {
       }
-      response.status(200)
     })
     response.send({ message: 'ok' });
   })
