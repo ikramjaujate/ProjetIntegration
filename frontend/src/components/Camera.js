@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 function Camera() {
-    const [etat, setEtat] = useState("http://172.20.10.3:6060/video")
+    const [etat, setEtat] = useState("http://0.0.0.0:6060/video")
     const [statusCam, setStatusCam] = useState(false) ;
     const [cameras, setCameras] = useState(null) ;
     const optionsToast = {
@@ -25,10 +25,9 @@ function Camera() {
           <button onClick={closeToast}>Close</button>
         </div>
     )
-
     const Msg2 = () => (
         <div>
-          <img id="test2" src="./backend/Reconaissance/images/ikram1.jpg" alt="video surveillance" width="640" height="480" />
+          <img id="test2" src="image-client/frame_2021-11-0118:21:33.jpeg" alt="video surveillance" width="640" height="480" />
         </div>
     )
 
@@ -49,20 +48,20 @@ function Camera() {
 
     function Allumer() {
         console.log("up")
-        fetch("http://172.20.10.3:6060/up", {
+        fetch("http://0.0.0.0:6060/up", {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             },
             mode: 'no-cors'
         }).then(res => res.json).then(data => {
-            setEtat("http://172.20.10.3:6060/video")
+            setEtat("http://0.0.0.0:6060/video")
         })
     }
 
     function Capture() {
         //event.preventDefault()
         console.log("capture")
-        fetch("http://172.20.10.3:6060/photo", {
+        fetch("http://0.0.0.0:6060/photo", {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             },
@@ -77,7 +76,7 @@ function Camera() {
 
     function Eteindre() {
         console.log("éteindre")
-        fetch("http://172.20.10.3:6060/shutdown", {
+        fetch("http://0.0.0.0:6060/shutdown", {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             },
