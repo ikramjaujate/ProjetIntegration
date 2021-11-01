@@ -26,10 +26,16 @@ function Camera() {
         </div>
     )
 
+    const Msg2 = () => (
+        <div>
+          <img id="test2" src="./backend/Reconaissance/images/ikram1.jpg" alt="video surveillance" width="640" height="480" />
+        </div>
+    )
+
     useEffect(()=> {
         // toast.success("../../backend/Reconaissance/images/ikram1.jpg", optionsToast);
         //toast.success("<a href='test'>link text</a>", optionsToast);
-        toast(<Msg />) ;
+        toast(<Msg2 />) ;
         fetch("/api/cameras", {
             headers: {
                 'Access-Control-Allow-Origin': '*'
