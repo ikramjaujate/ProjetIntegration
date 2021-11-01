@@ -1,5 +1,5 @@
 from flask import Flask, Response, render_template, request
-#from flask_cors import CORS
+from flask_cors import CORS
 import face_recognition
 import cv2
 from flask.wrappers import Response
@@ -9,7 +9,7 @@ from datetime import datetime
 import time
 app = Flask(__name__)
 
-#cors = CORS(app, resources={r"/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 path = './backend/Reconnaissance/images'
 images = []     # listes contenant toutes les images
@@ -138,7 +138,9 @@ def video():
 @app.route('/photo')
 def photo():
     global cap
-    return Response(gen('photo'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
+    res = Response(gen('photo'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
+    res.headers['Cache-Control'] = 'no-store'
+    return res
 
 @app.route('/shutdown')
 def shutdown():

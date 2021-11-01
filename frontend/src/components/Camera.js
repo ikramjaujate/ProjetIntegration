@@ -1,16 +1,35 @@
 
 
 import { useEffect, useState } from "react";
-
-
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function Camera() {
     const [etat, setEtat] = useState("http://172.20.10.3:6060/video")
     const [statusCam, setStatusCam] = useState(false) ;
     const [cameras, setCameras] = useState(null) ;
+    const optionsToast = {
+        autoClose: 8000,
+        position: "top-right",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true, 
+        theme:"colored"
+    };
+
+    const Msg = ({ closeToast, toastProps }) => (
+        <div>
+          Lorem ipsum dolor {toastProps.position}
+          <button>Retry</button>
+          <button onClick={closeToast}>Close</button>
+        </div>
+    )
 
     useEffect(()=> {
+        // toast.success("../../backend/Reconaissance/images/ikram1.jpg", optionsToast);
+        //toast.success("<a href='test'>link text</a>", optionsToast);
+        toast(<Msg />) ;
         fetch("/api/cameras", {
             headers: {
                 'Access-Control-Allow-Origin': '*'
@@ -37,8 +56,17 @@ function Camera() {
     function Capture() {
         //event.preventDefault()
         console.log("capture")
-        fetch("http://172.20.10.3:6060/photo")
-
+        fetch("http://172.20.10.3:6060/photo", {
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            mode: 'no-cors'
+        })
+        .then(res => res.json)
+        .then(data => {
+            toast.success("../../backend/Reconaissance/images/ikram1.jpg", optionsToast);
+        })
+        
     }
 
     function Eteindre() {
@@ -90,6 +118,8 @@ function Camera() {
 
                 </div >
             </div>
+            <ToastContainer style={{fontSize:"0.6rem"}}/>      
+
         </>
 
 
