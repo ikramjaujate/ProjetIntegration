@@ -33,7 +33,7 @@ const client = new Client({
   host: "localhost",
   port: 5432,
   user: "postgres",
-  password: "123",
+  password: "coda123",
   database: "ProjetIntegration"
 })
 
