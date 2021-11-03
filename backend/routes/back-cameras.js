@@ -1,4 +1,5 @@
 
+
 module.exports = function(app,client) {
      /**
  * Récupère à l'aide d'un GET toutes les caméra et leur état 
@@ -27,4 +28,15 @@ app.get('/api/cameras', (req, res) =>{
       res.send(result.rows);
     })
   })
+  app.get('/api/pictureScreenshoot', (req, res) =>{
+    const fs = require('fs');
+    let list = []
+    fs.readdir('../frontend/public/image-client/', (err, files) => {
+      files.forEach(file => {
+        list.push(file)
+      });
+      res.send({"picture" : list[list.length -1]})
+    });
+    
+    })
 }

@@ -8,6 +8,9 @@ function Camera() {
     const [etat, setEtat] = useState("http://0.0.0.0:6060/video")
     const [statusCam, setStatusCam] = useState(false) ;
     const [cameras, setCameras] = useState(null) ;
+    const [screenshoot, setScreenshoot] = useState(null);
+    
+    
     const optionsToast = {
         autoClose: 8000,
         position: "top-right",
@@ -27,14 +30,13 @@ function Camera() {
     )
     const Msg2 = () => (
         <div>
-          <img id="test2" src="image-client/frame_2021-11-0118:21:33.jpeg" alt="video surveillance" width="640" height="480" />
+          <img id="test2" src="image-client/frame_2021-11-0316:02:28.jpeg" alt="video surveillance" width="640" height="480" />
         </div>
     )
 
     useEffect(()=> {
-        // toast.success("../../backend/Reconaissance/images/ikram1.jpg", optionsToast);
-        //toast.success("<a href='test'>link text</a>", optionsToast);
-        toast(<Msg2 />) ;
+
+        
         fetch("/api/cameras", {
             headers: {
                 'Access-Control-Allow-Origin': '*'
@@ -69,7 +71,18 @@ function Camera() {
         })
         .then(res => res.json)
         .then(data => {
-            toast.success("../../backend/Reconaissance/images/ikram1.jpg", optionsToast);
+            fetch("/api/pictureScreenshoot", {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' 
+                }
+            }).then(res => res.json())
+            .then(data => {
+                console.log(data.picture)
+                //toast(<Msg2 />) ;
+                
+            })
+
+            //toast.success("../../backend/Reconaissance/images/ikram1.jpg", optionsToast);
         })
         
     }
