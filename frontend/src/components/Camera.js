@@ -1,9 +1,11 @@
 
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Zoom } from 'react-toastify';
 
-
+import '../css/Camera.css';
 function Camera() {
     const [etat, setEtat] = useState("http://0.0.0.0:6060/video")
     const [statusCam, setStatusCam] = useState(false) ;
@@ -12,27 +14,14 @@ function Camera() {
     
     
     const optionsToast = {
-        autoClose: 8000,
-        position: "top-right",
+        autoClose: 80000000000,
+        position: "bottom-right",
         hideProgressBar: false,
-        closeOnClick: true,
+        closeOnClick: false,
         pauseOnHover: true,
         draggable: true, 
         theme:"colored"
     };
-
-    const Msg = ({ closeToast, toastProps }) => (
-        <div>
-          Lorem ipsum dolor {toastProps.position}
-          <button>Retry</button>
-          <button onClick={closeToast}>Close</button>
-        </div>
-    )
-    const Msg2 = () => (
-        <div>
-          <img id="test2" src="image-client/frame_2021-11-0316:02:28.jpeg" alt="video surveillance" width="640" height="480" />
-        </div>
-    )
 
     useEffect(()=> {
 
@@ -77,12 +66,15 @@ function Camera() {
                 }
             }).then(res => res.json())
             .then(data => {
-                console.log(data.picture)
-                //toast(<Msg2 />) ;
+                setScreenshoot(data.picture)
+                const Msg2 = () => (
+                    <div >
+                      <img class="layout-screenshot"  data-bs-toggle="modal" data-bs-target="#openscreenshotmodal" src={`image-client/${data.picture}`} alt="video surveillance" width="100" height="auto" />
+                    </div>
+                )
+                toast.info(<Msg2 />, optionsToast) ;
                 
             })
-
-            //toast.success("../../backend/Reconaissance/images/ikram1.jpg", optionsToast);
         })
         
     }
@@ -111,6 +103,7 @@ function Camera() {
 
     return (
         <>
+
             <div class="row align-items-center">
                 <div class="m-auto px-2">
                     <h1>test</h1>
@@ -137,7 +130,17 @@ function Camera() {
                 </div >
             </div>
             <ToastContainer style={{fontSize:"0.6rem"}}/>      
+            <div id="openscreenshotmodal" className="modal fade"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
+            <div className="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                <div className="modal-content">
+                    
+                    <div className="modal-body">
+                    <img class="modal-screenshot" src={`image-client/${screenshoot}`} alt="video surveillance" width="100%" height="100%" />
+                    </div>
 
+                </div>
+            </div>
+        </div>
         </>
 
 
