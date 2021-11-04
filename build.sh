@@ -17,3 +17,4 @@ cp .env ./Application/www/backend
 cp docker/docker-compose.yml ./Application/
 
 echo 'Success'
+
