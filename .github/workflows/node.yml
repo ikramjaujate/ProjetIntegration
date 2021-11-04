@@ -59,7 +59,7 @@ jobs:
           chmod +x build.sh
           ./build.sh
       
-      - name: Copy app folder content to remote
+      - name: Application folder to remote
         uses: garygrossgarten/github-action-scp@release
         with:
           local: Application
@@ -68,7 +68,17 @@ jobs:
           port: ${{ secrets.VPS_PORT}}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
-      
+
+      - name: Pass build
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: frontend/build
+          remote: Application
+          host: ${{ secrets.VPS_HOST }}
+          port: ${{ secrets.VPS_PORT}}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+
       
       - name: Restart services
         uses: appleboy/ssh-action@master
