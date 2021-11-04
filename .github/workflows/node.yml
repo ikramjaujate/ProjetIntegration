@@ -79,4 +79,4 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
             cd Application
-            docker-compose down && docker-compose up -d
+            ls
