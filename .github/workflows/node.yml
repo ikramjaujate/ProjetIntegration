@@ -76,7 +76,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           port: ${{ secrets.VPS_PORT}}
           username: ${{ secrets.VPS_USER }}
-          passphrase: ${{ secrets.VPS_PASSPHRASE }}
+          password: ${{ secrets.VPS_PASSWORD }}
           script: |
             cd Application
             docker-compose down && docker-compose up -d
