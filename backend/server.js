@@ -5,7 +5,7 @@ const {Client} = require("pg");
 const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
-
+var path = require('path');
 // Const http = require('http')
 /*
  * Const cors = require('cors')
@@ -49,14 +49,16 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   next()
 })
+
 //const __dirname = path.resolve();
 app.use(express.static(__dirname + '/build/'));
-
+console.log(__dirname)
 // ROUTE FOR API
 grade(app, client);
 cameras(app, client);
 members(app, client);
 privatedata(app, client);
+
 app.get('*', (req, res) => {
   return res.sendFile(path
     .join(__dirname + '/build/', 'index.html'))
