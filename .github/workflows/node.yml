@@ -56,7 +56,7 @@ jobs:
       - name: Build application
         working-directory: .
         run: |
-          chmod +x .build.sh
+          chmod +x build.sh
           ./build.sh
       
       - name: Copy app folder content to remote
