@@ -60,14 +60,14 @@ jobs:
           ./build.sh
       
       - name: Copy app folder content to remote
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        local: Application
-        remote: Application
-        host: ${{ secrets.VPS_HOST }}
-        port: ${{ secrets.VPS_PORT}}
-        username: ${{ secrets.VPS_USER }}
-        password: ${{ secrets.VPS_PASSWORD }}
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: Application
+          remote: Application
+          host: ${{ secrets.VPS_HOST }}
+          port: ${{ secrets.VPS_PORT}}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
       
       - name: Restart services
         uses: appleboy/ssh-action@master
