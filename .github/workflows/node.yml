@@ -77,7 +77,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
-            mv .env Application/www/backend
+            cp .env Application/www/backend
             cd Application
             docker stop app
             docker stop database
