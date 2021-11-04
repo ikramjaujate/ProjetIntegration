@@ -1,0 +1,42 @@
+version: '2'
+
+services:
+
+  app:
+    image: node:14.15.1
+    container_name: app
+    depends_on:
+      - "db"
+    restart: unless-stopped
+    volumes:
+      - ./www/backend:/var/www/backend
+    networks:
+      vps-projet-network:
+        ipv4_address: 192.168.10.10
+    command: bash -c "cd /var/www/backend && npm i && node server.js"
+  db:
+    image: postgres
+    container_name: database
+    restart: always
+    environment:
+        - POSTGRES_DB=ProjetIntegration
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=123
+    logging:
+      options:
+        max-size: 10m
+        max-file: '3'
+    networks:
+      vps-projet-network:
+        ipv4_address: 192.168.10.11
+    volumes :
+      - ./db/fichier.sql:/docker-entrypoint-initdb.d/fichier.sql
+
+networks:
+  vps-projet-network:
+    name: vps-projet-network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.10.0/24
+          gateway: 192.168.10.1
