@@ -6,7 +6,7 @@ cd frontend
 npm run build
 cd ..
 cp -R backend ./Application/www
-mv frontend/build ./Application/www/backend
+cp -R frontend/build ./Application/www/backend
 rm -rf ./Application/www/backend/node_modules 
 rm -rf ./Application/www/backend/.env 
 
