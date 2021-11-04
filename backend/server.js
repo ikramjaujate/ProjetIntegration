@@ -4,6 +4,7 @@ const express = require("express");
 const {Client} = require("pg");
 const app = express();
 const dotenv = require("dotenv");
+const path = require('path')
 dotenv.config();
 
 
@@ -22,6 +23,7 @@ const grade = require('./routes/back-grade.js')
 const members = require('./routes/back-members.js')
 const privatedata = require('./routes/back-privatedata.js')
 const cameras = require('./routes/back-cameras.js')
+
 
 const client = new Client({
   host: process.env.DATABASE_HOST,
@@ -50,6 +52,17 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   next()
 })
+//const __dirname = path.resolve();
+app.use(express.static(__dirname + '/build/'));
+// ROUTE FOR API
+grade(app, client);
+cameras(app, client);
+members(app, client);
+privatedata(app, client);
+app.get('*', (req, res) => {
+  return res.sendFile(path
+    .join(__dirname + '/build/', 'index.html'))
+});
 
 client.connect(err => {
   if (err) {
@@ -59,8 +72,4 @@ client.connect(err => {
   }
 })
 
-// ROUTE FOR API
-grade(app, client);
-cameras(app, client);
-members(app, client);
-privatedata(app, client);
+

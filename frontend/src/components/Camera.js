@@ -136,7 +136,7 @@ function Camera() {
                     <div className="modal-content">
 
                         <div className="modal-body">
-                            <img class="modal-screenshot" src={`image-client/${screenshoot}`} alt="video surveillance" width="100%" height="100%" />
+                            {/*<img class="modal-screenshot" src={`image-client/${screenshoot}`} alt="video surveillance" width="100%" height="100%" />*/}
                         </div>
 
                     </div>

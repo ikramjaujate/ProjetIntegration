@@ -182,7 +182,9 @@ CREATE TABLE public.photos
 INSERT INTO photos(id_member, pictures)
 VALUES 
 (1, 'ikram1.jpg'),
-(2, 'ikram2.jpg');
+(1, 'ikram2.jpg'),
+(2, 'corentin1.jpg'),
+(2, 'corentin2.jpg');
 	
 	
 CREATE TABLE IF NOT EXISTS public.personal
