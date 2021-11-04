@@ -5,7 +5,9 @@ mkdir ./Application/www
 cp -R backend ./Application/www
 cd frontend
 npm run build
-mv ./build ../Application/www/backend
+cp -R ./build ../Application/www/backend
+ls -a 
+
 
 cd ..
 
@@ -18,5 +20,6 @@ cp ./.env ./Application/www/backend
 
 cp docker/docker-compose.yml ./Application/
 
+ls -a Application/www/backend
 echo 'Success'
 
