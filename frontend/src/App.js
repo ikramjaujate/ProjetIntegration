@@ -7,6 +7,7 @@ import Accueil from './Cam';
 import Secretary from './Secretary.js';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'; 
 import Modification from './components/Modification';
+import Login from './Login';
 function App() {
   return (
     <Router>
@@ -29,6 +30,9 @@ function App() {
             </Route>
             <Route exact path="/modification">
               <Modification/>
+            </Route>
+            <Route exact path="/login">
+              <Login/>
             </Route>
           </Switch>
         </div>

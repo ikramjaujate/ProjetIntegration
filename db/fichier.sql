@@ -195,10 +195,14 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS public.personal
 (
-    username char(25) NOT NULL,
-    password char(25) NOT NULL,
+    username varchar(25) NOT NULL,
+    password varchar(25) NOT NULL,
     PRIMARY KEY (username)
 );
 
 ALTER TABLE public.personal
     OWNER to postgres;
+
+INSERT INTO personal(username, password)
+VALUES 
+('admin', '123');
