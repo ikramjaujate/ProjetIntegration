@@ -19,9 +19,9 @@ services:
     container_name: database
     restart: always
     environment:
-        - POSTGRES_DB=ProjetIntegration
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=123
+        - POSTGRES_DB=ProjetIntegration ${{ secrets.POSTGRES_DB }}
+        - POSTGRES_USER=postgres ${{ secrets.POSTGRES_USER }}
+        - POSTGRES_PASSWORD=123 ${{ secrets.POSTGRES_PASSWORD }}
     logging:
       options:
         max-size: 10m

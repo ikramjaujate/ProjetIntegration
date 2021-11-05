@@ -29,13 +29,6 @@ const client = new Client({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE
 })
-/*const client = new Client({
-  host: "localhost",
-  port: 5432,
-  user: "postgres",
-  password: "123",
-  database: "ProjetIntegration"
-})*/
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
