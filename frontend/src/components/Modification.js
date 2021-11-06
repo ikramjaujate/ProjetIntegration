@@ -282,11 +282,11 @@ function Modification() {
     const popover = (
         <Popover id="popover-basic">
             <Popover.Body id="popover-test">
-                <div class="row mw-100">
+                <div class="row">
                     {allPhotos.map(photo =>
-                        <div class="col">
+                        <div class=" test col">
                             <i class="bi bi-x-circle-fill pr-2 mb-3" onClick={() => eliminate(photo.pictures)}></i>
-                            <img class="resize" src={photo.pictures} alt='' />
+                            <img class="img-thumbnail h-50" src={photo.pictures} alt='' />
                         </div>)}
                 </div>
             </Popover.Body>
