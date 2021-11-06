@@ -39,6 +39,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
             cp .env Application/www/backend
+            cp .env Application
             cd Application
             docker stop app
             docker stop database

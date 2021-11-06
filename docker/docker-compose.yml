@@ -19,9 +19,9 @@ services:
     container_name: database
     restart: always
     environment:
-        - POSTGRES_DB=process.env.POSTGRES_DB
-        - POSTGRES_USER=process.env.POSTGRES_USER
-        - POSTGRES_PASSWORD=process.env.POSTGRES_PASSWORD 
+        - POSTGRES_DB=${POSTGRES_DB}
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD} 
     logging:
       options:
         max-size: 10m
