@@ -89,7 +89,7 @@ background: none;
 font-size: 25px;
 
 }
-.test{
+.affiche{
   font-size: 20px;
 }
 p{
@@ -99,8 +99,11 @@ p{
   margin-bottom: 0%;
 }
 .tool{
- 
-  margin-left: 65.5%;
+  color: white;
+  margin-left: 63.5%;
+}
+.icon{
+  font-size: 10px;
 }
 .col {
   margin-bottom: 0%;

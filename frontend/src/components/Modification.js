@@ -348,13 +348,11 @@ function Modification() {
                 User 3
             </button>
 
-            <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
 
                     <div class="modal-content" style={{ backgroundColor: color }}>
-                        <div class="modal-header" style={{ backgroundColor: color }}>
-                            <button type="button" onClick={dimiss} class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+
                         <div class="modal-body">
 
                             <div class="hovereffect">
@@ -378,9 +376,9 @@ function Modification() {
                             </div>
 
                             <div class="tool">
-                                {etatModification === 0 ? <p class="test"> {nameGrade.toUpperCase()} <i onClick={modificationUp} className="bi bi-pencil-square" style={{ color: '#707070', 'background': color, "backgroundSize": "10px", fontSize: "80%", "textAlign": "right", "paddingRight": '10px ', "paddingLeft": "4px" }}></i></p>
+                                {etatModification === 0 ? <p class="affiche"> {nameGrade.toUpperCase()} <i onClick={modificationUp} className="bi bi-pencil-square" style={{ color: 'white', 'background': color, "backgroundSize": "10px", fontSize: "80%", "textAlign": "right", "paddingRight": '10px ', "paddingLeft": "4px" }}></i></p>
                                     : allGrade.map(grade => (grade.name_grade !== nameGrade ?
-                                        <i key={grade.name_grade} onClick={() => { modificationChoixGrade(grade.id_grade); }} className="bi bi-person-square" style={{ color: grade.color, "border": "10px black", 'background': color, fontSize: "100%", "textAlign": "right", "margin": "10px" }}></i> : ''))
+                                        <i key={grade.name_grade} onClick={() => { modificationChoixGrade(grade.id_grade); }} className="bi bi-person-square" style={{ color: grade.color, "border": "10px black", "fontSize" : "100%",'background': color, "textAlign": "right", "paddingRight": "20px" }}></i> : ''))
                                 }
                             </div>
 
