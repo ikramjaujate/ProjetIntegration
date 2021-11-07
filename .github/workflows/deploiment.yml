@@ -38,6 +38,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
+            cp -R db Application
             cp .env Application/www/backend
             cp .env Application
             cd Application
