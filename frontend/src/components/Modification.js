@@ -348,7 +348,7 @@ function Modification() {
                 User 3
             </button>
 
-            <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
 
                     <div class="modal-content" style={{ backgroundColor: color }}>
@@ -391,7 +391,6 @@ function Modification() {
                                 type="text"
                                 onSave={handleSave}
                                 editing={editing}
-
                                 buttonsAlign='before'
                             />
                         </div>
