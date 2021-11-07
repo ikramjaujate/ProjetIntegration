@@ -22,6 +22,7 @@ VALUES
 ('DISCONNECTED');
 
 
+
 CREATE TABLE IF NOT EXISTS public.camera
 (
     id_camera SERIAL NOT NULL,
