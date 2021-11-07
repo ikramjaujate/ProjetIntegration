@@ -45,7 +45,5 @@ jobs:
             docker stop app
             docker stop database
             docker rm app
-            docker rm database
             docker rmi node:14.15.1
-            docker rmi postgres
             docker-compose up -d
