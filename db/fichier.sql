@@ -49,6 +49,7 @@ VALUES
 ('ENTRENORD', 3);
 
 
+
 CREATE TABLE IF NOT EXISTS public.color
 (
     id_color SERIAL NOT NULL,
