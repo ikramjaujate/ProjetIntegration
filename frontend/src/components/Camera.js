@@ -14,7 +14,7 @@ function Camera() {
 
 
     const optionsToast = {
-        autoClose: 80000000000,
+        autoClose: 5000,
         position: "bottom-right",
         hideProgressBar: false,
         closeOnClick: false,
@@ -68,13 +68,12 @@ function Camera() {
                 }).then(res => res.json())
                     .then(data => {
                         setScreenshoot(data.picture)
-                        const Msg2 = () => (
+                        const ScreenshotToast = () => (
                             <div >
                                 <img class="layout-screenshot" data-bs-toggle="modal" data-bs-target="#openscreenshotmodal" src={`image-client/${data.picture}`} alt="video surveillance" width="100" height="auto" />
                             </div>
                         )
-                        toast.info(<Msg2 />, optionsToast);
-
+                        toast.info(<ScreenshotToast />, optionsToast);
                     })
             })
 
@@ -136,7 +135,7 @@ function Camera() {
                     <div className="modal-content">
 
                         <div className="modal-body">
-                            {/*<img class="modal-screenshot" src={`image-client/${screenshoot}`} alt="video surveillance" width="100%" height="100%" />*/}
+                            <img class="modal-screenshot" src={`image-client/${screenshoot}`} alt="video surveillance" width="100%" height="100%" />
                         </div>
 
                     </div>

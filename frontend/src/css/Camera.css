@@ -1,5 +1,9 @@
 .Toastify__toast-theme--colored.Toastify__toast--info {
     background-color: #457eaf!important;
+    width: 7rem;
+    margin-left: 40%;
+    margin-bottom: 0%;
+
 }
 
 .layout-screenshot {
