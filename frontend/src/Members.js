@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from './components/Navbar.js';
-import './css/Secretary.css';
 import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -16,24 +15,25 @@ export default function Members() {
     const [clientLastName, setClientLastName] = useState("");
     const [clientGrade, setClientGrade] = useState("");
     const [gradesList, setGradesList] = useState([])
-    const users = [1, 2, 3, 4 ,5, 6, 7, 8];
-    const final = [];
+    const [membersList, setMembersList] = useState([])
 
     useEffect(()=> {
         getGrade() ;
+        getMembers();
 	}, []);
 
-    const getUsers = () => {
+    const getMembers = () => {
 		let informations = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }, 
         };
-        fetch(`/api/users`, informations)
+        fetch(`/api/members`, informations)
             .then(response => {
-				return response.json()	
+				return response.json()
 			}).then(response => {
-				console.log(response.value)
-			})
+                setMembersList(response)
+                console.log(membersList)
+            })
 	}
 
     const submitClient = () => {
@@ -57,21 +57,24 @@ export default function Members() {
     }
     
 
-    for(let user of users){
-        final.push(
-            <div className="col-sm-6 col-lg-3 offset-1 mt-5 mb-3 bg-primary">
-                colonne {user}
-            </div>
-        )
-    }
+    // for(let user of users){
+    //     final.push(
+    //         <div className="col-sm-6 col-lg-3 offset-1 mt-5 mb-3 bg-primary">
+    //             colonne {user}
+    //         </div>
+    //     )
+    // }
     
    
     return (
         <>
             <Navbar/>
+            <div style={{border:'1px solid grey'}} className="rounded col-3 offset-2 mt-2"> 
+                <input type="text" placeholder="chercher"></input>
+            </div>
             <div className="container"> 
                 <div className="row">
-                    <Popup trigger={ <button className="col-sm-6 col-lg-3 offset-1 mt-5 mb-3 bg-danger">Ajouter utilisateur (+)</button>} position="center" modal nested>
+                    <Popup trigger={ <button style={{backgroundColor:'#c6e5c3', border:"1px solid lightgrey"}} className=" rounded col-sm-6 col-lg-3 offset-1 mt-5 mb-3">Ajouter utilisateur (+)</button>} position="center" modal nested>
                         <h1>Nouvel utilisateur:</h1>
                         <form onSubmit={submitClient}>
                             <label for="f-name">Prénom:</label><br/>
@@ -89,7 +92,29 @@ export default function Members() {
                             <UploadFiles/>                        
                         </form>
                     </Popup>
-                    {final}
+    
+                    {membersList.map((val) => {
+                        return (
+                            <Popup trigger={<div style={{backgroundColor:"#ebebeb"}} className="rounded col-sm-6 col-lg-3 offset-1 mt-5 mb-3">
+                                <div className="row rounded">
+                                    <div style={{backgroundColor:val.color}} className="rounded col-12">
+                                        {val.name_grade}
+                                    </div>
+                                    <div className="rounded col-12">                                        
+                                        {val.first_name} {val.last_name}
+                                    </div>
+                                </div>
+                            </div>
+                            } modal nest>
+
+                                <div>Hello</div>
+
+                            </Popup>
+                        )
+                    })}              
+
+            
+                       
                 </div>
             </div>
         </>

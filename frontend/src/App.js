@@ -1,5 +1,5 @@
 import './css/App.css';
-import Navbar from './components/Navbar.js';
+import Members from './Members';
 import Grades from './Grades';
 import Camera  from './components/Camera';
 import './css/App.css';
@@ -29,6 +29,9 @@ function App() {
             </Route>
             <Route exact path="/modification">
               <Modification/>
+            </Route>
+            <Route exact path="/members">
+              <Members/>
             </Route>
           </Switch>
         </div>
