@@ -6,14 +6,6 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 var path = require('path');
-// Const http = require('http')
-/*
- * Const cors = require('cors')
- * const mysql = require('mysql')
- * const router = express.Router()
- * const controller = require('./src/controller/file.controller')
- * const { request, response } = require('express')
- */
 const port = 3001;
 
 /* Different sets of existing APIs */
