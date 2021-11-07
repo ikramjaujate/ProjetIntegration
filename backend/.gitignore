@@ -1,6 +1,6 @@
 # Prerequisites
 *.d
-*.env
+*.env2
 .environnement
 # Object files
 *.o

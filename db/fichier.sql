@@ -1,6 +1,6 @@
 
 CREATE DATABASE ProjetIntegration;
-ALTER USER postgres WITH PASSWORD '123';
+ALTER USER postgres WITH PASSWORD 'CrY4rdh57LY9';
 GRANT ALL PRIVILEGES ON DATABASE ProjetIntegration TO postgres;
 
 \c ProjetIntegration;
