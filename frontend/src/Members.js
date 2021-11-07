@@ -23,6 +23,19 @@ export default function Members() {
         getGrade() ;
 	}, []);
 
+    const getUsers = () => {
+		let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }, 
+        };
+        fetch(`/api/users`, informations)
+            .then(response => {
+				return response.json()	
+			}).then(response => {
+				console.log(response.value)
+			})
+	}
+
     const submitClient = () => {
         console.log(clientGrade)
         Axios.put(`http://localhost:3001/api/client`, {

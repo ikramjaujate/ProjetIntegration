@@ -10,28 +10,12 @@ const controller = require("./src/controller/file.controller");
 const { request, response } = require('express');
 const port = 3001;
 
-/*const client = new Client({
+const client = new Client({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE,
-    port : 5432,
-});
-
-const client = new Client({
-    host: '127.0.0.1',
-    port: 5432,
-    user: 'postgres',
-    password: '123',
-    database: 'ProjetIntegration'
-  })
-*/
-const client = new Client({
-  host: 'localhost',
-  port: 5432,
-  user: 'postgres',
-  password: 'cookies',
-  database: 'integration'
+    port : process.env.DATABASE_PORT,
 })
 
 app.listen(port, () => {
