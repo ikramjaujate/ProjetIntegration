@@ -1,21 +1,16 @@
 import React from "react";
 import "../css/ToggleSwitch.css";
   
-const ToggleSwitch = ({ nom,status  }) => {
+const ToggleSwitch = ({ nom,status,id  }) => {
 
-    function changement(){
-        console.log("coucou")
-    }
-  
+
     
   return (
-    <div className="row  " className='switchcam'>
-
+    <div class='row ' className='switchcam'>
       <div className="toggle-switch">
-        {status==='ON'?
-            <input type="checkbox" className="checkbox" id={nom} defaultChecked  /> : status==='OFF'? <input type="checkbox" className="checkbox" id={nom} />:<input type="checkbox" className="checkbox" id={nom} disabled='true' style={{'backgroundColor':'grey'}}/>
+        {status===1?
+            <input type="checkbox" className="checkbox" id={id} defaultChecked  /> : status===2? <input type="checkbox" className="checkbox" id={id} />:<input type="checkbox" className="checkbox" id={nom} disabled />
         }
-       
         <label className="label" htmlFor={nom}>
           <span className="inner" />
           <span className="switch" />

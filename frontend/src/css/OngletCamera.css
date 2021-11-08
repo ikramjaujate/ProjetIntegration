@@ -1,13 +1,17 @@
 .cadreBouton{
-    background-color: hsl(180, 40%, 41%) !important;
+    background-color: hsl(180, 3%, 80%) !important;
     /* border:grey solid !important ; */
     color:rgb(5, 5, 5);
     margin-bottom:20px;
     border-radius:8px;
-    color:rgb(247, 246, 245);
+    color:rgb(82, 81, 80);
     
 }
 .cadreBouton:hover{
-    border:rgb(134, 134, 199) !important;
+    border:rgb(65, 65, 68) !important;
     background-color: rgb(162, 162, 167) !important;
+}
+.btn-close{
+    background-color:rgb(116, 153, 196) !important;
+    
 }

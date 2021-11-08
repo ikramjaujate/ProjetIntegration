@@ -10,8 +10,7 @@ module.exports = function(app,client) {
 
  
   app.get('/api/camera', (req, response) =>{
-    console.log("coucou")
-    client.query('select * from camera', (err, result) => {
+    client.query('select * from camera  left join status on status.id_status = camera.id_status', (err, result) => {
       
       if(err) throw err ;
       response.send(result.rows);
