@@ -1,3 +1,4 @@
+const { response } = require("express")
 
 /**
  *
@@ -49,6 +50,22 @@ module.exports = function (app, client) {
       }
       response.status(200).json(res.rows);
     })
+  })
+
+  app.delete('/api/members/:idMember', (req, response) => {
+    idMember= req.params.idMember
+    console.log(idMember)
+
+    let query = "delete from member where id_member = $1"
+
+    client.query(query, [idMember], (error, res) => {
+      if (error) {
+        throw error;
+      }
+      response.send(message = "ok")
+      console.log(res)
+    })
+
   })
 
 

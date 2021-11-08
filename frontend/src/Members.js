@@ -7,7 +7,6 @@ import UploadFiles from './components/File-upload.js';
 import Input from './components/Input';
 import Axios from 'axios';
 
-
 export default function Members() {
 
     Axios.defaults.withCredentials = true;
@@ -46,6 +45,14 @@ export default function Members() {
             if (response){
                 window.alert("Client déjà enregistré")
             }
+        })
+    }
+
+    const delMember = (id) => {
+        const idMember = id;
+        console.log(idMember)
+        Axios.delete(`http://localhost:3001/api/members/${idMember}`).then((response)=> {
+            alert(response.data)
         })
     }
 
@@ -109,7 +116,8 @@ export default function Members() {
                                         } modal nested>
                                             <div></div>
                                     </Popup>
-                                    <svg aria-hidden="true" className="mx-2 pb-1" width="20%" focusable="true" data-prefix="fas" data-icon="circle-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256C397.4 512 512 397.4 512 256S397.4 0 256 0zM336.1 303c9.375 9.375 9.375 24.56 0 33.94c-9.381 9.381-24.56 9.373-33.94 0L256 289.9l-47.03 47.03c-9.381 9.381-24.56 9.373-33.94 0c-9.375-9.375-9.375-24.56 0-33.94l47.03-47.03L175 208.1c-9.375-9.375-9.375-24.56 0-33.94s24.56-9.375 33.94 0L256 222.1l47.03-47.03c9.375-9.375 24.56-9.375 33.94 0s9.375 24.56 0 33.94l-47.03 47.03L336.1 303z"></path></svg>
+            
+                                    <button className="text-align btn btn-warning" id={val.id_member} onClick={event => {delMember(event.target.id)}} >X</button>
                                     </div>                                    
                                     <div className="rounded col-12">                                        
                                         {val.first_name} {val.last_name}
