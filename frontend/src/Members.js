@@ -52,7 +52,9 @@ export default function Members() {
         const idMember = id;
         console.log(idMember)
         Axios.delete(`http://localhost:3001/api/members/${idMember}`).then((response)=> {
-            alert(response.data)
+            if(response) {
+                window.location.reload();
+            }
         })
     }
 
