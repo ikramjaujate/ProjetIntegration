@@ -117,7 +117,7 @@ export default function Members() {
                                             <div></div>
                                     </Popup>
             
-                                    <button className="text-align btn btn-warning" id={val.id_member} onClick={event => {delMember(event.target.id)}} >X</button>
+                                    <button style={{border:"0px", backgroundImage:"url('https://cdn.iconscout.com/icon/free/png-256/delete-844-902124.png')", backgroundSize:"contain", backgroundRepeat:"no-repeat"}} className="mb-1 p-2 btn btn-outline-primary" id={val.id_member} onClick={event => {delMember(event.target.id)}} ></button>
                                     </div>                                    
                                     <div className="rounded col-12">                                        
                                         {val.first_name} {val.last_name}
