@@ -13,7 +13,7 @@ export default function Members() {
     Axios.defaults.withCredentials = true;
     const [clientFirstName, setClientFirstName] = useState("");
     const [clientLastName, setClientLastName] = useState("");
-    const [clientGrade, setClientGrade] = useState("");
+    const [clientGrade, setClientGrade] = useState(1);
     const [gradesList, setGradesList] = useState([])
     const [membersList, setMembersList] = useState([])
 
@@ -82,7 +82,7 @@ export default function Members() {
                             <label for="l-name">Nom:</label><br/>
                             <Input name="l-name" idName="l-name" max="50" min="1" type="texte" placeholder="Nom" setFunc={setClientLastName}/><br/>
                             <label for="grade">Grade:</label><br/>
-                            <select onChange={(e) => {
+                            <select required onChange={(e) => {
                                             setClientGrade(e.target.value)}} name="grade">
                                 {gradesList.map((val) => {
                                         return <option value={val.id_grade}>{val.id_grade + ". "}{val.name_grade}</option>
@@ -95,21 +95,27 @@ export default function Members() {
     
                     {membersList.map((val) => {
                         return (
-                            <Popup trigger={<div style={{backgroundColor:"#ebebeb"}} className="rounded col-sm-6 col-lg-3 offset-1 mt-5 mb-3">
+                            <div style={{backgroundColor:"#ebebeb"}} className="rounded col-sm-6 col-lg-3 offset-1 mt-5 mb-3 ">
                                 <div className="row rounded">
-                                    <div style={{backgroundColor:val.color}} className="rounded col-12">
+                                    <div style={{backgroundColor:val.color, fontSize:"0.7rem"}} className="col-6">
                                         {val.name_grade}
+                                        
                                     </div>
+                                    <div style={{backgroundColor:val.color}} className="col-6">
+                                    <Popup trigger={
+                                           
+                                                <svg aria-hidden="true" width="20%" focusable="false" className="pb-1 mx-1" data-prefix="fas" data-icon="pen-to-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M383.1 448H63.1V128h156.1l64-64H63.1C28.65 64 0 92.65 0 128v320c0 35.35 28.65 64 63.1 64h319.1c35.34 0 63.1-28.65 63.1-64l-.0039-220.1l-63.1 63.99V448zM497.9 42.19l-28.13-28.14c-18.75-18.75-49.14-18.75-67.88 0l-38.62 38.63l96.01 96.01l38.62-38.63C516.7 91.33 516.7 60.94 497.9 42.19zM147.3 274.4l-19.04 95.22c-1.678 8.396 5.725 15.8 14.12 14.12l95.23-19.04c4.646-.9297 8.912-3.213 12.26-6.562l186.8-186.8l-96.01-96.01L153.8 262.2C150.5 265.5 148.2 269.8 147.3 274.4z"></path></svg>
+                                            
+                                        } modal nested>
+                                            <div></div>
+                                    </Popup>
+                                    <svg aria-hidden="true" className="mx-2 pb-1" width="20%" focusable="true" data-prefix="fas" data-icon="circle-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256C397.4 512 512 397.4 512 256S397.4 0 256 0zM336.1 303c9.375 9.375 9.375 24.56 0 33.94c-9.381 9.381-24.56 9.373-33.94 0L256 289.9l-47.03 47.03c-9.381 9.381-24.56 9.373-33.94 0c-9.375-9.375-9.375-24.56 0-33.94l47.03-47.03L175 208.1c-9.375-9.375-9.375-24.56 0-33.94s24.56-9.375 33.94 0L256 222.1l47.03-47.03c9.375-9.375 24.56-9.375 33.94 0s9.375 24.56 0 33.94l-47.03 47.03L336.1 303z"></path></svg>
+                                    </div>                                    
                                     <div className="rounded col-12">                                        
                                         {val.first_name} {val.last_name}
                                     </div>
                                 </div>
                             </div>
-                            } modal nest>
-
-                                <div>Hello</div>
-
-                            </Popup>
                         )
                     })}              
 
