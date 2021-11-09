@@ -24,6 +24,7 @@ export default function Members() {
     const [gradesList, setGradesList] = useState([]);
     const [membersList, setMembersList] = useState([]);
     const [currentMember, setCurrentMember] = useState("");
+    const [filterText, setFilterText] = useState("")
 
     useEffect(()=> {
         getGrade() ;
@@ -92,7 +93,9 @@ export default function Members() {
             <Navbar/>
             <div  className="rounded row mt-2 justify-content-center"> 
                 <div className="col-4">
-                    <input style={{border:'1px solid grey'}} type="text" placeholder="chercher"></input>
+                    <input style={{border:'1px solid grey'}} type="text" onChange={e => {
+                        setFilterText(e.target.value)
+                    }}placeholder="chercher"></input>
                 </div>
             </div>
             <div> 
@@ -116,7 +119,7 @@ export default function Members() {
                         </form>
                     </Popup>
     
-                    {membersList.map((val) => {
+                    {membersList.filter(name => name.first_name.includes(filterText)).map((val) => {
                         return (
                             <div className="rounded col-sm-5 col-lg-3 p-4 mx-1 mb-3 " data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <div className="row rounded">
