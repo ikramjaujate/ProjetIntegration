@@ -10,9 +10,9 @@
     --error : red ;
 }
 
-body {
+/* body {
     color: var(--writing) ;
-}
+} */
 /* Cacher scrollbar horizontal */
 html::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
@@ -92,12 +92,12 @@ font-size: 25px;
 .affiche{
   font-size: 20px;
 }
-p{
+/* p{
   font-size: 40px;
   padding: 0%;
   font-weight: bolder;
   margin-bottom: 0%;
-}
+} */
 .tool{
   color: white;
   margin-left: 63.5%;
@@ -141,16 +141,17 @@ p{
   }
 
   
-  input,
+  /* input,
   textarea {
-    /** or input[editext="input"] {} */
+    or input[editext="input"] {} 
     background: #ffffff;
     color: #18140c;
     font-weight: normal;
     border-radius: 20px;
     border: 0 none;
     
-  }
+  } */
+  
   .hovereffect{
     padding-left: 20px;
   }
