@@ -24,7 +24,8 @@ export default function Members() {
     const [gradesList, setGradesList] = useState([]);
     const [membersList, setMembersList] = useState([]);
     const [currentMember, setCurrentMember] = useState("");
-    const [filterText, setFilterText] = useState("")
+    const [filterText, setFilterText] = useState("");
+    const [currentGrade, setCurrentGrade] = useState("Tous")
 
     useEffect(()=> {
         getGrade() ;
@@ -66,7 +67,6 @@ export default function Members() {
     }
 
     const setCurrent = (id) => {
-        console.log(membersList)
         setCurrentMember(id)   
              
     }
@@ -76,17 +76,7 @@ export default function Members() {
             setGradesList(response.data)
         }).then( () => {
         })
-    }
-    
-
-    // for(let user of users){
-    //     final.push(
-    //         <div className="col-sm-6 col-lg-3 offset-1 mt-5 mb-3 bg-primary">
-    //             colonne {user}
-    //         </div>
-    //     )
-    // }
-    
+    }    
    
     return (
         <>
@@ -97,6 +87,12 @@ export default function Members() {
                         setFilterText(e.target.value)
                     }}placeholder="chercher"></input>
                 </div>
+                <select onChange={e => (setCurrentGrade(e.target.value))} style={{width:"20%"}} className="form-select form-select-sm" aria-label="Default select example">
+                    <option>Tous</option>
+                    {gradesList.map((val) => {
+                            return (<option >{val.name_grade}</option>)
+                    })}
+                </select>                
             </div>
             <div> 
                 <div className="row justify-content-center">
@@ -119,7 +115,7 @@ export default function Members() {
                         </form>
                     </Popup>
     
-                    {membersList.filter(name => name.first_name.includes(filterText)).map((val) => {
+                    {membersList.filter(name => name.first_name.includes(filterText)).filter(currentGrade !== "Tous" ? grade => grade.name_grade === currentGrade : grade => grade.name_grade.includes("")).map((val) => {
                         return (
                             <div className="rounded col-sm-5 col-lg-3 p-4 mx-1 mb-3 " data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <div className="row rounded">
