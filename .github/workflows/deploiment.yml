@@ -28,7 +28,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           port: ${{ secrets.VPS_PORT}}
           username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}
+          passphrase: ${{ secrets.VPS_PASSPHRASE }}
       
       - name: Restart services
         uses: appleboy/ssh-action@master
@@ -36,7 +36,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           port: ${{ secrets.VPS_PORT}}
           username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}
+          passphrase: ${{ secrets.VPS_PASSPHRASE }}
           script: |
             cp -R db Application
             cp .env Application/www/backend
@@ -47,5 +47,5 @@ jobs:
             docker rm app
             docker rmi node:14.15.1
             docker-compose up -d
-            
+
             
