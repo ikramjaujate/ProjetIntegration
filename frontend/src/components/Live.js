@@ -13,27 +13,23 @@ import '../css/Pop-UpSup.css';
 
 function Live(){
   
+  
 
 return(
-    <div class="modal fade" id='ModalTarget' tabindex="-1" role="dialog" aria-labelledby="ModalLive" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="ModalLive">Live</h5>
-      <button type="button" class= "close " data-bs-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div>live...</div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" ><i class="bi bi-camera-reels"></i></button>
-      <button type="button" class="btn btn-primary"><i class="bi bi-camera"></i></button>
+  <div class="modal fade" id='ModalTarget' data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="ModalLive" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div style={{'width':'mincontent'}}>
+            <img class="img-thumbnail justify-content-between" alt='visu_live'src= "http://0.0.0.0:6060/video" width="440" height="300" title="Foscam FI8905W" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" className="col-2 btn btn-secondary"><i className="bi bi-camera-reels"></i></button>
+          <button type="button" className="col-2 btn btn-primary"><i class="bi bi-camera"></i></button>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
-  </div>
-)
-}
+)}
 export default Live; 

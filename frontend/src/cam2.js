@@ -2,6 +2,21 @@ import { useEffect, useState } from 'react';
 import CadreCameras from './components/OngletCamera.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/cam2.css'
+import Live from "./components/Live";
+import React from 'react';
+
+
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap/dist/css/bootstrap.css';
+import'bootstrap/dist/css/bootstrap.min.css';
+import'bootstrap/dist/js/bootstrap.min.js';
+import'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import { Popover, Toast, Tooltip } from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function Cam2 (){
     const[etatCam, setEtatCam] = useState(null)
@@ -20,20 +35,23 @@ function Cam2 (){
               })   
       }, [])
 
+      
+
     return (
         
-        <div>
-        <div>Zone de trie à venir </div>
+        <div className="cam2">
+        
         <div class="container"> 
+         <div className='row'>
         {etatCam&&etatCam.map(camera=> 
-          <CadreCameras nomCam={camera.name_camera} statusCam={camera.id_status} idCam={camera.id_camera} nomStatus={camera.name_status}/>
-          
-        )}    
+          <div>
+            <CadreCameras nomCam={camera.name_camera} statusCam={camera.id_status} idCam={camera.id_camera} nomStatus={camera.name_status}/>
+          </div>
+        )} 
+        
+        </div>  
         </div>
-        
-        
-       
-
+  
   </div>
 
 
