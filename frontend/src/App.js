@@ -8,6 +8,9 @@ import Secretary from './Secretary.js';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'; 
 import Modification from './components/Modification';
 import Login from './Login';
+import PrivateRoute from './components/PrivateRoute';
+
+
 function App() {
   return (
     <Router>
@@ -15,9 +18,10 @@ function App() {
         {/* <Navbar /> */}
         <div className="content">
           <Switch>
-
-            <Route exact path="/grades"> 
-              <Grades/>
+            <Route exact path="/grades">
+              <PrivateRoute path="/login"> 
+                <Grades/>
+              </PrivateRoute>
             </Route>
             <Route exact path="/camera"> 
               <Camera/>
