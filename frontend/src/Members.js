@@ -95,7 +95,7 @@ export default function Members() {
                 </select>                
             </div>
             <div> 
-                <div className="row justify-content-center">
+                <div className="row offset-1 justify-content-center">
                     <Popup trigger={ <button style={{backgroundColor:'#c6e5c3', border:"1px solid lightgrey"}} className="rounded col-sm-3 col-lg-3 mt-4 mb-5">Ajouter utilisateur (+)</button>} position="center" modal nested>
                         <h1>Nouvel utilisateur:</h1>
                         <form onSubmit={submitClient}>
@@ -134,7 +134,7 @@ export default function Members() {
                                         {val.first_name} {val.last_name}
                                         
                                         
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        {/* <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                 <div class="modal-header">
@@ -150,7 +150,7 @@ export default function Members() {
                                                 </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
