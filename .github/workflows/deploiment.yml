@@ -29,7 +29,6 @@ jobs:
           port: ${{ secrets.VPS_PORT}}
           username: ${{ secrets.VPS_USER }}
           passphrase: ${{ secrets.VPS_PASSPHRASE }}
-      
       - name: Restart services
         uses: appleboy/ssh-action@master
         with:
