@@ -36,7 +36,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           port: ${{ secrets.VPS_PORT}}
           username: ${{ secrets.VPS_USER }}
-          key_path: ${{ secrets.VPS_PRIVATEKEY }}
+          key: ${{ secrets.VPS_PRIVATEKEY }}
           script: |
             cp -R db Application
             cp .env Application/www/backend
