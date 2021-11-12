@@ -9,6 +9,14 @@ from datetime import datetime
 import time
 app = Flask(__name__)
 
+""" Enlever le commentaire pour faire fonctionner sur raspi
+import RPi.GPIO as GPIO
+cap = cv2.VideoCapture("0")
+cap.set(3,680)
+cap.set(4,680)
+"""
+etat = False #D"finition de l'état de la cam 
+
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 path = './backend/Reconnaissance/images'
@@ -48,14 +56,50 @@ flag = 0
 def index():
     return "Message par default"
 
+@app.route('/etat')
+def etat():
+    global etat
+    return {"etat":str(etat),"id":1}
+
+
+
+
+
+
 def gen(captur):
+    global etat
     cap = cv2.VideoCapture(0)
+    etat = cap.isOpened()
     frame_width = int(cap.get(3))
     frame_height = int(cap.get(4))
     print(captur)
     out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
     
+    """ GPIO + temps (pour fermeture de porte)
+     #Défénition du GPIO
+    GPIO.setmode(GPIO.BOARD)
+    # Set pin 11 as an output, and set servo1 as pin 11 as PWM
+    GPIO.setup(12,GPIO.OUT)
+    servo1 = GPIO.PWM(12,50) # Note 11 is pin, 50 = 50Hz pulse
+    servo1.start(0)
     
+    # Définition LED Rouge => refusé
+    LEDRefuse = 7
+    GPIO.setup(LEDRefuse,GPIO.OUT)
+    
+     # Définition LED Vert => accepté
+    LEDaccepte = 8
+    GPIO.setup(LEDaccepte,GPIO.OUT)
+    
+    #définition Capteur
+    pir_pin = 29
+    GPIO.setup(pir_pin, GPIO.IN)
+
+    temps =round(time.time())-20
+    tempsFermeture =round(time.time())-20
+    
+    """
+
 
     while True:
         success, img = cap.read()
@@ -87,6 +131,16 @@ def gen(captur):
         facesCurFrame = face_recognition.face_locations(imgS)
         encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
         
+        """ #Permet de refermer la porte après 10secondes
+        if (round(time.time()) >= tempsFermeture+10) :
+            GPIO.output(LEDaccepte, GPIO.LOW)  #eteindre la led d'acces  
+                
+            servo1.ChangeDutyCycle(2)
+            time.sleep(0.5)
+            servo1.ChangeDutyCycle(0)
+            print("je referme")
+
+        """
         for encodeFace,faceLoc in zip(encodesCurFrame,facesCurFrame):
             matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
             faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
@@ -96,6 +150,19 @@ def gen(captur):
             
 
             if faceDis[matchIndex]< 0.50:
+                """ # Permet la réouverture après 20secondes
+                if (round(time.time()) >= temps +20) :
+                    GPIO.output(LEDRefuse, GPIO.LOW)
+                    GPIO.output(LEDaccepte, GPIO.HIGH)
+                    servo1.ChangeDutyCycle(12)
+                    time.sleep(0.5)
+                    servo1.ChangeDutyCycle(0)
+                    tempsFermeture =round(time.time())
+                    
+                    temps = round(time.time())
+                    print("la porte s'ouvre")
+                    time.sleep(0.5)
+                """
                 name = className[matchIndex].upper()
                 #print(name)
                 y1,x2,y2,x1 = faceLoc
@@ -107,6 +174,11 @@ def gen(captur):
                 
                 
             else: 
+                """ # Allume la led rouge si led verte est éteinte
+                if (GPIO.input(LEDaccepte) == 0) :
+               
+                    GPIO.output(LEDRefuse, GPIO.HIGH)
+                """
                 name = 'Unknown'
                 #print(name)
                 y1,x2,y2,x1 = faceLoc
@@ -124,10 +196,31 @@ def gen(captur):
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
+    """#Définition des servo moteurs
+    servo1.stop()
+    GPIO.cleanup()
+    """
 
 @app.route('/video')
 def video():
+
+
+    """
+    global cap
+    
+    #définition Capteur
+    GPIO.setmode(GPIO.BOARD)
+    pir_pin = 29
+    GPIO.setup(pir_pin, GPIO.IN)
+    if GPIO.input(pir_pin):
+        print("Motion Detected!") 
+        return Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
+    else :
+        print("No Motion Detected!")
+        time.sleep(1)
+    """
+
+
     global cap
     res = Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
     #new_headers = [('Cache-Control', 'no-store')]

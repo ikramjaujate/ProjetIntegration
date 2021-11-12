@@ -10,41 +10,6 @@ import time
 app = Flask(__name__)
 
 import RPi.GPIO as GPIO
-import time
-
-
-#Set function to calculate percent from angle
-def angle_to_percent (angle) :
-    if angle > 180 or angle < 0 :
-        return False
-
-    start = 4
-    end = 12.5
-    ratio = (end - start)/180 #Calcul ratio from angle to percent
-
-    angle_as_percent = angle * ratio
-
-    return start + angle_as_percent
-
-
-
-
-#start PWM running, but with value of 0 (pulse off)
-
-'''
-print ("Turning back to 90 degrees for 2 seconds")
-servo1.ChangeDutyCycle(12)
-time.sleep(0.5)
-servo1.ChangeDutyCycle(0)
-time.sleep(3)
-
-#turn back to 0 degrees
-print ("Turning back to 0 degrees")
-servo1.ChangeDutyCycle(2)
-time.sleep(0.5)
-servo1.ChangeDutyCycle(0)'''
-    
-
 
 
 
@@ -54,12 +19,13 @@ path = './images'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
 
+
 myList = [x for x in os.listdir(path) if x.endswith('.jpg')]
+
 cap = cv2.VideoCapture("0")
-
 cap.set(3,680)
-
 cap.set(4,680)
+
 print("Nombre de classes détectées",len(myList))
 for x,cl in enumerate(myList):
         curImg = cv2.imread(f'{path}/{cl}')
@@ -82,17 +48,26 @@ def findEncodings(images):
 flag = True
 encodeListKnown = findEncodings(images)
 print('Encodings Complete')
-
+etat = False
 
 # Convertir les resolutions 
 
 
 @app.route('/')
 def index():
-    return "Message par default"
+    
+    return "coucou les loulou"
+
+@app.route('/etat')
+def etat():
+    global etat
+    return {"etat":str(etat),"id":1}
 
 def gen(captur):
+    global etat
     cap = cv2.VideoCapture(0)
+    print(cap.isOpened())
+    etat = cap.isOpened()
     frame_width = int(cap.get(3))
     frame_height = int(cap.get(4))
     print(captur)
@@ -104,24 +79,23 @@ def gen(captur):
     servo1 = GPIO.PWM(12,50) # Note 11 is pin, 50 = 50Hz pulse
     servo1.start(0)
     
+    # Définition LED Rouge => refusé
+    LEDRefuse = 7
+    GPIO.setup(LEDRefuse,GPIO.OUT)
+    
+     # Définition LED Vert => accepté
+    LEDaccepte = 8
+    GPIO.setup(LEDaccepte,GPIO.OUT)
+    
+    #définition Capteur
+    pir_pin = 29
+    GPIO.setup(pir_pin, GPIO.IN)
     
     out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
     temps =round(time.time())-20
     tempsFermeture =round(time.time())-20
     
-    '''
-    print ("Turning back to 90 degrees for 2 seconds")
-    servo1.ChangeDutyCycle(12)
-    time.sleep(0.5)
-    servo1.ChangeDutyCycle(0)
-    time.sleep(3)
 
-    #turn back to 0 degrees
-    print ("Turning back to 0 degrees")
-    servo1.ChangeDutyCycle(2)
-    time.sleep(0.5)
-    servo1.ChangeDutyCycle(0)
-    '''
     
     while True:
         success, img = cap.read()
@@ -147,6 +121,7 @@ def gen(captur):
         facesCurFrame = face_recognition.face_locations(imgS)
         encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
         if (round(time.time()) >= tempsFermeture+10) :
+            GPIO.output(LEDaccepte, GPIO.LOW)  #eteindre la led d'acces  
                 
             servo1.ChangeDutyCycle(2)
             time.sleep(0.5)
@@ -165,6 +140,8 @@ def gen(captur):
 
             if faceDis[matchIndex]< 0.50:
                 if (round(time.time()) >= temps +20) :
+                    GPIO.output(LEDRefuse, GPIO.LOW)
+                    GPIO.output(LEDaccepte, GPIO.HIGH)
                     servo1.ChangeDutyCycle(12)
                     time.sleep(0.5)
                     servo1.ChangeDutyCycle(0)
@@ -183,7 +160,11 @@ def gen(captur):
                 cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
                 #time.sleep(5)
                 
-            else: 
+            else:
+                if (GPIO.input(LEDaccepte) == 0) :
+               
+                    GPIO.output(LEDRefuse, GPIO.HIGH)
+
                 name = 'Unknown'
                 #print(name)
                 y1,x2,y2,x1 = faceLoc
@@ -208,7 +189,17 @@ def gen(captur):
 @app.route('/video')
 def video():
     global cap
-    return Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
+    
+    #définition Capteur
+    GPIO.setmode(GPIO.BOARD)
+    pir_pin = 29
+    GPIO.setup(pir_pin, GPIO.IN)
+    if GPIO.input(pir_pin):
+        print("Motion Detected!") 
+        return Response(gen('vid'), mimetype='multipart/x-mixed-replace; boundary=frame')
+    else :
+        print("No Motion Detected!")
+        time.sleep(1)
 
 @app.route('/photo')
 def photo():
@@ -219,3 +210,6 @@ def photo():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='6060',debug=True)
+
+
+
