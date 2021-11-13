@@ -34,7 +34,7 @@ const client = new Client({
 
 
 
-app.use(helmet());
+//app.use(helmet());
 // app.use(
 //   helmet({
 //     contentSecurityPolicy: false,
@@ -51,27 +51,27 @@ app.use(helmet.contentSecurityPolicy({
     'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
   }
 }));
-// //X-Content-Type-Options
-// app.use(helmet.noSniff());
+//X-Content-Type-Options
+app.use(helmet.noSniff());
 
-// //X-Frame-Options
-//  app.use(
-//   helmet.frameguard({
-//     action: "sameorigin",
-//   })
-//  );
+//X-Frame-Options
+ app.use(
+  helmet.frameguard({
+    action: "sameorigin",
+  })
+ );
 
-// //X-XSS-Protection
-// app.use(helmet.xssFilter());
+//X-XSS-Protection
+app.use(helmet.xssFilter());
 
-//Strict-Transport-Security
-// app.use(
-//   helmet.hsts({
-//     maxAge: 63072000, //2ans
-//     includeSubDomains: true,
-//     preload: false
-//   })
-// );
+Strict-Transport-Security
+app.use(
+  helmet.hsts({
+    maxAge: 63072000, //2ans
+    includeSubDomains: true,
+    preload: false
+  })
+);
 
 
 // app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
