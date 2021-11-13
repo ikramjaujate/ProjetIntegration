@@ -4,9 +4,11 @@ import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16' ;
 import 'jest-enzyme' 
 import 'jest-styled-components'
-import renderer from 'react-test-renderer'
 // import render from 'react-test-render'
-import {render} from 'react-dom';
+
+// import { render, cleanup } from '@testing-library/react';
+// import '@testing-library/jest-dom/extend-expect';
+// import renderer  from "react-test-renderer";
 
 
 /* Components */
@@ -35,6 +37,9 @@ describe('TitleModalGrade', () => {
       const paragraph = wrapper.find('h5')
       console.log("elem : ", paragraph)
       expect(wrapper).toHaveStyleRule('backgroundColor', '#086589')
+      //const {getByTestId} = render(<TitleModalGrade id="cc" bgColor="#086589" text="Directeur"></TitleModalGrade>);
+      //expect(getByTestId('cc')).toHaveStyle("backgroundColor : bleu")
+
       //const tree = renderer.create(<TitleModalGrade id="" bgColor="#086589" text="Directeur" />).toJSON()
       //console.log("tree : ", tree.children[0]);
       //expect(paragraph.text()).toHaveStyleRule('color', 'red')
