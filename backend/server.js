@@ -59,9 +59,20 @@ app.use(helmet.noSniff());
 //X-Frame-Options
  app.use(
   helmet.frameguard({
-    action: "deny",
+    action: "sameorigin",
   })
  );
+
+//X-XSS-Protection
+app.use(helmet.xssFilter());
+
+//Strict-Transport-Security
+app.use(
+  helmet.hsts({
+    maxAge: 123456,
+  })
+);
+
 
 // app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
 // app.use(
