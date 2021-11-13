@@ -42,11 +42,11 @@ app.use(
     contentSecurityPolicy: false,
   })
  );
- app.use(
-  helmet.frameguard({
-    action: "deny",
-  })
- );
+//  app.use(
+//   helmet.frameguard({
+//     action: "deny",
+//   })
+//  );
 // app.use(helmet.contentSecurityPolicy({
 //   directives: {
 //     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
