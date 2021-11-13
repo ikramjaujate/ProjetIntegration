@@ -34,24 +34,39 @@ const client = new Client({
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
-app.use(helmet());
 
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-    'default-src': ['\'self\'', 'https://restcountries.eu', 'blob:'],
-    'object-src' : ['\'self\'', 'https://restcountries.eu', 'data:'],
-    'img-src' : ['\'self\'', 'https://restcountries.eu', 'data:'],
-    'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-    'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-  }
-}));
-app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
+
+app.use(helmet());
 app.use(
-  helmet.hsts({
-    maxAge: 123456,
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "script-src": ["'self'", "securecoding.com"],
+      "style-src": null,
+    },
   })
-);
+ );
+ app.use(
+  helmet.frameguard({
+    action: "deny",
+  })
+ );
+// app.use(helmet.contentSecurityPolicy({
+//   directives: {
+//     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//     'default-src': ['\'self\'', 'https://restcountries.eu', 'blob:'],
+//     'object-src' : ['\'self\'', 'https://restcountries.eu', 'data:'],
+//     'img-src' : ['\'self\'', 'https://restcountries.eu', 'data:'],
+//     'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+//     'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+//   }
+// }));
+// app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
+// app.use(
+//   helmet.hsts({
+//     maxAge: 123456,
+//   })
+// );
 
 app.use(express.json())
 app.use(function (req, res, next) {
