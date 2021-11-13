@@ -43,37 +43,37 @@ app.use(helmet());
 //   })
 //  );
 
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-    'default-src': ['\'self\'' , 'blob:'],
-    'object-src' : ['\'self\'', 'data:'],
-    'img-src' : ['\'self\'', 'data:'],
-    'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-    'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-  }
-}));
-//X-Content-Type-Options
-app.use(helmet.noSniff());
+// app.use(helmet.contentSecurityPolicy({
+//   directives: {
+//     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//     'default-src': ['\'self\'' , 'blob:'],
+//     'object-src' : ['\'self\'', 'data:'],
+//     'img-src' : ['\'self\'', 'data:'],
+//     'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+//     'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+//   }
+// }));
+// //X-Content-Type-Options
+// app.use(helmet.noSniff());
 
-//X-Frame-Options
- app.use(
-  helmet.frameguard({
-    action: "sameorigin",
-  })
- );
+// //X-Frame-Options
+//  app.use(
+//   helmet.frameguard({
+//     action: "sameorigin",
+//   })
+//  );
 
-//X-XSS-Protection
-app.use(helmet.xssFilter());
+// //X-XSS-Protection
+// app.use(helmet.xssFilter());
 
 //Strict-Transport-Security
-app.use(
-  helmet.hsts({
-    maxAge: 63072000, //2ans
-    includeSubDomains: true,
-    preload: false
-  })
-);
+// app.use(
+//   helmet.hsts({
+//     maxAge: 63072000, //2ans
+//     includeSubDomains: true,
+//     preload: false
+//   })
+// );
 
 
 // app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
