@@ -37,11 +37,11 @@ app.listen(port, () => {
 
 
 app.use(helmet());
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-  })
- );
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: false,
+//   })
+//  );
 //  app.use(
 //   helmet.frameguard({
 //     action: "deny",
