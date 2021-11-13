@@ -53,7 +53,10 @@ app.use(helmet.contentSecurityPolicy({
     'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
   }
 }));
+//X-Content-Type-Options
+app.use(helmet.noSniff());
 
+//X-Frame-Options
  app.use(
   helmet.frameguard({
     action: "deny",
