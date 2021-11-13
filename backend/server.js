@@ -42,11 +42,7 @@ app.use(helmet());
 //     contentSecurityPolicy: false,
 //   })
 //  );
-//  app.use(
-//   helmet.frameguard({
-//     action: "deny",
-//   })
-//  );
+
 app.use(helmet.contentSecurityPolicy({
   directives: {
     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
@@ -57,6 +53,13 @@ app.use(helmet.contentSecurityPolicy({
     'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
   }
 }));
+
+ app.use(
+  helmet.frameguard({
+    action: "deny",
+  })
+ );
+
 // app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
 // app.use(
 //   helmet.hsts({
