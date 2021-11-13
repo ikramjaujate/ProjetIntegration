@@ -38,12 +38,8 @@ app.listen(port, () => {
 
 app.use(helmet());
 app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      "script-src": ["'unsafe-inline'"],
-      "style-src": null,
-    },
+  helmet({
+    contentSecurityPolicy: false,
   })
  );
  app.use(
