@@ -6,6 +6,7 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 var path = require('path');
+const helmet = require("helmet");
 // Const http = require('http')
 /*
  * Const cors = require('cors')
@@ -33,6 +34,24 @@ const client = new Client({
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
+app.use(helmet());
+
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+    'default-src': ['\'self\'', 'https://restcountries.eu', 'blob:'],
+    'object-src' : ['\'self\'', 'https://restcountries.eu', 'data:'],
+    'img-src' : ['\'self\'', 'https://restcountries.eu', 'data:'],
+    'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+    'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+  }
+}));
+app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
+app.use(permissionsPolicy({
+  features: {
+    fullscreen: ['self']
+  }
+}));
 
 app.use(express.json())
 app.use(function (req, res, next) {
