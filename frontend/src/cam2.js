@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import CadreCameras from './components/OngletCamera.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/cam2.css'
-import Live from "./components/Live";
 import React from 'react';
 
 
