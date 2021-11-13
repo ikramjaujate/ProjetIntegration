@@ -36,7 +36,7 @@ app.listen(port, () => {
 })
 
 
-app.use(helmet());
+//app.use(helmet());
 // app.use(
 //   helmet({
 //     contentSecurityPolicy: false,
@@ -69,7 +69,9 @@ app.use(helmet.xssFilter());
 //Strict-Transport-Security
 app.use(
   helmet.hsts({
-    maxAge: 123456,
+    maxAge: 63072000,
+    includeSubDomains: true,
+    preload: true
   })
 );
 
