@@ -47,11 +47,11 @@ app.use(helmet.contentSecurityPolicy({
   }
 }));
 app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
-app.use(permissionsPolicy({
-  features: {
-    fullscreen: ['self']
-  }
-}));
+app.use(
+  helmet.hsts({
+    maxAge: 123456,
+  })
+);
 
 app.use(express.json())
 app.use(function (req, res, next) {
