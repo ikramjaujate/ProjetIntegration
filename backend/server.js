@@ -41,16 +41,16 @@ app.use(helmet());
 //   })
 //  );
 
-// app.use(helmet.contentSecurityPolicy({
-//   directives: {
-//     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-//     'default-src': ['\'self\'' , 'blob:'],
-//     'object-src' : ['\'self\'', 'data:'],
-//     'img-src' : ['\'self\'', 'data:'],
-//     'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-//     'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-//   }
-// }));
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+    'default-src': ['\'self\'' , 'blob:'],
+    'object-src' : ['\'self\'', 'data:'],
+    'img-src' : ['\'self\'', 'data:'],
+    'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+    'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+  }
+}));
 // //X-Content-Type-Options
 // app.use(helmet.noSniff());
 
