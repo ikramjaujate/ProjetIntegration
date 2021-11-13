@@ -71,7 +71,7 @@ app.use(
   helmet.hsts({
     maxAge: 63072000,
     includeSubDomains: true,
-    preload: true
+    preload: false
   })
 );
 
