@@ -53,7 +53,7 @@ VALUES
 CREATE TABLE IF NOT EXISTS public.color
 (
     id_color SERIAL NOT NULL,
-    name_color char(25) NOT NULL,
+    name_color varchar(25) NOT NULL,
     PRIMARY KEY (id_color)
 );
 
@@ -197,8 +197,8 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS public.personal
 (
-    username char(25) NOT NULL,
-    password char(25) NOT NULL,
+    username varchar(25) NOT NULL,
+    password varchar(25) NOT NULL,
     PRIMARY KEY (username)
 );
 

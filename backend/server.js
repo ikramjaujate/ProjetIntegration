@@ -46,9 +46,9 @@ app.listen(port, () => {
 app.use(helmet.contentSecurityPolicy({
   directives: {
     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-    'default-src': ['\'self\'', 'https://restcountries.eu', 'blob:'],
-    'object-src' : ['\'self\'', 'https://restcountries.eu', 'data:'],
-    'img-src' : ['\'self\'', 'https://restcountries.eu', 'data:'],
+    'default-src': ['\'self\'' , 'blob:'],
+    'object-src' : ['\'self\'', 'data:'],
+    'img-src' : ['\'self\'', 'data:'],
     'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
     'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
   }

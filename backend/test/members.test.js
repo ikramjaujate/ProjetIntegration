@@ -3,7 +3,22 @@ var request = require("supertest"),
 
 request = request("http://localhost:3001");
 
-
+describe('PUT /api/client', function() {
+    it('Créé un nouveau client avec son nom prénom et grade', function(done) {
+        let client ={
+            FirstName : "TestFN" ,
+            LastName : "TestLN" ,
+            Grade : 1
+        }
+        request.get('/api/client')
+        .send(client)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(response => {
+            assert(response, 1);
+        }), done();
+    });
+})
 
 describe('GET /api/membres/:idMembre', function() {
     it('Obtenir toutes les informations concernant un membre', function(done) {
@@ -12,8 +27,8 @@ describe('GET /api/membres/:idMembre', function() {
         .expect(200)
         .then(response => {
             assert(response[0].id_member, 1);
-            assert(response[0].first_name, "Ikram");
-            assert(response[0].last_name, "Jaujate");
+            assert(response[0].first_name, "Jean");
+            assert(response[0].last_name, "Ab");
         }), done();
     });
 })

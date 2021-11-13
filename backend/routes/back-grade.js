@@ -1,5 +1,24 @@
 module.exports = function (app, client) {
 
+
+    /**
+     * 
+     * @author : Aurélien
+     * @method : GET
+     * 
+     */
+
+  app.get('/api/gradesInfos', (request, response) => {
+    let query = "select id_grade, name_grade from grade";
+
+    client.query(query, (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    })
+  });
+
     /**
      * Retrieves the actions of each camera for a grade
      *
@@ -126,8 +145,7 @@ module.exports = function (app, client) {
         (request, response, next) => {
 
             const {name} = request.body,
-                idColor = request.body.idcolor,
-
+                idColor = request.body.idcolor
                 query = "insert into grade (name_grade, id_color) \
         VALUES (($1), ($2))";
             // Requête1 Create grade
@@ -269,7 +287,7 @@ module.exports = function (app, client) {
     app.post(
         "/api/grades/:idGrade/acces",
         (request, response) => {
-
+            let reponse;
             const {idGrade} = request.params,
                 {actions} = request.body,
                 {notifications} = request.body,
@@ -292,7 +310,7 @@ module.exports = function (app, client) {
                             throw error;
 
                         }
-
+                        reponse = results
                     }
                 );
 
@@ -321,7 +339,7 @@ module.exports = function (app, client) {
                 );
 
             }
-            response.send({"message": "ok"});
+            response.send({"message": reponse});
 
         }
     );

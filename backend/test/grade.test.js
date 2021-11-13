@@ -16,6 +16,8 @@ describe('GET /api/grades/:idGrade/cameras', function() {
     });
 })
 
+
+
 describe('GET /api/grades', function() {
     it('Obtenir toutes les informations de tous les grades', function(done) {
         request.get('/api/grades')
@@ -70,5 +72,69 @@ describe('GET /api/grades/colors', function() {
         }), done();
     });
 })
+
+describe('PUT "/api/grades"', function() {
+    it('Ajouter un nouveau grade', function(done) {
+        let grade = {
+            "name" : "test",
+            "idcolor" : 4
+        }
+        request.put('/api/grades')
+        .send(grade)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(response => {
+            assert(response[0].message, "ok");
+        }), done();
+    });
+})
+
+describe('get "/api/grades"', function() {
+    it('Tester le nouveau grade ajouté', function(done) {
+        request.get('/api/grades')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(response => {
+            assert(response[response.length -1].name_grade, "test");
+        }), done();
+    });
+})
+
+describe('GET /api/gradesInfos', function() {
+    it('Sélectionne tous les grades avec leur id associé', function(done) {
+        request.get('/api/gradeInfos')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(response => {
+            assert(response[0].id_grade, 1);
+            assert(response[0].name_grade, "Directeur");
+            assert(response[2].id_grade, 3);
+            assert(response[2].name_grade, "Bénéficiaire");
+            console.log("ICI " + response)
+        }), done();
+    });
+})
+
+// describe('post "/api/grades/:idGrade/acces"', function() {
+//     it('Tester la nouvelle action sur le grade désiré', function(done) {
+//         let action = {
+//             "actions" : {
+//                 1 : false
+//             },
+//             "notifications" : {
+//                 1 : true
+//             }
+//         }
+//         request.post('/api/grades/1/acces')
+//         .expect('Content-Type', /json/)
+//         .expect(200)
+//         .then(response => {
+//             assert(response[0].name_grade, "test");
+//         }), done();
+//     });
+// })
+
+
+
 
 
