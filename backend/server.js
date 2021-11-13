@@ -37,15 +37,15 @@ app.listen(port, () => {
 
 
 app.use(helmet());
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     useDefaults: true,
-//     directives: {
-//       "script-src": ["'self'", "securecoding.com"],
-//       "style-src": null,
-//     },
-//   })
-//  );
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "script-src": ["'unsafe-inline'"],
+      "style-src": null,
+    },
+  })
+ );
  app.use(
   helmet.frameguard({
     action: "deny",
