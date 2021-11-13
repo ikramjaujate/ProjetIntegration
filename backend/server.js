@@ -43,7 +43,7 @@ app.listen(port, () => {
 //   })
 //  );
 
-app.use(helmet.contentSecurityPolicy({
+/*app.use(helmet.contentSecurityPolicy({
   directives: {
     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
     'default-src': ['\'self\'', 'https://restcountries.eu', 'blob:'],
@@ -52,28 +52,28 @@ app.use(helmet.contentSecurityPolicy({
     'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
     'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
   }
-}));
+}));*/
 //X-Content-Type-Options
-app.use(helmet.noSniff());
+//app.use(helmet.noSniff());
 
 //X-Frame-Options
- app.use(
+/*app.use(
   helmet.frameguard({
     action: "sameorigin",
   })
- );
+ );*/
 
 //X-XSS-Protection
-app.use(helmet.xssFilter());
+//app.use(helmet.xssFilter());
 
 //Strict-Transport-Security
-app.use(
+/*app.use(
   helmet.hsts({
     maxAge: 63072000,
     includeSubDomains: true,
     preload: false
   })
-);
+);*/
 
 
 // app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
