@@ -8,7 +8,7 @@ Enzyme.configure({ adapter: new Adapter() })
 
 
 describe('CameraInfo', () => {
-    it('Vérifier le nom de la camera passé en paramètre. ', () => {
+    it('Vérifier le nom de la camera passé en paramètre.', () => {
       const wrapper = shallow(<Input type="" name="" min="" max="" placeholder="" setFunc="" pattern="" title="coucou" step="" idName="coucou"/>)
       const paragraph = wrapper.find('input')
       expect(paragraph).toHaveLength(1)

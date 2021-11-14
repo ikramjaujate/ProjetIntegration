@@ -10,28 +10,28 @@ Enzyme.configure({ adapter: new Adapter() }); //Configurer Enzyme pour react 16
 
 describe('TitleModalGrade', () => {
     it('Vérifier le texte affiché dans le titre', () => {
-      const wrapper = shallow(<TitleModalGrade bgColor="" text="Directeur" />);
+      const wrapper = shallow(<TitleModalGrade text="Directeur" />);
       const paragraph = wrapper.find('h5');
       expect(paragraph).toHaveLength(1);
       expect(paragraph.text()).toEqual('Directeur');
     })
       
     it('Vérifier la couleur du fond du titre', () => {
-      const wrapper = shallow(<TitleModalGrade bgColor="#086589" text=""/>);
-      const paragraph = wrapper.find('h5.modal-title');
+      const wrapper = shallow(<TitleModalGrade bgColor="#086589"/>);
+      const paragraph = wrapper.find('.modal-title');
       expect(paragraph.prop('style')).toHaveProperty("backgroundColor", "#086589");
     })
 
-    it("Vérifier que le props bgColor a une valeur par défaut", () => {
-      const props = TitleModalGrade.defaultProps.bgColor;
-      expect(props).toBeDefined();
-      expect(props).toBe('var(--text-loading)');
+    it('Vérifier que le props bgColor a une valeur par défaut', () => {
+      const wrapper = shallow(<TitleModalGrade/>);
+      const paragraph = wrapper.find('.modal-title');
+      expect(paragraph.prop('style')).toHaveProperty("backgroundColor", 'var(--text-loading)');
     })
 
-    it("Vérifier que le props text a une valeur par défaut", () => {
-      const props = TitleModalGrade.defaultProps.text;
-      expect(props).toBeDefined();
-      expect(props).toBe('Chargement');
+    it('Vérifier que le props text a une valeur par défaut', () => {
+      const wrapper = shallow(<TitleModalGrade/>);
+      const paragraph = wrapper.find('h5');
+      expect(paragraph.text()).toEqual('Chargement');
     })
 })
   
