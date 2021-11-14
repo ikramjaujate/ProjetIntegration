@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import './css/Cam.css';
-import Navbar from './components/Navbar.js';
+import Navbar from './Navbar.js';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import photo from'./Image/photo.png'; 
