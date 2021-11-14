@@ -10,7 +10,7 @@ Enzyme.configure({ adapter: new Adapter() }); //Configurer Enzyme pour react 16
 
 describe('TitleModalGrade', () => {
     it('Vérifier le texte affiché dans le titre', () => {
-      const wrapper = shallow(<TitleModalGrade bgColor="" text="Directeur"></TitleModalGrade>);
+      const wrapper = shallow(<TitleModalGrade bgColor="" text="Directeur" />);
       const paragraph = wrapper.find('h5');
       expect(paragraph).toHaveLength(1);
       expect(paragraph.text()).toEqual('Directeur');
