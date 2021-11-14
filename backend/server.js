@@ -64,7 +64,7 @@ app.use(helmet.noSniff());
 //X-XSS-Protection
 app.use(helmet.xssFilter());
 
-Strict-Transport-Security
+//Strict-Transport-Security
 app.use(
   helmet.hsts({
     maxAge: 63072000, //2ans
