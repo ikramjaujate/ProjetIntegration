@@ -1,5 +1,5 @@
 import React from 'react'
-import Enzyme, { shallow, mount } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16' ;
 import 'jest-enzyme' 
 import 'jest-styled-components'
@@ -8,7 +8,7 @@ Enzyme.configure({ adapter: new Adapter() })
 
 
 describe('CameraInfo', () => {
-    it('Vérifier le nom de la camera passé en paramètre. ', () => {
+    it('Vérifier le nom de la camera passé en paramètre.', () => {
       const wrapper = shallow(<CameraInfo name="Lounge" allowed="" notification=""/>)
       const paragraph = wrapper.find('div.test2')
       expect(paragraph).toHaveLength(1)

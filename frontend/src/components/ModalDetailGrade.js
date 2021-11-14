@@ -10,7 +10,7 @@ const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDet
         <div id="gradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div className="modal-content">
-                    <TitleModalGrade id="gradeModalLabel" bgColor={colorModalDetails} text={titleModalDetails} />
+                    <TitleModalGrade bgColor={colorModalDetails} text={titleModalDetails} />
                     <div className="modal-body">
                         <div className="row justify-content-center">
                             <div className="layout-legend col-10 col-lg-9">
