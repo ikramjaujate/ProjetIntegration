@@ -15,7 +15,7 @@ module.exports = function (app, client) {
       if(error){
         throw error
       }
-      res.status(200).json(result.rowCount);
+      res.status(200).json(result);
     })
   })
 

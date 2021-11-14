@@ -1,8 +1,8 @@
-const assert = require("assert");
 var request = require("supertest");
-
-
 const app = require("../server.js");
+
+
+
 
 var request = request("http://localhost:3001");
 

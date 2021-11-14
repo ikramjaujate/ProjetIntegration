@@ -112,6 +112,8 @@ client.connect(err => {
   }
 })
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
+
+module.exports = server;
