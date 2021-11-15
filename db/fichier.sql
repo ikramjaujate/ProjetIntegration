@@ -43,7 +43,7 @@ VALUES
 ('SREU2', 1),
 ('SREU3', 1),
 ('SERVERROOM', 2),
-('ACCEUIL', 2),
+('ACCUEIL', 2),
 ('WC', 1),
 ('ENTREESUD', 1),
 ('ENTRENORD', 3);
