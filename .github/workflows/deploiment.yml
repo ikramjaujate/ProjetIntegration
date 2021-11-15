@@ -2,7 +2,7 @@ name: VPS
 on:
   push:
     branches:
-      - develop
+      - Security
 
 jobs:
   VPS-deploiement:

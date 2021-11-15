@@ -44,11 +44,29 @@ const client = new Client({
 app.use(helmet.contentSecurityPolicy({
   directives: {
     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-    'default-src': ['\'self\'' , 'blob:'],
-    'object-src' : ['\'self\'', 'data:'],
-    'img-src' : ['\'self\'', 'data:'],
-    'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-    'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+    'frame-ancestors' : none,
+    'block-all-mixed-content' : any,
+    'default-src' : none,
+    'script-src' : none,
+    'style-src' : none,
+    'object-src' : none,
+    'frame-src' : none,
+    'child-src' : none,
+    'img-src' : none,
+    'font-src' : none,
+    'connect-src' : none,
+    'manifest-src' : none, 
+    'base-uri' : none, 
+    'form-action' : none,
+    'media-src' : none, 
+    'prefetch-src' : none,
+    'worker-src' : none,
+    'report-uri' : 'https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/0/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report'
+    // 'default-src': ['\'self\'' , 'blob:'],
+    // 'object-src' : ['\'self\'', 'data:'],
+    // 'img-src' : ['\'self\'', 'data:'],
+    // 'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+    // 'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
   }
 }));
 //X-Content-Type-Options
