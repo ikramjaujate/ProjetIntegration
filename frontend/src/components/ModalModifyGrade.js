@@ -1,7 +1,6 @@
 import '../css/Grades.css';
 import ActionsCameras from './ActionsCameras';
 import TitleModalGrade from './TitleModalGrade' ;
-import ButtonGrade from './ButtonGrade';
 
 
 const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, saveAction, newNotifications, newActions, activateButton}) => {
@@ -76,16 +75,11 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
                         </div>
                     </div>
                     <div className="modal-footer row justify-content-between">
-                        {/* <button type="button" className="btn modal-button bouton-close col-11 col-sm-5" onClick={() => cancelModification()}>Annuler</button> */}
-                        {/* <button type="button" id="open-desc-grade-1" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir sur desc grade</button> */}
-                        {/* <button type="button" id="close-modify" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button> */}
-                        {/* <button type="button" id="open-confirmation" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-toggle="modal" data-bs-target="#confirmationCancelModal">Cancel</button> */}
-                        {/* <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" onClick={() => {saveAction();}}>Enregistrer</button> */}
-                        <ButtonGrade className="bouton-close" text="Annuler" func1={cancelModification} />
-                        <ButtonGrade id="open-desc-grade-1" className="hidden-btn bouton-close" text="Revenir desc grade" targetToggle="#gradeModal" dataToggle="modal" />
-                        <ButtonGrade id="close-modify" className="hidden-btn bouton-close" text="Fermer" dataDismiss="modal" ariaLabel="Close" />
-                        <ButtonGrade id="open-confirmation" className="hidden-btn bouton-close" text="Cancel" targetToggle="#confirmationCancelModal" dataToggle="modal" />
-                        <ButtonGrade className="bouton-action" text="Enregistrer" func1={saveAction} />
+                        <button type="button" className="btn modal-button bouton-close col-11 col-sm-5" onClick={() => cancelModification()}>Annuler</button>
+                        <button type="button" id="open-desc-grade-1" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir sur desc grade</button>
+                        <button type="button" id="close-modify" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
+                        <button type="button" id="open-confirmation" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-toggle="modal" data-bs-target="#confirmationCancelModal">Cancel</button>
+                        <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" onClick={() => {saveAction();}}>Enregistrer</button>
                     </div>
                 </div>
             </div>
