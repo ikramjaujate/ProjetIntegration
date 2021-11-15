@@ -204,3 +204,7 @@ CREATE TABLE IF NOT EXISTS public.personal
 
 ALTER TABLE public.personal
     OWNER to postgres;
+
+INSERT INTO personal(username, password)
+VALUES 
+('admin', '123');
