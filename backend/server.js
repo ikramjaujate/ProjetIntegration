@@ -44,8 +44,8 @@ const client = new Client({
 // CSP Header middleware
 app.use(function(req, res, next) {
   res.setHeader(
-    "content-security-policy-report-only",
-    "frame-ancestors 'self';  default-src 'self'; script-src 'sha256-taE1esL2Z5EmqZ+029XVYXt4sxKUw336oUN3SAp4XZs=' 'self' 'report-sample' https://projet.4x4vert.be; style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-mkh8535AFt6ogczZfol78HZgvhGGEDTCXpPucFH37Jo=' 'report-sample' projet.4x4vert.be; object-src 'none'; frame-src 'self'; child-src 'self'; img-src projet.4x4vert.be; font-src 'self'; connect-src 'self'; manifest-src 'self' projet.4x4vert.be; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self'; report-uri https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/5/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report"
+    "Content-Security-Policy",
+    "frame-ancestors 'self'; upgrade-insecure-requests;  default-src 'self'; script-src 'sha256-taE1esL2Z5EmqZ+029XVYXt4sxKUw336oUN3SAp4XZs=' 'self' 'report-sample' https://projet.4x4vert.be; style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-mkh8535AFt6ogczZfol78HZgvhGGEDTCXpPucFH37Jo=' 'report-sample' projet.4x4vert.be; object-src 'none'; frame-src 'self'; child-src 'self'; img-src '*'; font-src 'self'; connect-src 'self'; manifest-src 'self' projet.4x4vert.be; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self'; report-uri https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/5/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report"
   ),
   next();
 });
