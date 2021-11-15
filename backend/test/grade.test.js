@@ -133,6 +133,24 @@ describe('GET /api/gradesInfos', function() {
     });
 })
 
+describe('POST /api/grades/:idGrade/acces', function() {
+    it('Tester la nouvelle action sur le grade désiré', function(done) {
+        let action = {
+            "actions" : {"1" : "false"},
+            "notifications" : {"1" : "true"}
+        }
+        chai.request(server)
+        .post('/api/grades/1/acces')
+        .send(action)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.message.should.be.eql("ok");
+            done();
+        })
+    });
+})
+
 // describe('post "/api/grades/:idGrade/acces"', function() {
 //     it('Tester la nouvelle action sur le grade désiré', function(done) {
 //         let action = {
