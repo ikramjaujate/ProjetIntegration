@@ -339,7 +339,7 @@ module.exports = function (app, client) {
                 );
 
             }
-            response.send({"message": reponse});
+            response.send({"message": "ok"});
 
         }
     );
