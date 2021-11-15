@@ -165,8 +165,10 @@ module.exports = function (app, client) {
       client.query(query, [idMember, photo], (error, results) => {
         if (error) {
         }
+        response.status(200)
+        response.send({"count" : results.rowCount})
       })
-      response.send({ message: 'ok' });
+      
     })
 
   /**

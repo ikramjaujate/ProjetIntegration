@@ -66,11 +66,22 @@ describe('GET /api/membres/:idMembre/photos/count', function() {
             res.body[0].count.should.be.eql('1');
             done();
         })
-        // .expect('Content-Type', /json/)
-        // .expect(200)
-        // .then(response => {
-        //     assert(response[0].count, 2);
-        // }), done();
+    });
+})
+
+describe('DELETE /api/membres/:idMember/eliminate/photo', function() {
+    it('Supprime le path d une photo qui correspond à un utilisateur', function(done) {
+        let photo ={
+            photo : "ikram1.jpg"
+        };
+        chai.request(server)
+        .get('/api/membres/1/eliminate/photo')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('count').eql(1);
+            done();
+        })
     });
 })
 
