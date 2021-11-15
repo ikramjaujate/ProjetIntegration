@@ -59,9 +59,9 @@ function Secretary() {
                     <h1>Nouvel utilisateur:</h1>
                     <form onSubmit={submitClient}>
                     <label for="f-name">Prénom:</label><br/>
-                    <Input name="f-name" idName="f-name" max="50" min="1" type="texte" placeholder="Prénom" setFunc={setClientFirstName}/><br/>
+                    <Input name="f-name" idName="f-name" max="50" min="1" type="text" placeholder="Prénom" setFunc={setClientFirstName}/><br/>
                     <label for="l-name">Nom:</label><br/>
-                    <Input name="l-name" idName="l-name" max="50" min="1" type="texte" placeholder="Nom" setFunc={setClientLastName}/><br/>
+                    <Input name="l-name" idName="l-name" max="50" min="1" type="text" placeholder="Nom" setFunc={setClientLastName}/><br/>
                     <label for="grade">Grade:</label><br/>
                     <select onChange={(e) => {
                                     setClientGrade(e.target.value)}} name="grade">
