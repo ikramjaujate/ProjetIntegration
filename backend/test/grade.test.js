@@ -151,24 +151,7 @@ describe('POST /api/grades/:idGrade/acces', function() {
     });
 })
 
-// describe('post "/api/grades/:idGrade/acces"', function() {
-//     it('Tester la nouvelle action sur le grade désiré', function(done) {
-//         let action = {
-//             "actions" : {
-//                 1 : false
-//             },
-//             "notifications" : {
-//                 1 : true
-//             }
-//         }
-//         request.post('/api/grades/1/acces')
-//         .expect('Content-Type', /json/)
-//         .expect(200)
-//         .then(response => {
-//             assert(response[0].name_grade, "test");
-//         }), done();
-//     });
-// })
+
 
 
 

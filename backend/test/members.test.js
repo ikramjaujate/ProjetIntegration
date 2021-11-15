@@ -74,6 +74,39 @@ describe('GET /api/membres/:idMembre/photos/count', function() {
     });
 })
 
+describe('GET /api/membres/:idMember/name', () => {
+    it("Tester d'obtenir le nom concernant un membre", (done) => {
+        chai.request(server)
+        .get('/api/membres/1/name')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].first_name.should.be.eql('Jean');
+            res.body[0].last_name.should.be.eql('Ab');
+            done();
+        })
+    });
+})
+
+
+describe('PUT /api/membres/:idMember/update', function() {
+    it("Tester la modification d'un nom et prenom d'un membre", function(done) {
+        let member = {
+            "name" : "NouveauPrenom",
+            "surname" : "NouveauNomFamille"
+        }
+        chai.request(server)
+        .put('/api/membres/1/update')
+        .send(member)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            console.log("kiko : ", res.body)
+            done();
+        })
+    });
+})
+
 /*describe('GET /api/membres/:idMembre/grade', function() {
     it('Obtenir toutes les informations concernant un membre', function(done) {
         request.get('/api/membres/1/grade')

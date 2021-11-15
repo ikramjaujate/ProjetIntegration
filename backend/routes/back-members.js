@@ -78,8 +78,9 @@ module.exports = function (app, client) {
       let query = "select first_name, last_name  \
     from member \
     where id_member = ($1)" ;
-      client.query(query, [idMember], (error, results) => {
+      client.query(query, [parseInt(idMember)], (error, results) => {
         if (error) {
+          throw error
         }
         response.status(200).json(results.rows)
       })
@@ -144,8 +145,8 @@ module.exports = function (app, client) {
         if (error) {
         }
         response.status(200)
+        response.send({"count" : results.rowCount});
       })
-      response.send({ message: 'ok' });
     })
 
   /**

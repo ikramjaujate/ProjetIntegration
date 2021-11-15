@@ -188,8 +188,7 @@ module.exports = function (app, client) {
      * @param {dictionnary} notifications contains a dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
      */
     app.post("/api/grades/:idGrade/acces",(request, response) => {
-        console.log("oui");
-        let reponse;
+        let reponse = 0, requete1=false, requete2=false;
         const idGrade = request.params.idGrade;
         const actions = request.body.actions;
         const notifications = request.body.notifications;
@@ -201,8 +200,9 @@ module.exports = function (app, client) {
                 if (error) {
                     throw error;
                 }
-                reponse = results
+                reponse++ ;
             });
+            requete1 = true ;
         }
         const query2 = "update permission \
         set notification = ($1) \
@@ -212,9 +212,14 @@ module.exports = function (app, client) {
                 if (error) {
                     throw error;
                 }
+                reponse ++ ;
             });
+            requete2=true ;
         }
-        console.log("oui");
+        while (requete1==false || requete2==false) {
+            console.log("rep : ", reponse);
+        }
+        console.log("rep : ", reponse);
         response.send({"message": "ok"});
     });
 };
