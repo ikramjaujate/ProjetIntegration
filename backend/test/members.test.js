@@ -63,7 +63,7 @@ describe('GET /api/membres/:idMembre/photos/count', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            res.body[0].count.should.be.eql('2');
+            res.body[0].count.should.be.eql('1');
             done();
         })
         // .expect('Content-Type', /json/)

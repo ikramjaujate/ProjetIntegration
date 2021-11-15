@@ -80,8 +80,8 @@ describe('GET /api/grades/colors', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            res.body[0].id_color.should.be.eql(5);
-            res.body[0].name_color.should.be.eql('#FFCCBC');
+            res.body[0].id_color.should.be.eql(4);
+            res.body[0].name_color.should.be.eql('#FFF9C4');
             done();
         })
     });
@@ -91,7 +91,7 @@ describe('PUT /api/grades', function() {
     it('Ajouter un nouveau grade', function(done) {
         let grade = {
             "name" : "test",
-            "idcolor" : 4
+            "idcolor" : 3
         }
         chai.request(server)
         .put('/api/grades')
