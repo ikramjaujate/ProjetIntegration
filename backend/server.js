@@ -8,6 +8,8 @@ dotenv.config();
 var path = require('path');
 const helmet = require("helmet");
 const permissionsPolicy = require("permissions-policy");
+const expectCt = require("expect-ct");
+
 // Const http = require('http')
 /*
  * Const cors = require('cors')
@@ -89,6 +91,9 @@ app.use(permissionsPolicy({
     fullscreen: ['self']
   }
 }));
+
+//Expect-CT
+app.use(expectCt({ maxAge: 123 }));
 
 app.use(express.json({ limit: '10kb' }));
 

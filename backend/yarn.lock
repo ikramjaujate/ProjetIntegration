@@ -2123,6 +2123,11 @@
   "resolved" "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz"
   "version" "1.8.1"
 
+"expect-ct@^1.0.0":
+  "integrity" "sha512-DXxS7CswEMM/nunGGVve9x7T0KUkeVjk/jEaVNlpdmk2RbEkKOJAfLUzBGZ5NkF15QktHowln0ZMi6oq+dQPHw=="
+  "resolved" "https://registry.npmjs.org/expect-ct/-/expect-ct-1.0.0.tgz"
+  "version" "1.0.0"
+
 "express@^4.17.1":
   "integrity" "sha512-mHJ9O79RqluphRrcw2X/GTh3k9tVv8YcoyY4Kkh4WDMUYKRZUq0h1o0w2rrrxBqM7VoeUVqgb27xlEMXTnYt4g=="
   "resolved" "https://registry.npmjs.org/express/-/express-4.17.1.tgz"
