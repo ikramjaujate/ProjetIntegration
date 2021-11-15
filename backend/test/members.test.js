@@ -20,7 +20,7 @@ describe('PUT /api/client', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            console.log(res)
+            //console.log(res)
             // res.body.should.have.property('rowCount').eql(1)
             done();
         })
@@ -50,7 +50,7 @@ describe('GET /api/membres/:idMembre/photos', () => {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            res.body[0].pictures.should.be.eql('ikram2.jpg');
+            res.body[0].pictures.should.be.eql('ikram1.jpg');
             done();
         })
     });
