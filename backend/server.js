@@ -64,6 +64,12 @@ app.use(helmet.noSniff());
 //X-XSS-Protection
 app.use(helmet.xssFilter());
 
+//Referrer-Policy
+app.use(
+  helmet.referrerPolicy({
+    policy: ["origin", "unsafe-url"],
+  })
+ );
 //X-POWERED-BY
 app.use(helmet.hidePoweredBy());
 
