@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar.js';
+import Navbar from './Navbar.js';
 import './css/Secretary.css';
 import React, { useState, useEffect } from 'react'
 import Popup from 'reactjs-popup';

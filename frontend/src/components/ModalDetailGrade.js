@@ -1,7 +1,6 @@
 import '../css/Grades.css';
 import CameraInfo from './CameraInfo';
 import TitleModalGrade from './TitleModalGrade' ;
-import ButtonGrade from './ButtonGrade';
 
 
 const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDetails, activateButton, resetModal}) => {
@@ -32,10 +31,8 @@ const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDet
                         </div>
                     </div>
                     <div className="modal-footer row justify-content-between">
-                        {/* <button type="button" id="close-informations" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button> */}
-                        {/* <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");resetModal();}}>Modifier</button> */}
-                        <ButtonGrade id="close-informations" className="bouton-close" text="Fermer" dataDismiss="modal" ariaLabel="Close" />
-                        <ButtonGrade className="bouton-action" text="Modifier" targetToggle="#modifyGradeModal" dataToggle="modal" func1={activateButton} param1="close-informations" func2={resetModal} />
+                        <button type="button" id="close-informations" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
+                        <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");resetModal();}}>Modifier</button>
                     </div>
                 </div>
             </div>

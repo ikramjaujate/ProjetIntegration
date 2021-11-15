@@ -1,5 +1,5 @@
 import './css/App.css';
-import Navbar from './components/Navbar.js';
+import Navbar from './Navbar';
 import Grades from './Grades';
 import Camera  from './components/Camera';
 import './css/App.css';
@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <Navbar /> */}
+        <Navbar />
         <div className="content">
           <Switch>
 
@@ -21,7 +21,7 @@ function App() {
             <Route exact path="/camera"> 
               <Camera/>
             </Route>
-            <Route exact path="/accueil">
+            <Route exact path="/home">
              <Accueil/> 
             </Route>
             <Route exact path="/secretary">

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ElementNavBar Snapshot - renders correctement 1`] = `
+<li
+  className="nav-item"
+>
+  <a
+    className="nav-link-main"
+    href="test_href"
+  >
+    <svg
+      aria-hidden="true"
+      className="svg-inline--fa test_classname"
+      data-icon="test_data-icon"
+      data-prefix="fas"
+      focusable="false"
+      role="img"
+      viewBox="0 0 0 0"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10 10"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="link-text"
+    >
+      test_text
+    </span>
+  </a>
+</li>
+`;
