@@ -64,6 +64,9 @@ app.use(helmet.noSniff());
 //X-XSS-Protection
 app.use(helmet.xssFilter());
 
+//X-POWERED-BY
+app.use(helmet.hidePoweredBy());
+
 //Strict-Transport-Security
 app.use(
   helmet.hsts({
