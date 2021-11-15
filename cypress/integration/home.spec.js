@@ -51,7 +51,7 @@ describe("Tests pour la page grades", () => {
         cy.contains('button','Modifier').click()
         cy.get('[type="checkbox"]').get('.action-1-1').click()
         cy.contains('button','Enregistrer').click()
-        cy.contains('button','Enregistrer').click()
+        cy.contains('div','Vous venez de modifier les actions des caméras du grade Directeur !')
 
      
     });
