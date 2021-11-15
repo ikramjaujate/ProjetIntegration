@@ -56,16 +56,23 @@ describe('GET /api/membres/:idMembre/photos', () => {
     });
 })
 
-/*describe('GET /api/membres/:idMembre/photos/count', function() {
+describe('GET /api/membres/:idMembre/photos/count', function() {
     it('Obtenir le nombre de photo concernant un membre', function(done) {
-        request.get('/api/membres/:idMember/photos/count')
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then(response => {
-            assert(response[0].count, 2);
-        }), done();
+        chai.request(server)
+        .get('/api/membres/1/photos/count')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].count.should.be.eql('1');
+            done();
+        })
+        // .expect('Content-Type', /json/)
+        // .expect(200)
+        // .then(response => {
+        //     assert(response[0].count, 2);
+        // }), done();
     });
-})*/
+})
 
 /*describe('GET /api/membres/:idMembre/grade', function() {
     it('Obtenir toutes les informations concernant un membre', function(done) {
