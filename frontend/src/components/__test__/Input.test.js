@@ -26,17 +26,22 @@ describe('CameraInfo', () => {
       expect(paragraph).toHaveLength(1)
       expect(paragraph.at(0).props().name).toEqual("client");
     })
-  
     it('Vérifier le placeholder du input. ', () => {
       const wrapper = shallow(<Input required type="" name="" min="" max="" placeholder="text" setFunc="" pattern="" title="" step="" idName=""/>)
       const paragraph = wrapper.find('input')
       expect(paragraph).toHaveLength(1)
       expect(paragraph.at(0).props().placeholder).toEqual("text");
     })
-   
-
-
-
-
-
+    it('Vérifier le placeholder par default du input. ', () => {
+      const wrapper = shallow(<Input />)
+      const paragraph = wrapper.find('input')
+      expect(paragraph).toHaveLength(1)
+      expect(paragraph.at(0).props().placeholder).toEqual("texte");
+    })
+    it('Vérifier le text par default du input. ', () => {
+      const wrapper = shallow(<Input />)
+      const paragraph = wrapper.find('input')
+      expect(paragraph).toHaveLength(1)
+      expect(paragraph.at(0).props().type).toEqual("text");
+    })
 })
