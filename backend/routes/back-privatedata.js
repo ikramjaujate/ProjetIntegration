@@ -1,5 +1,4 @@
 module.exports = function (app, client) {
-    var moment = require("moment");
     const jwt = require('jsonwebtoken');
   
     const bcrypt = require("bcrypt");
@@ -9,25 +8,6 @@ module.exports = function (app, client) {
         const username = request.body.username;
         const password = request.body.password;
 
-        // bcrypt.hash(password, 10, function (err, hash) {
-        //     console.log(hash)
-            
-        // })
-
-        
-          /*bcrypt.compare(test, 123, (error, response1) => {
-            console.log("type : ", response1)
-            if (response1) {
-              request.session.user = results;
-              response.send(results);
-            } else {
-              response.send({message:'ko', msg:"Mauvais nom d'utilisateur et/ou de mot de passe"});
-            }
-          });*/
-  
-
-
-        
         let query = "select *  \
                     from personal \
                     where username = ($1)" ;

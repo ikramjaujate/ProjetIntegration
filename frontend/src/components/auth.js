@@ -1,16 +1,16 @@
 export function isLoggedIn() {
-    return localStorage.getItem("accessToken") !== null && localStorage.getItem("accessToken") !== "undefined";
+    return localStorage.getItem("access_token") !== null && localStorage.getItem("access_token") !== "undefined";
 }
 
 export function deleteTokens() {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("access_token");
 
 }
 
 export function requiredAuth(nextState, replace) {
     if (!isLoggedIn()) {
         replace({
-            pathname: '/',
+            pathname: '/login',
             state: {nextPathname: nextState.location.pathname}
         })
     }

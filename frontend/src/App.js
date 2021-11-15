@@ -14,39 +14,45 @@ import {PrivateRoute} from "./components/PrivateRoute.js";
 
 function App() {
 
-
+  if (isLoggedIn()){
   return (
     <Router>
       <div className="App">
         {/* <Navbar /> */}
         <div className="content">
           <Switch>
-          <Route exact  path="/grades">
-                <Grades/>
-            </Route>
-            <PrivateRoute exact isloggedin={isLoggedIn()}  path="/camera"> 
-              <Camera/>
-            </PrivateRoute>
-            <PrivateRoute exact isloggedin={isLoggedIn()} path="/accueil">
-             <Accueil/> 
-            </PrivateRoute>
-            <PrivateRoute exact isloggedin={isLoggedIn()} path="/secretary">
-              <Secretary/>
-            </PrivateRoute>
-            <PrivateRoute exact isloggedin={isLoggedIn()} path="/modification">
-              <Modification/>
-            </PrivateRoute>
-            <PrivateRoute exact isloggedin={isLoggedIn()}  path="/login">
-              <Login/>
-            </PrivateRoute>
-            <Route exact path='/login'  >
-              <Login/>
-                </Route>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Grades}  path="/grades"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Camera} path="/camera"/> 
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Accueil} path="/accueil"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Secretary} path="/secretary"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} path="/modification"  component={Modification}/>
+            <Route path='/login' exact component={Login}/>
           </Switch>
         </div>
       </div>
     </Router>
-  );}
+  );}else {
+    return(
+      <Router>
+      <div className="App">
+        {/* <Navbar /> */}
+        <div className="content">
+          <Switch>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Grades}  path="/grades"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Camera} path="/camera"/> 
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Accueil} path="/accueil"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Secretary} path="/secretary"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} path="/modification"  component={Modification}/>
+            <Route path='/login' exact component={Login}/>
+          </Switch>
+        </div>
+      </div>
+    </Router>
+
+    )
+    
+  }
+}
 
 
 export default App;
