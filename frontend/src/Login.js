@@ -5,15 +5,13 @@ import'bootstrap/dist/js/bootstrap.min.js';
 import'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import {useEffect, useState} from "react" ;
-import { useCookies } from 'react-cookie';
-import { withCookies } from "react-cookie";
+
 
 
 function Login() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [state, setState] = useState(0);
-    const [cookie, setCookie] = useCookies(['user'])
 
 	const loginUser = () => {
 		let informations = {
@@ -24,20 +22,22 @@ function Login() {
         fetch(`/api/login`, informations)
             .then(response => {
 				return response.json()	
-			}).then(response => {
-				console.log(response.value)
-                if(response.value.rowCount){
-                    setCookie('Id', username, { path: '/' });
+			}).then(token => {
+                console.log(token.value)
+                if (token.value) {
+                    localStorage.setItem('access_token', token.value);
+
+                    if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token") !== "undefined") {
+                        window.location.replace("/")
+                    }
                 }
+
+                
 			})
 	}
 	const handleSubmit = (e) => {
 		e.preventDefault()
 	}
-
-    const showCookie = () => {
-        console("cookies = " + cookie)
-    }
 
 
     return (
@@ -55,7 +55,6 @@ function Login() {
                 </div>
                 
                 <button onClick={loginUser} class="btn btn-primary">Connecter</button><br/>
-                <button onClick={showCookie} class="btn btn-primary">CLICK</button>
 
             </form>
     	</div>
@@ -63,4 +62,4 @@ function Login() {
         </>
     )
 
-} export default withCookies(Login);
+} export default Login;

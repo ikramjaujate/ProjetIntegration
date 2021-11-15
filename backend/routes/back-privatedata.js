@@ -1,4 +1,7 @@
 module.exports = function (app, client) {
+    var moment = require("moment");
+    const jwt = require('jsonwebtoken');
+  
     const bcrypt = require("bcrypt");
 
     app.post('/api/login', (request, response) => {
@@ -27,19 +30,21 @@ module.exports = function (app, client) {
         
         let query = "select *  \
                     from personal \
-                    where username = ($1) and password= $2" ;
-        client.query(query, [username, password], (error, results) => {
-          // bcrypt.compare(password, results.rows[0].password, (error, res) => {
-            
-            if (results) {
-                response.send({value: results})
-            } else {
-                response.send({value :"Mauvais nom d'utilisateur et/ou de mot de passe"});
+                    where username = ($1)" ;
+        client.query(query, [username], (error, results) => {
+          //console.log(results.rows[0].password)
+          bcrypt.compare(password, results.rows[0].password)
+          .then(valid => {
+            if (!valid) {
+              return res.status(401).json({ error: 'Mot de passe incorrect !' });
             }
-          // });
-          //response.send({ rowCount: results.rowCount });
-          //response.status(200).json(results.rowCount)
-        })
+            const token = jwt.sign({
+              data: username
+            }, 'secret', { expiresIn: '100000h' });
+            
+            response.send({value: token})
+          })
       })
+    })
 
 };

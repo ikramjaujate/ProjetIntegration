@@ -1,23 +1,22 @@
 import React from 'react';
 import { Redirect, Route } from "react-router-dom";
 import {useEffect, useState} from "react" ;
-import { useCookies } from 'react-cookie';
+import {isLoggedIn} from './auth.js';
 
-export default function PrivateRoute({path}) {
-    // const [cookie, setCookie] = useState("")
-    // useEffect(() => {
-    //     setCookie(cookie.get('Id'))
-    //     console.log("this is a cookie :" + cookie)
-    // })
-    // if(cookie.name !== "admin"){
-        return (    
-            <Route> 
-                    <Redirect
+export const PrivateRoute = ({component: Component, ...rest}) => (
+    <Route
+        {...rest}
+        render={props =>
+            isLoggedIn() ? (
+                <Component {...props} />
+            ) : (
+                <Redirect
                     to={{
-                        pathname: path,
+                        pathname: "/",
+                        state: {from: props.location}
                     }}
-                    />
-            </Route> 
-        )
-    // }
-}
+                />
+            )
+        }
+    />
+);

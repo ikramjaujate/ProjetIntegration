@@ -8,41 +8,45 @@ import Secretary from './Secretary.js';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'; 
 import Modification from './components/Modification';
 import Login from './Login';
-import PrivateRoute from './components/PrivateRoute';
+import {isLoggedIn} from './components/auth.js';
+import {PrivateRoute} from "./components/PrivateRoute.js";
 
 
 function App() {
+
+
   return (
     <Router>
       <div className="App">
         {/* <Navbar /> */}
         <div className="content">
           <Switch>
-            <Route exact path="/grades">
-              <PrivateRoute path="/login"> 
+          <Route exact  path="/grades">
                 <Grades/>
-              </PrivateRoute>
             </Route>
-            <Route exact path="/camera"> 
+            <PrivateRoute exact isloggedin={isLoggedIn()}  path="/camera"> 
               <Camera/>
-            </Route>
-            <Route exact path="/accueil">
+            </PrivateRoute>
+            <PrivateRoute exact isloggedin={isLoggedIn()} path="/accueil">
              <Accueil/> 
-            </Route>
-            <Route exact path="/secretary">
+            </PrivateRoute>
+            <PrivateRoute exact isloggedin={isLoggedIn()} path="/secretary">
               <Secretary/>
-            </Route>
-            <Route exact path="/modification">
+            </PrivateRoute>
+            <PrivateRoute exact isloggedin={isLoggedIn()} path="/modification">
               <Modification/>
-            </Route>
-            <Route exact path="/login">
+            </PrivateRoute>
+            <PrivateRoute exact isloggedin={isLoggedIn()}  path="/login">
               <Login/>
-            </Route>
+            </PrivateRoute>
+            <Route exact path='/login'  >
+              <Login/>
+                </Route>
           </Switch>
         </div>
       </div>
     </Router>
-  );
-}
+  );}
+
 
 export default App;
