@@ -47,24 +47,25 @@ describe("Tests pour la page grades", () => {
     it("Tests si on peut modifier un grade", () => {
         cy.get('#cancel-creation').click()
         cy.contains('div','Directeur').click()
-        cy.contains('button','Modifier')
-        //cy.contains('input','[type="checkbox"]').uncheck()
-        //cy.contains('button', 'Enregistrer').click()
-        //cy.contains('input','.action-6-1').click()
-        
+        cy.wait(1000)
+        cy.contains('button','Modifier').click()
+        cy.get('[type="checkbox"]').get('.action-1-1').click()
+        cy.contains('button','Enregistrer').click()
+        cy.contains('button','Enregistrer').click()
+
      
     });
 
 })
 
 
-describe("Tests pour la page grades", () => {
+describe("Tests pour la page camera", () => {
     
-    it("Tests si la page d'accueil contient bien le react", () => {
+    it("Tests si la page camera contient bien le react", () => {
         cy.visit("projet.4x4vert.be/camera");
 
     });
-    it("Tests si la page d'accueil bien un titre", () => {
+    it("Tests si la page camera bien un titre", () => {
         cy.get('h3')
         cy.contains('Camera')
         cy.contains('button','prend photo')
