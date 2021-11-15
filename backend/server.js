@@ -41,34 +41,33 @@ const client = new Client({
 //   })
 //  );
 
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-    'frame-ancestors' : 'none',
-    'block-all-mixed-content' : 'any',
-    'default-src' : 'none',
-    'script-src' : 'none',
-    'style-src' : 'none',
-    'object-src' : 'none',
-    'frame-src' : 'none',
-    'child-src' : 'none',
-    'img-src' : 'none',
-    'font-src' : 'none',
-    'connect-src' : 'none',
-    'manifest-src' : 'none', 
-    'base-uri' : 'none', 
-    'form-action' : 'none',
-    'media-src' : 'none', 
-    'prefetch-src' : 'none',
-    'worker-src' : 'none',
-    'report-uri' : 'https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/0/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report'
-    // 'default-src': ['\'self\'' , 'blob:'],
-    // 'object-src' : ['\'self\'', 'data:'],
-    // 'img-src' : ['\'self\'', 'data:'],
-    // 'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-    // 'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-  }
-}));
+const http = require('http');
+
+http.createServer((request, response) => {
+  // Handing the request
+  request.on(app);
+
+  response.writeHead(200, {
+    "content-security-policy-report-only": "frame-ancestors 'self'; block-all-mixed-content; default-src 'self'; script-src 'self' 'report-sample'; style-src 'self' 'report-sample'; object-src 'none'; frame-src 'self'; child-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self'; report-uri https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/4/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report"
+
+    // other security headers here...
+  });
+
+  // Sending the response
+  response.end(app);
+});
+
+// app.use(helmet.contentSecurityPolicy({
+//   directives: {
+//     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//     "content-security-policy-report-only": "frame-ancestors 'self'; block-all-mixed-content; default-src 'self'; script-src 'self' 'report-sample'; style-src 'self' 'report-sample'; object-src 'none'; frame-src 'self'; child-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self'; report-uri https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/3/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report"
+//     'default-src': ['\'self\'' , 'blob:'],
+//     'object-src' : ['\'self\'', 'data:'],
+//     'img-src' : ['\'self\'', 'data:'],
+//     'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+//     'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+//   }
+// }));
 //X-Content-Type-Options
 app.use(helmet.noSniff());
 
