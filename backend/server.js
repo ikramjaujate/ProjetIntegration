@@ -41,26 +41,18 @@ const client = new Client({
 //   })
 //  );
 
-const http = require('http');
-
-http.createServer((request, response) => {
-  // Handing the request
-  request.on(app);
-
-  response.writeHead(200, {
-    "content-security-policy-report-only": "frame-ancestors 'self'; block-all-mixed-content; default-src 'self'; script-src 'self' 'report-sample'; style-src 'self' 'report-sample'; object-src 'none'; frame-src 'self'; child-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self'; report-uri https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/4/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report"
-
-    // other security headers here...
-  });
-
-  // Sending the response
-  response.end(app);
+// CSP Header middleware
+app.use(function(req, res, next) {
+  res.setHeader(
+    "content-security-policy-report-only",
+    "frame-ancestors 'self'; block-all-mixed-content; default-src 'self'; script-src 'self' 'report-sample' 'unsafe-inline' https://projet.4x4vert.be; style-src 'self' 'report-sample' projet.4x4vert.be; object-src 'none'; frame-src 'self'; child-src 'self'; img-src 'self' projet.4x4vert.be; font-src 'self'; connect-src 'self'; manifest-src 'self' projet.4x4vert.be; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self'; report-uri https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/5/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report"
+  ),
+  next();
 });
 
 // app.use(helmet.contentSecurityPolicy({
 //   directives: {
 //     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-//     "content-security-policy-report-only": "frame-ancestors 'self'; block-all-mixed-content; default-src 'self'; script-src 'self' 'report-sample'; style-src 'self' 'report-sample'; object-src 'none'; frame-src 'self'; child-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self'; report-uri https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/3/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report"
 //     'default-src': ['\'self\'' , 'blob:'],
 //     'object-src' : ['\'self\'', 'data:'],
 //     'img-src' : ['\'self\'', 'data:'],
@@ -68,6 +60,7 @@ http.createServer((request, response) => {
 //     'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
 //   }
 // }));
+
 //X-Content-Type-Options
 app.use(helmet.noSniff());
 
