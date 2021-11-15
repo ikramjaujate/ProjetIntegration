@@ -2,7 +2,7 @@ name: Backend
 on:
   push:
     branches:
-      - develop
+      - IntegrationTests
 
 jobs:
   test-backend:
