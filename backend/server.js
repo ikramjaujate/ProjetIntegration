@@ -82,6 +82,13 @@ app.use(
   })
 );
 
+// Permissions Policy
+app.use(permissionsPolicy({
+  features: {
+    fullscreen: ['self']
+  }
+}));
+
 app.use(express.json({ limit: '10kb' }));
 
 
