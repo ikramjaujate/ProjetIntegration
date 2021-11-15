@@ -1,17 +1,16 @@
 import React from 'react' ;
-import Enzyme, { shallow, mount } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16' ;
 import 'jest-enzyme' ;
 import 'jest-styled-components';
 import ActionsCameras from '../ActionsCameras.js' ;
-import ModalModifyGrade from '../ModalModifyGrade.js' ;
-
 Enzyme.configure({ adapter: new Adapter() });
 
 
+
 describe('ActionCameras', () => {
+
     it('Vérifier le texte affiché dans le titre', () => {
-      // const wrapper = shallow(<ActionsCameras name_camera="ZoneSud" id_camera="" notification="" changeAction="" changeNotification="" allowed="" currentIdGrade="" />);
       const wrapper = shallow(<ActionsCameras name_camera="ZoneSud" />);
       const paragraph = wrapper.find('div.name-camera-grade');
       //expect(paragraph).toHaveLength(1);
@@ -33,7 +32,6 @@ describe('ActionCameras', () => {
     it("Vérifier la classe du switch représentant l'action de la caméra", () => {
       const wrapper = shallow(<ActionsCameras id_camera="2" currentIdGrade="1" />);
       const paragraph = wrapper.find('input.form-check-input');
-      //expect(paragraph.at(0).props().className).toHaveClass("form-check-input input-switch action-1-2");
       expect(paragraph.hasClass('action-1-2')).toEqual(true) ;
     })
 
