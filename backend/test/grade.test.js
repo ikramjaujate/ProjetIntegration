@@ -80,8 +80,7 @@ describe('GET /api/grades/colors', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            res.body[0].id_color.should.be.eql(5);
-            res.body[0].name_color.should.be.eql('#FFCCBC');
+            res.body[0].message.should.be.eql("ok");
             done();
         })
     });
@@ -121,6 +120,27 @@ describe('GET /api/gradesInfos', function() {
     it('Sélectionne tous les grades avec leur id associé x2', function(done) {
         chai.request(server)
         .get('/api/gradesInfos')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].id_grade.should.be.eql(1);
+            res.body[0].name_grade.should.be.eql("Directeur");
+            res.body[2].id_grade.should.be.eql(3);
+            res.body[2].name_grade.should.be.eql("Bénéficiaire");
+            done();
+        })
+    });
+})
+
+describe('POST /api/grades/:idGrade/acces', function() {
+    it('Tester la nouvelle action sur le grade désiré', function(done) {
+        let action = {
+            "actions" : {"1" : "false"},
+            "notifications" : {"1" : "true"}
+        }
+        chai.request(server)
+        .post('/api/grades/1/acces')
+        .send(action)
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');

@@ -188,6 +188,7 @@ module.exports = function (app, client) {
      * @param {dictionnary} notifications contains a dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
      */
     app.post("/api/grades/:idGrade/acces",(request, response) => {
+        console.log("oui");
         let reponse;
         const idGrade = request.params.idGrade;
         const actions = request.body.actions;
@@ -213,6 +214,7 @@ module.exports = function (app, client) {
                 }
             });
         }
-        response.send({"message": reponse});
+        console.log("oui");
+        response.send({"message": "ok"});
     });
 };
