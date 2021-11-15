@@ -4,11 +4,17 @@ import Adapter from 'enzyme-adapter-react-16' ;
 import 'jest-enzyme' ;
 import 'jest-styled-components';
 import ElementNavBar from '../ElementNavBar.js' ;
+import renderer from 'react-test-renderer';
 
 Enzyme.configure({ adapter: new Adapter() }); 
 
 
 describe('ElementNavBar', () => {
+    it('Snapshot - renders correctement', () => {
+        const paragraph = renderer.create(<ElementNavBar href="test_href" text="test_text" dataIcon="test_data-icon" className="test_classname" viewBox="0 0 0 0" d="M10 10"/>).toJSON();
+        expect(paragraph).toMatchSnapshot();
+    });
+
     it("Vérifier le lien vers lequel pointe l'élément", () => {
       const wrapper = shallow(<ElementNavBar href="https://www.test.com/" />);
       const paragraph = wrapper.find('a');
