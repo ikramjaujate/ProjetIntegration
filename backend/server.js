@@ -67,7 +67,7 @@ app.use(helmet.xssFilter());
 //Referrer-Policy
 app.use(
   helmet.referrerPolicy({
-    policy: ["origin", "unsafe-url"],
+    policy: ["strict-origin-when-cross-origin"]
   })
  );
 //X-POWERED-BY
