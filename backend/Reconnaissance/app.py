@@ -189,8 +189,8 @@ def gen(captur):
 
                 
                     
-        
-        out.write(img)
+        if(captur=='videoCptur'): 
+            out.write(img)
         # encode OpenCV raw frame to jpg and displaying it
         ret, buffer = cv2.imencode('.jpg', img)
         frame = buffer.tobytes()
@@ -232,6 +232,14 @@ def video():
 def photo():
     global cap
     return Response(gen('photo'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
+
+
+
+@app.route('/videoCptur')
+def videoCptur():
+    global cap
+    return Response(gen('videoCptur'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
+
 
 @app.route('/shutdown')
 def shutdown():
