@@ -2,7 +2,7 @@ name: ReconnaissanceFaciale
 on:
   push:
     branches:
-      - Security
+      - develop
 env:
   node-version: 16.10.0
 
