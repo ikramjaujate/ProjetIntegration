@@ -82,13 +82,8 @@ app.use(
   })
 );
 
+app.use(express.json({ limit: '10kb' }));
 
-// app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
-// app.use(
-//   helmet.hsts({
-//     maxAge: 123456,
-//   })
-// );
 
 app.use(express.json())
 // app.use(function (req, res, next) {
