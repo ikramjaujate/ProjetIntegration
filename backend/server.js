@@ -45,7 +45,7 @@ const client = new Client({
 app.use(function(req, res, next) {
   res.setHeader(
     "content-security-policy-report-only",
-    "frame-ancestors 'self'; default-src 'self'; script-src 'self' 'report-sample' 'hashes' https://projet.4x4vert.be; style-src 'self' 'report-sample' projet.4x4vert.be; object-src 'none'; frame-src 'self'; child-src 'self'; img-src 'self' projet.4x4vert.be; font-src 'self'; connect-src 'self'; manifest-src 'self' projet.4x4vert.be; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self'; report-uri https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/5/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report"
+    "frame-ancestors 'self'; 'upgrade-insecure-requests'; default-src 'self'; script-src 'self' 'report-sample' https://projet.4x4vert.be; style-src 'self' 'report-sample' projet.4x4vert.be; object-src 'none'; frame-src 'self'; child-src 'self'; img-src 'self' projet.4x4vert.be; font-src 'self'; connect-src 'self'; manifest-src 'self' projet.4x4vert.be; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self'; report-uri https://gate.rapidsec.net/g/r/csp/452d046c-f17a-48d8-9182-538b5fb80cbb/0/5/3?sct=29cca4f3-eb63-4b97-8454-1d3ffa0e1423&dpos=report"
   ),
   next();
 });
