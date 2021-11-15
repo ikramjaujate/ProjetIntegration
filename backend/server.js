@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 var path = require('path');
 const helmet = require("helmet");
+const permissionsPolicy = require("permissions-policy");
 // Const http = require('http')
 /*
  * Const cors = require('cors')
