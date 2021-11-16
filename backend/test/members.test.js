@@ -82,7 +82,7 @@ describe('GET /api/membres/:idMembre/photos/count', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            res.body[0].count.should.be.eql('1');
+            res.body[0].count.should.be.eql('2');
             done();
         })
     });
@@ -148,7 +148,7 @@ describe('GET /api/membres/:idMembre/grade', function() {
             res.body[0].id_member.should.be.eql(1);
             res.body[0].id_grade.should.be.eql(1);
             res.body[0].name_grade.should.be.eql("Directeur");
-            res.body[0].color.should.be.eql("#B2DFDB");
+            res.body[0].color.should.be.eql("#e37352");
             done();
         })
     })
