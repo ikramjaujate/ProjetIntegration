@@ -28,7 +28,7 @@ function Login() {
                     localStorage.setItem('access_token', token.value);
 
                     if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token") !== "undefined") {
-                        window.location.replace("/grades")
+                        window.location.replace("/home")
                     }
                 }
 

@@ -5,7 +5,6 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './Navbar.js';
 import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -80,7 +79,7 @@ export default function Members() {
    
     return (
         <>
-            <Navbar/>
+
             <div  className="rounded row mt-2 justify-content-center"> 
                 <div className="col-4">
                     <input style={{border:'1px solid grey'}} type="text" onChange={e => {
