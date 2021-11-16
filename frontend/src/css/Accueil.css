@@ -1,0 +1,24 @@
+.cam2 .container{ 
+    height:600px;
+    overflow-y:scroll;
+    margin-top: 5%;
+}
+.cam2 .titre{
+    margin-top: 10px;
+    color:#0d6efd;
+    font-size: 120%;
+}
+.cam2 .container::-webkit-scrollbar {
+	width: 6px; 
+}
+.cam2 .container::-webkit-scrollbar-thumb {
+	background: #8f3917; 
+	border-radius: 10px;
+}
+.cam2 .container::-webkit-scrollbar-thumb:hover { 
+	background: #696969;
+}
+.cam2 .container::-webkit-scrollbar-thumb:active {
+	background: #2A2A2A;
+}
+

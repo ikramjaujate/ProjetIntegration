@@ -3,7 +3,7 @@ import Members from './Members';
 import Grades from './Grades';
 import Camera  from './components/Camera';
 import './css/App.css';
-import Accueil from './Cam';
+import Accueil from './Accueil.js';
 import Secretary from './Secretary.js';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'; 
 import Modification from './components/Modification';
@@ -32,7 +32,8 @@ function App() {
         </div>
       </div>
     </Router>
-  );}else {
+  );}
+  else {
     return(
       <Router>
       <div className="App">

@@ -73,7 +73,7 @@ def gen(captur):
     frame_width = int(cap.get(3))
     frame_height = int(cap.get(4))
     print(captur)
-    out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+    #out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
     
     """ GPIO + temps (pour fermeture de porte)
      #Défénition du GPIO
@@ -191,7 +191,7 @@ def gen(captur):
                 
                     
         
-        out.write(img)
+        #out.write(img)
         # encode OpenCV raw frame to jpg and displaying it
         ret, buffer = cv2.imencode('.jpg', img)
         frame = buffer.tobytes()
