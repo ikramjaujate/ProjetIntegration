@@ -6,30 +6,30 @@ import { useEffect, useState } from "react";
 
 
 function Camera() {
-    const [etat, setEtat] = useState("http://0.0.0.0:6060/video")
+    const [etat, setEtat] = useState("http://192.168.1.19:6060/video")
 
     function Allumer() {
         console.log("up")
-        fetch("http://0.0.0.0:6060/up", {
+        fetch("http://192.168.1.19:6060/up", {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             },
             mode: 'no-cors'
         }).then(res => res.json).then(data => {
-            setEtat("http://0.0.0.0:6060/video")
+            setEtat("http://192.168.1.19:6060/video")
         })
     }
 
     function Capture() {
         //event.preventDefault()
         console.log("capture")
-        fetch("http://0.0.0.0:6060/photo")
+        fetch("http://192.168.1.19:6060/photo")
 
     }
 
     function Eteindre() {
         console.log("éteindre")
-        fetch("http://0.0.0.0:6060/shutdown", {
+        fetch("http://192.168.1.19:6060/shutdown", {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             },
