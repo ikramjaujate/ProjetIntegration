@@ -154,8 +154,8 @@ CREATE TABLE IF NOT EXISTS public.member
 (
     id_member SERIAL NOT NULL,
     id_grade INTEGER NOT NULL,
-	first_name CHAR(25) NOT NULL,
-	last_name CHAR(25) NOT NULL,
+	first_name varchar(25) NOT NULL,
+	last_name varchar(25) NOT NULL,
     PRIMARY KEY (id_member),
 	FOREIGN KEY (id_grade) REFERENCES grade(id_grade)
 );
@@ -185,7 +185,7 @@ VALUES
 CREATE TABLE public.photos
 (
     id_member SERIAL NOT NULL,
-    pictures CHAR(1024) NOT NULL,
+    pictures varchar(255) NOT NULL,
 	FOREIGN KEY (id_member) REFERENCES member(id_member)
 );
 
@@ -198,7 +198,7 @@ VALUES
 CREATE TABLE IF NOT EXISTS public.personal
 (
     username varchar(25) NOT NULL,
-    password varchar(25) NOT NULL,
+    password varchar(1024) NOT NULL,
     PRIMARY KEY (username)
 );
 
@@ -207,4 +207,4 @@ ALTER TABLE public.personal
 
 INSERT INTO personal(username, password)
 VALUES 
-('admin', '123');
+('toto', 'toto');
