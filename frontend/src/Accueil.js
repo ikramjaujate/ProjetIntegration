@@ -21,12 +21,15 @@ function Cam2 (){
     const[etatCam, setEtatCam] = useState(null)
 
     useEffect(()=>{
+      
         //Get qui va chercher toutes les caméras et leur état 
         var etatCamera = {method : 'GET',
               headers:{'Content-type':'application/json'}
               }
-              fetch('http://localhost:3001/api/camera', etatCamera)
+        
+              fetch('/api/camera', etatCamera)
               .then(response =>{
+                console.log(response)
                   return response.json()
               })
               .then(json =>{               

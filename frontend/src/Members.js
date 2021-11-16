@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './components/Navbar.js';
+import Navbar from './Navbar.js';
 import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
