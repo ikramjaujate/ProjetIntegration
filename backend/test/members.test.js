@@ -20,7 +20,6 @@ describe('PUT /api/client', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            //console.log(res)
             // res.body.should.have.property('rowCount').eql(1)
             done();
         })
@@ -75,7 +74,8 @@ describe('DELETE /api/membres/:idMember/eliminate/photo', function() {
             photo : "ikram1.jpg"
         };
         chai.request(server)
-        .get('/api/membres/1/eliminate/photo')
+        .delete('/api/membres/1/eliminate/photo')
+        .send(photo)
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
@@ -112,19 +112,41 @@ describe('PUT /api/membres/:idMember/update', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            console.log("kiko : ", res.body)
+            res.body.should.have.property("count").eql(1);
             done();
         })
     });
 })
 
-/*describe('GET /api/membres/:idMembre/grade', function() {
+describe('GET /api/membres/:idMembre/grade', function() {
     it('Obtenir toutes les informations concernant un membre', function(done) {
-        request.get('/api/membres/1/grade')
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then(response => {
-            assert(response[0].id_member, 1);
-        }), done();
-    });
-})*/
+        chai.request(server)
+        .get('/api/membres/1/grade')
+        .end((err,res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].id_member.should.be.eql(1);
+            res.body[0].id_grade.should.be.eql(1);
+            res.body[0].name_grade.should.be.eql("Directeur");
+            res.body[0].color.should.be.eql("#B2DFDB");
+            done();
+        })
+    })
+})
+
+describe('PUT /api/membres/:idGrade', function() {
+    it('change le grade d une personne', function(done) {
+        let client ={
+            userNow :  5,
+        };
+        chai.request(server)
+        .put('/api/membres/2')
+        .send(client)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property("message").eql("ok");
+            done();
+        })
+    })
+});
