@@ -24,7 +24,13 @@ function Camera() {
     function Capture() {
         //event.preventDefault()
         console.log("capture")
-        fetch(url +"/photo")
+        
+        fetch(url +"/photo", {
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            mode: 'no-cors'
+        })
 
     }
 
@@ -37,6 +43,16 @@ function Camera() {
             mode: 'no-cors'
         }).then(res => res.json).then(data => {
             setEtat('camera-disconnected.png')
+        })
+    }
+
+    function Video() {
+        console.log("stopvideo")
+        fetch(url +"/videoCaptur", {
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            mode: 'no-cors'
         })
     }
 
@@ -55,6 +71,7 @@ function Camera() {
                     <button class="btn btn-primary m-5" type="button" onClick={Capture}>prend photo</button>
                     <button class="btn btn-primary m-5" onClick={Allumer} type="button" name="start" value="Eteindre">up</button>
                     <button class="btn btn-primary m-5" onClick={Eteindre} type="button" name="stop" value="Eteindre">Éteindre</button>
+                    <button class="btn btn-primary m-5" onClick={Video} type="button" name="video" value="video">video</button>
 
                 </div >
             </div>

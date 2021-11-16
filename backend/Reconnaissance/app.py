@@ -102,95 +102,101 @@ def gen(captur):
 
 
     while True:
+        captur = 'vid'
         success, img = cap.read()
-
+        imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
+        imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
         if(captur=='photo'): 
             
-            now = str(datetime.now())
-            now = now[0:19]
-            d = datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
-           
-            img_name = "image-client/frame_{}.jpeg".format(str(d))
+            now = datetime.now().timestamp()
+            img_name = "frame_{}.jpeg".format(str(now))
 
             cv2.imwrite(img_name, img)
             print(" written!")
-        
+            
             captur = "vid"
-            break
             
-
-        if flag == 1:
-            #flag = 0
-            cap.release()
-                
-                
-
-        imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
-        imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
-
-        facesCurFrame = face_recognition.face_locations(imgS)
-        encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
+        if(captur=='videoCaptur'): 
+            imgS = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) # redimensionner pour garder les performances
+            imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
+            #print('videosave') 
+            #out.write(img)  
+            captur = 'vid'
+            pass
+            #break
         
-        """ #Permet de refermer la porte après 10secondes
-        if (round(time.time()) >= tempsFermeture+10) :
-            GPIO.output(LEDaccepte, GPIO.LOW)  #eteindre la led d'acces  
-                
-            servo1.ChangeDutyCycle(2)
-            time.sleep(0.5)
-            servo1.ChangeDutyCycle(0)
-            print("je referme")
+        else :    
 
-        """
-        for encodeFace,faceLoc in zip(encodesCurFrame,facesCurFrame):
-            matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
-            faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
+            if flag == 1:
+                #flag = 0
+                cap.release()
+                    
+                    
 
-            matchIndex = np.argmin(faceDis)
+           
 
+            facesCurFrame = face_recognition.face_locations(imgS)
+            encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
             
-
-            if faceDis[matchIndex]< 0.50:
-                """ # Permet la réouverture après 20secondes
-                if (round(time.time()) >= temps +20) :
-                    GPIO.output(LEDRefuse, GPIO.LOW)
-                    GPIO.output(LEDaccepte, GPIO.HIGH)
-                    servo1.ChangeDutyCycle(12)
-                    time.sleep(0.5)
-                    servo1.ChangeDutyCycle(0)
-                    tempsFermeture =round(time.time())
+            """ #Permet de refermer la porte après 10secondes
+            if (round(time.time()) >= tempsFermeture+10) :
+                GPIO.output(LEDaccepte, GPIO.LOW)  #eteindre la led d'acces  
                     
-                    temps = round(time.time())
-                    print("la porte s'ouvre")
-                    time.sleep(0.5)
-                """
-                name = className[matchIndex].upper()
-                #print(name)
-                y1,x2,y2,x1 = faceLoc
-                y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
-                cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
-                cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
-                cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+                servo1.ChangeDutyCycle(2)
+                time.sleep(0.5)
+                servo1.ChangeDutyCycle(0)
+                print("je referme")
+
+            """
+            for encodeFace,faceLoc in zip(encodesCurFrame,facesCurFrame):
+                matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
+                faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
+
+                matchIndex = np.argmin(faceDis)
 
                 
-                
-            else: 
-                """ # Allume la led rouge si led verte est éteinte
-                if (GPIO.input(LEDaccepte) == 0) :
-               
-                    GPIO.output(LEDRefuse, GPIO.HIGH)
-                """
-                name = 'Unknown'
-                #print(name)
-                y1,x2,y2,x1 = faceLoc
-                y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
-                cv2.rectangle(img,(x1,y1),(x2,y2),(0,0,255),2)
-                cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,0,255),cv2.FILLED)
-                cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
 
-                
+                if faceDis[matchIndex]< 0.50:
+                    """ # Permet la réouverture après 20secondes
+                    if (round(time.time()) >= temps +20) :
+                        GPIO.output(LEDRefuse, GPIO.LOW)
+                        GPIO.output(LEDaccepte, GPIO.HIGH)
+                        servo1.ChangeDutyCycle(12)
+                        time.sleep(0.5)
+                        servo1.ChangeDutyCycle(0)
+                        tempsFermeture =round(time.time())
+                        
+                        temps = round(time.time())
+                        print("la porte s'ouvre")
+                        time.sleep(0.5)
+                    """
+                    name = className[matchIndex].upper()
+                    #print(name)
+                    y1,x2,y2,x1 = faceLoc
+                    y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
+                    cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
+                    cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
+                    cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+
                     
-        if(captur=='videoCptur'): 
-            out.write(img)
+                    
+                else: 
+                    """ # Allume la led rouge si led verte est éteinte
+                    if (GPIO.input(LEDaccepte) == 0) :
+                
+                        GPIO.output(LEDRefuse, GPIO.HIGH)
+                    """
+                    name = 'Unknown'
+                    #print(name)
+                    y1,x2,y2,x1 = faceLoc
+                    y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
+                    cv2.rectangle(img,(x1,y1),(x2,y2),(0,0,255),2)
+                    cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,0,255),cv2.FILLED)
+                    cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+
+                    
+                        
+            
         # encode OpenCV raw frame to jpg and displaying it
         ret, buffer = cv2.imencode('.jpg', img)
         frame = buffer.tobytes()
@@ -235,11 +241,10 @@ def photo():
 
 
 
-@app.route('/videoCptur')
+@app.route('/videoCaptur')
 def videoCptur():
     global cap
-    return Response(gen('videoCptur'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
-
+    return Response(gen('videoCaptur'))
 
 @app.route('/shutdown')
 def shutdown():
