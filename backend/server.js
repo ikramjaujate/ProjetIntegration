@@ -6,7 +6,7 @@ const app = express();
 const dotenv = require("dotenv");
 const path = require('path')
 dotenv.config();
-var path = require('path');
+//var path = require('path');
 const helmet = require("helmet");
 const permissionsPolicy = require("permissions-policy");
 const expectCt = require("expect-ct");
