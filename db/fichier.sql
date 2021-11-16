@@ -43,7 +43,7 @@ VALUES
 ('SREU2', 1),
 ('SREU3', 1),
 ('SERVERROOM', 2),
-('ACCEUIL', 2),
+('ACCUEIL', 2),
 ('WC', 1),
 ('ENTREESUD', 1),
 ('ENTRENORD', 3);
@@ -154,8 +154,8 @@ CREATE TABLE IF NOT EXISTS public.member
 (
     id_member SERIAL NOT NULL,
     id_grade INTEGER NOT NULL,
-	first_name varchar(25) NOT NULL,
-	last_name varchar(25) NOT NULL,
+	first_name VARCHAR(25) NOT NULL,
+	last_name VARCHAR(25) NOT NULL,
     PRIMARY KEY (id_member),
 	FOREIGN KEY (id_grade) REFERENCES grade(id_grade)
 );
@@ -185,7 +185,7 @@ VALUES
 CREATE TABLE public.photos
 (
     id_member SERIAL NOT NULL,
-    pictures varchar(255) NOT NULL,
+    pictures VARCHAR(1024) NOT NULL,
 	FOREIGN KEY (id_member) REFERENCES member(id_member)
 );
 
