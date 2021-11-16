@@ -16,11 +16,31 @@ describe('PUT /api/client', function() {
             Grade : 1
         };
         chai.request(server)
-        .get('/api/client')
+        .put('/api/client')
+        .send(client)
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            // res.body.should.have.property('rowCount').eql(1)
+            res.body.should.have.property('rowCount').eql(1)
+            done();
+        })
+    })
+});
+
+describe('PUT /api/client', function() {
+    it('Ne devrait pas ajouter un client sans nom de famille', function(done) {
+        let client ={
+            FirstName : "TestFN" ,
+            Grade : 1
+        };
+        chai.request(server)
+        .put('/api/client')
+        .send(client)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('name').eql("error");
+            res.body.column.should.be.eql("last_name")
             done();
         })
     })
@@ -62,7 +82,7 @@ describe('GET /api/membres/:idMembre/photos/count', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            res.body[0].count.should.be.eql('1');
+            res.body[0].count.should.be.eql('2');
             done();
         })
     });
@@ -128,7 +148,7 @@ describe('GET /api/membres/:idMembre/grade', function() {
             res.body[0].id_member.should.be.eql(1);
             res.body[0].id_grade.should.be.eql(1);
             res.body[0].name_grade.should.be.eql("Directeur");
-            res.body[0].color.should.be.eql("#B2DFDB");
+            res.body[0].color.should.be.eql("#e37352");
             done();
         })
     })
