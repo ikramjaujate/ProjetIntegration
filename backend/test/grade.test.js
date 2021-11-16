@@ -17,7 +17,9 @@ describe('GET /api/grades/:idGrade/cameras', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            res.body[0].name_camera.should.be.eql('CAFET');
+            res.body[4].name_camera.should.be.eql('SREU3');
+            res.body[4].id_camera.should.be.eql(5);
+            res.body[4].allowed.should.be.eql(true);
             done();
         })
     });
@@ -65,7 +67,6 @@ describe('GET /api/grades/members', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            //REGLER CE PB JSP COMMENT FAIRE
             res.body[0].id_grade.should.be.eql(3);
             res.body[0].members.should.be.eql('9');
             done();
@@ -99,6 +100,7 @@ describe('PUT /api/grades', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
+            res.body.should.have.property("message").eql("ok")
             done();
         })
     })

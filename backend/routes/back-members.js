@@ -167,7 +167,7 @@ module.exports = function (app, client) {
         if (error) {
         }
         response.status(200)
-        response.send({"count" : results.rowCount})
+        response.send({ "count" : results.rowCount})
       })
       
     })

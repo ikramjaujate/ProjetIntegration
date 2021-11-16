@@ -67,7 +67,6 @@ module.exports = function (app, client) {
             if (error) {
                 throw error;
             }
-            // Console.log(results.rows)
             response.status(200).json(results.rows);
         });
     });
@@ -133,13 +132,10 @@ module.exports = function (app, client) {
                         /*
                             * Try {
                             *     client.query(query4, [idgrade, idCamera], (error, results4) => {
-                            *         console.log("error ififif'' ", error) ;
-                            *         console.log("cv");
                             *     })
                             *     throw error;
                             *   }
                             *   catch (err) {
-                            *     console.log("error 4 ", err) ;
                             *     response.send({message:'ko'});
                             *     return ;
                             *   }
@@ -217,9 +213,7 @@ module.exports = function (app, client) {
             requete2=true ;
         }
         while (requete1==false || requete2==false) {
-            console.log("rep : ", reponse);
         }
-        console.log("rep : ", reponse);
         response.send({"message": "ok"});
     });
 };
