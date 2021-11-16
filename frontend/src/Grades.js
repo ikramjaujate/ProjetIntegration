@@ -35,6 +35,10 @@ function Grades() {
     const [borderNewNameGrade, setBorderNewNameGrade] = useState("null");
     const [titleModalDetails, setTitleModalDetails] = useState("Chargement");
     const [colorModalDetails, setColorModalDetails] = useState("var(--text-loading)");
+    //const [cc, setCC] = useState(0) ;
+    let actionsModify = 0 ;
+    let notificationsModify = 0 ;
+    //const [notificationsModify, setNotificationsModify] = useState(0) ;
 
     const optionsToast = {
         autoClose: 8000,
@@ -267,36 +271,73 @@ function Grades() {
 
 
     /**
+     * Verify if all the fetch api have been done, for the modification
+     * of the access and the notification for a grade.
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+    const verifyActions = () => {
+        if ((actionsModify === Object.keys(newActions).length) && (notificationsModify === Object.keys(newNotifications).length)) {
+            actionsModify = 0 ;
+            notificationsModify = 0 ;
+            
+            activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
+            newActions = {} ;
+            newNotifications = {} ;
+            getGrades() ;
+            openCameraInfo(currentColor,currentGrade,currentIdGrade) ;
+            toast.success("Vous venez de modifier les actions des caméras du grade " + currentGrade + " !", optionsToast);
+        }
+    }
+
+
+    /**
      * Save new camera action and new presence/absence of notification for a grade
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-     const saveAction = () => {
-
-        let grade = currentGrade ;
-        let informations = { method: 'POST',
+     const saveAction = () => {     
+        for (let camera in newActions) {
+            let informations = { method: 'POST',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({actions : newActions, notifications : newNotifications})
-        };
+               body: JSON.stringify({camera: camera, action : newActions[camera]})
+            };
 
-        fetch(`/api/grades/${currentIdGrade}/acces`, informations)
-        .then(result => {
-            return result.json();
-        })
-        .then(data => {
-            activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
-            newActions = {} ;
-            newNotifications = {} ;
-            if (data.message === "ok") {
-                getGrades() ;
-                openCameraInfo(currentColor,currentGrade,currentIdGrade) ;
-                toast.success("Vous venez de modifier les actions des caméras du grade " + grade + " !", optionsToast);
-            }
-            else {
-                toast.error(errorMsgClient, optionsToast);
-            }
-        });
+            fetch(`/api/grades/${currentIdGrade}/action`, informations)
+            .then(result => {
+                return result.json();
+            })
+            .then(data => {
+                if (data.count === 1) {
+                    actionsModify++ ;
+                    verifyActions() ;
+                }
+                else {
+                    toast.error(errorMsgClient, optionsToast);
+                }
+            });
+        }
 
+        for (let camera in newNotifications) {
+            let informations = { method: 'POST',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({camera: camera, notification : newNotifications[camera]})
+            };
+
+            fetch(`/api/grades/${currentIdGrade}/notification`, informations)
+            .then(result => {
+                return result.json();
+            })
+            .then(data => {
+                if (data.count === 1) {
+                    notificationsModify++ ;
+                    verifyActions() ;
+                }
+                else {
+                    toast.error(errorMsgClient, optionsToast);
+                }
+            });
+        }
     }
 
 

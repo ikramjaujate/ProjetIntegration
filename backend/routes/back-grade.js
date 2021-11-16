@@ -209,11 +209,64 @@ module.exports = function (app, client) {
                     throw error;
                 }
                 reponse ++ ;
+                response.send({"message": "ok"});
             });
             requete2=true ;
+            
         }
         while (requete1==false || requete2==false) {
         }
         response.send({"message": "ok"});
+    });
+
+    /**
+     * Modifies the actions of the cameras for a grade
+     *
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @method POST
+     * @param {integer} idGrade identifier of the grade for which we want to get the information
+     * @param {dictionnary} actions  contains a dictionary with the camera ID as key and the new camera action as value (= opposite of the old value)
+     * @param {dictionnary} notifications contains a dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
+     */
+     app.post("/api/grades/:idGrade/action",(request, response) => {
+        console.log("access2")
+        const idGrade = request.params.idGrade;
+        const action = request.body.action;
+        const camera = request.body.camera;
+        const query = "update permission \
+        set allowed = ($1) \
+        where id_grade = ($2) and id_camera = ($3) ";
+        client.query(query,[action, idGrade, camera],(error, results) => {
+            if (error) {
+                throw error;
+            }
+            response.send({"count": results.rowCount});
+        });
+    });
+
+    /**
+     * Modifies the actions of the cameras for a grade
+     *
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @method POST
+     * @param {integer} idGrade identifier of the grade for which we want to get the information
+     * @param {dictionnary} actions  contains a dictionary with the camera ID as key and the new camera action as value (= opposite of the old value)
+     * @param {dictionnary} notifications contains a dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
+     */
+     app.post("/api/grades/:idGrade/notification",(request, response) => {
+        console.log("access3");
+        const idGrade = request.params.idGrade;
+        const notification = request.body.notification;
+        const camera = request.body.camera;
+        const query2 = "update permission \
+        set notification = ($1) \
+        where id_grade = ($2) and id_camera = ($3) ";
+            client.query(query2,[notification, idGrade, camera],(error, results) => {
+                if (error) {
+                    throw error;
+                }
+                response.send({"count": results.rowCount});
+            });
+            
     });
 };
