@@ -220,7 +220,7 @@ module.exports = function (app, client) {
     });
 
     /**
-     * Modifies the actions of the cameras for a grade
+     * Modifies the action of a cameras for a grade
      *
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @method POST
@@ -229,7 +229,6 @@ module.exports = function (app, client) {
      * @param {dictionnary} notifications contains a dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
      */
      app.post("/api/grades/:idGrade/action",(request, response) => {
-        console.log("access2")
         const idGrade = request.params.idGrade;
         const action = request.body.action;
         const camera = request.body.camera;
@@ -245,7 +244,7 @@ module.exports = function (app, client) {
     });
 
     /**
-     * Modifies the actions of the cameras for a grade
+     * Modifies the notification of a cameras for a grade
      *
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @method POST

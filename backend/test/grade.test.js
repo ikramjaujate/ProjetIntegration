@@ -135,19 +135,37 @@ describe('GET /api/gradesInfos', function() {
     });
 })
 
-describe('POST /api/grades/:idGrade/acces', function() {
-    it('Tester la nouvelle action sur le grade désiré', function(done) {
+describe('POST /api/grades/:idGrade/action', function() {
+    it('Tester la nouvelle action sur le grade désiré et la caméra désirée', function(done) {
         let action = {
-            "actions" : {"1" : "false"},
-            "notifications" : {"1" : "true"}
+            "camera" : 1,
+            "action" : false
         }
         chai.request(server)
-        .post('/api/grades/1/acces')
+        .post('/api/grades/1/action')
         .send(action)
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            res.body.message.should.be.eql("ok");
+            res.body.count.should.be.eql(1);
+            done();
+        })
+    });
+})
+
+describe('POST /api/grades/:idGrade/notification', function() {
+    it('Tester la nouvelle action sur le grade désiré et la caméra désirée', function(done) {
+        let action = {
+            "camera" : 1,
+            "action" : true
+        }
+        chai.request(server)
+        .post('/api/grades/1/action')
+        .send(action)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.count.should.be.eql(1);
             done();
         })
     });
