@@ -1,7 +1,31 @@
+describe("Tests pour la connexion", () => {
+    
+    it("connexion", () => {
+        cy.visit("projet.4x4vert.be/login");
+        cy.get('input').get('#exampleInputEmail1').type('admin')
+        cy.get('input').get('#exampleInputPassword1').type('123')
+        cy.contains('button','Connecter').click()
+        //cy.get('input').get('#exampleInputEmail1').type('admin')
+        //cy.get('input').get('#exampleInputPassword1').type('123')
+        cy.contains('button','Connecter').click()
+        cy.wait(1000)
+    });
+})
 describe("Tests pour la page grades", () => {
     let test = 'test3'
+
     it("Tests si la page d'accueil contient bien le react", () => {
-        cy.visit("projet.4x4vert.be/grades");
+        
+        cy.visit("projet.4x4vert.be/login");
+        cy.get('input').get('#exampleInputEmail1').type('admin')
+        cy.get('input').get('#exampleInputPassword1').type('123')
+        cy.contains('button','Connecter').click()
+        cy.contains('button','Connecter').click()
+        //console.log(localStorage)
+        cy.wait(1000)
+        Cypress.Cookies.preserveOnce('session_id', 'remember_token')
+       // cy.visit("projet.4x4vert.be/grades");
+        
 
     });
     it("Tests si la page d'accueil bien un titre", () => {
@@ -63,9 +87,18 @@ describe("Tests pour la page camera", () => {
     
     it("Tests si la page camera contient bien le react", () => {
         cy.visit("projet.4x4vert.be/camera");
+        cy.get('input').get('#exampleInputEmail1').type('admin')
+        cy.get('input').get('#exampleInputPassword1').type('123')
+        cy.contains('button','Connecter').click()
+        cy.contains('button','Connecter').click()
+        console.log(localStorage)
+        cy.wait(1000)
+        cy.visit("projet.4x4vert.be/camera");
+        console.log(localStorage)
 
     });
     it("Tests si la page camera bien un titre", () => {
+        //cy.visit("projet.4x4vert.be/camera");
         cy.get('h3')
         cy.contains('Camera')
         cy.contains('button','prend photo')
@@ -80,6 +113,12 @@ describe("Tests pour la page camera", () => {
 describe("Tests pour la page accueil", () => {
     
     it("Tests si la page d'accueil contient bien le react", () => {
+        cy.visit("projet.4x4vert.be/login");
+        cy.get('input').get('#exampleInputEmail1').type('admin')
+        cy.get('input').get('#exampleInputPassword1').type('123')
+        cy.contains('button','Connecter').click()
+        cy.contains('button','Connecter').click()
+        cy.wait(1000)
         cy.visit("projet.4x4vert.be/accueil");
 
     });
