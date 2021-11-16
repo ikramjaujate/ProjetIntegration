@@ -13,36 +13,30 @@ describe('LayoutGrade', () => {
       const snapshot = renderer.create(<LayoutGrade name = "Directeur" color = "#00000" members="directeur" allowed_camera={1} refused_camera ={1}/>).toJSON();
       expect(snapshot).toMatchSnapshot();
     })
-    it('Vérifier le texte affiché dans le premier titre (directeur)', () => {
+    it('Vérifier le texte affiché dans le premier titre', () => {
       const wrapper = shallow(<LayoutGrade name = "Directeur" color = "" members="" allowed_camera="" refused_camera ="" />);
       const paragraph = wrapper.find('div.name-grade');
       expect(paragraph.text()).toEqual('Directeur');
     })
-    it('Vérifier le texte affiché dans le deuxième titre (Personnel)', () => {
-        const wrapper = shallow(<LayoutGrade name = "Personnel" color = "" members="" allowed_camera="" refused_camera ="" />);
-        const paragraph = wrapper.find('div.name-grade');
-        expect(paragraph.text()).toEqual('Personnel');
-      })
-    it('Vérifier le texte affiché dans le troisieme titre (beneficaire)', () => {
-        const wrapper = shallow(<LayoutGrade name = "Personnel" color = "" members="" allowed_camera="" refused_camera ="" />);
-        const paragraph = wrapper.find('div.name-grade');
-        expect(paragraph.text()).toEqual('Personnel');
-      })
-
     it('Vérifier la couleur du fond du logo du directeur', () => {
         const wrapper = shallow(<LayoutGrade name = "" color = "#e37352" members="" allowed_camera="" refused_camera =""/>);
         const paragraph = wrapper.find('div.bg-person');
         expect(paragraph.prop('style')).toHaveProperty("backgroundColor", "#e37352");
       }) 
-      it('Vérifier la couleur du fond du logo du personnel', () => {
-        const wrapper = shallow(<LayoutGrade name = "" color = "#7B6CAF" members="" allowed_camera="" refused_camera =""/>);
-        const paragraph = wrapper.find('div.bg-person');
-        expect(paragraph.prop('style')).toHaveProperty("backgroundColor", "#7B6CAF");
-      }) 
-      it('Vérifier la couleur du fond du logo du beneficaire', () => {
-        const wrapper = shallow(<LayoutGrade name = "" color = "#cdc7af" members="" allowed_camera="" refused_camera =""/>);
-        const paragraph = wrapper.find('div.bg-person');
-        expect(paragraph.prop('style')).toHaveProperty("backgroundColor", "#cdc7af");
+    it('Vérifier l"écriture du mot membre si il y en a plusieurs', () => {
+        const wrapper = shallow(<LayoutGrade name = "" color = "" members="2" allowed_camera="" refused_camera =""/>)
+        const paragraph = wrapper.find('div.informations').at(2);
+        expect(paragraph.text()).toEqual('2 membres')
+      })
+    it('Vérifier si le nombre de caméra autorisées est bien renvoyé', () => {
+        const wrapper = shallow(<LayoutGrade name = "" color = "" members="" allowed_camera="10" refused_camera =""/>)
+        const paragraph = wrapper.find('div.informations').at(0);
+        expect(paragraph.text()).toEqual('10 ')
+      })
+    it('Vérifier si le nombre de caméra non-autorisées est bien renvoyé', () => {
+        const wrapper = shallow(<LayoutGrade name = "" color = "" members="" allowed_camera="" refused_camera ="0"/>)
+        const paragraph = wrapper.find('div.informations').at(1);
+        expect(paragraph.text()).toEqual('0 ')
       }) 
 
 })
