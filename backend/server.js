@@ -7,6 +7,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 var path = require('path');
 const helmet = require("helmet");
+const express_waf_middleware = require("express-waf-middleware");
+
 // Const http = require('http')
 /*
  * Const cors = require('cors')
@@ -22,6 +24,7 @@ const grade = require('./routes/back-grade.js')
 const members = require('./routes/back-members.js')
 const privatedata = require('./routes/back-privatedata.js')
 const cameras = require('./routes/back-cameras.js')
+
 
 const client = new Client({
   host: process.env.DATABASE_HOST,
@@ -125,3 +128,22 @@ client.connect(err => {
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
+
+var emudb = new ExpressWaf.EmulatedDB();
+var waf = new ExpressWaf.ExpressWaf({
+    blocker:{
+        db: emudb,
+        blockTime: 1000
+    },
+    log: true
+});
+// Module CSRF
+waf.addModule('csrf-module', {
+  allowedMethods:['GET', 'POST', 'PUT','DELETE'],
+  refererIndependentUrls: ['/'],
+  allowedOrigins: ['http://localhost:3000']
+}, function (error) {
+  console.log(error);
+});
+
+app.use(waf.check);
