@@ -16,11 +16,31 @@ describe('PUT /api/client', function() {
             Grade : 1
         };
         chai.request(server)
-        .get('/api/client')
+        .put('/api/client')
+        .send(client)
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            // res.body.should.have.property('rowCount').eql(1)
+            res.body.should.have.property('rowCount').eql(1)
+            done();
+        })
+    })
+});
+
+describe('PUT /api/client', function() {
+    it('Ne devrait pas ajouter un client sans nom de famille', function(done) {
+        let client ={
+            FirstName : "TestFN" ,
+            Grade : 1
+        };
+        chai.request(server)
+        .put('/api/client')
+        .send(client)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('name').eql("error");
+            res.body.column.should.be.eql("last_name")
             done();
         })
     })

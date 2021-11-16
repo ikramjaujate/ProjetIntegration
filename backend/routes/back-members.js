@@ -10,11 +10,10 @@ module.exports = function (app, client) {
       const firstName = req.body.FirstName
       const lastName = req.body.LastName
       const grade = req.body.Grade
-      console.log(grade)
       let query = 'insert into member (id_grade, first_name, last_name) values (($1), ($2), ($3))';
       client.query(query, [grade, firstName, lastName], (error, result) => {
         if(error){
-          throw error
+          res.send(error)
         }
         res.status(200).json(result);
       })
@@ -159,7 +158,6 @@ module.exports = function (app, client) {
    app.delete('/api/membres/:idMember/eliminate/photo', (request, response) => {
       const idMember = request.params.idMember;
       const photo = request.body.photo
-      //console.log(photo)
       let query = "delete from photos \
       where id_member = ($1) and pictures = ($2)" ;
 
