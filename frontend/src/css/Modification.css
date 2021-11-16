@@ -10,9 +10,9 @@
     --error : red ;
 }
 
-body {
+/* body {
     color: var(--writing) ;
-}
+} */
 /* Cacher scrollbar horizontal */
 html::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }

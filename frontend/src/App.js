@@ -1,5 +1,5 @@
 import './css/App.css';
-import Navbar from './components/Navbar.js';
+import Members from './Members';
 import Grades from './Grades';
 import Camera  from './components/Camera';
 import './css/App.css';
@@ -25,6 +25,7 @@ function App() {
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Camera} path="/camera"/> 
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Accueil} path="/accueil"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Secretary} path="/secretary"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Members} path="/members"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} path="/modification"  component={Modification}/>
             <Route path='/login' exact component={Login}/>
           </Switch>
@@ -42,6 +43,7 @@ function App() {
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Camera} path="/camera"/> 
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Accueil} path="/accueil"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Secretary} path="/secretary"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Members} path="/members"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} path="/modification"  component={Modification}/>
             <Route path='/login' exact component={Login}/>
           </Switch>

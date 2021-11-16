@@ -20,6 +20,7 @@ const expectCt = require("expect-ct");
  * const controller = require('./src/controller/file.controller')
  * const { request, response } = require('express')
  */
+var path = require('path');
 const port = 3001;
 
 /* Different sets of existing APIs */

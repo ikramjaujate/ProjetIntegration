@@ -1,3 +1,5 @@
+const { response } = require("express")
+
 module.exports = function (app, client) {
   
     /**
@@ -19,21 +21,53 @@ module.exports = function (app, client) {
       })
     })
 
-      /**
-       * 
-       * @author : Aurélien
-       * 
-       */
+  app.get('/api/members', (request, response) => {
 
-      /*let routes = (app) => {
-        router.post("/upload", controller.upload);
-        router.get("/files", controller.getListFiles);
-        router.get("/files/:name", controller.download);
-      
-        app.use(router);
-      };
-      
-      module.exports = routes;
+    let query = "select ME.id_member, GRM.id_grade, ME.first_name, ME.last_name, GRM.name_grade, CO.name_color as color \
+                from grade as GRM \
+                join member as ME on ME.id_grade = GRM.id_grade \
+                join color as CO on GRM.id_color = CO.id_color \
+                order by GRM.id_grade ;"
+    client.query(query, (error, res) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(res.rows);
+    })
+  })
+
+  app.delete('/api/members/:idMember', (req, response) => {
+    idMember= req.params.idMember
+    console.log(idMember)
+
+    let query = "delete from member where id_member = $1"
+
+    client.query(query, [idMember], (error, res) => {
+      if (error) {
+        throw error;
+      }
+      response.send(message = "ok")
+      console.log(res)
+    })
+
+  })
+
+
+  /**
+   * 
+   * @author : Aurélien
+   * 
+   */
+
+  /*let routes = (app) => {
+     router.post("/upload", controller.upload);
+     router.get("/files", controller.getListFiles);
+     router.get("/files/:name", controller.download);
+   
+     app.use(router);
+   };
+   
+   module.exports = routes;
     global.__basedir = __dirname;
     
     const initRoutes = require("./src/routes");
@@ -45,6 +79,8 @@ module.exports = function (app, client) {
     app.listen(port, () => {
       console.log(`Running at localhost:${port2}`);
     });*/
+
+  
 
     /**
      * Retrieves all the information from a member
