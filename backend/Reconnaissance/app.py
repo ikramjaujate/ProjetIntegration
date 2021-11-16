@@ -1,5 +1,5 @@
 from flask import Flask, Response, render_template, request
-#from flask_cors import CORS
+from flask_cors import CORS
 import face_recognition
 import cv2
 from flask.wrappers import Response
@@ -109,8 +109,9 @@ def gen(captur):
             now = str(datetime.now())
             now = now[0:19]
             d = datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
-           
-            img_name = "image-client/frame_{}.jpeg".format(str(d))
+
+            
+            img_name = "frontend/public/image-client/frame_{}.jpeg".format(str(d).replace(" ", "-"))
 
             cv2.imwrite(img_name, img)
             print(" written!")
@@ -231,7 +232,9 @@ def video():
 @app.route('/photo')
 def photo():
     global cap
-    return Response(gen('photo'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
+    res = Response(gen('photo'), mimetype='multipart/x-mixed-replace; boundary=myboundary')
+    #res.headers['Cache-Control'] = 'no-cache'
+    return res
 
 @app.route('/shutdown')
 def shutdown():

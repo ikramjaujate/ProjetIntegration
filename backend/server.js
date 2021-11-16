@@ -4,11 +4,13 @@ const express = require("express");
 const {Client} = require("pg");
 const app = express();
 const dotenv = require("dotenv");
+const path = require('path')
 dotenv.config();
 var path = require('path');
 const helmet = require("helmet");
 const permissionsPolicy = require("permissions-policy");
 const expectCt = require("expect-ct");
+
 
 // Const http = require('http')
 /*
@@ -115,7 +117,6 @@ grade(app, client);
 cameras(app, client);
 members(app, client);
 privatedata(app, client);
-
 app.get('*', (req, res) => {
   return res.sendFile(path
     .join(__dirname + '/build/', 'index.html'))
