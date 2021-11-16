@@ -4,11 +4,15 @@ import Adapter from 'enzyme-adapter-react-16' ;
 import 'jest-enzyme' ;
 import 'jest-styled-components';
 import LayoutGrade from '../LayoutGrade.js' ;
-
+import renderer from 'react-test-renderer';
 Enzyme.configure({ adapter: new Adapter() });
 
 
 describe('LayoutGrade', () => {
+    it('Snapshot - renders correctement', () => {
+      const snapshot = renderer.create(<LayoutGrade name = "Directeur" color = "#00000" members="directeur" allowed_camera={1} refused_camera ={1}/>).toJSON();
+      expect(snapshot).toMatchSnapshot();
+    })
     it('Vérifier le texte affiché dans le premier titre (directeur)', () => {
       const wrapper = shallow(<LayoutGrade name = "Directeur" color = "" members="" allowed_camera="" refused_camera ="" />);
       const paragraph = wrapper.find('div.name-grade');

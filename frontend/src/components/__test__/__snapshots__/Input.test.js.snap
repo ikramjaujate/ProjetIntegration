@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CameraInfo Snapshot - renders correctement 1`] = `
+<input
+  className="input_modif"
+  id="text"
+  maxLength={2}
+  minLength={1}
+  name="camera"
+  onChange={[Function]}
+  pattern="text"
+  placeholder="text"
+  required={true}
+  step="text"
+  title="text"
+  type="text"
+/>
+`;

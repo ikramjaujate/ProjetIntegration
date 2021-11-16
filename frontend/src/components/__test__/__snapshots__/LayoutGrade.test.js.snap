@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LayoutGrade Snapshot - renders correctement 1`] = `
+<div
+  className="row p-1 justify-content-center card-grade"
+>
+  <div
+    className="p-1 bg-light shadow-sm rounded row col-10 col-md-9 col-lg-7 col-xl-6"
+    data-bs-target="#gradeModal"
+    data-bs-toggle="modal"
+    type="button"
+  >
+    <div
+      className="rounded bg-person col-12 col-sm-3"
+      style={
+        Object {
+          "backgroundColor": "#00000",
+        }
+      }
+    >
+      <i
+        className="bi bi-people icon-person"
+      />
+    </div>
+    <div
+      className="align-self-center name-grade col-8 col-sm-6"
+    >
+      Directeur
+    </div>
+    <div
+      className="layout-nbr-camera p-0 col align-self-end row col-4 col-sm-3"
+    >
+      <div
+        className="p-0 informations col-6"
+      >
+        1
+         
+        <i
+          className="bi bi-camera-video-fill allowed-camera"
+        />
+      </div>
+      <div
+        className="p-0 informations col-6"
+      >
+        1
+         
+        <i
+          className="bi bi-camera-video-fill refused-camera"
+        />
+      </div>
+      <div
+        className="p-0 informations col-12"
+      >
+        directeur
+         
+        membre
+      </div>
+    </div>
+  </div>
+</div>
+`;

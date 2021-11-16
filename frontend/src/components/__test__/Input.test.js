@@ -5,16 +5,23 @@ import 'jest-enzyme'
 import 'jest-styled-components';
 import Input from '../Input.js' ;
 Enzyme.configure({ adapter: new Adapter() })
-
+import renderer from 'react-test-renderer';
+    
 
 describe('CameraInfo', () => {
-    it('Vérifier le caractère required du input. ', () => {
-      const wrapper = shallow(<Input required type="" name="" min="" max="" placeholder="" setFunc="" pattern="" title="" step="" idName=""/>)
-      const paragraph = wrapper.find('input')
-      expect(paragraph).toHaveLength(1)
-      expect(paragraph.at(0).props().required).toEqual(true);
-    })
-    it('Vérifier le type du input. ', () => {
+
+  it('Snapshot - renders correctement', () => {
+    const snapshot = renderer.create(<Input type="text" name="camera" min={1} max={2} placeholder="text" setFunc="" pattern="text" title="text" step="text" idName="text"/>).toJSON();
+    expect(snapshot).toMatchSnapshot();
+  })
+
+  it('Vérifier le caractère required du input. ', () => {
+    const wrapper = shallow(<Input required type="" name="" min="" max="" placeholder="" setFunc="" pattern="" title="" step="" idName=""/>)
+    const paragraph = wrapper.find('input')
+    expect(paragraph).toHaveLength(1)
+    expect(paragraph.at(0).props().required).toEqual(true);
+  })
+  it('Vérifier le type du input. ', () => {
       const wrapper = shallow(<Input required type="text" name="" min="" max="" placeholder="" setFunc="" pattern="" title="" step="" idName=""/>)
       const paragraph = wrapper.find('input')
       expect(paragraph).toHaveLength(1)
