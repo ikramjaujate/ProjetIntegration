@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import CadreCameras from './components/OngletCamera.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/cam2.css'
+import './css/Accueil.css'
 import React from 'react';
 
 
@@ -39,6 +39,9 @@ function Cam2 (){
     return (
         
         <div className="cam2">
+        
+        
+        <div className='titre offset-lg-5 offset-md-4 offset-sm-4 offset-2'>Page de gestion des caméras</div>
         
         <div class="container"> 
          <div className='row'>

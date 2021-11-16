@@ -3,7 +3,7 @@ import Navbar from './components/Navbar.js';
 import Grades from './Grades';
 import Camera  from './components/Camera';
 import './css/App.css';
-import Cam2 from './cam2.js';
+import Accueil from './Accueil.js';
 import Secretary from './Secretary.js';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'; 
 import Modification from './components/Modification';
@@ -18,8 +18,8 @@ function App() {
             <Route exact path="/grades"> 
               <Grades/>
             </Route>
-            <Route exact path="/cam2"> 
-              <Cam2/>
+            <Route exact path="/accueil"> 
+              <Accueil/>
             </Route>
             <Route exact path="/camera"> 
               <Camera/>

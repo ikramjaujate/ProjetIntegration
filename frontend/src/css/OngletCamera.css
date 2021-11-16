@@ -3,12 +3,12 @@
     margin-bottom:3%;
     border-radius:8px;
     color:rgb(107, 106, 105); 
-    
-    
-
 }
+
 .ON:hover{
     background-color: hsl(0, 0%, 59%);
     color:azure;
+    cursor: pointer;
+    
   }
 
