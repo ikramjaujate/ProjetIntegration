@@ -1,15 +1,12 @@
 describe("Tests pour la connexion", () => {
-    
+    /*
     it("connexion", () => {
         cy.visit("projet.4x4vert.be/login");
         cy.get('input').get('#exampleInputEmail1').type('admin')
         cy.get('input').get('#exampleInputPassword1').type('123')
         cy.contains('button','Connecter').click()
-        //cy.get('input').get('#exampleInputEmail1').type('admin')
-        //cy.get('input').get('#exampleInputPassword1').type('123')
-        cy.contains('button','Connecter').click()
         cy.wait(1000)
-    });
+    });*/
 })
 describe("Tests pour la page grades", () => {
     let test = 'test3'
@@ -20,11 +17,8 @@ describe("Tests pour la page grades", () => {
         cy.get('input').get('#exampleInputEmail1').type('admin')
         cy.get('input').get('#exampleInputPassword1').type('123')
         cy.contains('button','Connecter').click()
-        cy.contains('button','Connecter').click()
-        //console.log(localStorage)
-        cy.wait(1000)
-        Cypress.Cookies.preserveOnce('session_id', 'remember_token')
-       // cy.visit("projet.4x4vert.be/grades");
+        cy.get('a[href=grades]').click()
+        
         
 
     });
@@ -82,19 +76,15 @@ describe("Tests pour la page grades", () => {
 
 })
 
-
+/*
 describe("Tests pour la page camera", () => {
     
     it("Tests si la page camera contient bien le react", () => {
-        cy.visit("projet.4x4vert.be/camera");
+        cy.visit("projet.4x4vert.be/login");
         cy.get('input').get('#exampleInputEmail1').type('admin')
         cy.get('input').get('#exampleInputPassword1').type('123')
         cy.contains('button','Connecter').click()
-        cy.contains('button','Connecter').click()
-        console.log(localStorage)
-        cy.wait(1000)
-        cy.visit("projet.4x4vert.be/camera");
-        console.log(localStorage)
+        cy.get('a[href=camera]').click()
 
     });
     it("Tests si la page camera bien un titre", () => {
@@ -108,7 +98,7 @@ describe("Tests pour la page camera", () => {
     });
     
 
-})
+})*/
 
 describe("Tests pour la page accueil", () => {
     
@@ -117,16 +107,37 @@ describe("Tests pour la page accueil", () => {
         cy.get('input').get('#exampleInputEmail1').type('admin')
         cy.get('input').get('#exampleInputPassword1').type('123')
         cy.contains('button','Connecter').click()
-        cy.contains('button','Connecter').click()
-        cy.wait(1000)
-        cy.visit("projet.4x4vert.be/accueil");
+        cy.get('a[href=home]').click()
 
     });
-    it("Tests si la page d'accueil bien un titre et une navbar", () => {
-        cy.get('h3')
-        cy.contains('Visionnez vos caméras en live')
-        cy.get('nav')
-        cy.contains('Accueil')
+    it("Tests si la page d'accueil bien un titre et des caméra cliquable", () => {
+        cy.get('div')
+        cy.contains('Page de gestion des caméras')
+        cy.get('div')
+        //cy.get('input').get('#1').click()
+        cy.contains('CAFET').click()
+        
+        //cy.get('button[aria-label="Close"]').click()
+        
+    });
+    
+
+})
+
+
+describe("Tests pour la page membres", () => {
+    
+    it("Tests si la page membre contient bien le react", () => {
+        cy.visit("projet.4x4vert.be/login");
+        cy.get('input').get('#exampleInputEmail1').type('admin')
+        cy.get('input').get('#exampleInputPassword1').type('123')
+        cy.contains('button','Connecter').click()
+        cy.get('a[href=members]').click()
+
+    });
+    it("Tests si la page membre bien un titre et une navbar", () => {
+        cy.get('input[placeholder=chercher')
+        
         
     });
     
