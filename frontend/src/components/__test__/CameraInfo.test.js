@@ -8,6 +8,11 @@ Enzyme.configure({ adapter: new Adapter() })
 
 
 describe('CameraInfo', () => {
+    it('Snapshot - renders correctement', () => {
+        const snapshot = renderer.create(<CameraInfo name="Lounge" allowed={false} notification={true}/>).toJSON();
+        expect(snapshot).toMatchSnapshot();
+    })
+
     it('Vérifier le nom de la camera passé en paramètre.', () => {
       const wrapper = shallow(<CameraInfo name="Lounge" allowed="" notification=""/>)
       const paragraph = wrapper.find('div.test2')
