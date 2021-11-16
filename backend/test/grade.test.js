@@ -19,7 +19,11 @@ describe('GET /api/grades/:idGrade/cameras', function() {
             res.body.should.be.a('array');
             res.body[4].name_camera.should.be.eql('SREU3');
             res.body[4].id_camera.should.be.eql(5);
+            res.body[4].id_permission.should.be.eql(5);
             res.body[4].allowed.should.be.eql(true);
+            res.body[4].allowed.should.be.a("boolean");
+            res.body[4].notification.should.be.eql(false);
+            res.body[4].notification.should.be.a("boolean");
             done();
         })
     });
@@ -34,6 +38,7 @@ describe('GET /api/grades', function() {
             res.should.have.status(200);
             res.body.should.be.a('array');
             res.body[0].name_grade.should.be.eql('Directeur');
+            res.body[0].color.should.be.eql("#e37352");
             done();
         })
     });
@@ -58,9 +63,7 @@ describe('GET /api/grades', function() {
             done();
         })
     });
-})
 
-describe('GET /api/grades/members', function() {
     it('Obtenir nombre de personnes par grade', function(done) {
         chai.request(server)
         .get('/api/grades/members')

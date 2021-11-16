@@ -25,9 +25,7 @@ describe('PUT /api/client', function() {
             done();
         })
     })
-});
 
-describe('PUT /api/client', function() {
     it('Ne devrait pas ajouter un client sans nom de famille', function(done) {
         let client ={
             FirstName : "TestFN" ,
@@ -56,10 +54,10 @@ describe('GET /api/membres/:idMembre', function() {
             res.body[0].id_member.should.be.eql(1);
             res.body[0].first_name.should.be.eql('Jean');
             res.body[0].last_name.should.be.eql('Ab');
+            res.body[0].id_grade.should.be.eql(1);
             done();
         })
     });
-    //     .expect('Content-Type', /json/)
 })
 
 describe('GET /api/membres/:idMembre/photos', () => {
@@ -89,7 +87,7 @@ describe('GET /api/membres/:idMembre/photos/count', function() {
 })
 
 describe('DELETE /api/membres/:idMember/eliminate/photo', function() {
-    it('Supprime le path d une photo qui correspond à un utilisateur', function(done) {
+    it('Supprime une photo qui correspond à un utilisateur', function(done) {
         let photo ={
             photo : "ikram1.jpg"
         };
@@ -106,7 +104,7 @@ describe('DELETE /api/membres/:idMember/eliminate/photo', function() {
 })
 
 describe('GET /api/membres/:idMember/name', () => {
-    it("Tester d'obtenir le nom concernant un membre", (done) => {
+    it("Obtient le nom d'un membre selon son id", (done) => {
         chai.request(server)
         .get('/api/membres/1/name')
         .end((err, res) => {
@@ -121,7 +119,7 @@ describe('GET /api/membres/:idMember/name', () => {
 
 
 describe('PUT /api/membres/:idMember/update', function() {
-    it("Tester la modification d'un nom et prenom d'un membre", function(done) {
+    it("Modification du nom et du prénom d'un membre selon son id", function(done) {
         let member = {
             "name" : "NouveauPrenom",
             "surname" : "NouveauNomFamille"
@@ -154,8 +152,8 @@ describe('GET /api/membres/:idMembre/grade', function() {
     })
 })
 
-describe('PUT /api/membres/:idGrade', function() {
-    it('change le grade d une personne', function(done) {
+describe("PUT /api/membres/:idGrade", function() {
+    it("Change le grade d'un membre", function(done) {
         let client ={
             userNow :  5,
         };
@@ -164,8 +162,8 @@ describe('PUT /api/membres/:idGrade', function() {
         .send(client)
         .end((err, res) => {
             res.should.have.status(200);
-            res.body.should.be.a('object');
-            res.body.should.have.property("message").eql("ok");
+            res.body.should.be.a("object");
+            res.body.should.have.property("count").eql(1);
             done();
         })
     })

@@ -208,9 +208,9 @@ module.exports = function (app, client) {
     client.query(query, [idGrade, userNow ], (error, results) => {
       if (error) {
       }
-      response.status(200)
-    })
-    response.send({ message: 'ok' });
+      response.status(200);
+      response.send({ "count": results.rowCount });
+    })    
   })
 
 }
