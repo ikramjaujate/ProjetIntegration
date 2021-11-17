@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar.js';
+
 import './css/Secretary.css';
 import React, { useState, useEffect } from 'react'
 import Popup from 'reactjs-popup';
@@ -53,7 +53,6 @@ function Secretary() {
 
     return (
         <div className="secretary-page">
-            <Navbar/>
             <div id="layout-user">          
                 <Popup trigger={ <button className="add-user">Ajouter utilisateur (+)</button>} position="center" modal nested>
                     <h1>Nouvel utilisateur:</h1>

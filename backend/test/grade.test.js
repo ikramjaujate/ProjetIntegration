@@ -1,138 +1,180 @@
 const assert = require("assert");
-var request = require("supertest"),
+let chai = require('chai');
+let chaiHttp = require('chai-http');
+let server = require('../server');
+let should = chai.should();
+var request = require("supertest");
+
+chai.use(chaiHttp);
 
 request = request("http://localhost:3001");
 
 
-
 describe('GET /api/grades/:idGrade/cameras', function() {
     it('Voir toutes les informations concernant les cameras pour un grade', function(done) {
-        request.get('/api/grades/1/cameras')
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then(response => {
-            assert(response[0].name_camera, 'CAFET');
-        }), done();
+        chai.request(server)
+        .get('/api/grades/1/cameras')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[4].name_camera.should.be.eql('SREU3');
+            res.body[4].id_camera.should.be.eql(5);
+            res.body[4].id_permission.should.be.eql(5);
+            res.body[4].allowed.should.be.eql(true);
+            res.body[4].allowed.should.be.a("boolean");
+            res.body[4].notification.should.be.eql(false);
+            res.body[4].notification.should.be.a("boolean");
+            done();
+        })
     });
 })
 
 
-
 describe('GET /api/grades', function() {
     it('Obtenir toutes les informations de tous les grades', function(done) {
-        request.get('/api/grades')
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then(response => {
-            assert(response[0].name_grade, 'Directeur');
-        }), done();
+        chai.request(server)
+        .get('/api/grades')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].name_grade.should.be.eql('Directeur');
+            res.body[0].color.should.be.eql("#e37352");
+            done();
+        })
     });
 })
 
 describe('GET /api/grades', function() {
     it('Obtenir chaque camera pour chaque grade', function(done) {
-        request.get('/api/grades')
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then(response => {
+        chai.request(server)
+        .get('/api/grades')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
             /*Cameras autorisées par grade*/ 
-            assert(response[0].allowedcamera, 10);
-            assert(response[1].allowedcamera, 6);
-            assert(response[0].allowedcamera, 3);
+            res.body[0].allowedcamera.should.be.eql('10');
+            res.body[1].allowedcamera.should.be.eql('6');
+            res.body[2].allowedcamera.should.be.eql('3');
 
             /*Cameras non autorisées par grade*/ 
-            assert(response[0].refusedcamera, 0);
-            assert(response[1].refusedcamera, 4);
-            assert(response[0].refusedcamera, 7);
-
-        }), done();
+            res.body[0].refusedcamera.should.be.eql('0');
+            res.body[1].refusedcamera.should.be.eql('4');
+            res.body[2].refusedcamera.should.be.eql('7');
+            done();
+        })
     });
-})
 
-describe('GET /api/grades/members', function() {
     it('Obtenir nombre de personnes par grade', function(done) {
-        request.get('/api/grades/members')
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then(response => {
-            assert(response[0].id_grade, 3);
-            assert(response[0].members, 9);
-        }), done();
+        chai.request(server)
+        .get('/api/grades/members')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].id_grade.should.be.eql(3);
+            res.body[0].members.should.be.eql('9');
+            done();
+        })
     });
 })
 
 describe('GET /api/grades/colors', function() {
     it('Obtenir toutes les couleurs existantes', function(done) {
-        request.get('/api/grades/members')
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then(response => {
-            assert(response[0].id_color, 4);
-            assert(response[0].name_color, "#FFF9C4");
-        }), done();
+        chai.request(server)
+        .get('/api/grades/colors')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].id_color.should.be.eql(1);
+            res.body[0].name_color.should.be.eql('#B2DFDB');
+            done();
+        })
     });
 })
 
-describe('PUT "/api/grades"', function() {
+describe('PUT /api/grades', function() {
     it('Ajouter un nouveau grade', function(done) {
         let grade = {
             "name" : "test",
-            "idcolor" : 4
+            "idcolor" : 3
         }
-        request.put('/api/grades')
+        chai.request(server)
+        .put('/api/grades')
         .send(grade)
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then(response => {
-            assert(response[0].message, "ok");
-        }), done();
-    });
-})
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property("message").eql("ok")
+            done();
+        })
+    })
+});
 
-describe('get "/api/grades"', function() {
+describe('GET /api/grades', function() {
     it('Tester le nouveau grade ajouté', function(done) {
-        request.get('/api/grades')
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then(response => {
-            assert(response[response.length -1].name_grade, "test");
-        }), done();
+        chai.request(server)
+        .get('/api/grades')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[res.body.length -1].name_grade.should.be.eql("test");
+            done();
+        })
     });
 })
 
 describe('GET /api/gradesInfos', function() {
-    it('Sélectionne tous les grades avec leur id associé', function(done) {
-        request.get('/api/gradeInfos')
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then(response => {
-            assert(response[0].id_grade, 1);
-            assert(response[0].name_grade, "Directeur");
-            assert(response[2].id_grade, 3);
-            assert(response[2].name_grade, "Bénéficiaire");
-            console.log("ICI " + response)
-        }), done();
+    it('Sélectionne tous les grades avec leur id associé x2', function(done) {
+        chai.request(server)
+        .get('/api/gradesInfos')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].id_grade.should.be.eql(1);
+            res.body[0].name_grade.should.be.eql("Directeur");
+            res.body[2].id_grade.should.be.eql(3);
+            res.body[2].name_grade.should.be.eql("Bénéficiaire");
+            done();
+        })
     });
 })
 
-// describe('post "/api/grades/:idGrade/acces"', function() {
-//     it('Tester la nouvelle action sur le grade désiré', function(done) {
-//         let action = {
-//             "actions" : {
-//                 1 : false
-//             },
-//             "notifications" : {
-//                 1 : true
-//             }
-//         }
-//         request.post('/api/grades/1/acces')
-//         .expect('Content-Type', /json/)
-//         .expect(200)
-//         .then(response => {
-//             assert(response[0].name_grade, "test");
-//         }), done();
-//     });
-// })
+describe('POST /api/grades/:idGrade/action', function() {
+    it('Tester la nouvelle action sur le grade désiré et la caméra désirée', function(done) {
+        let action = {
+            "camera" : 1,
+            "action" : false
+        }
+        chai.request(server)
+        .post('/api/grades/1/action')
+        .send(action)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.count.should.be.eql(1);
+            done();
+        })
+    });
+})
+
+describe('POST /api/grades/:idGrade/notification', function() {
+    it('Tester la nouvelle action sur le grade désiré et la caméra désirée', function(done) {
+        let action = {
+            "camera" : 1,
+            "action" : true
+        }
+        chai.request(server)
+        .post('/api/grades/1/action')
+        .send(action)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.count.should.be.eql(1);
+            done();
+        })
+    });
+})
+
+
 
 
 
