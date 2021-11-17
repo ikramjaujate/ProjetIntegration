@@ -6,6 +6,7 @@ const uuid = require('uuid').v4;
 const magicpump = require('magic-pump');
 
 //---------------------------------------------------------------------------
+//Fichier de base du fonctionnement du waf
 
 const WAF_ASSERTION_OPERATOR = {
 	OP_OR: 0x01,
@@ -28,7 +29,7 @@ const WAF_MATCH_TYPE = {
 	MATCH_PAYLOAD: 0x80,
 	MATCH_COOKIES: 0x100,
 	MATCH_FILE_EXT: 0x200,
-	MATCH_ALL_SPECIFIED: 0x400 //Flag usada para comparações de WAF_MANAGE_TYPE.PERMIT onde todos os campos devem corresponder.
+	MATCH_ALL_SPECIFIED: 0x400 //Drapeau utilisé pour les comparaisons de WAF_MANAGE_TYPE.PERMIT où tous les champs doivent correspondre.
 }
 
 const WAF_MANAGE_TYPE = {

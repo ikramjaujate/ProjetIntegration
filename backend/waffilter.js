@@ -1,3 +1,5 @@
+//Fichier pour le filtrage
+
 const SafetyFilterType = {
     FILTER_VALIDATE_NUMBER_INT:     0x01,
     FILTER_VALIDATE_NUMBER_FLOAT:   0x02,
@@ -15,10 +17,10 @@ const SafetyAntiXssType = {
 
 const SafetyFilter = {
     
-    /**Valida entradas numéricas
+    /**
      * 
-     * @param {string} input Entrada a ser validada.
-     * @param {number} filterType Tipo de validação a ser aplicada.
+     * @param {string} input 
+     * @param {number} filterType 
      */
     FilterVariable: function(input, filterType){
         switch(filterType){
@@ -26,7 +28,7 @@ const SafetyFilter = {
                 return (Number(input) == input && input % 1 === 0);
             case SafetyFilterType.FILTER_VALIDATE_NUMBER_FLOAT: //Standard of ECMA since 2019.
                 return (Number(input) == input);
-            case SafetyFilterType.FILTER_VALIDATE_STRING: //Mantém apenas 
+            case SafetyFilterType.FILTER_VALIDATE_STRING: 
                 return !new RegExp(/[^a-zA-Z0-9 ]/g).test(input);
             case SafetyFilterType.FILTER_VALIDATE_EMAIL: //https://emailregex.com/ RFC 5322
                 return (new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)).test(input);

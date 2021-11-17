@@ -8,8 +8,9 @@ const path = require('path')
 dotenv.config();
 //var path = require('path');
 const helmet = require("helmet");
-const Waf = require('mini-waf/wafbase');
-const wafrules = require('mini-waf/wafrules');
+// Ajout des fichier du waf
+const Waf = require('mini-waf/wafbase');  // Base du waf
+const wafrules = require('mini-waf/wafrules'); //Règles de sécurisation associer au waf
 
 
 const express_waf_middleware = require("express-waf-middleware");
@@ -70,8 +71,6 @@ app.use(function(req, res, next) {
   ),
   next();
 });
-
-
 
 //X-Content-Type-Options
 app.use(helmet.noSniff());

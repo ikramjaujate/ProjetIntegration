@@ -1,3 +1,4 @@
+//Fichier utilitaire créant la structure pour l'affichage des logs
 const Ip = require('ip');
 const fs = require('fs');
 const path = require('path');
