@@ -4,9 +4,14 @@ const express = require("express");
 const {Client} = require("pg");
 const app = express();
 const dotenv = require("dotenv");
+const path = require('path')
 dotenv.config();
-var path = require('path');
+//var path = require('path');
 const helmet = require("helmet");
+const permissionsPolicy = require("permissions-policy");
+const expectCt = require("expect-ct");
+
+
 // Const http = require('http')
 /*
  * Const cors = require('cors')
@@ -15,6 +20,7 @@ const helmet = require("helmet");
  * const controller = require('./src/controller/file.controller')
  * const { request, response } = require('express')
  */
+
 const port = 3001;
 
 /* Different sets of existing APIs */
@@ -30,6 +36,13 @@ const client = new Client({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE
 })
+// const client = new Client({
+//   host: "localhost",
+//   port: 5432,
+//   user: "postgres",
+//   password: "123",
+//   database: "ProjetIntegration"
+// })
 
 
 
@@ -64,6 +77,15 @@ app.use(helmet.noSniff());
 //X-XSS-Protection
 app.use(helmet.xssFilter());
 
+//Referrer-Policy
+app.use(
+  helmet.referrerPolicy({
+    policy: ["strict-origin-when-cross-origin"]
+  })
+ );
+//X-POWERED-BY
+app.use(helmet.hidePoweredBy());
+
 //Strict-Transport-Security
 app.use(
   helmet.hsts({
@@ -73,13 +95,18 @@ app.use(
   })
 );
 
+// Permissions Policy
+app.use(permissionsPolicy({
+  features: {
+    fullscreen: ['self']
+  }
+}));
 
-// app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
-// app.use(
-//   helmet.hsts({
-//     maxAge: 123456,
-//   })
-// );
+//Expect-CT
+app.use(expectCt({ maxAge: 123 }));
+
+app.use(express.json({ limit: '10kb' }));
+
 
 app.use(express.json())
 // app.use(function (req, res, next) {
@@ -98,7 +125,6 @@ grade(app, client);
 cameras(app, client);
 members(app, client);
 privatedata(app, client);
-
 app.get('*', (req, res) => {
   return res.sendFile(path
     .join(__dirname + '/build/', 'index.html'))
@@ -112,6 +138,8 @@ client.connect(err => {
   }
 })
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
+
+module.exports = server;

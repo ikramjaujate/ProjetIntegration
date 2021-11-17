@@ -1,7 +1,6 @@
 import '../css/Grades.css';
 import {useState} from "react" ;
 import {ChromePicker} from 'react-color' ;
-import ButtonGrade from './ButtonGrade';
 
 
 const ModalAddGrade = ({nameGrade, borderGrade, colorGrade, idColorGrade, colors, errorName, errorColor, setNameGrade, resetCreation, createGrade, chooseColor}) => {
@@ -70,10 +69,8 @@ const ModalAddGrade = ({nameGrade, borderGrade, colorGrade, idColorGrade, colors
                         </div>
                     </div>
                     <div className="modal-footer row justify-content-between">
-                        {/* <button type="button" id="cancel-creation" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" onClick={resetCreation}>Annuler </button> */}
-                        {/* <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" onClick={() => createGrade()}>Créer </button> */}
-                        <ButtonGrade id="cancel-creation" className="bouton-close" text="Annuler" dataDismiss="modal" ariaLabel="Close" func1={resetCreation} />
-                        <ButtonGrade className="bouton-action" text="Créer" func1={createGrade} />
+                        <button type="button" id="cancel-creation" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" onClick={resetCreation}>Annuler </button>
+                        <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" onClick={() => createGrade()}>Créer </button>
                     </div>
                 </div>
             </div>

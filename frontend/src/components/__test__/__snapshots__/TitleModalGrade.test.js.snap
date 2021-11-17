@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TitleModalGrade Snapshot - renders correctement 1`] = `
+<div
+  className="modal-header row justify-content-center"
+>
+  <h5
+    className="modal-title test p-1 shadow-sm rounded col-10 col-sm-11 col-lg-9"
+    style={
+      Object {
+        "backgroundColor": "#000000",
+      }
+    }
+  >
+    Test
+  </h5>
+</div>
+`;
