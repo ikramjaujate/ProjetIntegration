@@ -239,9 +239,11 @@ module.exports = function (app, client) {
             if (error) {
                 throw error;
             }
+
             response.send({"count": results.rowCount});
         });
     });
+
 
     /**
      * Modifies the notification of a cameras for a grade
