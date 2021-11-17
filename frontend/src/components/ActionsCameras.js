@@ -21,4 +21,14 @@ const ActionsCameras = ({name_camera, id_camera, notification, changeAction, cha
     );
 }
 
+ActionsCameras.defaultProps = {
+    name_camera: "Chargement",
+    id_camera : "0",
+    notification : false ,
+    changeAction : () => {},
+    changeNotification : () => {},
+    allowed : false,
+    currentIdGrade : "0"
+}
+
 export default ActionsCameras;
