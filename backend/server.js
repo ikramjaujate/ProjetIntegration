@@ -63,7 +63,7 @@ const client = new Client({
 app.use(function(req, res, next) {
   res.setHeader(
     "Content-Security-Policy",
-    "frame-ancestors 'self'; upgrade-insecure-requests;  default-src 'self'; script-src 'sha256-taE1esL2Z5EmqZ+029XVYXt4sxKUw336oUN3SAp4XZs=' 'self' 'report-sample' https://projet.4x4vert.be; style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-mkh8535AFt6ogczZfol78HZgvhGGEDTCXpPucFH37Jo=' 'report-sample' projet.4x4vert.be; object-src 'none'; frame-src 'self'; child-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self' projet.4x4vert.be; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self';"
+    "frame-ancestors 'self'; upgrade-insecure-requests; style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-mkh8535AFt6ogczZfol78HZgvhGGEDTCXpPucFH37Jo=' 'report-sample' projet.4x4vert.be; object-src 'none'; frame-src 'self'; child-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self' projet.4x4vert.be; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self';"
   ),
   next();
 });
