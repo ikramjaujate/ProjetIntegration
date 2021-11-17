@@ -14,27 +14,27 @@ describe('LayoutGrade', () => {
       expect(snapshot).toMatchSnapshot();
     })
     it('Vérifier le texte affiché dans le premier titre', () => {
-      const wrapper = shallow(<LayoutGrade name = "Directeur" color = "" members="" allowed_camera="" refused_camera ="" />);
+      const wrapper = shallow(<LayoutGrade name = "Directeur" />);
       const paragraph = wrapper.find('div.name-grade');
       expect(paragraph.text()).toEqual('Directeur');
     })
     it('Vérifier la couleur du fond du logo du directeur', () => {
-        const wrapper = shallow(<LayoutGrade name = "" color = "#e37352" members="" allowed_camera="" refused_camera =""/>);
+        const wrapper = shallow(<LayoutGrade color = "#e37352" />);
         const paragraph = wrapper.find('div.bg-person');
         expect(paragraph.prop('style')).toHaveProperty("backgroundColor", "#e37352");
       }) 
     it('Vérifier l"écriture du mot membre si il y en a plusieurs', () => {
-        const wrapper = shallow(<LayoutGrade name = "" color = "" members="2" allowed_camera="" refused_camera =""/>)
+        const wrapper = shallow(<LayoutGrade members="2" />)
         const paragraph = wrapper.find('div.informations').at(2);
         expect(paragraph.text()).toEqual('2 membres')
       })
     it('Vérifier si le nombre de caméra autorisées est bien renvoyé', () => {
-        const wrapper = shallow(<LayoutGrade name = "" color = "" members="" allowed_camera="10" refused_camera =""/>)
+        const wrapper = shallow(<LayoutGrade allowed_camera="10" />)
         const paragraph = wrapper.find('div.informations').at(0);
         expect(paragraph.text()).toEqual('10 ')
       })
     it('Vérifier si le nombre de caméra non-autorisées est bien renvoyé', () => {
-        const wrapper = shallow(<LayoutGrade name = "" color = "" members="" allowed_camera="" refused_camera ="0"/>)
+        const wrapper = shallow(<LayoutGrade refused_camera ="0"/>)
         const paragraph = wrapper.find('div.informations').at(1);
         expect(paragraph.text()).toEqual('0 ')
       }) 
