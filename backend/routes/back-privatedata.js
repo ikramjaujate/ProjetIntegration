@@ -7,12 +7,13 @@ module.exports = function (app, client) {
 
         const username = request.body.username;
         const password = request.body.password;
-
+      
         let query = "select *  \
                     from personal \
                     where username = ($1)" ;
         client.query(query, [username], (error, results) => {
           //console.log(results.rows[0].password)
+          console.log(bcrypt.compare(password, results.rows[0].password))
           bcrypt.compare(password, results.rows[0].password)
           .then(valid => {
             if (!valid) {

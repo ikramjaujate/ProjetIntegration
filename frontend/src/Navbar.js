@@ -1,5 +1,5 @@
 import './css/Navbar.css';
-import ElementNavBar from './components/ElementNavBar';
+import ElementNavBar from './components/ElementNavbar';
 
 function Navbar() {
     return (
