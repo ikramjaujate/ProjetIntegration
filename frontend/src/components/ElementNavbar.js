@@ -1,22 +1,15 @@
 import '../css/Navbar.css';
 
-function ElementNavbar( {href, text,  icon, }) {
+function ElementNavbar( {href, dataIcon, text, d, className, viewBox}) {
     return (
-        /*<li className="nav-item">
+        <li className="nav-item">
             <a href={href} className="nav-link-main">  
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon={dataIcon} className={`svg-inline--fa ${className}`} role="img" xmlns="http://www.w3.org/2000/svg" viewBox={viewBox}>
                     <path fill="currentColor" d={d}></path>
                 </svg>
                 <span className="link-text">{text}</span>
             </a>                 
-        </li>   */
-        <li className="nav-item">
-            <a href={href} className="nav-link-main">  
-                <i class={`bi ${icon} m-4`} style={{"fontSize" : "2rem"}}></i>
-               <span className="link-text"  style={{fontWeight: "500"}}>{text}</span>
-            </a>                 
-        </li> 
-
+        </li>   
     );
 }
   

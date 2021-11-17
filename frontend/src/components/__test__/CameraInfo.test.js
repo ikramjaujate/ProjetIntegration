@@ -14,7 +14,7 @@ describe('CameraInfo', () => {
         expect(snapshot).toMatchSnapshot();
     })
 
-    it('Vérifier le nom de la camera passé en paramètre. ', () => {
+    it('Vérifier le nom de la camera passé en paramètre.', () => {
         const wrapper = shallow(<CameraInfo name="Lounge" allowed="" notification=""/>)
         const paragraph = wrapper.find('div.name-camera-grade')
         expect(paragraph).toHaveLength(1)
