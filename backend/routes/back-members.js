@@ -15,9 +15,13 @@ module.exports = function (app, client) {
       let query = 'insert into member (id_grade, first_name, last_name) values (($1), ($2), ($3))';
       client.query(query, [grade, firstName, lastName], (error, result) => {
         if(error){
+          res.status(400)
           res.send(error)
         }
-        res.status(200).json(result);
+        else{
+          res.status(200)
+          res.send({"message" : "ok"})
+        }
       })
     })
 
@@ -38,16 +42,18 @@ module.exports = function (app, client) {
 
   app.delete('/api/members/:idMember', (req, response) => {
     idMember= req.params.idMember
-    console.log(idMember)
 
     let query = "delete from member where id_member = $1"
 
     client.query(query, [idMember], (error, res) => {
       if (error) {
-        throw error;
+        response.status(400)
+        response.send(error);
       }
-      response.send(message = "ok")
-      console.log(res)
+      else{
+      response.status(200)
+      response.send({"message" : "ok"})
+      }
     })
 
   })

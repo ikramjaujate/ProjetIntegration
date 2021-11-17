@@ -253,7 +253,6 @@ module.exports = function (app, client) {
      * @param {dictionnary} notifications contains a dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
      */
      app.post("/api/grades/:idGrade/notification",(request, response) => {
-        console.log("access3");
         const idGrade = request.params.idGrade;
         const notification = request.body.notification;
         const camera = request.body.camera;
