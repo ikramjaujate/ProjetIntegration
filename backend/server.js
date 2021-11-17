@@ -40,23 +40,6 @@ const client = new Client({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE
 })
-// const client = new Client({
-//   host: "localhost",
-//   port: 5432,
-//   user: "postgres",
-//   password: "123",
-//   database: "ProjetIntegration"
-// })
-
-
-
-
-//app.use(helmet());
-// app.use(
-//   helmet({
-//     contentSecurityPolicy: false,
-//   })
-//  );
 
 
 // CSP Header middleware
@@ -67,7 +50,6 @@ app.use(function(req, res, next) {
   ),
   next();
 });
-
 
 
 //X-Content-Type-Options
@@ -89,7 +71,8 @@ app.use(
     policy: ["strict-origin-when-cross-origin"]
   })
  );
-//X-POWERED-BY
+
+//X-Powered-By
 app.use(helmet.hidePoweredBy());
 
 //Strict-Transport-Security
@@ -101,17 +84,8 @@ app.use(
   })
 );
 
-// Permissions Policy
-app.use(permissionsPolicy({
-  features: {
-    fullscreen: ['self']
-  }
-}));
-
 //Expect-CT
-app.use(expectCt({ maxAge: 123 }));
-
-app.use(express.json({ limit: '10kb' }));
+app.use(expectCt({ maxAge: 86400 }));
 
 
 app.use(express.json())
