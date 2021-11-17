@@ -21,7 +21,7 @@ describe('PUT /api/client', function() {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            res.body.should.have.property('rowCount').eql(1)
+            res.body.should.have.property('message').eql("ok")
             done();
         })
     })
@@ -35,7 +35,7 @@ describe('PUT /api/client', function() {
         .put('/api/client')
         .send(client)
         .end((err, res) => {
-            res.should.have.status(200);
+            res.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.have.property('name').eql("error");
             res.body.column.should.be.eql("last_name")

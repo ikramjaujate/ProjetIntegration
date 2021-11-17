@@ -12,10 +12,10 @@ chai.use(chaiHttp);
 
 var request = request("http://localhost:3001");
 
-describe('GET /api/etatCam', function() {
+describe('GET /api/camera', function() {
     it('Verifier l état des caméras', (done) => {
       chai.request(server)
-      .get('/api/etatCam')
+      .get('/api/camera')
       .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("array");

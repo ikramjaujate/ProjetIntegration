@@ -11,6 +11,9 @@ import 'reactjs-popup/dist/index.css';
 import UploadFiles from './components/File-upload.js';
 import Input from './components/Input';
 import Axios from 'axios';
+import {Toast} from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Members() {
 
@@ -22,13 +25,24 @@ export default function Members() {
     const [clientGrade, setClientGrade] = useState(1);
     const [gradesList, setGradesList] = useState([]);
     const [membersList, setMembersList] = useState([]);
-    const [currentMember, setCurrentMember] = useState("");
     const [filterText, setFilterText] = useState("");
     const [currentGrade, setCurrentGrade] = useState("Tous")
+
+    const optionsToast = {
+        autoClose: 5000,
+        position: "bottom-right",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true, 
+        theme:"colored"
+    };
 
     useEffect(()=> {
         getGrade() ;
         getMembers();
+        Array.from(document.querySelectorAll('.toast'))
+        .forEach(toastNode => new Toast(toastNode));
 	}, []);
 
     const getMembers = () => {
@@ -44,36 +58,44 @@ export default function Members() {
             })
 	}
 
-    const submitClient = () => {
-        Axios.put(`http://localhost:3001/api/client`, {
+    const submitClient = (event) => {
+        Axios.put(`/api/client`, {
             FirstName : clientFirstName,
             LastName : clientLastName,
             Grade : clientGrade
-        }).then ((response) => {
-            if (response){
-                window.alert("Client déjà enregistré")
-            }
+        }).then (() => {
+            getMembers()
         })
     }
 
     const delMember = (id) => {
         const idMember = id;
-        Axios.delete(`http://localhost:3001/api/members/${idMember}`).then((response)=> {
-            if(response) {
-                window.location.reload();
+        let informations = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }, 
+        };
+        fetch(`/api/members/${idMember}`, informations).then((response)=> {
+            if(response.status === 200){
+                console.log(response)
+                getGrade() ;
+                getMembers();            
+                (toast.success("Suppression réussie"  , optionsToast))
             }
-        })
+            else {
+                (toast.error("Suppression échouée"  , optionsToast))
+            }
+            })
     }
 
-    const setCurrent = (id) => {
-        setCurrentMember(id)   
-             
-    }
-
-    const getGrade = () => {
-        Axios.get(`http://localhost:3001/api/gradesInfos`).then((response)=> {
-            setGradesList(response.data)
-        }).then( () => {
+    const getGrade = () => {        
+        let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }, 
+        };
+        fetch(`/api/gradesInfos`, informations).then((response)=> {
+            return response.json()
+        }).then( (response) => {
+            setGradesList(response)
         })
     }    
    
@@ -116,7 +138,7 @@ export default function Members() {
     
                     {membersList.filter(name => name.first_name.includes(filterText)).filter(currentGrade !== "Tous" ? grade => grade.name_grade === currentGrade : grade => grade.name_grade.includes("")).map((val) => {
                         return (
-                            <div className="rounded col-sm-5 col-lg-3 p-4 mx-1 mb-3 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <div className="rounded col-sm-5 col-lg-3 p-4 mx-1 mb-3 ">
                                 <div className="row rounded">
                                     <div style={{backgroundColor:val.color, fontSize:"0.7rem"}} className="col-6">
                                         {val.name_grade}
@@ -160,6 +182,7 @@ export default function Members() {
             
                        
                 </div>
+                <ToastContainer style={{fontSize:"0.6rem"}}/>  
             </div>
         </>
     )
