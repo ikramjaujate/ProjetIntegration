@@ -8,6 +8,9 @@ const path = require('path')
 dotenv.config();
 //var path = require('path');
 const helmet = require("helmet");
+
+const express_waf_middleware = require("express-waf-middleware");
+
 const permissionsPolicy = require("permissions-policy");
 const expectCt = require("expect-ct");
 
@@ -28,6 +31,7 @@ const grade = require('./routes/back-grade.js')
 const members = require('./routes/back-members.js')
 const privatedata = require('./routes/back-privatedata.js')
 const cameras = require('./routes/back-cameras.js')
+
 
 const client = new Client({
   host: process.env.DATABASE_HOST,
@@ -54,16 +58,18 @@ const client = new Client({
 //   })
 //  );
 
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-    'default-src': ['\'self\'' , 'blob:'],
-    'object-src' : ['\'self\'', 'data:'],
-    //'img-src' : ['\'self\'', 'data:'],
-    'script-src' : ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-    'script-src-attr': ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-  }
-}));
+
+// CSP Header middleware
+app.use(function(req, res, next) {
+  res.setHeader(
+    "Content-Security-Policy",
+    "frame-ancestors 'self'; upgrade-insecure-requests;  default-src 'self'; script-src 'sha256-taE1esL2Z5EmqZ+029XVYXt4sxKUw336oUN3SAp4XZs=' 'self' 'report-sample' https://projet.4x4vert.be; style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-mkh8535AFt6ogczZfol78HZgvhGGEDTCXpPucFH37Jo=' 'report-sample' projet.4x4vert.be; object-src 'none'; frame-src 'self'; child-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self' projet.4x4vert.be; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self';"
+  ),
+  next();
+});
+
+
+
 //X-Content-Type-Options
 app.use(helmet.noSniff());
 
@@ -142,4 +148,26 @@ const server = app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
 
+/*
+var emudb = new ExpressWaf.EmulatedDB();
+var waf = new ExpressWaf.ExpressWaf({
+    blocker:{
+        db: emudb,
+        blockTime: 1000
+    },
+    log: true
+});
+// Module CSRF
+
+waf.addModule('csrf-module', {
+  allowedMethods:['GET', 'POST', 'PUT','DELETE'],
+  refererIndependentUrls: ['/'],
+  allowedOrigins: ['http://localhost:3000']
+}, function (error) {
+  console.log(error);
+});*/
+
+//app.use(waf.check);
+
 module.exports = server;
+
