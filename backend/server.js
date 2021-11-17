@@ -63,7 +63,7 @@ const client = new Client({
 app.use(function(req, res, next) {
   res.setHeader(
     "Content-Security-Policy",
-    "frame-ancestors 'self'; default-src 'self'; script-src 'sha256-leYCTtAGk9OA86rkpsFvzjewfVkLMqDTkMVb/B4Pt2Q=' 'self'; img-src 'sha256-leYCTtAGk9OA86rkpsFvzjewfVkLMqDTkMVb/B4Pt2Q='; upgrade-insecure-requests; style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-mkh8535AFt6ogczZfol78HZgvhGGEDTCXpPucFH37Jo=' 'report-sample' projet.4x4vert.be; object-src 'none'; frame-src 'self'; child-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self' projet.4x4vert.be; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self';"
+    "frame-ancestors 'self'; default-src 'self'; script-src 'sha256-leYCTtAGk9OA86rkpsFvzjewfVkLMqDTkMVb/B4Pt2Q=' 'self'; img-src *; upgrade-insecure-requests; style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-mkh8535AFt6ogczZfol78HZgvhGGEDTCXpPucFH37Jo=' 'report-sample' projet.4x4vert.be; object-src 'none'; frame-src 'self'; child-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self' projet.4x4vert.be; base-uri 'self'; form-action 'self'; media-src 'self'; prefetch-src 'self'; worker-src 'self';"
   ),
   next();
 });
