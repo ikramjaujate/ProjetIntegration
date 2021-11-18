@@ -1,0 +1,41 @@
+body {
+    color: #BDBDBD;
+}
+
+a {
+    color: #8b90f8;
+}
+
+.global {
+    margin-left: 20%;
+    margin-right: 10%;
+    
+}
+
+.gdpr {
+    font-size : 2.3rem;
+    text-align: center;
+    color: #457eaf;
+    margin-top : 5%;
+}
+
+.vigueur {
+    text-align: center;
+    font-style: italic;
+}
+
+.article {
+    font-size : 1.7rem;
+    margin-bottom: 4%;
+    color:#f88b90;
+}
+
+.texte {
+    font-size: 0.8em;
+    text-align: justify;
+    line-height:50px;
+}
+
+
+
+

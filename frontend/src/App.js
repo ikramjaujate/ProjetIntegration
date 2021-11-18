@@ -12,6 +12,7 @@ import {isLoggedIn} from './components/auth.js';
 import {PrivateRoute} from "./components/PrivateRoute.js";
 import Navbar from './Navbar';
 import Cam2 from './Accueil.js';
+import GDPR from './GDPR';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Secretary} path="/secretary"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Members} path="/members"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Cam2} path="/home"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={GDPR} path='/gdpr'/>
             <PrivateRoute exact isloggedin={isLoggedIn()} path="/modification"  component={Modification}/>
             <Route path='/login' exact component={Login}/>
           </Switch>
@@ -48,6 +50,7 @@ function App() {
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Secretary} path="/secretary"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Members} path="/members"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Cam2} path="/home"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={GDPR} path='/gdpr'/>
             <PrivateRoute exact isloggedin={isLoggedIn()} path="/modification"  component={Modification}/>
             <Route path='/login' exact component={Login}/>
           </Switch>
