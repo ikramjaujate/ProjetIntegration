@@ -44,7 +44,7 @@ function Cam2 (){
         <div className="cam2">
         
         
-        <div className='titre offset-lg-5 offset-md-4 offset-sm-4 offset-2'>Page de gestion des caméras</div>
+        <div className='titre text-center offset-1'>Page de gestion des caméras</div>
         
         <div class="container"> 
          <div className='row'>

@@ -16,7 +16,7 @@ module.exports = function (app, client) {
           bcrypt.compare(password, results.rows[0].password)
           .then(valid => {
             if (!valid) {
-              return res.status(401).json({ error: 'Mot de passe incorrect !' });
+              response.status(401).json({ error: 'Mot de passe incorrect !' });
             }
             const token = jwt.sign({
               data: username

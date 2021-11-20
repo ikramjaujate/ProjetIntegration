@@ -9,12 +9,15 @@
     font-size: 120%;
 }
 .cam2 .container::-webkit-scrollbar {
-	width: 6px; 
+	width: 4px; 
+    display: block;
 }
+
 .cam2 .container::-webkit-scrollbar-thumb {
-	background: #8f3917; 
+	background: #969696; 
 	border-radius: 10px;
 }
+
 .cam2 .container::-webkit-scrollbar-thumb:hover { 
 	background: #696969;
 }
