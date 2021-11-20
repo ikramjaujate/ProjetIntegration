@@ -18,6 +18,7 @@ jobs:
         working-directory: .
         run: |
           cd frontend 
+          npm install
           npm run build
           cd ..
           chmod +x build.sh
