@@ -19,7 +19,7 @@ jobs:
         run: |
           cd frontend 
           npm install
-          npm run build
+          CI= npm run build
           cd ..
           chmod +x build.sh
           ./build.sh
