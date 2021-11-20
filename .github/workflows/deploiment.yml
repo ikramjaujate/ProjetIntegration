@@ -17,8 +17,13 @@ jobs:
       - name: Build application
         working-directory: .
         run: |
+          cd frontend 
+          npm run build
+          cd ..
           chmod +x build.sh
           ./build.sh
+
+          
       
       - name: Application folder to remote
         uses: garygrossgarten/github-action-scp@release
