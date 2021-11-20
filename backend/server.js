@@ -9,7 +9,7 @@ dotenv.config();
 //var path = require('path');
 const helmet = require("helmet");
 
-const express_waf_middleware = require("express-waf-middleware");
+//const express_waf_middleware = require("express-waf-middleware");
 
 const permissionsPolicy = require("permissions-policy");
 const expectCt = require("expect-ct");
