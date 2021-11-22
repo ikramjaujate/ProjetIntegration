@@ -23,7 +23,7 @@ return(
             <button type="button" class=" btn-secondary btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <img className="img-thumbnail" alt='visu_live' src={etat} width="440" height="300" title="Foscam FI8905W" />
+            <img className="img-thumbnail" alt='visu_live' src='https://video.4x4vert.be/video' width="440" height="300" title="Foscam FI8905W" />
           </div>
           <div class="modal-footer justify-content-center">
             <button type="button" className=" col-3 btn btn-secondary"><i className="bi bi-camera-reels"></i></button>
