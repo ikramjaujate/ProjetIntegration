@@ -5,7 +5,9 @@ import'bootstrap/dist/js/bootstrap.min.js';
 import'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import {useEffect, useState} from "react" ;
-import Toggle from "./components/ChangeTheme/Toggler"
+import Toggle from "./components/ChangeTheme/Toggler";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 // import  {useDarkMode} from "./components/ChangeTheme/userDarkMode"
 // import  {useDaltonismkMode} from "./components/ChangeTheme/userDaltonismMode"
@@ -25,13 +27,21 @@ function Settings() {
     const [errorNew, setErrorNew] = useState("");
     const [passwordOld, setPasswordOld] = useState("");
     const [passwordNew, setPasswordNew] = useState("");
-    const [validationModification, setValidationModification] = useState("");
     const [borderOldPassword, setBorderOldPassword] = useState("null");
     const [borderNewPassword, setBorderNewPassword] = useState("null");
+    const optionsToast = {
+        autoClose: 8000,
+        position: "top-right",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true, 
+        theme:"colored"
+    };
 
     
     useEffect(()=> {
-        deleteErrorMsg(true, true);
+        deleteErrorMsgPassword(true, true);
 	}, []);
 
     const changeDark = () => {
@@ -69,8 +79,7 @@ function Settings() {
     //     }
     // }
 
-    const deleteErrorMsg = (OldError, NewError) => {
-        setValidationModification("") ;
+    const deleteErrorMsgPassword = (OldError, NewError) => {
         if (OldError) {
             setBorderOldPassword("1px solid #ced4da");
             setErrorOld("");
@@ -84,7 +93,6 @@ function Settings() {
     }
 
     const modifyPassword = () => {
-        setValidationModification("") ;
         let oldPassword = passwordOld ;
         let newPassword = passwordNew ;
         let id = localStorage.getItem("id") ;
@@ -96,7 +104,7 @@ function Settings() {
             setErrorOld("Veuillez choisir un nom");
         }
         else {
-            deleteErrorMsg(true, false) ;
+            deleteErrorMsgPassword(true, false) ;
             oldPasswordok = true ;
         }
         
@@ -115,13 +123,13 @@ function Settings() {
                 setBorderNewPassword("1px solid var(--error)");
             }
             else {
-                deleteErrorMsg(false, true) ;
+                deleteErrorMsgPassword(false, true) ;
                 newPasswordok = true ;
             }
         }
 
         if (newPasswordok && oldPasswordok) {
-            deleteErrorMsg(true, true) ;
+            deleteErrorMsgPassword(true, true) ;
             console.log("bien true")
             fetch (`/api/${id}/password`,{
                 method: "POST",
@@ -135,7 +143,9 @@ function Settings() {
             })
             .then(data => {
                 if (data.count === 1) {
-                    setValidationModification("Modifié avec succès");
+                    setPasswordOld("") ;
+                    setPasswordNew("") ;
+                    toast.success("Mot de passe modifié avec succès !", optionsToast);
                 }
                 else if (data.count === "ancien mot de passe incorrect") {
                     setErrorOld("Mot de passe incorect");
@@ -197,8 +207,9 @@ function Settings() {
                 </div>
                 <div id="error-name" className="errorMessagePassword col-12 col-md-6 order-2 order-md-3">{errorOld}</div>
                 <div id="error-color" className="errorMessagePassword col-12 col-md-6 order-4">{errorNew}</div>
-                <div id="validation" className="validationMessagePassword col-12 col-md-6 order-4">{validationModification}</div>
             </form>
+            <ToastContainer style={{fontSize:"0.6rem"}}/>      
+
         </>
     )
 
