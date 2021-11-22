@@ -26,10 +26,12 @@ function Settings() {
     const [passwordOld, setPasswordOld] = useState("");
     const [passwordNew, setPasswordNew] = useState("");
     const [validationModification, setValidationModification] = useState("");
+    const [borderOldPassword, setBorderOldPassword] = useState("null");
+    const [borderNewPassword, setBorderNewPassword] = useState("null");
 
     
     useEffect(()=> {
-        setValidationModification("")
+        deleteErrorMsg(true, true);
 	}, []);
 
     const changeDark = () => {
@@ -67,44 +69,59 @@ function Settings() {
     //     }
     // }
 
+    const deleteErrorMsg = (OldError, NewError) => {
+        setValidationModification("") ;
+        if (OldError) {
+            setBorderOldPassword("1px solid #ced4da");
+            setErrorOld("");
+        }
+        if (NewError) {
+            setErrorNew("");
+            // let styleElem = document.head.appendChild(document.createElement("style"));
+            // styleElem.innerHTML = "#empty:before {border:none}";
+            setBorderNewPassword("1px solid #ced4da");
+        }
+    }
+
     const modifyPassword = () => {
-        setValidationModification("")
-        // let oldPassword = document.getElementById("validationCustom01").value;
-        // let newPassword = document.getElementById("validationCustom02").value;
+        setValidationModification("") ;
         let oldPassword = passwordOld ;
         let newPassword = passwordNew ;
         let id = localStorage.getItem("id") ;
-        // let newName = textNewNameGrade ;
-        // let newColor = finalIdColor ;
-        let newNameok = false, newColorok = false ;
+        let oldPasswordok = false, newPasswordok = false ;
+        let limitCharacter = 12;
+
         if (oldPassword === "") {
-            console.log("old vide")
-            //setBorderNewNameGrade("1px solid var(--error)");
+            setBorderOldPassword("1px solid var(--error)");
             setErrorOld("Veuillez choisir un nom");
         }
         else {
-            console.log("old rempli")
-            //setBorderNewNameGrade("1px solid var(--error)");
-            setErrorOld("");
-            newNameok = true ;
+            deleteErrorMsg(true, false) ;
+            oldPasswordok = true ;
         }
-        // else {
-        //     deleteErrorMsg(true, false);
-        //     newNameok = true ;
-        // }
         
         if (newPassword === "") {
-            console.log("new vide")
             setErrorNew("Veuillez choisir une couleur");
+            setBorderNewPassword("1px solid var(--error)");
         }
         else {
-            console.log("new rempli")
-            setErrorNew("");
-            newColorok = true ;
+            var format_mdp = /^[!@#$%^&*()_+\-=\[\]{};':"\|,.<>\/?]*$/;
+            if(newPassword.length < limitCharacter) {
+                setErrorNew("Mot de passe trop court, au moins 12 caractère");
+                setBorderNewPassword("1px solid var(--error)");
+            }
+            else if (newPassword.split('').filter(lettre => lettre === lettre.toUpperCase()).length === 0 || newPassword.split('').filter(lettre => !isNaN(lettre)).length === 0 || newPassword.split('').filter(lettre => lettre.match(format_mdp)).length === 0) {
+                setErrorNew("Veuillez entrer un mot de passe plus sécurisé (comprenant 1 lettre, 1 chiffre, et 1 caractère spécial)");
+                setBorderNewPassword("1px solid var(--error)");
+            }
+            else {
+                deleteErrorMsg(false, true) ;
+                newPasswordok = true ;
+            }
         }
 
-        console.log("colo : ", newColorok, " nam : ", newNameok)
-        if (newColorok && newNameok) {
+        if (newPasswordok && oldPasswordok) {
+            deleteErrorMsg(true, true) ;
             console.log("bien true")
             fetch (`/api/${id}/password`,{
                 method: "POST",
@@ -117,17 +134,15 @@ function Settings() {
                 return res.json();
             })
             .then(data => {
-                console.log("data : ", data)
                 if (data.count === 1) {
-                    console.log("ok !")
                     setValidationModification("Modifié avec succès");
                 }
                 else if (data.count === "ancien mot de passe incorrect") {
-                    console.log("incorrect ancien")
                     setErrorOld("Mot de passe incorect");
+                    setBorderOldPassword("1px solid var(--error)");
                 }
                 else {
-                    console.log('erreur')
+                    console.log('erreur modification mot de passe')
                 }
             })
         }
@@ -159,7 +174,7 @@ function Settings() {
             <form style={{marginLeft:'200px'}} class="row g-3 needs-validation" novalidate>
                 <div class="col-md-4">
                     <label for="validationCustom01" class="form-label">Ancien mot de passe</label>
-                    <input type="password" class="form-control" id="validationCustom01" required value={passwordOld} onChange={(e) => {setPasswordOld(e.target.value)}}/>
+                    <input type="password" class="form-control" id="validationCustom01" required value={passwordOld} onChange={(e) => {setPasswordOld(e.target.value)}} style={{border:borderOldPassword}}/>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
@@ -169,7 +184,7 @@ function Settings() {
                 </div>
                 <div class="col-md-4">
                     <label for="validationCustom01" class="form-label">Nouveau mot de passe</label>
-                    <input type="password" class="form-control" id="validationCustom02" required value={passwordNew} onChange={(e) => {setPasswordNew(e.target.value)}}/>
+                    <input type="password" class="form-control" id="validationCustom02" required value={passwordNew} onChange={(e) => {setPasswordNew(e.target.value)}} style={{border:borderNewPassword}}/>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
