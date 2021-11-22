@@ -135,6 +135,7 @@ var waf = new ExpressWaf.ExpressWaf({
 });
 // Module CSRF
 
+
 waf.addModule('csrf-module', {
   allowedMethods:['GET', 'POST', 'PUT','DELETE'],
   refererIndependentUrls: ['/'],
