@@ -1,0 +1,14 @@
+:root {
+    --validation : #45c160 ;
+}
+
+
+.errorMessagePassword {
+    color:var(--error) ;
+    font-size: 0.6rem;
+}
+
+.validationMessagePassword {
+    color:var(--validation) ;
+    font-size: 0.6rem;
+}

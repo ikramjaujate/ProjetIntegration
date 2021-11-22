@@ -54,7 +54,6 @@ module.exports = function (app, client) {
               })
             })
           }
-          response.status(200).json({"count" : "erreur"});
         })
       })
     })

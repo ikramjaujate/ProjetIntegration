@@ -11,6 +11,8 @@ import Toggle from "./components/ChangeTheme/Toggler"
 // import  {useDaltonismkMode} from "./components/ChangeTheme/userDaltonismMode"
 import  {useTh} from "./components/ChangeTheme/userTh"
 import { useGlobal  } from 'reactn';
+import './css/Settings.css';
+
 
 function Settings() {
 
@@ -18,8 +20,17 @@ function Settings() {
     // const [themeDaltonism, toggleThemeDaltonism] = useDaltonismkMode();
     const [test, setTest] = useTh();
     const [color, setColor] = useGlobal("color");
+
     const [errorOld, setErrorOld] = useState("");
     const [errorNew, setErrorNew] = useState("");
+    const [passwordOld, setPasswordOld] = useState("");
+    const [passwordNew, setPasswordNew] = useState("");
+    const [validationModification, setValidationModification] = useState("");
+
+    
+    useEffect(()=> {
+        setValidationModification("")
+	}, []);
 
     const changeDark = () => {
         //toggleThemeDark() ;
@@ -57,83 +68,69 @@ function Settings() {
     // }
 
     const modifyPassword = () => {
+        setValidationModification("")
+        // let oldPassword = document.getElementById("validationCustom01").value;
+        // let newPassword = document.getElementById("validationCustom02").value;
+        let oldPassword = passwordOld ;
+        let newPassword = passwordNew ;
+        let id = localStorage.getItem("id") ;
         // let newName = textNewNameGrade ;
         // let newColor = finalIdColor ;
-        // let newNameok = false, newColorok = false ;
-        // if (newName === "") {
-        //     setBorderNewNameGrade("1px solid var(--error)");
-        //     setTextErrorName("Veuillez choisir un nom");
-        // }
-        // else if (informationsGrade.map(element => element.name_grade).indexOf(newName) !== -1) {
-        //     setBorderNewNameGrade("1px solid var(--error)");
-        //     setTextErrorName("Ce nom existe déjà");
-        // }
+        let newNameok = false, newColorok = false ;
+        if (oldPassword === "") {
+            console.log("old vide")
+            //setBorderNewNameGrade("1px solid var(--error)");
+            setErrorOld("Veuillez choisir un nom");
+        }
+        else {
+            console.log("old rempli")
+            //setBorderNewNameGrade("1px solid var(--error)");
+            setErrorOld("");
+            newNameok = true ;
+        }
         // else {
         //     deleteErrorMsg(true, false);
         //     newNameok = true ;
         // }
         
-        // if (newColor === "empty") {
-        //     setTextErrorColor("Veuillez choisir une couleur");
-        //     let styleElem = document.head.appendChild(document.createElement("style"));
-        //     styleElem.innerHTML = "#empty:before {border:1px solid red}";
-        // }
-        // else {
-        //     deleteErrorMsg(false, true);
-        //     newColorok = true ;
-        // }
+        if (newPassword === "") {
+            console.log("new vide")
+            setErrorNew("Veuillez choisir une couleur");
+        }
+        else {
+            console.log("new rempli")
+            setErrorNew("");
+            newColorok = true ;
+        }
 
-        // if (newColorok && newNameok) {
-        //     deleteErrorMsg(true, true) ;
-
-        //     fetch ("/api/grades",{
-        //         method: "PUT",
-        //         headers:{
-        //             "Content-type": "application/json"
-        //         },
-        //         body: JSON.stringify({name:newName, idcolor:newColor})
-        //     })
-        //     .then((res)=> {
-        //         return res.json();
-        //     })
-        //     .then(data => {
-        //         resetCreation() ;
-        //         document.getElementById("cancel-creation").click() ;
-        //         if (data.message === "ok") {
-        //             getGrades() ;
-        //             getColor() ;
-        //             toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
-        //         }
-        //         else {
-        //             toast.error(errorMsgClient, optionsToast);
-        //         }
-        //     });    
-        // }
-        let oldPassword = document.getElementById("validationCustom01").value;
-        let newPassword = document.getElementById("validationCustom02").value;
-        let id = localStorage.getItem("id") ;
-        fetch (`/api/${id}/password`,{
-            method: "POST",
-            headers:{
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({oldPassword:oldPassword, newPassword:newPassword, id_user:localStorage.getItem("id")})
-        })
-        .then((res)=> {
-            return res.json();
-        })
-        .then(data => {
-            console.log("data : ", data)
-            if (data.count === 1) {
-                console.log("ok !")
-            }
-            else if (data.count === "ancien mot de passe incorrect") {
-                console.log("incorrect ancien")
-            }
-            else {
-                console.log('erreur')
-            }
-        })
+        console.log("colo : ", newColorok, " nam : ", newNameok)
+        if (newColorok && newNameok) {
+            console.log("bien true")
+            fetch (`/api/${id}/password`,{
+                method: "POST",
+                headers:{
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({oldPassword:oldPassword, newPassword:newPassword, id_user:localStorage.getItem("id")})
+            })
+            .then((res)=> {
+                return res.json();
+            })
+            .then(data => {
+                console.log("data : ", data)
+                if (data.count === 1) {
+                    console.log("ok !")
+                    setValidationModification("Modifié avec succès");
+                }
+                else if (data.count === "ancien mot de passe incorrect") {
+                    console.log("incorrect ancien")
+                    setErrorOld("Mot de passe incorect");
+                }
+                else {
+                    console.log('erreur')
+                }
+            })
+        }
 
     }
     
@@ -162,7 +159,7 @@ function Settings() {
             <form style={{marginLeft:'200px'}} class="row g-3 needs-validation" novalidate>
                 <div class="col-md-4">
                     <label for="validationCustom01" class="form-label">Ancien mot de passe</label>
-                    <input type="password" class="form-control" id="validationCustom01" required />
+                    <input type="password" class="form-control" id="validationCustom01" required value={passwordOld} onChange={(e) => {setPasswordOld(e.target.value)}}/>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
@@ -172,7 +169,7 @@ function Settings() {
                 </div>
                 <div class="col-md-4">
                     <label for="validationCustom01" class="form-label">Nouveau mot de passe</label>
-                    <input type="password" class="form-control" id="validationCustom02" required />
+                    <input type="password" class="form-control" id="validationCustom02" required value={passwordNew} onChange={(e) => {setPasswordNew(e.target.value)}}/>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
@@ -183,8 +180,9 @@ function Settings() {
                 <div class="col-12">
                     <button class="btn btn-primary" type="button" onClick={modifyPassword}>Submit form</button>
                 </div>
-                <div id="error-name" className="errorMessage col-12 col-md-6 order-2 order-md-3">{errorOld}</div>
-                <div id="error-color" className="errorMessage col-12 col-md-6 order-4">{errorNew}</div>
+                <div id="error-name" className="errorMessagePassword col-12 col-md-6 order-2 order-md-3">{errorOld}</div>
+                <div id="error-color" className="errorMessagePassword col-12 col-md-6 order-4">{errorNew}</div>
+                <div id="validation" className="validationMessagePassword col-12 col-md-6 order-4">{validationModification}</div>
             </form>
         </>
     )
