@@ -10,6 +10,8 @@ import Login from './Login';
 import {isLoggedIn} from './components/auth.js';
 import {PrivateRoute} from "./components/PrivateRoute.js";
 import Navbar from './Navbar';
+//import Photos from './components/Photos';
+import Biblio from './Files.js'
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
         <div className="content">
           <Switch>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Grades}  path="/grades"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={Biblio}  path="/photos"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Camera} path="/camera"/> 
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Accueil} path="/home"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Members} path="/members"/>
