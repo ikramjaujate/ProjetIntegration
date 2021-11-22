@@ -14,9 +14,8 @@ import Navbar from './Navbar';
 import Settings from './Settings';
 
 
-import  {useDarkMode} from "./components/ChangeTheme/userDarkMode"
 import { GlobalStyles } from "./components/ChangeTheme/Globalstyle";
-import { lightTheme, darkTheme } from "./components/ChangeTheme/Themes"
+import { lightTheme, darkTheme, daltonismTheme } from "./components/ChangeTheme/Themes"
 import { setGlobal, useGlobal  } from 'reactn';
 // Set an initial global state directly:
 setGlobal({
@@ -26,7 +25,7 @@ setGlobal({
 function App() {
 
   const [theme, themeToggler] = useGlobal("color");
-  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  const themeMode = theme === 'light' ? lightTheme : theme ==="dark" ? darkTheme : daltonismTheme;
 
   if(isLoggedIn()){
     return(

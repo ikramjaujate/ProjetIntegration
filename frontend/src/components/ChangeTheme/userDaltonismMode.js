@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-export const useDarkMode = () => {
-    const [theme, setTheme] = useState('light');
+export const useDaltonismkMode = () => {
+    const [theme, setTheme] = useState('clair');
     const [mountedComponent, setMountedComponent] = useState(false)
     const setMode = mode => {
         window.localStorage.setItem('theme', mode)
@@ -8,15 +8,17 @@ export const useDarkMode = () => {
     };
 
     const themeToggler = () => {
-        console.log("theme dark : ", theme)
-        theme === 'light' ? setMode('dark') : setMode('light')
+        console.log("theme dalto : ", theme)
+        theme === 'clair' ? setMode('daltonism') : setMode('clair')
     };
 
     useEffect(() => {
         const localTheme = window.localStorage.getItem('theme');
-        localTheme ? setTheme(localTheme) : setMode('light')
+        console.log("local : ", localTheme);
+        localTheme === "light" || localTheme === "clair" ? setTheme(localTheme) : setMode('clair')
+        // localTheme==="daltonism" ? setMode(localTheme) : setMode('clair')
         setMountedComponent(true)
     }, []);
-
     return [theme, themeToggler, mountedComponent]
 };
+

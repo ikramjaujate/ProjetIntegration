@@ -11,3 +11,8 @@ export const darkTheme = {
     toggleBorder: '#6B8096',
     background: '#999',
 }
+
+export const daltonismTheme = {
+    body: 'red',
+    text: 'white'
+}

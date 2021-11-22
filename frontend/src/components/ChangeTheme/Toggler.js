@@ -3,41 +3,13 @@ import { func, string } from 'prop-types';
 import styled from "styled-components"
 
 import  {useDarkMode} from "./userDarkMode"
-import { GlobalStyles } from "./Globalstyle";
-import { lightTheme, darkTheme } from "./Themes"
 import { useGlobal  } from 'reactn';
 // import Switch from 'expo-dark-mode-switch';
 
 import '../../css/Toggler.css'
-const Button = styled.button`
-  
-  border: 2px solid ${({ theme }) => theme.toggleBorder};
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 0.5rem;
-  justify-content: space-between;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 0.5rem;
-  position: relative;
-  width: 8rem;
-  height: 4rem;
-  outline: none;
-  }
 
-`;
 
-const Sun = styled.svg`
- height: auto;
- width: 2.5rem;
- transition: all 0.7s linear;
-`;
 
-const Moon = styled.svg`
-  height: auto;
-  width: 2.5rem;
-  transition: all 0.7s linear;
-`
 
 const Toggle = () => {
 
@@ -73,10 +45,5 @@ const Toggle = () => {
         </ div>
     );
 };
-
-Toggle.propTypes = {
-    theme: string.isRequired,
-    toggleTheme: func.isRequired,
-}
 
 export default Toggle;

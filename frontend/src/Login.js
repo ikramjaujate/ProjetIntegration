@@ -23,10 +23,10 @@ function Login() {
             .then(response => {
 				return response.json()	
 			}).then(token => {
-                console.log(token.value)
+                //console.log(token)
                 if (token.value) {
                     localStorage.setItem('access_token', token.value);
-
+                    localStorage.setItem('id', token.id);
                     if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token") !== "undefined") {
                         window.location.replace("/home")
                     }
