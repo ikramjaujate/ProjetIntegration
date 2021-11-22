@@ -27,6 +27,16 @@ module.exports = function (app, client) {
       })
     })
 
+
+    /**
+     * Modifies the password of the user connecter, by crypting it
+     *
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @method POST
+     * @param {integer} user identifier of user that is trying to modify his password
+     * @param {string} oldPassword  old password of the user
+     * @param {string} newPassword new password choose by the user
+     */
     app.post('/api/:user/password', (request, response) => {
       const oldPassword = request.body.oldPassword;
       const newPassword = request.body.newPassword;

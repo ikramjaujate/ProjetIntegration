@@ -40,10 +40,21 @@ function Settings() {
     };
 
     
+    /**
+     * Clear all the error message when refreshing
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */    
     useEffect(()=> {
         deleteErrorMsgPassword(true, true);
 	}, []);
 
+
+    /**
+     * Switch the theme between normal and dark mode
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const changeDark = () => {
         //toggleThemeDark() ;
         //setColor(themeDark)
@@ -53,6 +64,12 @@ function Settings() {
         //console.log("depuis dark : dark : ", themeDark, " dalt : ", themeDaltonism, " color : ", color)
     }
 
+
+    /**
+     * Switch the theme between normal and daltonism mode
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const changeDaltonism = () => {
         //toggleThemeDaltonism() ;
         //setColor(themeDaltonism) ;
@@ -62,6 +79,12 @@ function Settings() {
         //console.log("depuis dalt : dark : ", themeDark, " dalt : ", themeDaltonism, " color : ", color)
     }
 
+
+    /**
+     * Function test
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const click = () => {
         console.log("color : ", color)
     }
@@ -79,6 +102,12 @@ function Settings() {
     //     }
     // }
 
+
+    /**
+     * Suppression of error messages at modification of the password
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const deleteErrorMsgPassword = (OldError, NewError) => {
         if (OldError) {
             setBorderOldPassword("1px solid #ced4da");
@@ -92,6 +121,13 @@ function Settings() {
         }
     }
 
+
+    /**
+     * Modify the password, checking beforehand that the information requested is complete
+     * and correct
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const modifyPassword = () => {
         let oldPassword = passwordOld ;
         let newPassword = passwordNew ;
