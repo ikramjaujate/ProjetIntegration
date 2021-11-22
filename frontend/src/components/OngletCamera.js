@@ -6,7 +6,7 @@
  import { useEffect, useState } from "react";
 
 function CadreCameras ({idCam,nomCam, statusCam, nomStatus}){
-    const [etat, setEtat] = useState("http://0.0.0.0:6060/video")
+    const [etat, setEtat] = useState("http://projetintegr.ddns.net:6060/video")
     return ( 
        <div>
             {statusCam ===1 ?
