@@ -1,11 +1,13 @@
 :root {
     --validation : #45c160 ;
+    --save-button : #cfc3b0 ;/*#f79436;*/
 }
 
 
-.errorMessagePassword {
+.errorMessageModify {
     color:var(--error) ;
     font-size: 0.6rem;
+    margin-left:2.8rem!important;
 }
 
 .validationMessagePassword {
@@ -68,4 +70,31 @@
 
 .settings {
     margin-top: 7rem!important;
+}
+
+.daltonismCard {
+    padding-right: 0rem!important;
+    margin-bottom:0.25rem!important; 
+    padding-left: 0.25rem!important;  
+}
+.underCardDal {
+    padding: 0.5rem!important;
+}
+.darkCard {
+    margin-bottom:0.25rem!important; 
+    padding-right: 0.3rem!important;  
+}
+.underCardDark {
+    padding: 0.5rem!important;
+}
+
+.save-button{
+    background-color: var(--save-button);
+    color:white;
+}
+.errorMessageNew{
+    margin-left: 0rem!important;
+}
+.errorMessagePassword{
+    margin-left: 0rem!important;
 }

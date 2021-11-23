@@ -50,6 +50,10 @@ function Settings() {
     useEffect(()=> {
         deleteErrorMsgPassword(true, true);
         deleteErrorMsgUsername(true, true);
+        setPasswordOld("") ;
+        setPasswordNew("") ;
+        setNewUsername("") ;
+        setActualPassword("") ;
 	}, []);
 
 
@@ -101,7 +105,7 @@ function Settings() {
 
         if (oldPassword === "") {
             setBorderOldPassword("1px solid var(--error)");
-            setErrorOld("Veuillez enter votre ancien mot de passe");
+            setErrorOld("Veuillez remplir ce champ");
         }
         else {
             deleteErrorMsgPassword(true, false) ;
@@ -109,12 +113,12 @@ function Settings() {
         }
         
         if (newPassword === "") {
-            setErrorNew("Veuillez entrer votre nouveau mot de passe");
+            setErrorNew("Veuillez remplir ce champ");
             setBorderNewPassword("1px solid var(--error)");
         }
         else {
             if(newPassword.length < limitCharacter) {
-                setErrorNew("Mot de passe trop court, au moins 12 caractère");
+                setErrorNew("Mot de passe trop court, au moins " + limitCharacter.toString() + " caractères");
                 setBorderNewPassword("1px solid var(--error)");
             }
             else if (newPassword.split('').filter(lettre => lettre === lettre.toUpperCase()).length === 0 || newPassword.split('').filter(lettre => !isNaN(lettre)).length === 0 || newPassword.split('').filter(lettre => lettre.match(format_mdp)).length === 0) {
@@ -129,7 +133,6 @@ function Settings() {
 
         if (newPasswordok && oldPasswordok) {
             deleteErrorMsgPassword(true, true) ;
-            console.log("bien true")
             fetch (`/api/${id}/password`,{
                 method: "POST",
                 headers:{
@@ -144,10 +147,10 @@ function Settings() {
                 if (data.count === 1) {
                     setPasswordOld("") ;
                     setPasswordNew("") ;
-                    toast.success("Mot de passe modifié avec succès !", optionsToast);
+                    toast.success("Votre mot de passe a été modifié avec succès !", optionsToast);
                 }
                 else if (data.count === "ancien mot de passe incorrect") {
-                    setErrorOld("Mot de passe incorect");
+                    setErrorOld("Mot de passe incorrect");
                     setBorderOldPassword("1px solid var(--error)");
                 }
                 else {
@@ -190,7 +193,7 @@ function Settings() {
 
         if (username === "") {
             setBorderNewUsername("1px solid var(--error)");
-            setErrorUsername("Veuillez entrer votre nom d'utilisateur");
+            setErrorUsername("Veuillez remplir ce champ");
         }
         else {
             if (username.length < limitCharacter) {
@@ -203,7 +206,7 @@ function Settings() {
             }
         }
         if (password === "") {
-            setErrorPassword("Veuillez entrer votre mot de passe");
+            setErrorPassword("Veuillez remplir ce champ");
             setBorderActualPassword("1px solid var(--error)");
         }
         else {
@@ -227,7 +230,7 @@ function Settings() {
                 if (data.count === 1) {
                     setNewUsername("") ;
                     setActualPassword("") ;
-                    toast.success("username modifié", optionsToast);
+                    toast.success("Votre nom d'utilisateur a été modifié avec succès !", optionsToast);
                 }
                 else if (data.count === "mot de passe incorrect") {
                     setErrorPassword("Mot de passe incorect");
@@ -245,7 +248,7 @@ function Settings() {
     }
     
     return (
-        <div className="container">
+        <div>
             {/* <Toggle /> */}
             {/* <div className="row settings justify-content-center mt-1 offset-1">
                 <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
@@ -294,8 +297,8 @@ function Settings() {
                                 <button className="btn btn-sm m-1" style={{backgroundColor:"#f79436", color:"white"}} type="button" onClick={modifyPassword}>Sauvegarder</button>
                             </div>
                         </div>
-                        <div className="errorMessagePassword col-12">{errorOld}</div>
-                        <div className="errorMessagePassword col-12">{errorNew}</div>
+                        <div className="errorMessageModify col-12">{errorOld}</div>
+                        <div className="errorMessageModify col-12">{errorNew}</div>
                     </div>
                 </div>
 
@@ -318,8 +321,8 @@ function Settings() {
                             </div>
                         </div>
 
-                        <div className="errorMessagePassword col-12">{errorUsername}</div>
-                        <div className="errorMessagePassword col-12">{errorPassword}</div>
+                        <div className="errorMessageModify col-12">{errorUsername}</div>
+                        <div className="errorMessageModify col-12">{errorPassword}</div>
                     </div>
                 </div>
             </div> */}
@@ -366,28 +369,36 @@ function Settings() {
                     </div>
                 </div> */}
 
-                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
-                    <div className="col-4 ">Mode sombre</div>
-                    <div className="col-2 row switch-dark-mode">
-                        <div className="col-12 form-check form-switch">
-                            {color === "dark" ?
-                            <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
-                            : color === "daltonism" ?
-                            <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" disabled />
-                            : <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" />
-                            }
+                <div className="row col-8 p-0 justify-content-evenly">
+                    <div className="row col-6 m-0 darkCard p-0">
+                        <div className="row col-12 rounded m-0 bg-light shadow-sm underCardDark">
+                            <div className="col-9 m-0">Mode sombre</div>
+                            <div className="col-3 row switch-dark-mode m-0">
+                                <div className="col-12 form-check form-switch">
+                                    {color === "dark" ?
+                                    <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
+                                    : color === "daltonism" ?
+                                    <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" disabled />
+                                    : <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" />
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 
-                    <div className="col-4">Mode daltonien</div>
-                    <div className="col-2 row switch-daltonism-mode">
-                        <div className="col-12 form-check form-switch">
-                            {color === "daltonism" ?
-                            <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
-                            : color === "dark" ? 
-                            <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" disabled/>
-                            : <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" />
-                            }
+                    <div className="row col-6 m-0 daltonismCard">
+                        <div className="row col-12 rounded bg-light shadow-sm m-0 underCardDal">
+                            <div className="col-9 m-0">Mode daltonien</div>
+                            <div className="col-3 row switch-daltonism-mode m-0">
+                                <div className="col-12 form-check form-switch">
+                                    {color === "daltonism" ?
+                                    <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
+                                    : color === "dark" ? 
+                                    <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" disabled/>
+                                    : <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" />
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -417,10 +428,10 @@ function Settings() {
                             <input type="password" maxLength='20' className="form-control m-1" id="newPassword" required value={passwordNew} onChange={(e) => {setPasswordNew(e.target.value)}} style={{border:borderNewPassword}}/>
                         </div>
                         <div className="col-3 mt-4">
-                            <button className="btn btn-sm m-1" style={{backgroundColor:"#f79436", color:"white"}} type="button" onClick={modifyPassword}>Sauvegarder</button>
+                            <button className="btn btn-sm m-1 save-button" type="button" onClick={modifyPassword}>Sauvegarder</button>
                         </div>
-                        <div className="errorMessagePassword col-12">{errorOld}</div>
-                        <div className="errorMessagePassword col-12">{errorNew}</div>
+                        <div className="errorMessageModify errorMessageOld col-4 offset-1">{errorOld}</div>
+                        <div className="errorMessageModify errorMessageNew col-4">{errorNew}</div>
                     </div>
                 </div>
 
@@ -436,10 +447,10 @@ function Settings() {
                             <input type="password" className="form-control m-1" id="actualPassword" required value={actualPassword} onChange={(e) => {setActualPassword(e.target.value)}} style={{border:borderActualPassword}}/>
                         </div>
                         <div className="col-3 mt-4">
-                            <button className="btn btn-sm m-1" style={{backgroundColor:"#f79436", color:"white"}} type="button" onClick={modifyUsername}>Sauvegarder</button>
+                            <button className="btn btn-sm m-1 save-button" type="button" onClick={modifyUsername}>Sauvegarder</button>
                         </div>
-                        <div className="errorMessagePassword col-12">{errorUsername}</div>
-                        <div className="errorMessagePassword col-12">{errorPassword}</div>
+                        <div className="errorMessageModify errorMessageUsername col-4 offset-1">{errorUsername}</div>
+                        <div className="errorMessageModify errorMessagePassword col-4">{errorPassword}</div>
                     </div>
                 </div>
             </div>

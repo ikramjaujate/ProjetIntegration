@@ -13,13 +13,23 @@ export const darkTheme = {
 	carteGrade : '#363636',
 	bodyColor : '#e1e1e1',
 	bgNavbar : '#383838',
-	textColorTile : '#ffffff',
+	textColorTitle : '#ffffff',
 	addGrade : '#7aff9d',
-	cameraAllower : '#7aff9d',
+	cameraAllowed : '#7aff9d',
 	cameraRefused : '#fb6060',
-	bg_modalGrade : '#282828',
+	bgModalGrade : '#282828',
 	fermerModalBtn : '#626262',
-	bgColorNotifDetailgrade : 'rgb(88 88 88)'
+	bgColorNotifDetailgrade : 'rgb(88 88 88)',
+    borderModal : "1px solid #000000",
+    newBgLight : "#363636",
+    bodyModal : "#201f1f",
+    slashBellColor :"#bbbbbb",
+    lineCamera : "#3d3d3d",
+    addMember : "rgb(173, 249, 166)",
+    borderCardMember : "0.001rem solid #727272",
+    shadowMember : "0 .5rem 1rem rgba(0,0,0,.15)",
+    bgInput : "#dfdfde",
+    saveInformations : "#cbacbf", //#df5531
 }
 
 export const daltonismTheme = {

@@ -79,7 +79,7 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
                         <button type="button" id="open-desc-grade-1" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir sur desc grade</button>
                         <button type="button" id="close-modify" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
                         <button type="button" id="open-confirmation" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-toggle="modal" data-bs-target="#confirmationCancelModal">Cancel</button>
-                        <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" onClick={() => {saveAction();}}>Enregistrer</button>
+                        <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" style={{backgroundColor:currentColor}} onClick={() => {saveAction();}}>Enregistrer</button>
                     </div>
                 </div>
             </div>
