@@ -59,3 +59,13 @@
     /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='black'/%3e%3c/svg%3e"); */
     background-color : #20b1ff ;
 }
+
+.settings .form-label {
+    font-size:0.65rem!important;
+    margin-bottom: 0rem;
+    margin-left: 0.5rem;
+}
+
+.settings {
+    margin-top: 7rem!important;
+}
