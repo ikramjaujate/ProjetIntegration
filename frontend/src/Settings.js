@@ -245,57 +245,91 @@ function Settings() {
     }
     
     return (
-        <>
+        <div>
             {/* <Toggle /> */}
-
-            {color === "dark" ?
-            <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode sombre<input id="dark-switch" onChange={() => {changeTheme("dark")}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div>
-            : color === "daltonism" ?
-            <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode sombre<input id="dark-switch" onChange={() => {changeTheme("dark")}} class="form-check-input" type="checkbox" role="switch" disabled /></div>
-            : <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode sombre<input id="dark-switch" onChange={() => {changeTheme("dark")}} class="form-check-input" type="checkbox" role="switch" /></div>
-            }
-
-            {color === "daltonism" ?
-            <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode daltonien<input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div>
-            : color === "dark" ? 
-            <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode daltonien<input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} class="form-check-input" type="checkbox" role="switch" disabled/></div>
-            : <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode daltonien<input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} class="form-check-input" type="checkbox" role="switch" /></div>
-            }
-
-            <form style={{marginLeft:'200px'}} class="row g-3 needs-validation" novalidate>
-                <div class="col-md-4">
-                    <label for="oldPassword" class="form-label">Ancien mot de passe</label>
-                    <input type="password" class="form-control" id="oldPassword" required value={passwordOld} onChange={(e) => {setPasswordOld(e.target.value)}} style={{border:borderOldPassword}}/>
+            <div className="row justify-content-center mt-1">
+                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
+                    <div className="col-12 mb-1">Mode sombre</div>
+                    <div className="col-12 row switch-dark-mode">
+                        <div className="col-2 offset-2 form-check form-switch">
+                            {color === "dark" ?
+                            <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
+                            : color === "daltonism" ?
+                            <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" disabled />
+                            : <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" />
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="newPassword" class="form-label">Nouveau mot de passe</label>
-                    <input type="password" maxLength='20' class="form-control" id="newPassword" required value={passwordNew} onChange={(e) => {setPasswordNew(e.target.value)}} style={{border:borderNewPassword}}/>
-                </div>
-                <div class="col-12">
-                    <button class="btn btn-primary" type="button" onClick={modifyPassword}>Sauvegarder mot de passe</button>
-                </div>
-                <div className="errorMessagePassword col-12 col-md-6 order-2 order-md-3">{errorOld}</div>
-                <div className="errorMessagePassword col-12 col-md-6 order-4">{errorNew}</div>
 
+                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
+                    <div className="col-12 mb-1">Mode daltonien</div>
+                    <div className="col-12 row">
+                        <div className="col-2 offset-2 form-check form-switch">
+                            {color === "daltonism" ?
+                            <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
+                            : color === "dark" ? 
+                            <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" disabled/>
+                            : <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" />
+                            }
+                        </div>
+                    </div>
+                </div>
 
-                <div class="col-md-4">
-                    <label for="newUsername" class="form-label">Nouveau username</label>
-                    <input type="text" maxLength="15" class="form-control" id="newUsername" required value={newUsername} onChange={(e) => {setNewUsername(e.target.value)}} style={{border:borderNewUsername}}/>
+                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
+                    <div className="col-12 mb-1">Modification du mot de passe</div>
+                    <div className="row col-12">
+                        <div className="row col-12">
+                            <div className="col-5 offset-1">
+                                {/* <label for="oldPassword" className="form-label">Ancien mot de passe</label> */}
+                                <input type="password" placeholder="ancien mdp" className="form-control m-1" id="oldPassword" required value={passwordOld} onChange={(e) => {setPasswordOld(e.target.value)}} style={{border:borderOldPassword}}/>
+                            </div>
+                        </div>
+                        <div className="row col-12">
+                            <div className="col-5 offset-1">
+                                {/* <label for="newPassword" className="form-label">Nouveau mot de passe</label> */}
+                                <input type="password" placeholder="nouveau mdp" maxLength='20' className="form-control m-1" id="newPassword" required value={passwordNew} onChange={(e) => {setPasswordNew(e.target.value)}} style={{border:borderNewPassword}}/>
+                            </div>
+                        </div>
+                        <div className="row col-12">
+                            <div className="col-10 offset-1">
+                                <button className="btn btn-primary m-1" type="button" onClick={modifyPassword}>Sauvegarder</button>
+                            </div>
+                        </div>
+                        <div className="errorMessagePassword col-12">{errorOld}</div>
+                        <div className="errorMessagePassword col-12">{errorNew}</div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="actualPassword" class="form-label">Mot de passe</label>
-                    <input type="password" class="form-control" id="actualPassword" required value={actualPassword} onChange={(e) => {setActualPassword(e.target.value)}} style={{border:borderActualPassword}}/>
-                </div>
-                <div class="col-12">
-                    <button class="btn btn-primary" type="button" onClick={modifyUsername}>Sauvegarder username</button>
-                </div>
-                <div className="errorMessagePassword col-12 col-md-6 order-2 order-md-3">{errorUsername}</div>
-                <div className="errorMessagePassword col-12 col-md-6 order-4">{errorPassword}</div>
-            </form>
 
+                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
+                    <div className="col-12 mb-1">Modification du nom d'utilisateur</div>
+                    <div className="row col-12">
+                        <div className="row col-12">
+                            <div className="col-5 offset-1">
+                                {/* <label for="newUsername" className="form-label">Nouveau username</label> */}
+                                <input type="text" placeholder="nouveau username" maxLength="15" className="form-control m-1" id="newUsername" required value={newUsername} onChange={(e) => {setNewUsername(e.target.value)}} style={{border:borderNewUsername}}/>
+                            </div>
+                        </div>
+                        <div className="row col-12">
+                            <div className="col-5 offset-1">
+                                {/* <label for="actualPassword" className="form-label">Mot de passe</label> */}
+                                <input type="password" placeholder="mot de passe de verif" className="form-control m-1" id="actualPassword" required value={actualPassword} onChange={(e) => {setActualPassword(e.target.value)}} style={{border:borderActualPassword}}/>
+                            </div>
+                        </div>
+                        <div className="row col-12">
+                            <div className="col-10 offset-1">
+                                <button className="btn btn-primary m-1" type="button" onClick={modifyUsername}>Sauvegarder</button>
+                            </div>
+                        </div>
+
+                        <div className="errorMessagePassword col-12">{errorUsername}</div>
+                        <div className="errorMessagePassword col-12">{errorPassword}</div>
+                    </div>
+                </div>
+            </div>
             <ToastContainer style={{fontSize:"0.6rem"}}/>      
 
-        </>
+        </ div>
     )
 
 } export default Settings;
