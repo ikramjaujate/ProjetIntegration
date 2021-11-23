@@ -247,7 +247,7 @@ function Settings() {
     return (
         <div>
             {/* <Toggle /> */}
-            <div className="row justify-content-center mt-1">
+            <div className="row settings justify-content-center mt-1 offset-1">
                 <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
                     <div className="col-12 mb-1">Mode sombre</div>
                     <div className="col-12 row switch-dark-mode">
