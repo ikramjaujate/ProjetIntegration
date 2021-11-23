@@ -280,7 +280,7 @@ function Settings() {
 
                 <div class="col-md-4">
                     <label for="newUsername" class="form-label">Nouveau username</label>
-                    <input type="text" class="form-control" id="newUsername" required value={newUsername} onChange={(e) => {setNewUsername(e.target.value)}} style={{border:borderNewUsername}}/>
+                    <input type="text" maxLength="15" class="form-control" id="newUsername" required value={newUsername} onChange={(e) => {setNewUsername(e.target.value)}} style={{border:borderNewUsername}}/>
                 </div>
                 <div class="col-md-4">
                     <label for="actualPassword" class="form-label">Mot de passe</label>
