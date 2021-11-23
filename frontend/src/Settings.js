@@ -53,6 +53,7 @@ function Settings() {
      */    
     useEffect(()=> {
         deleteErrorMsgPassword(true, true);
+        deleteErrorMsgUsername(true, true);
 	}, []);
 
 
@@ -62,12 +63,11 @@ function Settings() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const changeDark = () => {
-        //toggleThemeDark() ;
-        //setColor(themeDark)
+        let cc ;
         document.getElementById("dark-switch").checked ? setColor("dark") : setColor("light") ;
-        console.log("checked : ", document.getElementById("dark-switch").checked, "color : ", color)
-        setTest(color) ;
-        //console.log("depuis dark : dark : ", themeDark, " dalt : ", themeDaltonism, " color : ", color)
+        document.getElementById("dark-switch").checked ? cc = "dark" : cc = "light" ;
+        console.log("checked : ", document.getElementById("dark-switch").checked, "color : ", color, " couleur : ", cc)
+        setTest(cc) ;
     }
 
 
@@ -77,36 +77,12 @@ function Settings() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const changeDaltonism = () => {
-        //toggleThemeDaltonism() ;
-        //setColor(themeDaltonism) ;
+        let cc ;
         document.getElementById("daltonism-switch").checked ? setColor("daltonism") : setColor("light") ;
-        console.log("checked : ", document.getElementById("daltonism-switch").checked, "color : ", color)
-        setTest(color) ;
-        //console.log("depuis dalt : dark : ", themeDark, " dalt : ", themeDaltonism, " color : ", color)
+        document.getElementById("daltonism-switch").checked ? cc = "daltonism" : cc = "light" ;
+        console.log("checked : ", document.getElementById("daltonism-switch").checked, "color : ", color, " couleur : ", cc)
+        setTest(cc) ;
     }
-
-
-    /**
-     * Function test
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    const click = () => {
-        console.log("color : ", color)
-    }
-	
-    // const disableOther = (idDisabling) => {
-    //     let idToDisable = idDisabling === "dark-switch" ? "daltonism-switch" : "dark-switch" ;
-    //     console.log(idDisabling, " desactive ", idToDisable);
-    //     if (document.getElementById(idDisabling).checked === true) {
-    //         console.log("en true");
-    //         document.getElementById(idToDisable).disabled = true ;
-    //     }
-    //     else {
-    //         document.getElementById(idToDisable).disabled = false ;
-    //         console.log("en false");
-    //     }
-    // }
 
 
     /**
@@ -284,7 +260,7 @@ function Settings() {
     
     return (
         <>
-            <Toggle />
+            {/* <Toggle /> */}
 
             {color === "dark" ?
             <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="dark-switch" onChange={() => {changeDark()}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div>
@@ -302,7 +278,6 @@ function Settings() {
             {/* <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="dark-switch" onChange={() => {test("dark-switch")}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div> */}
             {/* <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="daltonism-switch" onChange={() => {test("daltonism-switch")}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div> */}
 
-            <button onClick={click}>iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii</button>
 
             <form style={{marginLeft:'200px'}} class="row g-3 needs-validation" novalidate>
                 <div class="col-md-4">

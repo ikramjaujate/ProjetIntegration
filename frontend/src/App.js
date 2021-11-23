@@ -19,13 +19,13 @@ import { lightTheme, darkTheme, daltonismTheme } from "./components/ChangeTheme/
 import { setGlobal, useGlobal  } from 'reactn';
 // Set an initial global state directly:
 setGlobal({
-  color:  window.localStorage.getItem('theme') === 'dark' ? 'light' : 'dark'
+  color:  window.localStorage.getItem('theme') === 'light' ? 'light' : window.localStorage.getItem('theme') === 'dark' ? "dark" : "daltonism"
 });
 
 function App() {
 
   const [theme, themeToggler] = useGlobal("color");
-  const themeMode = theme === 'light' ? lightTheme : theme ==="dark" ? darkTheme : daltonismTheme;
+  const themeMode = theme === 'light' ? lightTheme : theme === "dark" ? darkTheme : daltonismTheme;
 
   if(isLoggedIn()){
     return(

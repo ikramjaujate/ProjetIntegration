@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 export const useDaltonismkMode = () => {
+    console.log("useDaltonsim");
     const [theme, setTheme] = useState('clair');
     const [mountedComponent, setMountedComponent] = useState(false)
     const setMode = mode => {

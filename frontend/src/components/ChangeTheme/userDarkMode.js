@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 export const useDarkMode = () => {
+    console.log("useDark");
     const [theme, setTheme] = useState('light');
     const [mountedComponent, setMountedComponent] = useState(false)
     const setMode = mode => {
