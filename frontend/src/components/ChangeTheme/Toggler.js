@@ -1,19 +1,13 @@
 import React from 'react'
-import { func, string } from 'prop-types';
-import styled from "styled-components"
-
-import  {useDarkMode} from "./userDarkMode"
+import  {useThemeMode} from "./userThemeMode"
 import { useGlobal  } from 'reactn';
-// import Switch from 'expo-dark-mode-switch';
 
 import '../../css/Toggler.css'
 
 
-
-
 const Toggle = () => {
 
-    const [theme, toggleTheme] = useDarkMode();
+    const [theme, toggleTheme] = useThemeMode();
     const [color, setColor] = useGlobal("color");
 
     const change = () => {

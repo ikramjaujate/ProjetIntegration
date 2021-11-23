@@ -9,18 +9,14 @@ import Toggle from "./components/ChangeTheme/Toggler";
 import { ToastContainer, toast } from 'react-toastify';
 
 
-// import  {useDarkMode} from "./components/ChangeTheme/userDarkMode"
-// import  {useDaltonismkMode} from "./components/ChangeTheme/userDaltonismMode"
-import  {useTh} from "./components/ChangeTheme/userTh"
+import  {useThemeMode} from "./components/ChangeTheme/userThemeMode"
 import { useGlobal  } from 'reactn';
 import './css/Settings.css';
 
 
 function Settings() {
 
-    // const [themeDark, toggleThemeDark] = useDarkMode();
-    // const [themeDaltonism, toggleThemeDaltonism] = useDaltonismkMode();
-    const [test, setTest] = useTh();
+    const [theme, setTheme] = useThemeMode();
     const [color, setColor] = useGlobal("color");
 
     const [errorOld, setErrorOld] = useState("");
@@ -58,30 +54,17 @@ function Settings() {
 
 
     /**
-     * Switch the theme between normal and dark mode
+     * Switch the theme of the site according to the param given
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {string} theme name of the theme that is switch
      */
-    const changeDark = () => {
-        let cc ;
-        document.getElementById("dark-switch").checked ? setColor("dark") : setColor("light") ;
-        document.getElementById("dark-switch").checked ? cc = "dark" : cc = "light" ;
-        console.log("checked : ", document.getElementById("dark-switch").checked, "color : ", color, " couleur : ", cc)
-        setTest(cc) ;
-    }
-
-
-    /**
-     * Switch the theme between normal and daltonism mode
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    const changeDaltonism = () => {
-        let cc ;
-        document.getElementById("daltonism-switch").checked ? setColor("daltonism") : setColor("light") ;
-        document.getElementById("daltonism-switch").checked ? cc = "daltonism" : cc = "light" ;
-        console.log("checked : ", document.getElementById("daltonism-switch").checked, "color : ", color, " couleur : ", cc)
-        setTest(cc) ;
+     const changeTheme = (theme) => {
+        let newColor ;
+        //document.getElementById(theme + "-switch").checked ? setColor(theme) : setColor("light") ;
+        document.getElementById(theme + "-switch").checked ? newColor = theme : newColor = "light" ;
+        setColor(newColor)
+        setTheme(newColor) ;
     }
 
 
@@ -263,17 +246,17 @@ function Settings() {
             {/* <Toggle /> */}
 
             {color === "dark" ?
-            <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="dark-switch" onChange={() => {changeDark()}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div>
+            <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode sombre<input id="dark-switch" onChange={() => {changeTheme("dark")}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div>
             : color === "daltonism" ?
-            <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="dark-switch" onChange={() => {changeDark()}} class="form-check-input" type="checkbox" role="switch" disabled /></div>
-            : <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="dark-switch" onChange={() => {changeDark()}} class="form-check-input" type="checkbox" role="switch" /></div>
+            <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode sombre<input id="dark-switch" onChange={() => {changeTheme("dark")}} class="form-check-input" type="checkbox" role="switch" disabled /></div>
+            : <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode sombre<input id="dark-switch" onChange={() => {changeTheme("dark")}} class="form-check-input" type="checkbox" role="switch" /></div>
             }
 
             {color === "daltonism" ?
-            <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="daltonism-switch" onChange={() => {changeDaltonism()}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div>
+            <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode daltonien<input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div>
             : color === "dark" ? 
-            <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="daltonism-switch" onChange={() => {changeDaltonism()}} class="form-check-input" type="checkbox" role="switch" disabled/></div>
-            : <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="daltonism-switch" onChange={() => {changeDaltonism()}} class="form-check-input" type="checkbox" role="switch" /></div>
+            <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode daltonien<input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} class="form-check-input" type="checkbox" role="switch" disabled/></div>
+            : <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode daltonien<input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} class="form-check-input" type="checkbox" role="switch" /></div>
             }
             {/* <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="dark-switch" onChange={() => {test("dark-switch")}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div> */}
             {/* <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="daltonism-switch" onChange={() => {test("daltonism-switch")}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div> */}
