@@ -13,7 +13,7 @@
     font-size: 0.6rem;
 }
 
-.switch-dark-mode.form-switch .form-check-input:checked {
+.switch-dark-mode .form-switch .form-check-input:checked {
     background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='yellow'/%3e%3c/svg%3e");
     background-color : black ;
 }
@@ -34,4 +34,28 @@
 
 .settings .form-control {
     font-size: 0.8rem !important;
+}
+
+/* #20b1ff - #2fe786 */
+.switch-daltonism-mode .form-switch .form-check-input:checked {
+    /* background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle id='cc'  r='3' fill='black'/></svg>"); */
+    background-color : #2fe786 ;
+}
+#cc {
+    background-color: purple!important;
+    fill : red!important;
+}
+
+.switch-daltonism-mode .form-switch .form-check-input {
+    /* background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='black'/%3e%3c/svg%3e"); */
+    background-color : #20b1ff ;
+}
+
+.switch-daltonism-mode .form-switch .form-check-input:checked:focus {
+    /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='yellow'/%3e%3c/svg%3e"); */
+    background-color : #2fe786 ;
+}
+.switch-daltonism-mode .form-switch .form-check-input:focus {
+    /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='black'/%3e%3c/svg%3e"); */
+    background-color : #20b1ff ;
 }

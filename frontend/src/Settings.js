@@ -264,7 +264,7 @@ function Settings() {
 
                 <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
                     <div className="col-12 mb-1">Mode daltonien</div>
-                    <div className="col-12 row">
+                    <div className="col-12 row switch-daltonism-mode">
                         <div className="col-2 offset-2 form-check form-switch">
                             {color === "daltonism" ?
                             <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
@@ -293,7 +293,7 @@ function Settings() {
                         </div>
                         <div className="row col-12">
                             <div className="col-10 offset-1">
-                                <button className="btn btn-primary m-1" type="button" onClick={modifyPassword}>Sauvegarder</button>
+                                <button className="btn btn-sm m-1" style={{backgroundColor:"#f79436", color:"white"}} type="button" onClick={modifyPassword}>Sauvegarder</button>
                             </div>
                         </div>
                         <div className="errorMessagePassword col-12">{errorOld}</div>
@@ -318,7 +318,7 @@ function Settings() {
                         </div>
                         <div className="row col-12">
                             <div className="col-10 offset-1">
-                                <button className="btn btn-primary m-1" type="button" onClick={modifyUsername}>Sauvegarder</button>
+                                <button className="btn btn-sm m-1" style={{backgroundColor:"#f79436", color:"white"}} type="button" onClick={modifyUsername}>Sauvegarder</button>
                             </div>
                         </div>
 
