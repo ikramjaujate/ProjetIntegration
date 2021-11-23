@@ -186,7 +186,7 @@ function Settings() {
         let password = actualPassword ;
         let id = localStorage.getItem("id") ;
         let passwordok = false, usernameok = false ;
-        let limitCharacter = 6;
+        let limitCharacter = 5;
 
         if (username === "") {
             setBorderNewUsername("1px solid var(--error)");
@@ -233,10 +233,13 @@ function Settings() {
                     setErrorPassword("Mot de passe incorect");
                     setBorderActualPassword("1px solid var(--error)");
                 }
+                else if (data.count === "nom d'utilisateur déjà utilisé") {
+                    setErrorUsername("Nom utilisateur déjà utilisé");
+                    setBorderNewUsername("1px solid var(--error)");
+                }
                 else {
                     console.log('erreur modification username')
                 }
-                console.log("data : ", data);
             })
         }
     }
@@ -258,9 +261,6 @@ function Settings() {
             <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode daltonien<input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} class="form-check-input" type="checkbox" role="switch" disabled/></div>
             : <div style={{marginLeft: "281px"}} class="form-check form-switch">Mode daltonien<input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} class="form-check-input" type="checkbox" role="switch" /></div>
             }
-            {/* <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="dark-switch" onChange={() => {test("dark-switch")}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div> */}
-            {/* <div style={{marginLeft: "281px"}} class="form-check form-switch"><input id="daltonism-switch" onChange={() => {test("daltonism-switch")}} class="form-check-input" type="checkbox" role="switch" defaultChecked /></div> */}
-
 
             <form style={{marginLeft:'200px'}} class="row g-3 needs-validation" novalidate>
                 <div class="col-md-4">
@@ -292,6 +292,7 @@ function Settings() {
                 <div className="errorMessagePassword col-12 col-md-6 order-2 order-md-3">{errorUsername}</div>
                 <div className="errorMessagePassword col-12 col-md-6 order-4">{errorPassword}</div>
             </form>
+
             <ToastContainer style={{fontSize:"0.6rem"}}/>      
 
         </>

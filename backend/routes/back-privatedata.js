@@ -82,29 +82,44 @@ module.exports = function (app, client) {
       const password = request.body.password;
       const user = request.params.user;
 
-      let query = "select password  \
+      //Verify if the username already exists
+      let queryVerifyUsername = "select username  \
       from personal \
-      where id_personal = ($1)" ;
-      client.query(query, [user], (error, results) => {
-        bcrypt.compare(password, results.rows[0].password)
-        .then(valid => {
-          if (!valid) {
-            response.status(200).json({ "count": 'mot de passe incorrect' });
-          }
-          else {
-            let query1 = "update personal \
-            set username=($1) \
-            where id_personal=($2)"
-            client.query(query1, [username, user], (error, results1) => {
-              if (error) {
-                throw error
+      where username = ($1)" ;
+      client.query(queryVerifyUsername, [username], (error, resultsVerifyUsername) => {
+        if (error) {
+          throw error
+        }
+        if (resultsVerifyUsername.rows.length > 0) {
+          response.status(200).json({"count" : "nom d'utilisateur déjà utilisé"});
+        }
+        else {
+          //Verify if the password is correct
+          let queryVerifyPassword = "select password  \
+          from personal \
+          where id_personal = ($1)" ;
+          client.query(queryVerifyPassword, [user], (error, resultsVerifyPassword) => {
+            bcrypt.compare(password, resultsVerifyPassword.rows[0].password)
+            .then(valid => {
+              if (!valid) {
+                response.status(200).json({ "count": 'mot de passe incorrect' });
               }
-              response.status(200).json({"count" : results1.rowCount});
+              else {
+                //Update the username
+                let queryUpdateUsername = "update personal \
+                set username=($1) \
+                where id_personal=($2)"
+                client.query(queryUpdateUsername, [username, user], (error, resultsUpdateUsername) => {
+                  if (error) {
+                    throw error
+                  }
+                  response.status(200).json({"count" : resultsUpdateUsername.rowCount});
+                })
+              }
             })
-          }
-        })
-      })
+          })
+        }
+      })      
     })
-
 
 };
