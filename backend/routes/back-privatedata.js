@@ -68,5 +68,43 @@ module.exports = function (app, client) {
       })
     })
 
+    /**
+     * Modifies the username of the user connecter, by verify the password first
+     *
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @method POST
+     * @param {integer} user identifier of user that is trying to modify his username
+     * @param {string} username  old password of the user
+     * @param {string} password new password choose by the user
+     */
+     app.post('/api/:user/username', (request, response) => {
+      const username = request.body.username;
+      const password = request.body.password;
+      const user = request.params.user;
+
+      let query = "select password  \
+      from personal \
+      where id_personal = ($1)" ;
+      client.query(query, [user], (error, results) => {
+        bcrypt.compare(password, results.rows[0].password)
+        .then(valid => {
+          if (!valid) {
+            response.status(200).json({ "count": 'mot de passe incorrect' });
+          }
+          else {
+            let query1 = "update personal \
+            set username=($1) \
+            where id_personal=($2)"
+            client.query(query1, [username, user], (error, results1) => {
+              if (error) {
+                throw error
+              }
+              response.status(200).json({"count" : results1.rowCount});
+            })
+          }
+        })
+      })
+    })
+
 
 };
