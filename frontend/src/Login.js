@@ -4,60 +4,63 @@ import'bootstrap/dist/css/bootstrap.min.css';
 import'bootstrap/dist/js/bootstrap.min.js';
 import'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import {useEffect, useState} from "react" ;
+import {useState} from "react" ;
 
 
 
 function Login() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const [state, setState] = useState(0);
+    const [blankPassword, setBlankPassword] = useState('')
+    const [blankUsername, setBlankUsername] = useState('')
+    const [errorMsg, setErrorMsg] = useState('')
 
-	const loginUser = () => {
-		let informations = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }, 
-			body: JSON.stringify({ username, password })
-        };
-        fetch(`/api/login`, informations)
-            .then(response => {
-				return response.json()	
-			}).then(token => {
-                console.log(token.value)
-                if (token.value) {
-                    localStorage.setItem('access_token', token.value);
+	const loginUser = (event) => {
+        event.preventDefault()
+        usernameVerif()
+        passwordVerif()        
+        if(username !== '' && password !== ''){
+            let informations = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }, 
+                body: JSON.stringify({ username, password })
+            };
+            fetch(`/api/login`, informations)
+                .then(response => {
+                    return (response.json())             
+                }).then(token => {
+                    setErrorMsg(<p style={{color:'red'}}>{token.message}</p>)
+                    if (token.value) {
+                        localStorage.setItem('access_token', token.value);
 
-                    if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token") !== "undefined") {
-                        window.location.replace("/home")
-                    }
-                }
-
-                
-			})
+                        if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token") !== "undefined") {
+                            window.location.replace("/home")
+                        }
+                    }                
+                })
+        }    
 	}
-	const handleSubmit = (e) => {
-		e.preventDefault()
-	}
+    
+    const usernameVerif = () => {
+        if(username === ''){
+            setBlankUsername(<p style={{color : "red", fontSize : "calc(0.3rem + 0.4vw)", fontStyle:"italic"}}>Champ requis</p>)
+        }
+        else setBlankUsername('')
+        
+    }
+
+    const passwordVerif = () => {
+        if(password === ''){
+            setBlankPassword(<p style={{color : "red", fontSize : "calc(0.3rem + 0.4vw)", fontStyle:"italic"}}>Champ requis</p>)
+        }
+        else setBlankPassword('')
+
+    }
+
 
 
     return (
         <>
-        {/* <div className="container">
-            <form onSubmit={handleSubmit}>
-                
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nom d'utilisateuuuuuuuur</label>
-                    <input type="text" placeholder='toto' value={username} onChange={(e) => setUsername(e.target.value)} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" placeholder='' value={password} onChange={(e) => setPassword(e.target.value)} class="form-control" id="exampleInputPassword1"/>
-                </div>
-                
-                <button onClick={loginUser} class="btn btn-primary">Connecter</button><br/>
-
-            </form>
-    	</div> */}
         <section class="vh-100 gradient-custom mx-md-0" style={{fontSize: "calc(0.5rem + 0.5vw", minWidth:"300px"}}>
             <div class="container  py-md-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -67,22 +70,27 @@ function Login() {
 
                         <div class="pb-2">
 
-                        <h2 style={{fontSize: "calc(1rem + 0.5vw"}} class="fw-bold mb-2 text-uppercase">Connexion</h2>
-                        <p class="text-white-50 mb-2">Entrez vos identifiants</p>
+                            <h2 style={{fontSize: "calc(1rem + 0.5vw"}} class="fw-bold mb-2 text-uppercase">Connexion</h2>
+                            <p class="text-white-50 mb-2">Entrez vos identifiants</p>
+                            <form>
+                                <div class="form-outline form-white mb-4">
+                                
+                                    <label class="form-label">Identifiant</label>
+                                    <input required type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="exemple" style={{fontSize: "calc(0.5rem + 0.5vw"}} class="form-control form-control-lg" />
+                                    {blankUsername}
+                                    
+                                </div>
 
-                        <div class="form-outline form-white mb-4">
-                            <label class="form-label" for="typeEmailX">Identifiant</label>
-                            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="identifiant" id="typeEmailX" style={{fontSize: "calc(0.5rem + 0.5vw"}} class="form-control form-control-lg" />
+                                <div class="form-outline form-white mb-4">
+                                    <label class="form-label">Mot de passe</label>
+                                    <input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="*******"  style={{fontSize: "calc(0.5rem + 0.5vw"}} class="form-control form-control-lg" />
+                                    {blankPassword}
+                                </div>                        
+
+                                <button class="btn btn-outline-dark btn-lg px-4 px-md-5 px-lg-5" onClick={loginUser} style={{fontSize: "calc(0.7rem + 0.7vw", backgroundColor : "#457eaf"}}>Connexion</button>                        
                             
-                        </div>
-
-                        <div class="form-outline form-white mb-4">
-                            <label class="form-label" for="typePasswordX">Mot de passe</label>
-                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="*******" id="typePasswordX" style={{fontSize: "calc(0.5rem + 0.5vw"}} class="form-control form-control-lg" />
-                            
-                        </div>
-
-                        <button class="btn bg-success btn-outline-dark btn-lg px-4 px-md-5 px-lg-5" onClick={loginUser} style={{fontSize: "calc(0.7rem + 0.7vw"}}>Connexion</button>
+                            </form>
+                            {errorMsg}
 
                         </div>
 

@@ -13,17 +13,22 @@ module.exports = function (app, client) {
                     where username = ($1)" ;
         client.query(query, [username], (error, results) => {
           //console.log(results.rows[0].password)
-          bcrypt.compare(password, results.rows[0].password)
-          .then(valid => {
-            if (!valid) {
-              response.status(401).json({ error: 'Mot de passe incorrect !' });
-            }
-            const token = jwt.sign({
-              data: username
-            }, 'secret', { expiresIn: '100000h' });
-            
-            response.send({value: token})
-          })
+          if(results.rowCount == 1)  
+            bcrypt.compare(password, results.rows[0].password)
+            .then(valid => {
+              if (!valid) {
+                response.status(201).json({ message: 'Mot de passe incorrect !' });
+              }
+              else {
+                const token = jwt.sign({
+                data: username
+              }, 'secret', { expiresIn: '100000h' });
+              response.send({value: token})
+              }                          
+            })
+          else{          
+            (response.send({message : "Cet utilisateur n'existe pas"}))
+          }
       })
     })
 
