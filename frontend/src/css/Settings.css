@@ -120,3 +120,28 @@
     background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
     background-color : #df5531 ;
 } */
+
+.settings .bi-brightness-high-fill {
+    font-size:0.8rem;
+    top:-0.05rem;
+    position:relative; 
+    left:0.5rem;
+}
+.settings .bi-moon-stars-fill {
+    font-size:0.6rem;
+    top:-0.2rem;
+    position:relative; 
+    left:-0.1rem;
+}
+.settings .bi-eye-slash {
+    font-size:0.7rem;
+    top:-0.1rem;
+    position:relative; 
+    left:0.5rem;
+}
+.settings .bi-eye-fill {
+    font-size:0.7rem;
+    top:-0.1rem;
+    position:relative; 
+    left:-0.1rem;
+}

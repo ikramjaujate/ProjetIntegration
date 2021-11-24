@@ -257,7 +257,7 @@ function Settings() {
                         <div className="row col-12 rounded m-0 bg-light shadow-sm underCardDark">
                             <div className="col-7 m-0">Mode sombre</div>
                             <div className="row col-5 switch-dark-mode p-0 m-0">
-                                <div className="col-3 p-0"><i className="bi bi-brightness-high-fill" style={{fontSize:"0.8rem", top:"-0.2rem", position:"relative"}}></i></div>
+                                <div className="col-3 p-0"><i className="bi bi-brightness-high-fill"></i></div>
                                 <div className="col-4 form-check form-switch">
                                     {color === "dark" ?
                                     <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
@@ -266,7 +266,7 @@ function Settings() {
                                     : <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" />
                                     }
                                 </div>
-                                <div className="col-3 p-0"><i className="bi bi-moon-stars-fill" style={{fontSize:"0.6rem", top:"-0.2rem", position:"relative"}}></i></div>
+                                <div className="col-3 p-0"><i className="bi bi-moon-stars-fill"></i></div>
                             </div>
                         </div>
                     </div>
@@ -275,7 +275,7 @@ function Settings() {
                         <div className="row col-12 rounded m-0 bg-light shadow-sm underCardDal">
                             <div className="col-7 m-0">Mode daltonien</div>
                             <div className="row col-5 switch-daltonism-mode p-0 m-0">
-                                <div className="col-3 p-0"><i className="bi bi-eye-slash" style={{fontSize:"0.7rem", top:"-0.2rem", position:"relative"}}></i></div>
+                                <div className="col-3 p-0"><i className="bi bi-eye-slash"></i></div>
                                 <div className="col-4 form-check form-switch">
                                 {color === "daltonism" ?
                                     <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
@@ -284,26 +284,10 @@ function Settings() {
                                     : <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" />
                                     }
                                 </div>
-                                <div className="col-3 p-0"><i className="bi bi-eye-fill" style={{fontSize:"0.7rem", top:"-0.2rem", position:"relative"}}></i></div>
+                                <div className="col-3 p-0"><i className="bi bi-eye-fill"></i></div>
                             </div>
                         </div>
                     </div>
-                
-                    {/* <div className="row col-6 m-0 daltonismCard">
-                        <div className="row col-12 rounded bg-light shadow-sm m-0 underCardDal">
-                            <div className="col-7 m-0">Mode daltonien</div>
-                            <div className="col-5 row switch-daltonism-mode m-0">
-                                <div className="col-12 form-check form-switch">
-                                    {color === "daltonism" ?
-                                    <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
-                                    : color === "dark" ? 
-                                    <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" disabled/>
-                                    : <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" />
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
 
                 <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
