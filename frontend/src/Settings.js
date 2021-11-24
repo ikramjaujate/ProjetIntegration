@@ -104,7 +104,7 @@ function Settings() {
         var format_mdp = /^[!@#$%^&*()_+\-=\[\]{};':"\|,.<>\/?]*$/;
 
         if (oldPassword === "") {
-            setBorderOldPassword("1px solid var(--error)");
+            setBorderOldPassword("1px solid var(--error-border)");
             setErrorOld("Veuillez remplir ce champ");
         }
         else {
@@ -114,16 +114,16 @@ function Settings() {
         
         if (newPassword === "") {
             setErrorNew("Veuillez remplir ce champ");
-            setBorderNewPassword("1px solid var(--error)");
+            setBorderNewPassword("1px solid var(--error-border)");
         }
         else {
             if(newPassword.length < limitCharacter) {
                 setErrorNew("Mot de passe trop court, au moins " + limitCharacter.toString() + " caractères");
-                setBorderNewPassword("1px solid var(--error)");
+                setBorderNewPassword("1px solid var(--error-border)");
             }
             else if (newPassword.split('').filter(lettre => lettre === lettre.toUpperCase()).length === 0 || newPassword.split('').filter(lettre => !isNaN(lettre)).length === 0 || newPassword.split('').filter(lettre => lettre.match(format_mdp)).length === 0) {
                 setErrorNew("Veuillez entrer un mot de passe plus sécurisé (comprenant 1 lettre, 1 chiffre, et 1 caractère spécial)");
-                setBorderNewPassword("1px solid var(--error)");
+                setBorderNewPassword("1px solid var(--error-border)");
             }
             else {
                 deleteErrorMsgPassword(false, true) ;
@@ -151,7 +151,7 @@ function Settings() {
                 }
                 else if (data.count === "ancien mot de passe incorrect") {
                     setErrorOld("Mot de passe incorrect");
-                    setBorderOldPassword("1px solid var(--error)");
+                    setBorderOldPassword("1px solid var(--error-border)");
                 }
                 else {
                     console.log('erreur modification mot de passe')
@@ -192,12 +192,12 @@ function Settings() {
         let limitCharacter = 5;
 
         if (username === "") {
-            setBorderNewUsername("1px solid var(--error)");
+            setBorderNewUsername("1px solid var(--error-border)");
             setErrorUsername("Veuillez remplir ce champ");
         }
         else {
             if (username.length < limitCharacter) {
-                setBorderNewUsername("1px solid var(--error)");
+                setBorderNewUsername("1px solid var(--error-border)");
                 setErrorUsername("Trop court, au moins " + limitCharacter.toString() + " caractères");
             }
             else {
@@ -207,7 +207,7 @@ function Settings() {
         }
         if (password === "") {
             setErrorPassword("Veuillez remplir ce champ");
-            setBorderActualPassword("1px solid var(--error)");
+            setBorderActualPassword("1px solid var(--error-border)");
         }
         else {
             passwordok = true ;
@@ -234,11 +234,11 @@ function Settings() {
                 }
                 else if (data.count === "mot de passe incorrect") {
                     setErrorPassword("Mot de passe incorect");
-                    setBorderActualPassword("1px solid var(--error)");
+                    setBorderActualPassword("1px solid var(--error-border)");
                 }
                 else if (data.count === "nom d'utilisateur déjà utilisé") {
                     setErrorUsername("Nom utilisateur déjà utilisé");
-                    setBorderNewUsername("1px solid var(--error)");
+                    setBorderNewUsername("1px solid var(--error-border)");
                 }
                 else {
                     console.log('erreur modification username')
@@ -250,131 +250,15 @@ function Settings() {
     return (
         <div>
             {/* <Toggle /> */}
-            {/* <div className="row settings justify-content-center mt-1 offset-1">
-                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
-                    <div className="col-12 mb-1">Mode sombre</div>
-                    <div className="col-12 row switch-dark-mode">
-                        <div className="col-2 offset-2 form-check form-switch">
-                            {color === "dark" ?
-                            <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
-                            : color === "daltonism" ?
-                            <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" disabled />
-                            : <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" />
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
-                    <div className="col-12 mb-1">Mode daltonien</div>
-                    <div className="col-12 row switch-daltonism-mode">
-                        <div className="col-2 offset-2 form-check form-switch">
-                            {color === "daltonism" ?
-                            <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
-                            : color === "dark" ? 
-                            <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" disabled/>
-                            : <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" />
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
-                    <div className="col-12 mb-1">Modification du mot de passe</div>
-                    <div className="row col-12">
-                        <div className="row col-12">
-                            <div className="col-5 offset-1">
-                                <input type="password" placeholder="ancien mdp" className="form-control m-1" id="oldPassword" required value={passwordOld} onChange={(e) => {setPasswordOld(e.target.value)}} style={{border:borderOldPassword}}/>
-                            </div>
-                        </div>
-                        <div className="row col-12">
-                            <div className="col-5 offset-1">
-                                <input type="password" placeholder="nouveau mdp" maxLength='20' className="form-control m-1" id="newPassword" required value={passwordNew} onChange={(e) => {setPasswordNew(e.target.value)}} style={{border:borderNewPassword}}/>
-                            </div>
-                        </div>
-                        <div className="row col-12">
-                            <div className="col-10 offset-1">
-                                <button className="btn btn-sm m-1" style={{backgroundColor:"#f79436", color:"white"}} type="button" onClick={modifyPassword}>Sauvegarder</button>
-                            </div>
-                        </div>
-                        <div className="errorMessageModify col-12">{errorOld}</div>
-                        <div className="errorMessageModify col-12">{errorNew}</div>
-                    </div>
-                </div>
-
-                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
-                    <div className="col-12 mb-1">Modification du nom d'utilisateur</div>
-                    <div className="row col-12">
-                        <div className="row col-12">
-                            <div className="col-5 offset-1">
-                                <input type="text" placeholder="nouveau username" maxLength="15" className="form-control m-1" id="newUsername" required value={newUsername} onChange={(e) => {setNewUsername(e.target.value)}} style={{border:borderNewUsername}}/>
-                            </div>
-                        </div>
-                        <div className="row col-12">
-                            <div className="col-5 offset-1">
-                                <input type="password" placeholder="mot de passe de verif" className="form-control m-1" id="actualPassword" required value={actualPassword} onChange={(e) => {setActualPassword(e.target.value)}} style={{border:borderActualPassword}}/>
-                            </div>
-                        </div>
-                        <div className="row col-12">
-                            <div className="col-10 offset-1">
-                                <button className="btn btn-sm m-1" style={{backgroundColor:"#f79436", color:"white"}} type="button" onClick={modifyUsername}>Sauvegarder</button>
-                            </div>
-                        </div>
-
-                        <div className="errorMessageModify col-12">{errorUsername}</div>
-                        <div className="errorMessageModify col-12">{errorPassword}</div>
-                    </div>
-                </div>
-            </div> */}
-
             <div className="row settings justify-content-center offset-1">
-                {/* <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
-                    <div className="col-6 mb-1">Mode sombre</div>
-                    <div className="col-6 row switch-dark-mode">
-                        <div className="col-12 form-check form-switch">
-                            {color === "dark" ?
-                            <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
-                            : color === "daltonism" ?
-                            <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" disabled />
-                            : <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" />
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
-                    <div className="col-6 mb-1">Mode daltonien</div>
-                    <div className="col-6 row switch-daltonism-mode">
-                        <div className="col-12 form-check form-switch">
-                            {color === "daltonism" ?
-                            <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
-                            : color === "dark" ? 
-                            <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" disabled/>
-                            : <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" />
-                            }
-                        </div>
-                    </div>
-                </div> */}
-                {/* <div className="row col-6 rounded bg-light shadow-sm">
-                    <div className="col-8 ">Mode sombre</div>
-                    <div className="col-4 row switch-dark-mode">
-                        <div className="col-12 form-check form-switch">
-                            {color === "dark" ?
-                            <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
-                            : color === "daltonism" ?
-                            <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" disabled />
-                            : <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" />
-                            }
-                        </div>
-                    </div>
-                </div> */}
 
                 <div className="row col-8 p-0 justify-content-evenly">
                     <div className="row col-6 m-0 darkCard p-0">
                         <div className="row col-12 rounded m-0 bg-light shadow-sm underCardDark">
-                            <div className="col-9 m-0">Mode sombre</div>
-                            <div className="col-3 row switch-dark-mode m-0">
-                                <div className="col-12 form-check form-switch">
+                            <div className="col-7 m-0">Mode sombre</div>
+                            <div className="row col-5 switch-dark-mode p-0 m-0">
+                                <div className="col-3 p-0"><i className="bi bi-brightness-high-fill" style={{fontSize:"0.8rem", top:"-0.2rem", position:"relative"}}></i></div>
+                                <div className="col-4 form-check form-switch">
                                     {color === "dark" ?
                                     <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
                                     : color === "daltonism" ?
@@ -382,14 +266,33 @@ function Settings() {
                                     : <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" />
                                     }
                                 </div>
+                                <div className="col-3 p-0"><i className="bi bi-moon-stars-fill" style={{fontSize:"0.6rem", top:"-0.2rem", position:"relative"}}></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row col-6 m-0 daltonismCard">
+                        <div className="row col-12 rounded m-0 bg-light shadow-sm underCardDal">
+                            <div className="col-7 m-0">Mode daltonien</div>
+                            <div className="row col-5 switch-daltonism-mode p-0 m-0">
+                                <div className="col-3 p-0"><i className="bi bi-eye-slash" style={{fontSize:"0.7rem", top:"-0.2rem", position:"relative"}}></i></div>
+                                <div className="col-4 form-check form-switch">
+                                {color === "daltonism" ?
+                                    <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
+                                    : color === "dark" ? 
+                                    <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" disabled/>
+                                    : <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" />
+                                    }
+                                </div>
+                                <div className="col-3 p-0"><i className="bi bi-eye-fill" style={{fontSize:"0.7rem", top:"-0.2rem", position:"relative"}}></i></div>
                             </div>
                         </div>
                     </div>
                 
-                    <div className="row col-6 m-0 daltonismCard">
+                    {/* <div className="row col-6 m-0 daltonismCard">
                         <div className="row col-12 rounded bg-light shadow-sm m-0 underCardDal">
-                            <div className="col-9 m-0">Mode daltonien</div>
-                            <div className="col-3 row switch-daltonism-mode m-0">
+                            <div className="col-7 m-0">Mode daltonien</div>
+                            <div className="col-5 row switch-daltonism-mode m-0">
                                 <div className="col-12 form-check form-switch">
                                     {color === "daltonism" ?
                                     <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
@@ -400,21 +303,8 @@ function Settings() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
-                {/* <div className="row col-6 rounded bg-light shadow-sm">
-                    <div className="col-8">Mode daltonien</div>
-                    <div className="col-4 row switch-daltonism-mode">
-                        <div className="col-12 form-check form-switch">
-                            {color === "daltonism" ?
-                            <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
-                            : color === "dark" ? 
-                            <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" disabled/>
-                            : <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" />
-                            }
-                        </div>
-                    </div>
-                </div> */}
 
                 <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
                     <div className="col-12 mb-1">Modification du mot de passe</div>

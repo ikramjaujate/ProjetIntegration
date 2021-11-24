@@ -38,6 +38,9 @@ export const GlobalStyles = createGlobalStyle`
   .bouton-close {
     background-color: ${({ theme }) => theme.fermerModalBtn};
   }
+  .bouton-close:hover {
+    background-color: ${({ theme }) => theme.fermerModalBtnHover};
+  }
   .bg-light {
     background-color: ${({ theme }) => theme.newBgLight}!important;
   }
@@ -68,6 +71,36 @@ export const GlobalStyles = createGlobalStyle`
   }
   .save-button {
     background-color : ${({ theme }) => theme.saveInformations};
+  }
+  .save-button:hover {
+    background-color : ${({ theme }) => theme.saveInformationsHover};
+  }
+  .errorMessageModify {
+    color: ${({ theme }) => theme.errorMessage};
+  }
+  .errorMessage {
+    color: ${({ theme }) => theme.errorMessage};
+  }
+  .bi-brightness-high-fill {
+    color: ${({ theme }) => theme.nonUseIcon};
+  }
+  .bi-moon-stars-fill {
+    color:${({ theme }) => theme.useIcon};
+  }
+  .bi-eye-slash {
+    color:${({ theme }) => theme.desactivateIconLeft};
+  }
+  .bi-eye-fill {
+    color: ${({ theme }) => theme.desactivateIconRight};
+  }
+
+
+
+  .form-check-input:checked {
+    background-color : ${({ theme }) => theme.switchOn};
+  }
+  .form-check-input {
+    background-color : ${({ theme }) => theme.switchOff};
   }
   `
 

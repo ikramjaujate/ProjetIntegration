@@ -3,6 +3,7 @@ export const lightTheme = {
     text: '#363537',
     toggleBorder: '#FFF',
     background: 'linear-gradient(#39598A, #79D7ED)',
+    textColorTitle : 'var(--principal-color);',
 }
 
 export const darkTheme = {
@@ -19,6 +20,7 @@ export const darkTheme = {
 	cameraRefused : '#fb6060',
 	bgModalGrade : '#282828',
 	fermerModalBtn : '#626262',
+    fermerModalBtnHover : '#323232',
 	bgColorNotifDetailgrade : 'rgb(88 88 88)',
     borderModal : "1px solid #000000",
     newBgLight : "#363636",
@@ -29,10 +31,20 @@ export const darkTheme = {
     borderCardMember : "0.001rem solid #727272",
     shadowMember : "0 .5rem 1rem rgba(0,0,0,.15)",
     bgInput : "#dfdfde",
-    saveInformations : "#cbacbf", //#df5531
-}
+    saveInformations : "#df5531", //#df5531 cbacbf
+    saveInformationsHover : "#93341c",
+    errorMessage : "#ff6060",
+    useIcon : "white",
+    nonUseIcon : "#df5531",
+    desactivateIconLeft : "#787878",
+    desactivateIconRight : "#827c73",
+ }
 
 export const daltonismTheme = {
-    body: 'red',
-    text: 'white'
+    // body: 'red',
+    text: 'white',
+    switchOn : "#f5b83b",
+    switchOff : "#ff4ac3",
+    desactivateIconRight : "#5e5d5d", 
+    desactivateIconLeft : "#94adff",
 }

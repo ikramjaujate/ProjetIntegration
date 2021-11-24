@@ -208,11 +208,11 @@ function Grades() {
         let newColor = finalIdColor ;
         let newNameok = false, newColorok = false ;
         if (newName === "") {
-            setBorderNewNameGrade("1px solid var(--error)");
+            setBorderNewNameGrade("1px solid var(--error-border)");
             setTextErrorName("Veuillez choisir un nom");
         }
         else if (informationsGrade.map(element => element.name_grade).indexOf(newName) !== -1) {
-            setBorderNewNameGrade("1px solid var(--error)");
+            setBorderNewNameGrade("1px solid var(--error-border)");
             setTextErrorName("Ce nom existe déjà");
         }
         else {

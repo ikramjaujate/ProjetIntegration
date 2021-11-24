@@ -1,9 +1,12 @@
 import '../css/Grades.css';
 import CameraInfo from './CameraInfo';
 import TitleModalGrade from './TitleModalGrade' ;
+import { useState } from 'reactn';
 
 
 const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDetails, activateButton, resetModal}) => {
+
+    const [hover, setHover] = useState(false);
 
     return (
         <div id="gradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
@@ -32,7 +35,7 @@ const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDet
                     </div>
                     <div className="modal-footer row justify-content-between">
                         <button type="button" id="close-informations" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
-                        <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" style={{backgroundColor:colorModalDetails}} data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");resetModal();}}>Modifier</button>
+                        <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" style={{backgroundColor: hover ? "var(--hover-color)" : colorModalDetails, color: hover ? "black" : "white"}} data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");resetModal();}} onMouseEnter={()=>{setHover(true);}} onMouseLeave={()=>{setHover(false);}}>Modifier</button>
                     </div>
                 </div>
             </div>

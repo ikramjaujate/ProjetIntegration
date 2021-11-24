@@ -1,9 +1,7 @@
-import './css/App.css';
 import Members from './Members';
 import Grades from './Grades';
 import Camera  from './components/Camera';
 import {ThemeProvider} from "styled-components";
-import './css/App.css';
 import Accueil from './Accueil.js';
 import {BrowserRouter as Router, Route, Switch, Link, Redirect} from 'react-router-dom'; 
 import Modification from './components/Modification';
