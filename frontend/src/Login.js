@@ -23,7 +23,7 @@ function Login() {
             .then(response => {
 				return response.json()	
 			}).then(token => {
-                console.log(token.value)
+                console.log(token)
                 if (token.value) {
                     localStorage.setItem('access_token', token.value);
 
