@@ -21,6 +21,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import EdiText from "react-editext";
 import styled from "styled-components";
 
+import './css/Members.css';
+
+
 export const ImgContainer = styled.div`
   width: 100px;
   height: 100px;
@@ -439,8 +442,8 @@ export default function Members() {
                 </select>                
             </div>
             <div> 
-                <div className="row offset-1 justify-content-center">
-                    <Popup trigger={ <button style={{backgroundColor:'#c6e5c3', border:"1px solid lightgrey"}} className="rounded col-sm-3 col-lg-3 mt-4 mb-5">Ajouter utilisateur (+)</button>} position="center" modal nested>
+                <div className="row offset-1 justify-content-center members">
+                    <Popup trigger={ <button style={{backgroundColor:'#c6e5c3', border:"1px solid lightgrey"}} className="addMember rounded col-sm-3 col-lg-3 mt-4 mb-5">Ajouter utilisateur (+)</button>} position="center" modal nested>
                         <h1>Nouvel utilisateur:</h1>
                         <form onSubmit={submitClient}>
                             <label for="f-name">Prénom:</label><br/>
@@ -462,7 +465,7 @@ export default function Members() {
                     {membersList.filter(name => name.first_name.includes(filterText)).filter(currentGrade !== "Tous" ? grade => grade.name_grade === currentGrade : grade => grade.name_grade.includes("")).map((val) => {
                         return (
                             <div className="rounded col-sm-5 col-lg-3 p-4 mx-1 mb-3 ">
-                                <div className="row rounded">
+                                <div className="row rounded cardMember shadow">
                                     <div style={{backgroundColor:val.color, fontSize:"0.7rem"}} className="col-6">
                                         {val.name_grade}
                                         
@@ -470,7 +473,7 @@ export default function Members() {
                                     <div style={{backgroundColor:val.color}} className="col-6">
                                     <button className="p-2 btn-close btn-close-grey float-end" id={val.id_member} onClick={event => {if(window.confirm("Voulez vous vraiment supprimer " + val.last_name + "?")) delMember(event.target.id)}} ></button>
                                     </div>                                    
-                                    <div style={{backgroundColor:"#ebebeb"}} className="rounded col-12" onClick={() => changeUser(val.id_member)} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <div style={{backgroundColor:"#ebebeb"}} className="rounded col-12 downPart" onClick={() => changeUser(val.id_member)} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 
                                         <div class="col-md-4 text-align">
                                             <img src="https://as2.ftcdn.net/v2/jpg/03/32/59/65/1000_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg" class="img-fluid rounded-start" alt="profile-pic"/>

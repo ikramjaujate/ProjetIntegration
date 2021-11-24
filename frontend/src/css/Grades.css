@@ -8,6 +8,7 @@
     --writing : #686868 ;
     --empty-color : #BDBDBD ;
     --error : red ;
+    --error-border : #ff6060 ;
     --frame-choice-color:#5c5c5c;
     --principal-color:#457eaf;
     --principal-color-hover:#3a6a94;
@@ -28,20 +29,20 @@ body {
 
 /*Banner description of the page*/
 #desription-page {
-    background-color: white;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
     padding-top: 0.5rem;
+    /* color:var(--principal-color); */
 }
 #title-description{
     text-align: center;
     font-size: 2.3rem;
-    color:var(--principal-color);
+    /* color:var(--principal-color); */
 }
 #description{
     text-align: center;
     font-size: 0.7rem;
-    color:var(--principal-color);
+    /* color:var(--principal-color); */
 }
 /**/
 
@@ -90,7 +91,7 @@ body {
 .modal-button {
     margin: 0.25rem 0.75rem 0.25rem 0.75rem;
 }
-.modal-title {
+.title-modify .modal-title {
     color:white;
     text-align:center;
 }
@@ -239,7 +240,7 @@ body {
 /**/
 
 #frame-name-grade-input .form-control {
-    background-color: white !important;
+    background-color: white;
 }
 
 /*??*/
