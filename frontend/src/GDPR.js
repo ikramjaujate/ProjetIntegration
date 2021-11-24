@@ -1,9 +1,11 @@
 import React from "react";
-import Conditions from "./components/ConditionsGenerales";
+import Droit_GDPR from "./components/Droit_GDPR";
 
 function GDPR () {
     return (
-        <Conditions/>
+        <div>
+        <Droit_GDPR/>
+        </div>
     );
 }
 

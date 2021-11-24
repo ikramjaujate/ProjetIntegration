@@ -1,14 +1,47 @@
-import React from 'react';
-import '../css/Gdpr.css';
+import "../css/Gdpr.css"
+function Droit_GDPR(){
 
+ return (
+     <div className="offset-lg-3 offset-md-4 offset-sm-4 offset-2 col-lg-7 col-md-6 col-sm-7 col-8"> 
+        <nav  id="navbar-example2" className=" col navbar navbar-light bg-light px-3">
+            <a className="offset-lg-4 navbar-brand" href="#" >Conditions générales</a>
+            <ul style={{'display': 'block'}} class="nav nav-pills">
+                <li class="nav-item">
+                    
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Politic de confidentialité</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#Condition_utilisation">Condition d'utilisation</a></li>
+                        <li><a class="dropdown-item" href="#Mentions_legales">Article 1 : Les mentions légales</a></li>
+                        <li><a class="dropdown-item" href="#Acces_Site">Article 2 : Accès au site</a></li>
+                        <li><a class="dropdown-item" href="#Collectes_Donnees">Article 3 : Collecte des données</a></li>
+                        <li><a class="dropdown-item" href="#Prop_Intel">Article 4 : Propriété intellectuelle</a></li>
+                        <li><a class="dropdown-item" href="#Responsabilite">Article 5 : Responsabilité</a></li>
+                        <li><a class="dropdown-item" href="#Lien_Hypertextes">Article 6 : Liens hypertextes</a></li>
+                        <li><a class="dropdown-item" href="#Cookies">Article 7 : Cookies</a></li>
+                        <li><a class="dropdown-item" href="#article">Article 8 : Publication par l’Utilisateur</a></li>
+                        <li><a class="dropdown-item" href="#Droit">Article 9 : Droit applicable et juridiction compétente</a></li>
+                    </ul>
+                </li>
+                </li>
+                <li class="nav-item">
+                    
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Rgpd</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Third</a></li>
+                        <li><a class="dropdown-item" href="#scrollspyHeading4">Fourth</a></li>
+                        <li><hr class="dropdown-divider"/></li>
+                        <li><a class="dropdown-item" href="#scrollspyHeading5">Fifth</a></li>
+                    </ul>
+                </li>
+                </li>
+               
+            </ul>
+        </nav>
 
-export default function Conditions() {
-    return (
-        <div className="global">
-            <h1 className="gdpr"> Conditions générales d'utilisation </h1>
-                <p className="vigueur">En vigueur au 17/11/2021</p><br/>
-                <p className="texte">Les présentes conditions générales d'utilisation (dites « CGU ») ont pour objet l'encadrement juridique
-                    des modalités de mise à disposition du site et des services par <a
+        <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" className="scrollspy-example" tabindex="0" >
+            <p className="texte" id="Condition_utilisations">Les présentes conditions générales d'utilisation (dites « CGU ») ont pour objet l'encadrement juridique des modalités de mise à disposition du site et des services par <a
                         href="https://projet.4x4vert.be">projet.4x4vert.be</a> et de définir les conditions d’accès et
                     d’utilisation des services par « l'Utilisateur ».<br/>
                     
@@ -23,16 +56,23 @@ export default function Conditions() {
                     <a href="https://projet.4x4vert.be">projet.4x4vert.be</a> se réserve le droit de modifier
                     unilatéralement et à tout moment le contenu des présentes CGU.
                 </p>
-            <h2 className="article">Article 1 : Les mentions légales</h2>
-                <p className="texte">L’édition et la direction de la publication du site projet.4x4vert.be est assurée par Corentin
+            
+            <h2 className="article" id="Mentions_legales">
+                Article 1 : Les mentions légales
+            </h2>
+            <p className="texte">
+            L’édition et la direction de la publication du site projet.4x4vert.be est assurée par Corentin
                     Dallenogare, domicilié Louvain-la-Neuve. <br/>
                     Adresse e-mail c.dallenogare@students.ephec.be.<br/>
     
                     L'hébergeur du site <a href="https://projet.4x4vert.be">projet.4x4vert.be</a> est la société OVH, dont
                     le siège social est situé au France.
-                </p>
-            <h2 className="article">Article 2 : Accès au site</h2>
-                <p className="texte"> Le site <a href="https://projet.4x4vert.be">projet.4x4vert.be</a> permet à l'Utilisateur un accès
+        
+            </p>
+            <h2  id="Acces_Site" className="article">
+                Article 2 : Accès au site
+            </h2>
+            <p className='texte'> Le site <a href="https://projet.4x4vert.be">projet.4x4vert.be</a> permet à l'Utilisateur un accès
                     gratuit aux services suivants :
                     Le site internet propose les services suivants : <br/>
                     Gestion de caméras de sécurité et interface de gestion. <br/>
@@ -55,7 +95,9 @@ export default function Conditions() {
                     L'Utilisateur a la possibilité de contacter le site par messagerie électronique à l’adresse email de
                     l’éditeur communiqué à l’ARTICLE 1.
                 </p>
-            <h2 className="article">Article 3 : Collecte des données</h2>
+                <h2 id='Collecte_Donnees' className="article">
+                    Article 3 : Collecte des données
+                </h2>
                 <p className="texte">Le site assure à l'Utilisateur une collecte et un traitement d'informations personnelles dans le respect
                     de la vie privée conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers
                     et aux libertés. <br/>
@@ -67,7 +109,9 @@ export default function Conditions() {
                         <li className="liste">son espace personnel</li>
                     </ul>
                 </p>
-            <h2 className="article">Article 4 : Propriété intellectuelle</h2>
+                <h2 className="article" id="Prop_Intel">
+                    Article 4 : Propriété intellectuelle
+                </h2>
                 <p className="texte">Les marques, logos, signes ainsi que tous les contenus du site (textes, images, son…) font l'objet d'une
                     protection par le Code de la propriété intellectuelle et plus particulièrement par le droit d'auteur. <br/>
     
@@ -80,7 +124,7 @@ export default function Conditions() {
                     Il est rappelé conformément à l’article L122-5 du Code de propriété intellectuelle que l’Utilisateur qui
                     reproduit, copie ou publie le contenu protégé doit citer l’auteur et sa source.
                 </p>
-            <h2 className="article">Article 5 : Responsabilité</h2>
+                <h2 id="Responsabilite" className="article">Article 5 : Responsabilité</h2>
                 <p className="texte">Les sources des informations diffusées sur le site projet.4x4vert.be sont réputées fiables mais le site
                     ne garantit pas qu’il soit exempt de défauts, d’erreurs ou d’omissions. <br/>
                     Les informations communiquées sont présentées à titre indicatif et général sans valeur contractuelle.
@@ -97,13 +141,13 @@ export default function Conditions() {
                     La responsabilité du site ne peut être engagée en cas de force majeure ou du fait imprévisible et
                     insurmontable d'un tiers.
                 </p>
-            <h2 className="article">Article 6 : Liens hypertextes</h2>
+            <h2 id="Lien_Hypertextes" className="article">Article 6 : Liens hypertextes</h2>
                 <p className="texte">Des liens hypertextes peuvent être présents sur le site. L’Utilisateur est informé qu’en cliquant sur ces
                     liens, il sortira du site projet.4x4vert.be. Ce dernier n’a pas de contrôle sur les pages web sur
                     lesquelles aboutissent ces liens et ne saurait, en aucun cas, être responsable de leur contenu.
                 </p>
 
-            <h2 className="article">Article 7 : Cookies</h2>
+            <h2 id="Cookies"className="article">Article 7 : Cookies</h2>
                 <p className="texte">L’Utilisateur est informé que lors de ses visites sur le site, un cookie peut s’installer automatiquement
                     sur son logiciel de navigation.<br/>
                     Les cookies sont de petits fichiers stockés temporairement sur le disque dur de l’ordinateur de
@@ -140,14 +184,15 @@ export default function Conditions() {
                     Le contenu de l'Utilisateur peut être à tout moment et pour n'importe quelle raison supprimé ou modifié
                     par le site, sans préavis.
                 </p>
-            <h2 className="article">Article 9 : Droit applicable et juridiction compétente</h2>
+            <h2 id="Droit" className="article">Article 9 : Droit applicable et juridiction compétente</h2>
                 <p className="texte"> La législation française s'applique au présent contrat. En cas d'absence de résolution amiable d'un
                     litige né entre les parties, les tribunaux français seront seuls compétents pour en connaître. <br/>
                     Pour toute question relative à l’application des présentes CGU, vous pouvez joindre l’éditeur aux
                     coordonnées inscrites à l’ARTICLE 1.
                 </p>
-        </div>
-    );
-}
 
-    
+            
+        </div>
+    </div>
+)};
+export default Droit_GDPR; 

@@ -1,14 +1,13 @@
-body {
-    color: #BDBDBD;
-}
 
-a {
+
+.global a {
     color: #8b90f8;
 }
 
 .global {
     margin-left: 20%;
     margin-right: 10%;
+    color: #BDBDBD;
     
 }
 
@@ -33,7 +32,7 @@ a {
 .texte {
     font-size: 0.8em;
     text-align: justify;
-    line-height:50px;
+    line-height:25px;
 }
 
 
