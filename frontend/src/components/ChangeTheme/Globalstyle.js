@@ -121,6 +121,9 @@ export const GlobalStyles = createGlobalStyle`
   .bouton-warning {
     background-color : ${({ theme }) => theme.switchOff}!important;
   }
+  #modifyGradeModal .bi-bell-fill {
+    color : ${({ theme }) => theme.colorBell};
+  }
   
   `
 

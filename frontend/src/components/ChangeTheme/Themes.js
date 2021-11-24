@@ -41,7 +41,6 @@ export const darkTheme = {
  }
 
 export const daltonismTheme = {
-    // body: 'red',
     text: 'white',
     switchOn : "#f5b83b",
     switchOff : "#ff4ac3",
@@ -49,4 +48,5 @@ export const daltonismTheme = {
     desactivateIconLeft : "#94adff",
     errorMessage : "#ff4ac3",
     textColorTitle : 'var(--principal-color);',
+    colorBell : "#3efd00",
 }

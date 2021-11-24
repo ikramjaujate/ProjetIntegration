@@ -100,7 +100,7 @@ function Settings() {
         let newPassword = passwordNew ;
         let id = localStorage.getItem("id") ;
         let oldPasswordok = false, newPasswordok = false ;
-        let limitCharacter = 12;
+        let limitCharacter = 6;
         var format_mdp = /^[!@#$%^&*()_+\-=\[\]{};':"\|,.<>\/?]*$/;
 
         if (oldPassword === "") {
