@@ -47,4 +47,6 @@ export const daltonismTheme = {
     switchOff : "#ff4ac3",
     desactivateIconRight : "#5e5d5d", 
     desactivateIconLeft : "#94adff",
+    errorMessage : "#ff4ac3",
+    textColorTitle : 'var(--principal-color);',
 }

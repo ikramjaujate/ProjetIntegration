@@ -1,6 +1,13 @@
 import { createGlobalStyle} from "styled-components"
 
 export const GlobalStyles = createGlobalStyle`
+  :root {
+    --camera-allow : ${({ theme }) => theme.switchOn}!important;
+    --camera-refuse : ${({ theme }) => theme.switchOff}!important;
+    --error-border : ${({ theme }) => theme.switchOff}!important;
+  }
+
+
   body {
     background: ${({ theme }) => theme.body};
     color : ${({ theme }) => theme.bodyColor};
@@ -102,6 +109,19 @@ export const GlobalStyles = createGlobalStyle`
   .form-check-input {
     background-color : ${({ theme }) => theme.switchOff};
   }
+  .allowed-camera {
+    color : ${({ theme }) => theme.switchOn}!important;
+  }
+  .refused-camera {
+    color : ${({ theme }) => theme.switchOff}!important;
+  }
+  #icon-cancel {
+    color : ${({ theme }) => theme.switchOff}!important;
+  }
+  .bouton-warning {
+    background-color : ${({ theme }) => theme.switchOff}!important;
+  }
+  
   `
 
   //    transition: background 0.50s linear;

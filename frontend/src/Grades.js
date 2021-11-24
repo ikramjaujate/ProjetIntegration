@@ -223,7 +223,7 @@ function Grades() {
         if (newColor === "empty") {
             setTextErrorColor("Veuillez choisir une couleur");
             let styleElem = document.head.appendChild(document.createElement("style"));
-            styleElem.innerHTML = "#empty:before {border:1px solid red}";
+            styleElem.innerHTML = "#empty:before {border:1px solid var(--error-border)}";
         }
         else {
             deleteErrorMsg(false, true);
