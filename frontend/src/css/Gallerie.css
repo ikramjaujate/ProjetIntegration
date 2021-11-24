@@ -1,5 +1,10 @@
 .images{
-    width: 50%;
-    height: 50%;
+    width:5px;
+    
 
+}
+
+.p-image-preview-indicator{
+    width: 200px !important ;
+    margin-left: 20px !important;
 }

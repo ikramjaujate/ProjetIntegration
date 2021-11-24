@@ -17,7 +17,13 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.13",
     "pg": "^8.7.1",
-    "psql": "0.0.1"
+    "primeicons": "^5.0.0",
+    "primereact": "^7.0.1",
+    "psql": "0.0.1",
+    "react-bnb-gallery": "^1.4.4",
+    "react-carousel-minimal": "^1.4.1",
+    "react-image-gallery": "^1.2.7",
+    "react-responsive-carousel": "^3.2.22"
   },
   "devDependencies": {
     "cypress": "^9.0.0"
