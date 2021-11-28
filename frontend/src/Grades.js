@@ -7,6 +7,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Popover, Toast, Tooltip } from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd'
 
 
 import './css/Grades.css';
@@ -373,6 +374,11 @@ function Grades() {
         newNotifications = {} ;
     }
 
+
+      function handleDrag() {
+        console.log("Dragging...")
+    }
+
     
     return (
         <div>
@@ -382,14 +388,33 @@ function Grades() {
                     <div id="description" className="col-12">
                         Cette page vous permet de créer des grades, <br /> ainsi que de voir les détails de ces <br /> derniers !
                     </div>
-                </div>
+                </div> 
 
-                {informationsGrade && informationsGrade.map(grade => (
-                    <div className="col-12" onClick={() => openCameraInfo(grade.color, grade.name_grade, grade.id_grade)}>
-                        <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} 
-                            allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
-                    </div>
-                ))}
+                <DragDropContext onDragEnd={(param) => {
+                    const srcI = param.source.index;
+                    const desI = param.destination.index;
+                    informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0])
+                }}>
+                    <Droppable droppableId="droppable-1">
+                        {(provided, _) => (
+                        <div ref={provided.innerRef} {...provided.droppableProps}>
+                            {informationsGrade && informationsGrade.map((grade, i) => (
+                                <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
+                                    {(provided, snapshot) => (
+                                        <div className="draggable-card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-12" onDragStart={() => console.log("drag")}>
+                                            <div className="col-12" onClick={() => openCameraInfo(grade.color, grade.name_grade, grade.id_grade)}>
+                                                <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} 
+                                                    allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
+                                            </div>
+                                        </div>
+                                    )}
+                                </ Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                        )}
+                    </ Droppable>
+                </ DragDropContext>
 
                 <div id="layout-add" className="row p-1 text-center justify-content-center col-12">
                     <span title="Créer un grade" data-toggle="tooltip" data-placement="top">
@@ -407,7 +432,7 @@ function Grades() {
                 saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}/>
             <ModalConfirmationCancel activateButton={activateButton} deleteModification={deleteModification} />
 
-            <ToastContainer style={{fontSize:"0.6rem"}}/>      
+            <ToastContainer style={{fontSize:"0.6rem"}}/>  
         </div>
     );
   }

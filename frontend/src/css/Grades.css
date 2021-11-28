@@ -362,3 +362,12 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .layout-legend {font-size: 0.54rem;}
 }
 /**/
+
+
+.draggable-element:active {
+    cursor: grabbing;
+    /* background-color: royalblue!important; */
+    box-shadow: 0 0 1rem #666!important;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
