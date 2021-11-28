@@ -399,7 +399,7 @@ function Grades() {
             })
             .then(data => {
                 if (i === Math.abs(srcI - desI)) {
-                    if (data.count == 1) {
+                    if (data.count === 1) {
                         toast.success("L'ordre de vos grades a bien été mis à jour !", optionsToast);
                     }
                     else {
