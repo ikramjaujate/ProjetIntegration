@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS public.grade
     id_grade SERIAL NOT NULL,
     name_grade varchar(255) NOT NULL,
 	id_color integer NOT NULL,
+	order_place integer NOT NULL,
     PRIMARY KEY (id_grade),
 	FOREIGN KEY (id_color) REFERENCES color(id_color)
 );
@@ -94,11 +95,11 @@ CREATE TABLE IF NOT EXISTS public.grade
 ALTER TABLE public.grade
     OWNER to postgres;	
 	
-INSERT INTO grade(name_grade, id_color)
+INSERT INTO grade(name_grade, id_color, order_place)
 VALUES 
-('Directeur', 10),
-('Personnel', 18),
-('Bénéficiaire', 7);  
+('Directeur', 10, 0),
+('Personnel', 18, 1),
+('Bénéficiaire', 7, 2);  
 
 
 CREATE TABLE IF NOT EXISTS public.permission

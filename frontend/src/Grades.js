@@ -50,7 +50,7 @@ function Grades() {
         draggable: true, 
         theme:"colored"
     };
-    const errorMsgClient = "Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous." ;
+    const errorMsgClient = "Une erreur s'est produite. Veuillez réessayer. Si l'erreur persiste, contactez-nous." ;
 
     let newActions = {} ;
     let newNotifications = {} ;
@@ -374,14 +374,41 @@ function Grades() {
         newNotifications = {} ;
     }
 
+    /**
+     * Change the order of every grade that have been impact by the move and save it
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {object} param  informations about the card that have been moved, like her source and her destination
+     */
     const sortingGrade = (param) => {
-        console.log("param : ", param)
+        let actualId ;
         const srcI = param.source.index;
         const desI = param.destination.index;
-        informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0])
+        informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0]) ;
+        
+        let start = srcI > desI ? desI : srcI ;
+        for (let i=0+start ; i < Math.abs(srcI - desI)+start+1 ; i++) {
+            actualId = informationsGrade[i].id_grade ;
+            let informations = { method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({newPlace: i})
+            };
+            fetch(`/api/grades/${actualId}/order`, informations)
+            .then(result => {
+                return result.json();
+            })
+            .then(data => {
+                if (i === Math.abs(srcI - desI)) {
+                    if (data.count == 1) {
+                        toast.success("L'ordre de vos grades a bien été mis à jour !", optionsToast);
+                    }
+                    else {
+                        toast.error(errorMsgClient, optionsToast);
+                    }
+                }
+            });
+        }
     }
-
-
     
     return (
         <div>

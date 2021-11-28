@@ -47,7 +47,7 @@ module.exports = function (app, client) {
      * @method GET
      */
     app.get("/api/grades",(request, response) => {
-        const query = "select GRM.id_grade, GRM.name_grade, CO.name_color as color, \
+        const query = "select GRM.id_grade, GRM.name_grade, GRM.order_place, CO.name_color as color, \
                     (select count(*) \
                     from camera as CA \
                     join permission as PE on CA.id_camera = PE.id_camera \
@@ -61,7 +61,7 @@ module.exports = function (app, client) {
                     where GR.id_grade = GRM.id_grade and PE.allowed = false ) as refusedCamera \
                 from grade as GRM \
                 join color as CO on GRM.id_color = CO.id_color \
-                order by GRM.id_grade ;";
+                order by GRM.order_place ;";
 
         client.query(query,(error, results) => {
             if (error) {
@@ -101,53 +101,61 @@ module.exports = function (app, client) {
     app.put("/api/grades",(request, response, next) => {
         const name = request.body.name;
         const idColor = request.body.idcolor ;
-        const query = "insert into grade (name_grade, id_color) \
-        VALUES (($1), ($2))";
-        // Requête1 Create grade
-        client.query(query,[name,idColor],(error, results1) => {
+
+        // Request0 Get the order for this new grade
+        const query0 = "select max(grade.order_place) as order_place from grade;";
+        client.query(query0,(error, results0) => {
             if (error) {
                 throw error;
             }
-
-            // Requête2 - Get his id
-            const query2 = "select max(grade.id_grade) as id_grade from grade;";
-            client.query(query2,(error, results2) => {
+            const query = "insert into grade (name_grade, id_color, order_place) \
+            VALUES (($1), ($2), ($3))";
+            // Request1 Create grade
+            client.query(query,[name,idColor, results0.rows[0].order_place+1],(error, results1) => {
                 if (error) {
                     throw error;
                 }
 
-                // Requête3 - Get max number of camera
-                const query3 = "select count(*) as number_camera from camera;";
-                client.query(query3,(error, results3) => {
+                // Request2 - Get his id
+                const query2 = "select max(grade.id_grade) as id_grade from grade;";
+                client.query(query2,(error, results2) => {
                     if (error) {
                         throw error;
                     }
 
-                    // Requête4 - Create action for each camera for the grade
-                    const query4 = "insert into permission (id_grade, id_camera, allowed, notification) \
-                    VALUES (($1), ($2), 'false', 'false')";
-                    const idgrade = results2.rows[0].id_grade;
-                    const nbrcamera = results3.rows[0].number_camera;
-                    for (let idCamera = 1; idCamera < parseInt(nbrcamera) + 1; idCamera++) {
-                        /*
-                            * Try {
-                            *     client.query(query4, [idgrade, idCamera], (error, results4) => {
-                            *     })
-                            *     throw error;
-                            *   }
-                            *   catch (err) {
-                            *     response.send({message:'ko'});
-                            *     return ;
-                            *   }
-                            */
-                        client.query(query4,[idgrade,idCamera],(error, results4) => {
-                            if (error) {
-                                throw error;
-                            }
-                        });
-                    }
-                    // Response.status(200).json(results1.rows);
-                    response.send({"message": "ok"});
+                    // Request3 - Get max number of camera
+                    const query3 = "select count(*) as number_camera from camera;";
+                    client.query(query3,(error, results3) => {
+                        if (error) {
+                            throw error;
+                        }
+
+                        // Request4 - Create action for each camera for the grade
+                        const query4 = "insert into permission (id_grade, id_camera, allowed, notification) \
+                        VALUES (($1), ($2), 'false', 'false')";
+                        const idgrade = results2.rows[0].id_grade;
+                        const nbrcamera = results3.rows[0].number_camera;
+                        for (let idCamera = 1; idCamera < parseInt(nbrcamera) + 1; idCamera++) {
+                            /*
+                                * Try {
+                                *     client.query(query4, [idgrade, idCamera], (error, results4) => {
+                                *     })
+                                *     throw error;
+                                *   }
+                                *   catch (err) {
+                                *     response.send({message:'ko'});
+                                *     return ;
+                                *   }
+                                */
+                            client.query(query4,[idgrade,idCamera],(error, results4) => {
+                                if (error) {
+                                    throw error;
+                                }
+                            });
+                        }
+                        // Response.status(200).json(results1.rows);
+                        response.send({"message": "ok"});
+                    });
                 });
             });
         });
@@ -269,5 +277,28 @@ module.exports = function (app, client) {
                 response.send({"count": results.rowCount});
             });
             
+    });
+
+    /**
+     * Change the order place of a grade
+     *
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @method POST
+     * @param {integer} idGrade identifier of the grade for which we want to change the order place
+     * @param {integer} newPlace  new number of the place for the grade
+     */
+     app.post("/api/grades/:idGrade/order",(request, response) => {
+        const newPlace = request.body.newPlace ;
+        const idGrade = request.params.idGrade ;
+        const query = "update grade \
+        set order_place = ($1) \
+        where id_grade = ($2);" ;
+        client.query(query,[newPlace, idGrade],(error, results) => {
+            if (error) {
+                throw error;
+            }
+            // console.log("results : ", results)
+            response.status(200).json({"count" : results.rowCount});
+        });
     });
 };
