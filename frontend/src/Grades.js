@@ -374,10 +374,13 @@ function Grades() {
         newNotifications = {} ;
     }
 
-
-      function handleDrag() {
-        console.log("Dragging...")
+    const sortingGrade = (param) => {
+        console.log("param : ", param)
+        const srcI = param.source.index;
+        const desI = param.destination.index;
+        informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0])
     }
+
 
     
     return (
@@ -390,11 +393,7 @@ function Grades() {
                     </div>
                 </div> 
 
-                <DragDropContext onDragEnd={(param) => {
-                    const srcI = param.source.index;
-                    const desI = param.destination.index;
-                    informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0])
-                }}>
+                <DragDropContext onDragEnd={(param) => {sortingGrade(param)}}>
                     <Droppable droppableId="droppable-1">
                         {(provided, _) => (
                         <div ref={provided.innerRef} {...provided.droppableProps}>
