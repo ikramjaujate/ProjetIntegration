@@ -94,9 +94,9 @@ module.exports = function (app, client) {
      * Creates a new grade
      *
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @method GET
+     * @method PUT
      * @param {integer} name name of the new grade
-     * @param {integer} color color of the new grade
+     * @param {integer} idColor identifier for the color of the grade
      */
     app.put("/api/grades",(request, response, next) => {
         const name = request.body.name;
