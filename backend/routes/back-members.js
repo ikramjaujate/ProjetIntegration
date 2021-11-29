@@ -194,7 +194,7 @@ module.exports = function (app, client) {
    * Eliminate picture of a member
    * 
    * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
-   * @method PUT
+   * @method DELETE
    * @param {integer} idMember identifier of the member for which we want to eliminate photo
    */
    app.delete('/api/membres/:idMember/eliminate/photo', (request, response) => {
