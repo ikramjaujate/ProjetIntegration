@@ -3,6 +3,15 @@ module.exports = function (app, client) {
   
     const bcrypt = require("bcrypt");
 
+    /**
+     * Allows the user to log in
+     * 
+     * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
+     * @author Cécile Bonne <c.bonnet@students.ephec.be>
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     * @method POST
+     */
+
     app.post('/api/login', (request, response) => {
 
         const username = request.body.username;
@@ -17,7 +26,7 @@ module.exports = function (app, client) {
             bcrypt.compare(password, results.rows[0].password)
             .then(valid => {
               if (!valid) {
-                response.status(201).json({ message: 'Mot de passe incorrect !' });
+                response.status(201).json({ message: 'Utilisateur et/ou mot de passe incorrect !' });
               }
               else {
                 const token = jwt.sign({
@@ -27,7 +36,7 @@ module.exports = function (app, client) {
               }                          
             })
           else{          
-            (response.send({message : "Cet utilisateur n'existe pas"}))
+            (response.send({message : "Utilisateur et/ou mot de passe incorrect !"}))
           }
       })
     })
