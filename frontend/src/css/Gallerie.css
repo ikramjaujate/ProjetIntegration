@@ -6,5 +6,155 @@
 
 .p-image-preview-indicator{
     width: 200px !important ;
-    margin-left: 20px !important;
 }
+
+.titre{
+    width: 70%;
+}
+
+
+@media only screen and (max-width: 576px) {
+
+
+    i img{
+
+        width: 150px !important;
+        margin-left: 350%;
+        margin-right: 350%;
+        
+    }
+    .p-image-preview-indicator{
+        width: 150px !important ;
+        margin-left: 350%;
+    }
+    .images{
+        width:20px;
+        
+    
+    }
+    .photo{
+        text-align: center;
+    }
+}
+
+
+@media (min-width: 576px) and (max-width: 991px) {
+
+
+    i img{
+
+        width: 250px !important;
+        margin-left: 450%;
+        margin-right: 450%;
+        
+    }
+    .p-image-preview-indicator{
+        width: 250px !important ;
+        margin-left: 450%;
+    }
+    .images{
+        width:20px;
+        
+    
+    }
+}
+
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+
+    i img{
+
+        width: 350px !important;
+        margin-left: 600%;
+        margin-right: 600%;
+        
+    }
+    .p-image-preview-indicator{
+        width: 350px !important ;
+        margin-left: 600%;
+    }
+    .images{
+        width:20px;
+        
+    
+    }
+}
+@media only screen and (min-width: 1200px) {
+    
+   
+}
+
+.hovereffect {
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    cursor: default;
+  }
+  
+  .hovereffect .overlay {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+  }
+  
+  .hovereffect img {
+    display: block;
+    position: relative;
+    -webkit-transition: all 0.4s ease-in;
+    transition: all 0.4s ease-in;
+  }
+  
+  .hovereffect:hover img {
+    filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
+    filter: grayscale(1) blur(3px);
+    -webkit-filter: grayscale(1) blur(3px);
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+  
+ 
+  
+  .hovereffect i.info {
+    display: inline-block;
+    text-decoration: none;
+    margin: 0rem;
+    height: 100% !important;
+    background-color: transparent;
+    font-size: 250%;
+  }
+  
+
+  
+  .hovereffect i.info, .hovereffect h2 {
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.7);
+    -webkit-transition: all 0.4s ease-in;
+    transition: all 0.4s ease-in;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    color: #fff;
+    text-transform: uppercase;
+    height: 100% !important;
+  }
+  
+  .hovereffect:hover i.info, .hovereffect:hover h2 {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    height: 100% !important;
+  }
+
+  .overlay{
+      height: 100%;
+  }
+  i::before{
+    height: 100% !important;
+    text-align: center;
+  }

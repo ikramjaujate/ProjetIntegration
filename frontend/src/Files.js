@@ -9,6 +9,7 @@ import'bootstrap/dist/css/bootstrap.min.css';
 import'bootstrap/dist/js/bootstrap.min.js';
 import'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { trim } from 'jquery';
 
 
 
@@ -34,7 +35,19 @@ function Biblio (){
          
       }, [])
 
-      
+    const tri = () => {
+        //console.log(pictures.reverse());
+        //console.log(pictures);
+        let a = [...pictures];
+              
+        a.reverse()
+        
+        setPictures(a)
+        let triIcon = a[0] > a[a.length-1]?'bi bi-sort-numeric-up-alt' : 'bi bi-sort-numeric-down-alt'
+        document.getElementById("boutonTri").className = triIcon
+
+    }  
+    
 
     return (
         
@@ -55,12 +68,15 @@ function Biblio (){
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/image/image.min.js"></script>
         
-        <div className='titre text-center offset-1'>Page de gestion des fichiers</div>
+        <div className='titre text-center offset-1 '>Page de gestion des photos</div>
         
         <div class="container row justify-content-center"> 
-        <div  className={"row col-12 justify-content-center ml-1"}>
-            <div className={"col-4 justify-content-center"}><p>Nom</p></div>
-            <div className={"col-4"}><p>Date</p></div>
+        <div  className={"row col col-lg-12 col-md-12 justify-content-center ml-1 "}>
+          <div className={"row justify-content-md-center border border-secondary rounded titre border-3"}>
+            <div className={"col col-lg-3"}></div>
+            <div className={"col col-lg-4"}><p>Nom</p><button onClick={() => tri()}><i id="boutonTri" class="bi bi-sort-numeric-up-alt"></i></button></div>
+            <div className={"col col-lg-4"}><p>Date</p></div>
+          </div>
         {pictures&&pictures.map(phot=> 
           
             <Photos nomPhoto={phot} />
