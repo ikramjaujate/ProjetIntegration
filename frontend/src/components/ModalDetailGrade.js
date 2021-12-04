@@ -11,6 +11,10 @@ const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDet
     return (
         <div id="gradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                {/* <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill rounded-circle" type="button" onClick={() => {console.log("oui")}}>
+                    <span className="visually-hidden">New alerts</span>
+                    <i className="bi bi-trash" type="button" onClick={() => {console.log("oui")}}></i>
+                </span> */}
                 <div className="modal-content">
                     <TitleModalGrade bgColor={colorModalDetails} text={titleModalDetails} />
                     <div className="modal-body">

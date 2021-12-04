@@ -371,3 +371,59 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
 }
+
+/* .draggable-element:hover {
+    box-shadow: 0 0 1rem red!important;
+    background-color: red!important;
+    
+} */
+/* [type=button]:hover {
+    background-color: purple!important;
+}
+.bg-light:hover{
+    background-color: blue;
+} */
+
+.actionsGrades {
+    display: none;
+    position:absolute;
+    color:white;
+}
+.actionsGrade {
+    color:white
+}
+
+
+/* .gradeCard .rounded-circle {
+    width: 1.2rem !important;
+    height: 1.2rem !important;
+    top: 0.2rem!important;
+    background-color:#ff3e3e!important ;
+} */
+
+/* .gradeCard .bi-trash {
+    position:relative;
+    top:0.15rem;
+    left:-0.04rem;
+} */
+.gradeCard:hover{
+    background-color: blue!important;
+}
+
+/* #gradeModal .rounded-circle {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    background-color:#ff3e3e!important ;
+    z-index:1;
+} */
+
+#gradeModal .bi-trash {
+    /* position:relative;
+    top:0.25rem; */
+    /* left:-0.04rem; */
+    /* position:absolute;
+    left:93%; */
+    /* background-color: red; */
+    color:white;
+    /* top:0% */
+}

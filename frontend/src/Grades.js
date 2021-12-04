@@ -387,26 +387,33 @@ function Grades() {
         informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0]) ;
         
         let start = srcI > desI ? desI : srcI ;
-        for (let i=0+start ; i < Math.abs(srcI - desI)+start+1 ; i++) {
-            actualId = informationsGrade[i].id_grade ;
-            let informations = { method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({newPlace: i})
-            };
-            fetch(`/api/grades/${actualId}/order`, informations)
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                if (i === Math.abs(srcI - desI)) {
-                    if (data.count === 1) {
-                        toast.success("L'ordre de vos grades a bien été mis à jour !", optionsToast);
+        console.log("debut : ", 0+start, " fin : ", Math.abs(srcI - desI)+start+1)
+        console.log("math : ", Math.abs(srcI - desI))
+        // if (Math.abs(srcI - desI) === 0) {
+        //     console.log("vide")
+        // }
+        if (Math.abs(srcI - desI) > 0) {
+            for (let i=0+start ; i < Math.abs(srcI - desI)+start+1 ; i++) {
+                actualId = informationsGrade[i].id_grade ;
+                let informations = { method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({newPlace: i})
+                };
+                fetch(`/api/grades/${actualId}/order`, informations)
+                .then(result => {
+                    return result.json();
+                })
+                .then(data => {
+                    if (i === Math.abs(srcI - desI)) {
+                        if (data.count === 1) {
+                            toast.success("L'ordre de vos grades a bien été mis à jour !", optionsToast);
+                        }
+                        else {
+                            toast.error(errorMsgClient, optionsToast);
+                        }
                     }
-                    else {
-                        toast.error(errorMsgClient, optionsToast);
-                    }
-                }
-            });
+                });
+            }
         }
     }
     
@@ -428,9 +435,9 @@ function Grades() {
                                 <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
                                     {(provided, snapshot) => (
                                         <div className="draggable-card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-12" onDragStart={() => console.log("drag")}>
-                                            <div className="col-12" onClick={() => openCameraInfo(grade.color, grade.name_grade, grade.id_grade)}>
-                                                <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} 
-                                                    allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
+                                            <div className="col-12">
+                                                <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} order={grade.order_place} 
+                                                    allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} id={grade.id_grade} openCameraInfo={openCameraInfo}/>
                                             </div>
                                         </div>
                                     )}

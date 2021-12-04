@@ -288,6 +288,7 @@ module.exports = function (app, client) {
      * @param {integer} newPlace  new number of the place for the grade
      */
      app.post("/api/grades/:idGrade/order",(request, response) => {
+        //  console.log("rentre")
         const newPlace = request.body.newPlace ;
         const idGrade = request.params.idGrade ;
         const query = "update grade \
