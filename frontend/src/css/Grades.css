@@ -366,64 +366,64 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 
 .draggable-element:active {
     cursor: grabbing;
-    /* background-color: royalblue!important; */
     box-shadow: 0 0 1rem #666!important;
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
 }
 
-/* .draggable-element:hover {
-    box-shadow: 0 0 1rem red!important;
-    background-color: red!important;
-    
-} */
-/* [type=button]:hover {
-    background-color: purple!important;
-}
-.bg-light:hover{
-    background-color: blue;
-} */
 
-.actionsGrades {
-    display: none;
-    position:absolute;
-    color:white;
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    left: 0rem;
+    transition: opacity 0.3s cubic-bezier(0.1,0.1,0.25,1) 0.1s, left 0.3s cubic-bezier(0.1,0.1,0.25,1) 0.1s, visibility 0.3s cubic-bezier(0.1,0.1,0.25,1) 0.1s;
 }
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    left: 3rem;
+    transition: opacity 0.6s cubic-bezier(0.1,0.1,0.25,1) 0.2s, left 0.6s cubic-bezier(0.1,0.1,0.25,1) 0.2s, visibility 0.6s cubic-bezier(0.1,0.1,0.25,1) 0.2s;
+}
+
 .actionsGrade {
-    color:white
-}
-
-
-/* .gradeCard .rounded-circle {
-    width: 1.2rem !important;
-    height: 1.2rem !important;
-    top: 0.2rem!important;
-    background-color:#ff3e3e!important ;
-} */
-
-/* .gradeCard .bi-trash {
-    position:relative;
-    top:0.15rem;
-    left:-0.04rem;
-} */
-.gradeCard:hover{
-    background-color: blue!important;
-}
-
-/* #gradeModal .rounded-circle {
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-    background-color:#ff3e3e!important ;
-    z-index:1;
-} */
-
-#gradeModal .bi-trash {
-    /* position:relative;
-    top:0.25rem; */
-    /* left:-0.04rem; */
-    /* position:absolute;
-    left:93%; */
-    /* background-color: red; */
     color:white;
-    /* top:0% */
+    position: relative;
+}
+
+
+.gradeCard:hover{
+    box-shadow: 0 0 0.2rem #b1b0b0!important;
+}
+
+.frameActions {
+    text-align: center;
+    width: 1.4rem;
+    color:white!important;
+}
+.frameSee {
+    background-color:#86bff1 ;
+}
+.frameModify{
+    background-color: #e7dca8;
+}
+.frameDelete{
+    background-color: #fb4040;
+}
+
+.seeIcon {
+    font-size: 0.8rem;
+    position: relative;
+    top:-0.05rem;
+}
+.modifyIcon {
+    font-size: 0.7rem;
+    position: relative;
+    top:-0.1rem;
+}
+.deleteIcon {
+    font-size: 0.7rem;
+    position: relative;
+    top:-0.1rem;
 }

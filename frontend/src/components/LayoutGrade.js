@@ -6,10 +6,10 @@ const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, 
         console.log('delete')
     }
     const displayIcon = () => {
-        document.getElementsByClassName("actionsGrade")[order].style.display = "flex" ;
+        document.getElementById("actionsGrade-" + id).className = "actionsGrade row col-12 p-0 m-0 mb-2 justify-content-around visible" ; 
     }
     const hideIcon = () => {
-        document.getElementsByClassName("actionsGrade")[order].style.display = "none" ;
+        document.getElementById("actionsGrade-" + id).className = "actionsGrade row col-12 p-0 m-0 mb-2 justify-content-around hidden" ; 
     }
     return (
         <div className="row p-1 justify-content-center card-grade offset-md-1 offset-lg-1">
@@ -19,15 +19,15 @@ const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, 
                 </div>
                 <div className="align-self-center name-grade col-8 col-sm-6">{name}</div>
                 <div className="layout-nbr-camera p-0 col col-4 col-sm-3">
-                    <div className="actionsGrade row col-12 p-0 m-0 mb-2 justify-content-around">
-                        <div className="col-3 p-0 rounded-circle" style={{textAlign:"center", width:"1.4rem", backgroundColor:"#86bff1", color:"white!important"}} type="button"  data-bs-toggle="modal" data-bs-target="#gradeModal" onClick={() => openCameraInfo(color, name, id)}>
-                            <i class="bi bi-eye-fill" style={{fontSize:"0.9rem"}}></i>
+                    <div id={`actionsGrade-${id}`} className="actionsGrade row col-12 p-0 m-0 mb-2 justify-content-around hidden">
+                        <div type="button" className="frameSee frameActions col-3 p-0 rounded-circle shadow" data-bs-toggle="modal" data-bs-target="#gradeModal" onClick={() => openCameraInfo(color, name, id)}>
+                            <i class="bi bi-eye seeIcon"></i>
                         </div>
-                        <div className="col-3 p-0 rounded-circle" style={{textAlign:"center", width:"1.4rem", backgroundColor:"#e7dca8", color:"white!important"}}>
-                            <i class="bi bi-pen-fill" style={{fontSize:"0.8rem"}}></i>
+                        <div type="button" className="frameModify frameActions col-3 p-0 rounded-circle shadow">
+                            <i class="bi bi-pen modifyIcon"></i>
                         </div>
-                        <div className="col-3 p-0 rounded-circle" style={{textAlign:"center", width:"1.4rem", backgroundColor:"#fb4040", color:"white!important"}}>
-                            <i class="bi bi-trash" style={{fontSize:"0.8rem"}}></i>
+                        <div type="button" className="frameDelete frameActions col-3 p-0 rounded-circle shadow">
+                            <i class="bi bi-trash deleteIcon"></i>
                         </div>
                     </div>
                     <div className="p-0 col align-self-end row col-12 m-0">
