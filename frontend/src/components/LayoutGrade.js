@@ -12,8 +12,8 @@ const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, 
         document.getElementById("actionsGrade-" + id).className = "actionsGrade row col-12 p-0 m-0 mb-2 justify-content-around hidden" ; 
     }
     return (
-        <div className="row p-1 justify-content-center card-grade offset-md-1 offset-lg-1">
-            <div className="draggable-element gradeCard p-1 bg-light shadow-sm rounded row col-10 col-md-9 col-lg-7 col-xl-6" onMouseOver={() => {displayIcon()}} onMouseLeave={() => {hideIcon()}}>
+        // col-10 col-md-9 col-lg-7 col-xl-6
+            <div className="draggable-element gradeCard p-1 bg-light shadow-sm rounded row col-12" onMouseOver={() => {displayIcon()}} onMouseLeave={() => {hideIcon()}}>
                 <div className="rounded bg-person col-12 col-sm-3" style={{backgroundColor:color}} >
                     <i className="bi bi-people icon-person"></i>
                 </div>
@@ -41,7 +41,6 @@ const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, 
                     </div>
                 </div>
             </div>
-        </div>
     );
 }
 

@@ -388,11 +388,6 @@ function Grades() {
             informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0]) ;
             
             let start = srcI > desI ? desI : srcI ;
-            console.log("debut : ", 0+start, " fin : ", Math.abs(srcI - desI)+start+1)
-            console.log("math : ", Math.abs(srcI - desI))
-            // if (Math.abs(srcI - desI) === 0) {
-            //     console.log("vide")
-            // }
             if (Math.abs(srcI - desI) > 0) {
                 for (let i=0+start ; i < Math.abs(srcI - desI)+start+1 ; i++) {
                     actualId = informationsGrade[i].id_grade ;
@@ -434,16 +429,18 @@ function Grades() {
                         {(provided, _) => (
                         <div ref={provided.innerRef} {...provided.droppableProps}>
                             {informationsGrade && informationsGrade.map((grade, i) => (
-                                <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
-                                    {(provided, snapshot) => (
-                                        <div className="draggable-card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-12 m-0" onDragStart={() => console.log("drag")}>
-                                            <div className="col-12">
+                                <div className="row col-12 m-0">
+                                    <div className="row p-1 justify-content-center card-grade offset-md-1 offset-lg-1">
+                                        <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
+                                            {(provided, snapshot) => (
+                                                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-10 col-md-9 col-lg-7 col-xl-6 justify-content-center">
                                                 <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} order={grade.order_place} 
                                                     allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} id={grade.id_grade} openCameraInfo={openCameraInfo}/>
-                                            </div>
-                                        </div>
-                                    )}
-                                </ Draggable>
+                                                </div>
+                                            )}
+                                        </ Draggable>
+                                    </div>
+                                </div> 
                             ))}
                             {provided.placeholder}
                         </div>
