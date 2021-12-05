@@ -12,7 +12,7 @@ function ElementNavbar( {href, text,  icon}) {
         // </li>   
 
         <li className="nav-item">
-            <a href={href} className="nav-link-main">  
+            <a href={href} className="nav-link">  
                 <i class={`bi ${icon} m-4`} style={{"fontSize" : "2rem"}}></i>
                <span className="link-text"  style={{fontWeight: "500"}}>{text}</span>
             </a>                 
