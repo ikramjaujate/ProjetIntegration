@@ -10,6 +10,7 @@ import {isLoggedIn} from './components/auth.js';
 import {PrivateRoute} from "./components/PrivateRoute.js";
 import Navbar from './Navbar';
 import Settings from './Settings';
+import GDPR from './GDPR';
 
 
 import { GlobalStyles } from "./components/ChangeTheme/Globalstyle";
@@ -20,6 +21,7 @@ setGlobal({
   // color:  window.localStorage.getItem('theme') === 'light' ? 'light' : window.localStorage.getItem('theme') === 'dark' ? "dark" : "daltonism",
   color:  window.localStorage.getItem('theme') === 'daltonism' ? 'daltonism' : window.localStorage.getItem('theme') === 'dark' ? "dark" : "light"
 });
+
 
 function App() {
 
@@ -41,6 +43,7 @@ function App() {
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Accueil} path="/home"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Members} path="/members"/>
             <PrivateRoute exact isloggedin={isLoggedIn()} component={Settings} path="/settings"/>
+            <PrivateRoute exact isloggedin={isLoggedIn()} component={GDPR} path='/gdpr'/>
             <PrivateRoute exact isloggedin={isLoggedIn()} path="/modification"  component={Modification}/>
             <PrivateRoute exact isloggedin={isLoggedIn()} >
                <Redirect exact isloggedin={isLoggedIn()} component={Accueil} to="/home" />

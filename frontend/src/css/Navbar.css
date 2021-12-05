@@ -25,6 +25,7 @@ body {
   background-color: var(--bg-primary);
   transition: width 600ms ease;
   overflow: scroll;
+  z-index: 1;
  
 }
 
@@ -82,6 +83,7 @@ body {
     height: 4rem;
     display: fixed;
     flex-direction: row;
+    z-index: 1;
   }
 
   .nav-item {
@@ -120,10 +122,12 @@ body {
     top: 0;
     width: 6rem;
     height: 100%;
+    z-index: 1;
   }
 
   .navbar-main:hover {
     width: 14rem;
+    z-index:1;
   }
 
   .navbar-main:hover .link-text {
