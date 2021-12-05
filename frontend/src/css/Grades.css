@@ -330,8 +330,10 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .modal-button{font-size: 0.8rem;}
     .card-grade{margin-bottom: 0.2rem;}
     .layout-legend { padding: 0.2rem 0rem 0.3rem 0.3rem;}
-    .visible {top:-5rem;}
-    .hidden {top:-5rem;}
+    .visible {top:-5rem; 
+        display:;}
+    .hidden {top:-5rem;
+        display:none;}
 }
 
 @media only screen and (max-width: 550px) {
