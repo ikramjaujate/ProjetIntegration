@@ -1,7 +1,7 @@
 module.exports = function (app, client) {
-    const jwt = require('jsonwebtoken');
+    var jwt = require('jsonwebtoken');
   
-    const bcrypt = require("bcrypt");
+    var bcrypt = require("bcrypt");
 
     /**
      * Allows the user to log in
@@ -13,9 +13,11 @@ module.exports = function (app, client) {
      */
 
     app.post('/api/login', (request, response) => {
-
+       
         const username = request.body.username;
+        // console.log(username)
         const password = request.body.password;
+        // console.log(password)
       
         let query = "select *  \
                     from personal \
