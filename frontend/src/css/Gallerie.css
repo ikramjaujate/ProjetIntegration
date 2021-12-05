@@ -4,9 +4,7 @@
 
 }
 
-.p-image-preview-indicator{
-    width: 200px !important ;
-}
+
 
 .titre{
     width: 70%;
@@ -18,20 +16,15 @@
 
     i img{
 
-        width: 150px !important;
-        margin-left: 350%;
-        margin-right: 350%;
-        
+        width: 10rem !important;        
     }
-    .p-image-preview-indicator{
-        width: 150px !important ;
-        margin-left: 350%;
-    }
-    .images{
-        width:20px;
-        
     
-    }
+    .hovereffect i.info {
+        
+        font-size: 2rem !important;
+    
+      }
+
     .photo{
         text-align: center;
     }
@@ -43,19 +36,16 @@
 
     i img{
 
-        width: 250px !important;
-        margin-left: 450%;
-        margin-right: 450%;
+        width: 1.5rem !important;
+        
         
     }
-    .p-image-preview-indicator{
-        width: 250px !important ;
-        margin-left: 450%;
-    }
+    
     .images{
         width:20px;
-        
-    
+    }
+    .photo{
+        text-align: center;
     }
 }
 
@@ -65,15 +55,11 @@
 
     i img{
 
-        width: 350px !important;
-        margin-left: 600%;
-        margin-right: 600%;
+        width: 2rem !important;
+        
         
     }
-    .p-image-preview-indicator{
-        width: 350px !important ;
-        margin-left: 600%;
-    }
+    
     .images{
         width:20px;
         
@@ -122,9 +108,10 @@
     display: inline-block;
     text-decoration: none;
     margin: 0rem;
-    height: 100% !important;
+    height: 4rem;
     background-color: transparent;
     font-size: 250%;
+
   }
   
 
@@ -139,7 +126,7 @@
     filter: alpha(opacity=0);
     color: #fff;
     text-transform: uppercase;
-    height: 100% !important;
+    
   }
   
   .hovereffect:hover i.info, .hovereffect:hover h2 {
@@ -148,13 +135,8 @@
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1);
-    height: 100% !important;
   }
 
   .overlay{
       height: 100%;
-  }
-  i::before{
-    height: 100% !important;
-    text-align: center;
   }

@@ -72,7 +72,7 @@ function Biblio (){
         
         <div class="container row justify-content-center"> 
         <div  className={"row col col-lg-12 col-md-12 justify-content-center ml-1 "}>
-          <div className={"row justify-content-md-center border border-secondary rounded titre border-3"}>
+          <div className={"row justify-content-sm-center justify-content-md-center border border-secondary rounded titre border-3"}>
             <div className={"col col-lg-3"}></div>
             <div className={"col col-lg-4"}><p>Nom</p><button onClick={() => tri()}><i id="boutonTri" class="bi bi-sort-numeric-up-alt"></i></button></div>
             <div className={"col col-lg-4"}><p>Date</p></div>
