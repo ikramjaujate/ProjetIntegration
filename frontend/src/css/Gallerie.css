@@ -4,11 +4,11 @@
 
 }
 
-
-
-.titre{
-    width: 70%;
+#imgModalLabel{
+  color : black !important ;
 }
+
+
 
 
 @media only screen and (max-width: 576px) {
@@ -27,7 +27,16 @@
 
     .photo{
         text-align: center;
+        font-size: medium;
     }
+    .imgModal{
+      width: 100% !important;
+      padding: 1rem !important;
+     }
+     .modal-title{
+       font-size: medium;
+     }
+    
 }
 
 
@@ -37,16 +46,21 @@
     i img{
 
         width: 1.5rem !important;
-        
-        
+             
     }
     
     .images{
         width:20px;
     }
+
     .photo{
         text-align: center;
     }
+
+    .imgModal{
+      width: 100% !important;
+      padding: 1rem !important;
+     }
 }
 
 
@@ -62,12 +76,16 @@
     
     .images{
         width:20px;
-        
-    
     }
+    .imgModal{
+      width: 100% !important;
+     }
 }
 @media only screen and (min-width: 1200px) {
     
+   .imgModal{
+    width: 100% !important;
+   }
    
 }
 
