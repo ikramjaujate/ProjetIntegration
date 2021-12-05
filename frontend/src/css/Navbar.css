@@ -64,20 +64,25 @@
   .navbar-main {
     position: fixed;
     background-color: var(--bg-primary) !important;
-    
+    transition: 400ms;
     
     z-index: 1;
    
   }
+  .nav-link-main:hover {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+  }
   
  
-  
-  
-  
-  
-  
+  .navbar-main:hover {
+    width: 14rem;
+    z-index:1;
+  }
 
-  
+  .navbar-main:hover .link-text {
+    display: inline;
+  }  
   
   
   .link-text {
@@ -85,6 +90,8 @@
     margin-left: 1rem;
   }
   
-  
+  .container-fluid{
+    padding: 0 !important;
+  }
   
 }
