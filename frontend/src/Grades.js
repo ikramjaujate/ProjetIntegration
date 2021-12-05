@@ -420,7 +420,7 @@ function Grades() {
     return (
         <div>
             <div className="row justify-content-center">
-                <div id="desription-page" className="row col-11 col-sm-10 col-md-9 col-lg-7">
+                <div id="desription-page" className="row offset-1 col-11 col-sm-10 col-md-9 col-lg-7">
                     <div id="title-description" className="col-12">Grades</div>
                     <div id="description" className="col-12">
                         Cette page vous permet de créer des grades, <br /> ainsi que de voir les détails de ces <br /> derniers !
@@ -434,7 +434,7 @@ function Grades() {
                             {informationsGrade && informationsGrade.map((grade, i) => (
                                 <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
                                     {(provided, snapshot) => (
-                                        <div className="draggable-card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-12" onDragStart={() => console.log("drag")}>
+                                        <div className="draggable-card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-12 m-0" onDragStart={() => console.log("drag")}>
                                             <div className="col-12">
                                                 <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} order={grade.order_place} 
                                                     allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} id={grade.id_grade} openCameraInfo={openCameraInfo}/>

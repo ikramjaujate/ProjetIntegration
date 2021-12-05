@@ -289,12 +289,18 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 @media only screen and (max-width: 1250px) {
     .name-grade {font-size: 159%;}
 }
+@media only screen and (max-width: 1028px) {
+    .layout-nbr-camera {font-size: 94%;}
+}
 
 @media only screen and (max-width: 992px) {
     .modal-body {padding: 0rem;}
     .layout-legend {padding: 0.5rem 0rem 0.3rem 0.1rem;}
 }
 
+@media only screen and (max-width: 784px) {
+    .layout-nbr-camera {font-size: 88%;}
+}
 @media only screen and (max-width: 767px) {
     .informations{font-size: 84%;}
     .name-grade{font-size: 150%;}
@@ -324,6 +330,8 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .modal-button{font-size: 0.8rem;}
     .card-grade{margin-bottom: 0.2rem;}
     .layout-legend { padding: 0.2rem 0rem 0.3rem 0.3rem;}
+    .visible {top:-5rem;}
+    .hidden {top:-5rem;}
 }
 
 @media only screen and (max-width: 550px) {
