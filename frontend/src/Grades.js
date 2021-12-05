@@ -381,38 +381,40 @@ function Grades() {
      * @param {object} param  informations about the card that have been moved, like her source and her destination
      */
     const sortingGrade = (param) => {
-        let actualId ;
-        const srcI = param.source.index;
-        const desI = param.destination.index;
-        informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0]) ;
-        
-        let start = srcI > desI ? desI : srcI ;
-        console.log("debut : ", 0+start, " fin : ", Math.abs(srcI - desI)+start+1)
-        console.log("math : ", Math.abs(srcI - desI))
-        // if (Math.abs(srcI - desI) === 0) {
-        //     console.log("vide")
-        // }
-        if (Math.abs(srcI - desI) > 0) {
-            for (let i=0+start ; i < Math.abs(srcI - desI)+start+1 ; i++) {
-                actualId = informationsGrade[i].id_grade ;
-                let informations = { method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({newPlace: i})
-                };
-                fetch(`/api/grades/${actualId}/order`, informations)
-                .then(result => {
-                    return result.json();
-                })
-                .then(data => {
-                    if (i === Math.abs(srcI - desI)) {
-                        if (data.count === 1) {
-                            toast.success("L'ordre de vos grades a bien été mis à jour !", optionsToast);
+        if (param.destination !== null) {
+            let actualId ;
+            const srcI = param.source.index;
+            const desI = param.destination.index;
+            informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0]) ;
+            
+            let start = srcI > desI ? desI : srcI ;
+            console.log("debut : ", 0+start, " fin : ", Math.abs(srcI - desI)+start+1)
+            console.log("math : ", Math.abs(srcI - desI))
+            // if (Math.abs(srcI - desI) === 0) {
+            //     console.log("vide")
+            // }
+            if (Math.abs(srcI - desI) > 0) {
+                for (let i=0+start ; i < Math.abs(srcI - desI)+start+1 ; i++) {
+                    actualId = informationsGrade[i].id_grade ;
+                    let informations = { method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({newPlace: i})
+                    };
+                    fetch(`/api/grades/${actualId}/order`, informations)
+                    .then(result => {
+                        return result.json();
+                    })
+                    .then(data => {
+                        if (i === Math.abs(srcI - desI)) {
+                            if (data.count === 1) {
+                                toast.success("L'ordre de vos grades a bien été mis à jour !", optionsToast);
+                            }
+                            else {
+                                toast.error(errorMsgClient, optionsToast);
+                            }
                         }
-                        else {
-                            toast.error(errorMsgClient, optionsToast);
-                        }
-                    }
-                });
+                    });
+                }
             }
         }
     }

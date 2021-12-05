@@ -331,7 +331,8 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .card-grade{margin-bottom: 0.2rem;}
     .layout-legend { padding: 0.2rem 0rem 0.3rem 0.3rem;}
     .visible {top:-5rem; 
-        display:;}
+        /* display:; */
+    }
     .hidden {top:-5rem;
         display:none;}
 }
