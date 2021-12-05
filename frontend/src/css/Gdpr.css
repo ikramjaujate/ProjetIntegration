@@ -10,12 +10,23 @@
     color: #BDBDBD;
     
 }
-
+.titre{
+    color : rgb(47, 63, 57);
+    /* margin-top:30px; */
+}
+#navbar-example2{
+    /* position:fixed; */
+}
 .gdpr {
     font-size : 2.3rem;
     text-align: center;
-    color: #457eaf;
+    color: #af6f45;
     margin-top : 5%;
+}
+
+.test{
+    position:inherit;
+
 }
 
 .vigueur {
@@ -26,13 +37,23 @@
 .article {
     font-size : 1.7rem;
     margin-bottom: 4%;
-    color:#f88b90;
+    color:#d65e64;
 }
 
 .texte {
     font-size: 0.8em;
     text-align: justify;
     line-height:25px;
+}
+
+.liste{
+    /* padding-left: 2rem; */
+    /* list-style-type:round; */
+   
+    /* background-image: url(star.svg); */
+    /* background-color: red !important; */
+    background-size: 1.6rem 1.6rem;
+    background-repeat: no-repeat;
 }
 
 
