@@ -169,12 +169,16 @@ export default function Members() {
             console.log(response)
             if (response.status === 200) {
                 toast.success("Vous venez de modifier le nom et prénom de cet utilisateur", optionsToast);
+                
             }
             else {
                 toast.error("Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous");
             }
+            
 
         })
+        
+        
 
 
     }
