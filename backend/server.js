@@ -34,7 +34,8 @@ const port = 3001;
 const grade = require('./routes/back-grade.js')
 const members = require('./routes/back-members.js')
 const privatedata = require('./routes/back-privatedata.js')
-const cameras = require('./routes/back-cameras.js')
+const cameras = require('./routes/back-cameras.js');
+const photos = require('./routes/back-photos.js');
 
 
 const client = new Client({
@@ -110,6 +111,7 @@ grade(app, client);
 cameras(app, client);
 members(app, client);
 privatedata(app, client);
+photos(app,client);
 
  app.get('*', (req, res) => {
    return res.sendFile(path
