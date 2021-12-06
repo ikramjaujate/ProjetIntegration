@@ -1,14 +1,16 @@
 
 
 /* Small screens */
-@media only screen and (max-width: 599px) {
+@media only screen and (max-width: 991px) {
   .navbar-main {
     
     background-color: #457eaf !important;
     
    
   }
- 
+  a.hoverNav:hover{
+    color: #84CFEC !important;
+  }
  
 }
 
@@ -16,30 +18,13 @@
   color : #fff !important;
 }
 /* Large screens */
-@media (min-width: 600px) {
-  .navbar-main {
-    top: 0;
-    width: 6rem;
-    height: 100%;
-   
-  }
+@media (min-width: 991px) {
 
-  .navbar-main:hover {
-    width: 14rem;
-  }
-
-  .navbar-main:hover .link-text {
-    display: inline;
-  }
   .navbar-nav {
     display: flex;
     flex-direction: column !important;
   }
-  .nav-link-main svg {
-    width: 2rem;
-    min-width: 2rem;
-    margin: 0 1.5rem;
-  }
+ 
 
 
   :root {
@@ -49,7 +34,7 @@
     --text-secondary: #ececec;
     --bg-primary: #457eaf;
     --bg-secondary: #1e1e2c;
-    --transition-speed: 600ms;
+    
   }
   
   body {
@@ -58,40 +43,46 @@
     margin: 0;
     padding: 0;
   }
-  
-  
-  
+    
   .navbar-main {
     position: fixed;
     background-color: var(--bg-primary) !important;
-    transition: 400ms;
-    
+    transition: width .6s;
     z-index: 1;
+    top: 0;
+    width: 6rem;
+    height: 100%;
    
   }
-  .nav-link-main:hover {
-    background: var(--bg-secondary);
-    color: var(--text-secondary);
-  }
+  
   
  
   .navbar-main:hover {
     width: 14rem;
-    z-index:1;
+    transition: width .6s;
+   
   }
 
   .navbar-main:hover .link-text {
-    display: inline;
+    display:-webkit-inline-box;
   }  
   
   
   .link-text {
     display: none;
-    margin-left: 1rem;
   }
   
   .container-fluid{
     padding: 0 !important;
+    
+  }
+  .etirement{
+    width: 14rem;
+  }
+  
+
+  a.hoverNav:hover{
+    color: #84CFEC !important;
   }
   
 }

@@ -68,11 +68,11 @@ function Biblio (){
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/image/image.min.js"></script>
         
-        <div className='titre text-center offset-1 '>Page de gestion des photos</div>
+        <div className='gallerie text-center offset-1 '>Page de gestion des photos</div>
         
         <div class="container row justify-content-center"> 
         <div  className={"row col col-lg-12 col-md-12 justify-content-center ml-1 "}>
-          <div className={"row justify-content-sm-center justify-content-md-center border border-secondary rounded titre border-3"}>
+          <div className={"row justify-content-sm-center justify-content-md-center border border-secondary rounded gallerie border-3"}>
              <div className={"col col-lg-4 row p-1"}>
               <div className="col-6 col-xl-6"><p>Nom</p></div>
               <div className="col-6 col-xl-2"><button onClick={() => tri()}>
