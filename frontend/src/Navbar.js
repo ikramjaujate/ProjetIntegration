@@ -1,5 +1,5 @@
 import './css/Navbar.css';
-import ElementNavbar from './components/ElementNavbar';
+import ElementNavBar from './components/ElementNavbar';
 
 
 function Navbar() {
@@ -18,7 +18,7 @@ function Navbar() {
                 <ElementNavBar href="members"  text="MEMBRES" icon="bi-people" style={{"fontSize" : "2rem"}} />
                 <ElementNavBar href="photos" text="GALERIE" icon="bi-images" style={{"fontSize" : "2rem"}} />
                 <ElementNavBar href="settings" text="PARAMETRES" icon="bi-gear" style={{"fontSize" : "2rem"}} />
-                <ElementNavbar href="gdpr" text="GDPR" icon="bi bi-file-earmark-lock" style={{"fontSize" : "2rem"}} />
+                <ElementNavBar href="gdpr" text="GDPR" icon="bi bi-file-earmark-lock" style={{"fontSize" : "2rem"}} />
 
 
             </ul>

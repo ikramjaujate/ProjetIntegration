@@ -1,6 +1,6 @@
 import '../css/Navbar.css';
 
-function ElementNavbar( {href, text,  icon}) {
+function ElementNavBar( {href, text,  icon}) {
     return (
         // <li className="nav-item">
         //     <a href={href} className="nav-link-main">  
@@ -20,7 +20,7 @@ function ElementNavbar( {href, text,  icon}) {
     );
 }
   
-ElementNavbar.defaultProps = {
+ElementNavBar.defaultProps = {
     href: "home",
     dataIcon : "house",
     text : "Accueil",
@@ -29,4 +29,4 @@ ElementNavbar.defaultProps = {
     viewBox : "0 0 576 512"
 }
 
-export default ElementNavbar;
+export default ElementNavBar;
