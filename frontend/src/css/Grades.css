@@ -438,3 +438,7 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     position: relative;
     top:-0.1rem;
 }
+
+.gradespage .bg-light {
+    background-color: #f5f5f5!important;
+}

@@ -415,7 +415,7 @@ function Grades() {
     }
     
     return (
-        <div>
+        <div className="gradespage">
             <div className="row justify-content-center">
                 <div id="desription-page" className="row offset-1 col-11 col-sm-10 col-md-9 col-lg-7">
                     <div id="title-description" className="col-12">Grades</div>
