@@ -329,9 +329,13 @@ export default function Members() {
             .then(response => response.json())
             .then(res => {
                 setAllPhotos(res)
+                
                 for (let i in res) {
                     photos.push(res[i]["pictures"])
                     setProfilePhoto(res[0]["pictures"])
+                }
+                if (res.length === 0) { 
+                    setProfilePhoto('profile.jpeg')
                 }
                 setHasValue(true)
             })
