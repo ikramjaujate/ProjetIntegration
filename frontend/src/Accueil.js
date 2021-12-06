@@ -25,7 +25,7 @@ function Cam2 (){
               headers:{'Content-type':'application/json'}
               }
         
-              fetch('/api/camera', etatCamera)
+              fetch('/api/cameras', etatCamera)
               .then(response =>{
                 console.log(response)
                   return response.json()

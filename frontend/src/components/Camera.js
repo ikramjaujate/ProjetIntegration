@@ -109,11 +109,11 @@ function Camera() {
                     <section class="streaming">
                         <h3>Camera</h3>
                         <div id="changement">
-                            <img id="test" alt="video surveillance" src={etat} width="640" height="480" />
+                            <img id="test" alt="video surveillance" src='https://video.4x4vert.be/video'width="640" height="480" />
                         </div>
                     </section>
 
-                    <button class="btn btn-primary m-5" type="button" onClick={Capture}>prend photo</button>
+                    {/*<button class="btn btn-primary m-5" type="button" onClick={Capture}>prend photo</button>*/}
                     <button class="btn btn-primary m-5" onClick={Allumer} type="button" name="start" value="Eteindre">up</button>
                     <button class="btn btn-primary m-5" onClick={Eteindre} type="button" name="stop" value="Eteindre">Éteindre</button>
 

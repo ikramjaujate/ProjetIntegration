@@ -41,7 +41,7 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     margin-left: 30px;
     margin-bottom: 0%;
     padding: 0%;
-
+    background-color: #ffffff00!important;
 }
 
 

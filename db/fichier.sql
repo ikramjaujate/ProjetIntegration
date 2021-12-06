@@ -197,6 +197,7 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS public.personal
 (
+    id_personal SERIAL NOT NULL,
     username varchar(25) NOT NULL,
     password varchar(1024) NOT NULL,
     PRIMARY KEY (username)

@@ -8,6 +8,10 @@ const path = require('path')
 dotenv.config();
 //var path = require('path');
 const helmet = require("helmet");
+// Ajout des fichier du waf
+const Waf = require('mini-waf/wafbase');  // Base du waf
+const wafrules = require('mini-waf/wafrules'); //Règles de sécurisation associer au waf
+
 
 //const express_waf_middleware = require("express-waf-middleware");
 
@@ -109,10 +113,10 @@ members(app, client);
 privatedata(app, client);
 photos(app,client);
 
-app.get('*', (req, res) => {
-  return res.sendFile(path
-    .join(__dirname + '/build/', 'index.html'))
-});
+ app.get('*', (req, res) => {
+   return res.sendFile(path
+     .join(__dirname + '/build/', 'index.html'))
+ });
 
 client.connect(err => {
   if (err) {
@@ -137,6 +141,7 @@ var waf = new ExpressWaf.ExpressWaf({
 });
 // Module CSRF
 
+
 waf.addModule('csrf-module', {
   allowedMethods:['GET', 'POST', 'PUT','DELETE'],
   refererIndependentUrls: ['/'],
@@ -146,6 +151,8 @@ waf.addModule('csrf-module', {
 });*/
 
 //app.use(waf.check);
+app.use(Waf.WafMiddleware(wafrules.DefaultSettings));
+
 
 module.exports = server;
 

@@ -10,14 +10,14 @@ module.exports = function(app,client) {
  **/
 
  
-  app.get('/api/camera', (req, response) =>{
-    client.query('select * from camera  left join status on status.id_status = camera.id_status', (err, result) => {
+  // app.get('/api/camera', (req, response) =>{
+  //   client.query('select * from camera  left join status on status.id_status = camera.id_status', (err, result) => {
       
-      if(err) throw err ;
-      response.send(result.rows);
+  //     if(err) throw err ;
+  //     response.send(result.rows);
      
-    })
-  })
+  //   })
+  // })
 
 app.get('/api/cameras', (req, res) =>{
 

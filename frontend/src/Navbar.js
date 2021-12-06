@@ -1,8 +1,10 @@
 import './css/Navbar.css';
-import ElementNavBar from './components/ElementNavbar';
+import ElementNavbar from './components/ElementNavbar';
+
 
 function Navbar() {
     return (
+
         
         <nav className="navbar navbar-main navbar-expand-lg navbar-light bg-secondary ">
         <div class="container-fluid  etirement"> 
@@ -16,6 +18,8 @@ function Navbar() {
                 <ElementNavBar href="members"  text="MEMBRES" icon="bi-people" style={{"fontSize" : "2rem"}} />
                 <ElementNavBar href="photos" text="GALERIE" icon="bi-images" style={{"fontSize" : "2rem"}} />
                 <ElementNavBar href="settings" text="PARAMETRES" icon="bi-gear" style={{"fontSize" : "2rem"}} />
+                <ElementNavbar href="gdpr" text="GDPR" icon="bi bi-file-earmark-lock" style={{"fontSize" : "2rem"}} />
+
 
             </ul>
             </div>
