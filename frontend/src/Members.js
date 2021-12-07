@@ -435,13 +435,13 @@ export default function Members() {
         <>
 
             <div  className="rounded row mt-2 justify-content-center"> 
-                <div className="col offset-md-1 offset-xl-1 col-4">
+                <div className="rounded col offset-md-1 offset-xl-1 col-4">
                     <input style={{border:'1px solid grey'}} type="text" onChange={e => {
                         setFilterText(e.target.value)
                     }}placeholder="chercher"></input>
                 </div>
 
-                <div className="col col-3 col-lg-3 col-sm-3">
+                <div className="rounded col col-3 col-lg-3 col-sm-3">
                     <select onChange={e => (setCurrentGrade(e.target.value))} className="form-select form-select-sm" aria-label="Default select example">
                         <option >Tous</option>
                         {gradesList.map((val) => {
@@ -452,62 +452,72 @@ export default function Members() {
             </div>
             <div> 
                 <div className="row align-items-center offset-lg-1 justify-content-center members p-5">
-                    <div class="rounded col-sm-5 col-md-3 col-lg-5 col-xl-3">
-                        <div data-bs-toggle="modal" data-bs-target="#addUser" class="p-lg-5 p-xl-3 bg-success rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" color='fill' class="bi offset-5 offset-sm-4 bi-person-plus-fill" viewBox="0 0 16 16">
-                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                            </svg>
-                        </div>
-                        <div class="modal fade" id="addUser" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
+                    <div style={{opacity:'0.9'}} className="col-sm-5 col-md-3 col-lg-5 col-xl-3 p-4 mx-1 mb-3 ">
+                        <div className="row cardMember">
+                            <div style={{backgroundColor:"#cccccc"}} className="col-12">
+                                <button data-bs-toggle="modal" data-bs-target="#addUser" className="p-2 btn float-end" style={{border :'0'}} >                                            
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#00b806" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                    </svg>
+                                </button>  
+                            </div>                                    
+                            <div style={{backgroundColor:"#ebebeb"}} className="rounded col-12 downPart">
 
-                                <div class="modal-content" style={{ backgroundColor: color }}>
-
-                                    <div class="modal-body">
-
-                                        
-                                            <form class="form m-2" onSubmit={submitClient}>
-                                                <label for="f-name">Prénom:</label><br/>
-                                                <Input name="f-name" idName="f-name" max="50" min="1" type="texte" placeholder="Prénom" setFunc={setClientFirstName}/><br/>
-                                                <label class="mt-2" for="l-name">Nom:</label><br/>
-                                                <Input name="l-name" idName="l-name" max="50" min="1" type="texte" placeholder="Nom" setFunc={setClientLastName}/><br/>
-                                                <label class="mt-2" for="grade">Grade:</label><br/>
-                                                <select required onChange={(e) => {
-                                                                setClientGrade(e.target.value)}} name="grade">
-                                                    {gradesList.map((val) => {
-                                                            return <option value={val.id_grade}>{val.id_grade + ". "}{val.name_grade}</option>
-                                                    })}
-                                                </select><br/><br/>
-                                                
-                                                <button type="submit">Envoyer</button>
-                                                                        
-                                            </form>
-                                        
-
-                                    </div>     
-
+                                <div class="col-md-4 text-align">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                    </svg>
                                 </div>
+                                NOUVEAU
+                            </div>
+                        </div>
+                    </div>
+                      
+                    <div class="modal fade" id="addUser" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+
+                            <div class="modal-content" style={{ backgroundColor: color }}>
+
+                                <div class="modal-body">
+
+                                    
+                                        <form class="form m-2" onSubmit={submitClient}>
+                                            <label for="f-name">Prénom:</label><br/>
+                                            <Input name="f-name" idName="f-name" max="50" min="1" type="texte" placeholder="Prénom" setFunc={setClientFirstName}/><br/>
+                                            <label class="mt-2" for="l-name">Nom:</label><br/>
+                                            <Input name="l-name" idName="l-name" max="50" min="1" type="texte" placeholder="Nom" setFunc={setClientLastName}/><br/>
+                                            <label class="mt-2" for="grade">Grade:</label><br/>
+                                            <select required onChange={(e) => {
+                                                            setClientGrade(e.target.value)}} name="grade">
+                                                {gradesList.map((val) => {
+                                                        return <option value={val.id_grade}>{val.id_grade + ". "}{val.name_grade}</option>
+                                                })}
+                                            </select><br/><br/>
+                                            
+                                            <button type="submit">Envoyer</button>
+                                                                    
+                                        </form>
+                                    
+
+                                </div>     
 
                             </div>
 
-                        </div >    
+                        </div>
 
-                            
-                        
-                    </div>
-    
+                    </div >
+
                     {membersList.filter(name => name.first_name.includes(filterText)).filter(currentGrade !== "Tous" ? grade => grade.name_grade === currentGrade : grade => grade.name_grade.includes("")).map((val) => {
                         return (
                             <div className="rounded col-sm-5 col-md-3 col-lg-5 col-xl-3 p-4 mx-1 mb-3 ">
                                 <div className="row rounded cardMember">
                                     <div style={{backgroundColor:val.color, fontSize:"0.7rem"}} className="col-6">
-                                        {val.name_grade}
                                         
                                     </div>
                                     <div style={{backgroundColor:val.color}} className="col-6">
                                     <button className="p-2 btn float-end" id={val.id_member} style={{border :'0'}} onClick={event => {if(window.confirm("Voulez vous vraiment supprimer " + val.last_name + "?")) delMember(event.target.id)}} >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                         </svg>
                                     </button>
@@ -515,7 +525,10 @@ export default function Members() {
                                     <div style={{backgroundColor:"#ebebeb"}} className="rounded col-12 downPart" onClick={() => changeUser(val.id_member)} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 
                                         <div class="col-md-4 text-align">
-                                            <img src="https://as2.ftcdn.net/v2/jpg/03/32/59/65/1000_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg" class="img-fluid rounded-start" alt="profile-pic"/>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                            </svg>
                                         </div>
                                         {val.id_member}. {val.first_name} {val.last_name}
                                     </div>
