@@ -302,4 +302,33 @@ module.exports = function (app, client) {
             response.status(200).json({"count" : results.rowCount});
         });
     });
+
+    /**
+     * Delete a grade
+     *
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @method POST
+     * @param {integer} idGrade identifier of the grade for which we want to change the order place
+     */
+     app.delete("/api/grades/:idGrade",(request, response) => {
+        console.log("delete grade")
+        const idGrade = request.params.idGrade ;
+        console.log("id : ", idGrade)
+        const query = "delete from permission \
+        where id_grade = ($1); ";
+        client.query(query,[idGrade],(error, results) => {
+            if (error) {
+                throw error;
+            }
+            const query2 = "delete from grade \
+            where id_grade = ($1);" ;
+            client.query(query2,[idGrade],(error, results) => {
+                if (error) {
+                    throw error;
+                }
+                // console.log("results : ", results)
+                response.status(200).json({"count" : results.rowCount});
+            });
+        });
+    });
 };

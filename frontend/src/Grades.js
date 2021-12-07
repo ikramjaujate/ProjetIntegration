@@ -413,6 +413,28 @@ function Grades() {
             }
         }
     }
+
+    const deleteGrade = (idGrade) => {
+        console.log('delete : ', idGrade);
+        let informations = { method: 'DELETE',
+               headers: {'Content-Type': 'application/json'},
+        };
+
+        fetch(`/api/grades/${idGrade}`, informations)
+        .then(result => {
+            return result.json();
+        })
+        .then(data => {
+            console.log("data : ", data);
+            if (data.count === 1) {
+                getGrades() ;
+                toast.success("le grade a bien été supprimé !", optionsToast);
+            }
+            else {
+                toast.error(errorMsgClient, optionsToast);
+            }
+        });
+    }
     
     return (
         <div className="gradespage">
@@ -435,7 +457,7 @@ function Grades() {
                                             {(provided, snapshot) => (
                                                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-10 col-md-9 col-lg-7 col-xl-6 justify-content-center">
                                                 <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} order={grade.order_place} 
-                                                    allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} id={grade.id_grade} openCameraInfo={openCameraInfo}/>
+                                                    allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} id={grade.id_grade} openCameraInfo={openCameraInfo} deleteGrade={deleteGrade}/>
                                                 </div>
                                             )}
                                         </ Draggable>
@@ -449,8 +471,8 @@ function Grades() {
                 </ DragDropContext>
 
                 <div id="layout-add" className="row p-1 text-center justify-content-center col-12">
-                    <span title="Créer un grade" data-toggle="tooltip" data-placement="top">
-                        <i type="button" className="p-0 bi bi-plus-circle-fill add-user col-1" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
+                    <span className="col-12 row justify-content-center" title="Créer un grade" data-toggle="tooltip" data-placement="top">
+                        <i type="button" className="p-0 bi bi-plus-circle-fill add-user col-1 offset-2" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
                     </span>
                 </div>  
             </div>
