@@ -1,13 +1,12 @@
-.images{
+.voirPhoto .images{
     width:5px;
-    
+    }
 
-}
-
-#imgModalLabel{
+.voirPhoto #imgModalLabel{
   color : black !important ;
 }
-.gallerie{
+
+.voirPhoto .gallerie{
   color :#457eaf;
 }
 
@@ -16,28 +15,27 @@
 @media only screen and (max-width: 576px) {
 
 
-    i img{
-
+    .voirPhoto i img{
         width: 10rem !important;        
     }
     
-    .hovereffect i.info {
-        
+    .voirPhoto .hovereffect i.info {
         font-size: 2rem !important;
-    
-      }
+    }
 
-    .photo{
+    .voirPhoto .photo{
         text-align: center;
         font-size: medium;
     }
-    .imgModal{
+
+    .voirPhoto .imgModal{
       width: 100% !important;
       padding: 1rem !important;
-     }
-     .modal-title{
+    }
+
+    .voirPhoto .modal-title{
        font-size: medium;
-     }
+    }
     
 }
 
@@ -45,136 +43,134 @@
 @media (min-width: 576px) and (max-width: 991px) {
 
 
-    i img{
-
+    .voirPhoto i img{
         width: 1.5rem !important;
-             
     }
     
-    .images{
+    .voirPhoto .images{
         width:20px;
     }
 
-    .photo{
+    .voirPhoto .photo{
         text-align: center;
     }
 
-    .imgModal{
+    .voirPhoto .imgModal{
       width: 100% !important;
       padding: 1rem !important;
-     }
-     .gallerie{
+    }
+
+    .voirPhoto .gallerie{
        width: 60%;
        font-size:x-large;
-     }
-     .photo{
+    }
+
+    .voirPhoto .photo{
       text-align: center;
       font-size:1.5rem !important;
-  }
+    }
 }
 
 
 @media (min-width: 992px) and (max-width: 1199px) {
 
 
-    i img{
-
+    .voirPhoto i img{
         width: 2rem !important;
-       
     }
     
-    .images{
+    .voirPhoto .images{
         width:20px;
     }
-    .imgModal{
-      width: 100% !important;
-     }
 
-     .gallerie{
+    .voirPhoto .imgModal{
+      width: 100% !important;
+    }
+
+    .voirPhoto .gallerie{
       width: 70%;
     }
 }
 @media only screen and (min-width: 1200px) {
     
-   .imgModal{
+  .voirPhoto .imgModal{
     width: 100% !important;
-   }
-   .gallerie{
+  }
+
+   .voirPhoto .gallerie{
     width: 70%;
   }
-  .photo{
+
+  .voirPhoto .photo{
     text-align: center;
     font-size: 0.8rem;
-}
-   
+  }
 }
 
-.hovereffect {
+.voirPhoto .hovereffect {
     float: left;
     overflow: hidden;
     position: relative;
     text-align: center;
     cursor: default;
   }
-  
-  .hovereffect .overlay {
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-  }
-  
-  .hovereffect img {
-    display: block;
-    position: relative;
-    -webkit-transition: all 0.4s ease-in;
-    transition: all 0.4s ease-in;
-  }
-  
-  .hovereffect:hover img {
-    filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
-    filter: grayscale(1) blur(3px);
-    -webkit-filter: grayscale(1) blur(3px);
-    -webkit-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    transform: scale(1.2);
-  }
-  
- 
-  
-  .hovereffect i.info {
-    display: inline-block;
-    text-decoration: none;
-    margin: 0rem;
-    height: 4rem;
-    background-color: transparent;
-    font-size: 250%;
 
-  }
-  
+.voirPhoto .hovereffect .overlay {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
 
-  
-  .hovereffect i.info, .hovereffect h2 {
-    -webkit-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-    transform: scale(0.7);
-    -webkit-transition: all 0.4s ease-in;
-    transition: all 0.4s ease-in;
-    opacity: 0;
-    filter: alpha(opacity=0);
-    color: #fff;
-    text-transform: uppercase;
-    
-  }
-  
-  .hovereffect:hover i.info, .hovereffect:hover h2 {
-    opacity: 1;
-    filter: alpha(opacity=100);
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-  }
+.voirPhoto .hovereffect img {
+  display: block;
+  position: relative;
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+}
 
-  .overlay{
-      height: 100%;
-  }
+.voirPhoto .hovereffect:hover img {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
+  filter: grayscale(1) blur(3px);
+  -webkit-filter: grayscale(1) blur(3px);
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+
+
+.voirPhoto .hovereffect i.info {
+  display: inline-block;
+  text-decoration: none;
+  margin: 0rem;
+  height: 4rem;
+  background-color: transparent;
+  font-size: 250%;
+}
+
+
+
+.voirPhoto .hovereffect i.info,.voirPhoto .hovereffect h2 {
+  -webkit-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transform: scale(0.7);
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.voirPhoto .hovereffect:hover i.info,.voirPhoto .hovereffect:hover h2 {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.voirPhoto .overlay{
+    height: 100%;
+}

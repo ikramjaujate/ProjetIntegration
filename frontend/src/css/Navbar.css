@@ -57,13 +57,13 @@
   
   
  
-  .navbar-main:hover {
+  .navExpand:hover {
     width: 14rem;
     transition: width .6s;
-   
+    
   }
 
-  .navbar-main:hover .link-text {
+  .navExpand:hover .link-text {
     display:-webkit-inline-box;
   }  
   
@@ -76,10 +76,12 @@
     padding: 0 !important;
     
   }
-  .etirement{
+  .etirement:hover{
     width: 14rem;
   }
-  
+  .etirement{
+    height: 100%;
+  }
 
   a.hoverNav:hover{
     color: rgb(31, 57, 90) !important;

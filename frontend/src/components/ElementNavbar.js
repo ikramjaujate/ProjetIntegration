@@ -12,7 +12,7 @@ function ElementNavBar( {href, text,  icon, setSelectRoot, selectRoot}) {
         // </li>   
 
         <li className="nav-item" onclick={() =>{setSelectRoot(href);console.log("li")}}>
-            <a href={href} className="nav-link hoverNav" onclick={() =>{setSelectRoot(href);console.log(href)}} style={{background:href===selectRoot?"red":"none"}}>  
+            <a href={href} className="nav-link hoverNav" onclick={() =>{setSelectRoot(href);console.log(href)}} >  
                 <i class={`bi ${icon} m-4`} style={{"fontSize" : "2rem"}} onclick={() =>{setSelectRoot(href);console.log("i")}}></i>
                <span className="link-text"  style={{fontWeight: "500"}} onclick={() =>{setSelectRoot(href);console.log("span")}}>{text}</span>
             </a>                 
