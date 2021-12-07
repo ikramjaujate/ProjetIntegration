@@ -43,7 +43,7 @@ module.exports = function (app, client) {
   app.delete('/api/members/:idMember', (req, response) => {
     idMember= req.params.idMember
 
-    let query = "delete from member where id_member = $1"
+    let query = "delete from member where id_member = ($1)"
 
     client.query(query, [idMember], (error, res) => {
       if (error) {

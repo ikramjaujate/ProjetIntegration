@@ -37,21 +37,17 @@ ALTER TABLE public.camera
 INSERT INTO camera(name_camera, id_status)
 VALUES
 ('CAFET', 1),
-('LOUNGE', 1),
 ('SREU1', 3),
 ('SREU2', 1),
-('SREU3', 1),
 ('SERVERROOM', 2),
-('ACCEUIL', 2),
-('WC', 1),
-('ENTREESUD', 1),
-('ENTRENORD', 3);
+('ACCUEIL', 2),
+('ENTREESUD', 1);
 
 
 CREATE TABLE IF NOT EXISTS public.color
 (
     id_color SERIAL NOT NULL,
-    name_color char(25) NOT NULL,
+    name_color varchar(25) NOT NULL,
     PRIMARY KEY (id_color)
 );
 
@@ -77,14 +73,15 @@ VALUES
 ('#9f9f9f'),
 ('#b689c5'),
 ('#1b637e'),
-('#7c6caf94');
+('#7c6caf');
 
 
 CREATE TABLE IF NOT EXISTS public.grade
 (
     id_grade SERIAL NOT NULL,
     name_grade varchar(255) NOT NULL,
-	id_color integer NOT NULL,
+    id_color integer NOT NULL,
+    order_place integer NOT NULL,
     PRIMARY KEY (id_grade),
 	FOREIGN KEY (id_color) REFERENCES color(id_color)
 );
@@ -92,12 +89,11 @@ CREATE TABLE IF NOT EXISTS public.grade
 ALTER TABLE public.grade
     OWNER to pW95V2zYwk4L;
 
-INSERT INTO grade(name_grade, id_color)
+INSERT INTO grade(name_grade, id_color, order_place)
 VALUES
-('Directeur', 10),
-('Personnel', 18),
-('Bénéficiaire', 7);
-
+('Directeur', 10, 0),
+('Personnel', 18, 1),
+('Bénéficiaire', 7, 2);
 
 CREATE TABLE IF NOT EXISTS public.permission
 (
@@ -163,34 +159,29 @@ ALTER TABLE public.member
 
 INSERT INTO member(id_grade, first_name, last_name)
 VALUES
-(1, 'Jean', 'Ab'),
-(3, 'Louise', 'Cd'),
-(3, 'Marie', 'Ef'),
-(2, 'Luc', 'Gh'),
-(1, 'Alain', 'Ij'),
-(2, 'Henri', 'Kl'),
-(3, 'Eva', 'Mn'),
-(3, 'Clara', 'Op'),
-(3, 'Marion', 'Qr'),
-(2, 'Theo', 'St'),
-(2, 'Julien', 'Uv'),
-(3, 'Clement', 'Wx'),
-(3, 'Laurent', 'Yz'),
-(3, 'Laurence', 'Az'),
-(3, 'Pilou', 'By');
+(1, 'Ikram', 'Jaujate'),
+(3, 'Corentin', 'Dallenogare'),
+(3, 'Clémentine', 'Sacré'),
+(2, 'Julie', 'Fino'),
+(1, 'Aurelien', 'Brille'),
+(2, 'Cécile', 'Bonnet'),
+(3, 'Alexandre', 'Derwa'),
+(1, 'Marie-Noel', 'Vroman'),
+(1, 'Louis', 'VanDormael'),
+(1, 'Laurent', 'Schalkwijk');
 
 
 CREATE TABLE public.photos
 (
     id_member SERIAL NOT NULL,
-    pictures CHAR(1024) NOT NULL,
+    pictures varchar(1024) NOT NULL,
 	FOREIGN KEY (id_member) REFERENCES member(id_member)
 );
 
 INSERT INTO photos(id_member, pictures)
 VALUES
-(1, 'ikram1.jpg'),
 (1, 'ikram2.jpg'),
+(1, 'ikram1.jpg'),
 (2, 'corentin1.jpg'),
 (2, 'corentin2.jpg');
 
