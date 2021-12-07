@@ -328,11 +328,15 @@ function Settings() {
                         <div className="errorMessageModify errorMessagePassword col-4">{errorPassword}</div>
                     </div>
                 </div>
+                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
+                    
+                    <a href="gdpr" className="btn btn-light gdprLink">Conditions générales </a>
+                </div>
             </div>
 
             <ToastContainer style={{fontSize:"0.6rem"}}/>      
 
-        </ div>
+        </div>
     )
 
 } export default Settings;

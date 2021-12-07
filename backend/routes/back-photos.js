@@ -13,12 +13,12 @@ module.exports = function(app,client) {
 
         const fs = require('fs');
         let list = [];
-        fs.readdir('../frontend/public', (err, files) => {
+        fs.readdir('./build', (err, files) => {
           files.forEach(file => {
             
             var last3 = file.substr(file.length - 3); // permet d'obtenir les 3 derniers caractères du nom de fichier
-            if (last3 == "peg") { // ne prend que les fichiers en jpg
-                            
+            if ((last3 == "peg") && (file[0] ==="f")) { // ne prend que les fichiers en jpg
+              console.log()              
               list.push(file); // ajoute les fichiers à la liste
               
             }

@@ -9,12 +9,12 @@
    
   }
   a.hoverNav:hover{
-    color: #84CFEC !important;
+    color: rgb(31, 57, 90) !important;
   }
  
 }
 
-.nav-link{
+.navbar-main .nav-link{
   color : #fff !important;
 }
 /* Large screens */
@@ -57,13 +57,13 @@
   
   
  
-  .navbar-main:hover {
+  .navExpand:hover {
     width: 14rem;
     transition: width .6s;
-   
+    
   }
 
-  .navbar-main:hover .link-text {
+  .navExpand:hover .link-text {
     display:-webkit-inline-box;
   }  
   
@@ -76,13 +76,15 @@
     padding: 0 !important;
     
   }
-  .etirement{
+  .etirement:hover{
     width: 14rem;
   }
-  
+  .etirement{
+    height: 100%;
+  }
 
   a.hoverNav:hover{
-    color: #84CFEC !important;
+    color: rgb(31, 57, 90) !important;
   }
   
 }
