@@ -52,8 +52,8 @@ describe('GET /api/membres/:idMembre', function() {
             res.should.have.status(200);
             res.body.should.be.a('array');
             res.body[0].id_member.should.be.eql(1);
-            res.body[0].first_name.should.be.eql('Ikram');
-            res.body[0].last_name.should.be.eql('Jaujate');
+            res.body[0].first_name.should.be.eql('Jean');
+            res.body[0].last_name.should.be.eql('Ab');
             res.body[0].id_grade.should.be.eql(1);
             done();
         })
@@ -67,7 +67,7 @@ describe('GET /api/membres/:idMembre/photos', () => {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            res.body[0].pictures.should.be.eql('ikram2.jpg');
+            res.body[0].pictures.should.be.eql('ikram1.jpg');
             done();
         })
     });
@@ -110,8 +110,8 @@ describe('GET /api/membres/:idMember/name', () => {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            res.body[0].first_name.should.be.eql('Ikram');
-            res.body[0].last_name.should.be.eql('Jaujate');
+            res.body[0].first_name.should.be.eql('Jean');
+            res.body[0].last_name.should.be.eql('Ab');
             done();
         })
     });
