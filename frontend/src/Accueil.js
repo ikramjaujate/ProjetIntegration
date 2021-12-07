@@ -36,7 +36,7 @@ function Cam2 (){
       }, [])
 
       
-
+      
     return (
         
         <div className="cam2">
@@ -46,9 +46,9 @@ function Cam2 (){
         
         <div class="container"> 
          <div className='row'>
-        {etatCam&&etatCam.map(camera=> 
+        {etatCam&&etatCam.map((camera,index)=> 
           <div>
-            <CadreCameras nomCam={camera.name_camera} statusCam={camera.id_status} idCam={camera.id_camera} nomStatus={camera.name_status}/>
+            <CadreCameras nomCam={camera.name_camera} statusCam={camera.id_status} idCam={camera.id_camera} nomStatus={camera.name_status} index={index}/>
           </div>
         )} 
         
