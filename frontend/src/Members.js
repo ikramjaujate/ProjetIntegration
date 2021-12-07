@@ -469,10 +469,10 @@ export default function Members() {
             </div>
             <div> 
                 <div className="row align-items-center offset-lg-1 justify-content-center members p-5">
-                    <div style={{opacity:'0.9'}} className="col-sm-5 col-md-3 col-lg-5 col-xl-3 p-4 mx-1 mb-3 ">
+                    <div data-bs-toggle="modal" data-bs-target="#addUser"  style={{opacity:'0.6'}} className="col-sm-5 col-md-3 col-lg-5 col-xl-3 p-4 mx-1 mb-3 ">
                         <div className="row cardMember">
                             <div style={{backgroundColor:"#cccccc", borderTopLeftRadius:"10px", borderTopRightRadius:"10px" }} className="col-12">
-                                <button data-bs-toggle="modal" data-bs-target="#addUser" className="p-2 btn float-end" style={{border :'0'}} >                                            
+                                <button className="p-2 btn float-end" style={{border :'0'}} >                                            
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#00b806" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                                     </svg>
