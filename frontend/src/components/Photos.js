@@ -1,5 +1,5 @@
 function Photos({nomPhoto,counta}) {    
-
+    
     return (
         <>
         <div className="container row justify-content-center col-xl-12 ">
