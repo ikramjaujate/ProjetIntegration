@@ -37,15 +37,15 @@ export const ImgContainer = styled.div`
   }
   
 `;
-const optionsToast = {
-    autoClose: 4000,
-    position: "bottom-right",
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "colored"
-};
+// const optionsToast = {
+//     autoClose: 4000,
+//     position: "bottom-right",
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     theme: "colored"
+// };
 export default function Members() {
 
     
@@ -101,7 +101,7 @@ export default function Members() {
             .then(response => {
 				return response.json()
 			}).then(response => {
-                console.log(response)
+                // console.log(response)
                 setMembersList(response)
             })
 	}
@@ -449,7 +449,7 @@ export default function Members() {
         <>
 
             <div  className="rounded row mt-2 justify-content-center"> 
-                <div className="rounded col-7 col-lg-4 col-md-3 offset-md-2 offset-lg-2 offset-xl-2">
+                <div className="rounded col-7 col-lg-4 col-md-4 offset-md-2 offset-lg-2 offset-xl-2">
                     <input className="px-2" style={{border:'none', backgroundColor:"#acacac", borderRadius:"40px", color:'white', fontSize:"calc(0.7rem + 1vw)", outline:'none'}} type="text" onChange={e => {
                         setFilterText(e.target.value)
                     }}placeholder="chercher"></input>
@@ -511,7 +511,7 @@ export default function Members() {
                                                         return <option value={val.id_grade}>{val.id_grade + ". "}{val.name_grade}</option>
                                                 })}
                                             </select><br/><br/>
-                                            
+                                            <UploadFiles/>                                         
                                             <button type="submit">Envoyer</button>
                                                                     
                                         </form>
