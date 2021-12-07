@@ -435,13 +435,13 @@ export default function Members() {
         <>
 
             <div  className="rounded row mt-2 justify-content-center"> 
-                <div className="rounded col offset-md-1 offset-xl-1 col-4">
-                    <input style={{border:'1px solid grey'}} type="text" onChange={e => {
+                <div className="rounded col-7 col-lg-4 col-md-3 mb-2 offset-md-1 offset-xl-1">
+                    <input className="px-2" style={{border:'none', backgroundColor:"#acacac", borderRadius:"20px", color:'white', fontSize:"calc(0.7rem + 1vw)", outline:'none'}} type="text" onChange={e => {
                         setFilterText(e.target.value)
                     }}placeholder="chercher"></input>
                 </div>
 
-                <div className="rounded col col-3 col-lg-3 col-sm-3">
+                <div className="rounded col-6 col-lg-3 col-sm-3">
                     <select onChange={e => (setCurrentGrade(e.target.value))} className="form-select form-select-sm" aria-label="Default select example">
                         <option >Tous</option>
                         {gradesList.map((val) => {
