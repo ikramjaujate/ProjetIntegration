@@ -131,7 +131,7 @@ export default class UploadFiles extends Component {
             </label>
           </div>
 
-          <div className="col-4">
+          <div className="col-7 offset-2">
             <button
               className="btn btn-success btn-sm"
               disabled={!selectedFiles}
