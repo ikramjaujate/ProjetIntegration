@@ -145,3 +145,12 @@
     position:relative; 
     left:-0.1rem;
 }
+
+.gdprLink:hover{
+    text-decoration: underline;
+}
+
+.gdprLink{
+   
+    font-size:0.7rem;
+}

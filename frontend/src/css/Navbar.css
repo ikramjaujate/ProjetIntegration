@@ -9,12 +9,12 @@
    
   }
   a.hoverNav:hover{
-    color: #84CFEC !important;
+    color: rgb(31, 57, 90) !important;
   }
  
 }
 
-.nav-link{
+.navbar-main .nav-link{
   color : #fff !important;
 }
 /* Large screens */
@@ -82,7 +82,7 @@
   
 
   a.hoverNav:hover{
-    color: #84CFEC !important;
+    color: rgb(31, 57, 90) !important;
   }
   
 }

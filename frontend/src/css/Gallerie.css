@@ -7,7 +7,9 @@
 #imgModalLabel{
   color : black !important ;
 }
-
+.gallerie{
+  color :#457eaf;
+}
 
 
 
@@ -65,6 +67,10 @@
        width: 60%;
        font-size:x-large;
      }
+     .photo{
+      text-align: center;
+      font-size:1.5rem !important;
+  }
 }
 
 
@@ -96,6 +102,10 @@
    .gallerie{
     width: 70%;
   }
+  .photo{
+    text-align: center;
+    font-size: 0.8rem;
+}
    
 }
 

@@ -53,20 +53,7 @@ function Biblio (){
         
         <div className="files row justify-content-center">
         
-        <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
-        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/lara-light-indigo/theme.css" />
-        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.min.css" />
-        <link rel="stylesheet" href="https://unpkg.com/primeflex@2.0.0/primeflex.min.css" />
-
         
-        <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
-        <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
-        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-        <script src="https://unpkg.com/react-transition-group@4.4.2/dist/react-transition-group.js"></script>
-
-       
-        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/image/image.min.js"></script>
         
         <div className='gallerie text-center offset-1 '>Page de gestion des photos</div>
         
@@ -81,10 +68,11 @@ function Biblio (){
               <div className="col-6 col-xl-3 "><p >Date</p></div>
               </div>
           </div>
-        {pictures&&pictures.map(phot=> 
           
-            <Photos nomPhoto={phot} />
-          
+        {pictures&&pictures.map((phot, index)=> 
+            
+            <Photos nomPhoto={phot} counta={index} />
+            
         )} 
         </div>
         

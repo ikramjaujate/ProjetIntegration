@@ -12,7 +12,7 @@ function Droit_GDPR(){
                 <li class="nav-item">
                     
                     <li class="nav-item dropdown">
-                    <a class="rgpd liste nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Politic de confidentialité</a>
+                    <a class="rgpd liste nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Politique de confidentialité</a>
                     <ul class="liste dropdown-menu">
                         <li><a class="dropdown-item" href="#Mentions_legales">Article 1 : Les mentions légales</a></li>
                         <li><a class="dropdown-item" href="#Acces_Site">Article 2 : Accès au site</a></li>
@@ -31,7 +31,7 @@ function Droit_GDPR(){
                 <div className="col">
                 <li class="nav-item">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Rgpd</a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">RGPD</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#Securite">La sécurité des données clients.</a></li>
                             <li><a class="dropdown-item" href="#temps">La sauvegarde des données personnelles dans le temps</a></li>
@@ -47,7 +47,7 @@ function Droit_GDPR(){
         </div>
 
         <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" className="scrollspy-example " tabindex="0" >
-            <h1 className="titre">Politic de confidentialité</h1>
+            <h1 className="titre">Politique de confidentialité</h1>
             <p className="texte" id="Condition_utilisations">
                 Les présentes conditions générales d'utilisation (dites « CGU ») ont pour objet l'encadrement juridique des modalités de mise à disposition du site et des services par <a
                 href="https://projet.4x4vert.be">projet.4x4vert.be</a> et de définir les conditions d’accès et
@@ -221,14 +221,14 @@ function Droit_GDPR(){
                 <li className="liste">Le nom et le prénom de la personne</li>
 
             </ul>
-            <h2  id="Securite" className="article">La sécurité des données clients. </h2>
+            <h2  id="Securite" className="article">La sécurité des données clients </h2>
             <p className="texte">La base de données contenant les photos sera chiffré. De cette manière, en cas de fuite de la base de données, il sera impossible de retrouver la personne physique sur base de ses infomations, garantissant ainsi l'anonymat et le respect des employées de la société.</p>
             <h2  id="temps" className="article">La sauvegarde des données personnelles doit être limité dans le temps </h2>
             <p className="texte">
             La durée de conservation des données s’étend pendant toute la durée du contrat avec l’employé. Lorsque l’employé quitte la société, que ce soit un départ volontaire ou un licenciement, les informations seront supprimés de la base de donnée. 
             </p>
             <h2  id="oubli" className="article">
-                Le droit à l’oubli.
+                Le droit à l’oubli
             </h2>
             <p className="texte">
             Comme le prévaux la loi, les données ont le droit d'être conservé tant quelles sont utilisés. Dans le cadre de la compagnie, un employé n'ayant pas besoin d'accéder aux zones sécurisés ne sera pas ajouté à la base de donnée. 
@@ -242,10 +242,10 @@ function Droit_GDPR(){
             </p>
 
             <h2  id="corriger" className="article">
-            Le droit de corriger les données personnelles .
+            Le droit de corriger les données personnelles
             </h2>
             <p className="texte">
-            Les informations nécessaires au bon fonctionnement du systèmes sont limités. Le nom, prénom de la personne ainsi que les photos transmises peuvent être modifiés en prenant contact avec un responsable et le statut de la personne est directement géré par la société selon l’évolution de l’employé
+            Les informations nécessaires au bon fonctionnement du systèmes sont limités. Le nom, prénom de la personne ainsi que les photos transmises peuvent être modifiés en prenant contact avec un responsable et le statut de la personne est directement géré par la société selon l’évolution de l’employé.
             </p>
         </div>
     </div>

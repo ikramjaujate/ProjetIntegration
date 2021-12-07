@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-function Photos({nomPhoto}) {
+function Photos({nomPhoto,counta}) {
     const [pictures, setPictures] = useState(null);
-
+    //counta = counta.substr(0,26);
 
       
 
@@ -10,16 +10,16 @@ function Photos({nomPhoto}) {
         <>
         <div className="container row justify-content-center col-xl-12 ">
             <div className="row bg-light shadow rounded m-1 col-12 col-md-8 col-sm-8 col-lg-8 justify-content-center   ">
-            <div   className="row col-xl-4 justify-content-center mx-auto d-block hovereffect p-1" data-bs-toggle="modal" data-bs-target="#imgModal">
+            <div   className="row col-xl-4 justify-content-center mx-auto d-block hovereffect p-1" data-bs-toggle="modal" data-bs-target={`#modal-${counta}`}>
                 <img class = "img-responsive" href={nomPhoto} src={nomPhoto}></img>
                 <div class="row col-12 justify-content-center overlay mx-auto" >
                     <i class="col-7 col-md-7 align-self-center bi bi-eye info p-0"></i>
                 </div>
             </div>
-            <div className="photo row col-xl-3 col-sm-12 justify-content-sm-center justify-content-center">{nomPhoto}
+            <div className="photo row col-xl-3 col-sm-12 justify-content-sm-center justify-content-center border-end border-start">{nomPhoto}
             
             </div>
-            <div className="row col-xl-3 justify-content-sm-center justify-content-center photo">{nomPhoto.substr(6,10)}
+            <div className="row col-xl-3 justify-content-sm-center justify-content-center photo border-end">{nomPhoto.substr(6,10)}
             
             </div>
             <div className="row col-xl-3 justify-content-sm-center justify-content-center p-1">
@@ -28,7 +28,7 @@ function Photos({nomPhoto}) {
             </div>
             
             </div>
-            <div class="modal fade" id="imgModal" tabindex="-1" aria-labelledby="imgModalLabel" aria-hidden="true">
+            <div class="modal fade imgModal" id={`modal-${counta}`} tabindex="-1" aria-labelledby="imgModalLabel" aria-hidden="true">
 
            
             <div class="modal-dialog modal-xl">
