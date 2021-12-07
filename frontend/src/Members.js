@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useState, useEffect } from 'react';
-import 'reactjs-popup/dist/index.css';
+import 'reactjs-popup/dist/index.css'; 
 import UploadFiles from './components/File-upload.js';
 import Input from './components/Input';
 import Axios from 'axios';
@@ -73,6 +73,7 @@ export default function Members() {
     const [etatModification, setEtatModification] = useState(0)
     const [userNow, setUserNow] = useState("")
     const [allGrade, setAllGrade] = useState(null)
+    let flag = 1
 
     const optionsToast = {
         autoClose: 5000,
@@ -376,6 +377,19 @@ export default function Members() {
         })
     }
 
+    const Uncheck = (input) => {
+        
+        if(flag === 1){
+            setCurrentGrade(input)
+            flag = 0  
+            console.log(flag)
+        } 
+        else if (flag===0){
+            flag=1            
+            document.getElementById(input).checked = false;
+            setCurrentGrade("Tous")
+        }
+    }
 
 
     const popover = (
@@ -435,33 +449,36 @@ export default function Members() {
         <>
 
             <div  className="rounded row mt-2 justify-content-center"> 
-                <div className="rounded col-7 col-lg-4 col-md-3 mb-2 offset-md-1 offset-xl-1">
-                    <input className="px-2" style={{border:'none', backgroundColor:"#acacac", borderRadius:"20px", color:'white', fontSize:"calc(0.7rem + 1vw)", outline:'none'}} type="text" onChange={e => {
+                <div className="rounded col-7 col-lg-4 col-md-3 offset-md-2 offset-lg-2 offset-xl-2">
+                    <input className="px-2" style={{border:'none', backgroundColor:"#acacac", borderRadius:"40px", color:'white', fontSize:"calc(0.7rem + 1vw)", outline:'none'}} type="text" onChange={e => {
                         setFilterText(e.target.value)
                     }}placeholder="chercher"></input>
                 </div>
 
-                <div className="rounded col-6 col-lg-3 col-sm-3">
-                    <select onChange={e => (setCurrentGrade(e.target.value))} className="form-select form-select-sm" aria-label="Default select example">
-                        <option >Tous</option>
+                <div className="rounded col-6 col-lg-6 col-sm-3">
+                    <div className="form-check form-check-inline">
                         {gradesList.map((val) => {
-                                return (<option >{val.name_grade}</option>)
-                        })}
-                    </select>   
-                </div>             
+                                                            return (<><input type="radio" className="mx-1" id={val.name_grade} onClick={e => (Uncheck(e.target.id))} name="grade" value={val.name_grade}/>
+                                                            <label style={{backgroundColor: val.colors, width:"auto", borderRadius:"10px", fontSize:"calc(0.5vw + 0.5rem)"}} className="m-1 px-4 form-check-label" for={val.name_grade}>{val.name_grade}</label></>)
+                                                    })}
+                    </div>
+
+                    
+                </div>              
+                
             </div>
             <div> 
                 <div className="row align-items-center offset-lg-1 justify-content-center members p-5">
                     <div style={{opacity:'0.9'}} className="col-sm-5 col-md-3 col-lg-5 col-xl-3 p-4 mx-1 mb-3 ">
                         <div className="row cardMember">
-                            <div style={{backgroundColor:"#cccccc"}} className="col-12">
+                            <div style={{backgroundColor:"#cccccc", borderTopLeftRadius:"10px", borderTopRightRadius:"10px" }} className="col-12">
                                 <button data-bs-toggle="modal" data-bs-target="#addUser" className="p-2 btn float-end" style={{border :'0'}} >                                            
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#00b806" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                                     </svg>
                                 </button>  
                             </div>                                    
-                            <div style={{backgroundColor:"#ebebeb"}} className="rounded col-12 downPart">
+                            <div style={{backgroundColor:"#ebebeb", borderBottomLeftRadius:"10px", borderBottomRightRadius:"10px"}} className="col-12 downPart">
 
                                 <div class="col-md-4 text-align">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
@@ -511,18 +528,15 @@ export default function Members() {
                     {membersList.filter(name => name.first_name.includes(filterText)).filter(currentGrade !== "Tous" ? grade => grade.name_grade === currentGrade : grade => grade.name_grade.includes("")).map((val) => {
                         return (
                             <div className="rounded col-sm-5 col-md-3 col-lg-5 col-xl-3 p-4 mx-1 mb-3 ">
-                                <div className="row rounded cardMember">
-                                    <div style={{backgroundColor:val.color, fontSize:"0.7rem"}} className="col-6">
-                                        
-                                    </div>
-                                    <div style={{backgroundColor:val.color}} className="col-6">
+                                <div className="row rounded cardMember">                                    
+                                    <div style={{backgroundColor:val.color, borderTopLeftRadius:"10px", borderTopRightRadius:"10px" }} className="col-12">
                                     <button className="p-2 btn float-end" id={val.id_member} style={{border :'0'}} onClick={event => {if(window.confirm("Voulez vous vraiment supprimer " + val.last_name + "?")) delMember(event.target.id)}} >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                         </svg>
                                     </button>
                                     </div>                                    
-                                    <div style={{backgroundColor:"#ebebeb"}} className="rounded col-12 downPart" onClick={() => changeUser(val.id_member)} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <div style={{backgroundColor:"#ebebeb", borderBottomLeftRadius:"10px", borderBottomRightRadius:"10px"}} className="col-12 downPart" onClick={() => changeUser(val.id_member)} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 
                                         <div class="col-md-4 text-align">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">

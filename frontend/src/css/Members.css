@@ -1,3 +1,32 @@
 .members .shadow {
     box-shadow : 0 0rem 0rem rgba(0,0,0,.15)!important;
 }
+
+input[type="radio"] {
+    display: none;
+  }
+  input[type="radio"] + label {
+    position: relative;
+    padding-left: 1.3rem;
+  }
+  input[type="radio"] + label::before,
+  input[type="radio"] + label::after {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    bottom: 13%;
+    left: 0;
+    content:'';
+    width: 0.7rem;
+    height: 0.7rem; 
+    border-radius: 50px;
+    margin-left: 4%;
+  }
+  input[type="radio"] + label::before {
+    border: 1px solid #a0a0a0;
+    background-color: #eee;
+  }
+  input[type="radio"]:checked + label::after {
+    background-image: url('https://cdn-icons.flaticon.com/png/512/1055/premium/1055183.png?token=exp=1638886537~hmac=03b8cb4ca8d11d2dbb29f5691b945d71');
+    background-size: contain;
+  }

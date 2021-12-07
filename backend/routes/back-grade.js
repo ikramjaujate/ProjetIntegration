@@ -7,7 +7,11 @@ module.exports = function (app, client) {
      * 
      */
     app.get('/api/gradesInfos', (request, response) => {
-        let query = "select id_grade, name_grade from grade";
+        let query = "  select GR.id_grade, GR.name_grade, CO.name_color as colors\
+		from public.grade as GR\
+		join color as CO on GR.id_color = CO.id_color\
+		where GR.id_color = CO.id_color\
+		order by GR.id_grade ;"
 
         client.query(query, (error, results) => {
         if (error) {
