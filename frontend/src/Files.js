@@ -13,9 +13,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 function Biblio (){
-  const fs = require('fs').promises;
     const [pictures, setPictures] = useState(null);
-    fs.unlink('.');
+   
     useEffect(()=>{
       
         //Get qui va chercher toutes les photos 
