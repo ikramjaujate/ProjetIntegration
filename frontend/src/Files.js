@@ -47,6 +47,44 @@ function Biblio (){
         document.getElementById("boutonTri").className = triIcon
 
     }  
+    const supprimerPhoto = (photo) =>{
+      console.log("Supprimer photo fct");
+      
+      const idPhoto = photo;
+      console.log(idPhoto)
+      let informations = {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' }, 
+      };
+      fetch(`/api/photos/${idPhoto}`, informations).then((response)=> {
+          if(response.status === 200){
+              // var element = document.getElementById(idPhoto);
+              // element.parentNode.removeChild(element);
+              // window.location.reload(false);
+              let a = [...pictures];
+              a.reverse()
+              setPictures(a)
+              console.log(response)            
+              console.log("supression réussis")
+          }
+          else {
+              console.log("supression raté")
+          }
+          })
+      /*const pathsToCheck = ['../../public/', '../../public/frame_2021-11-23-20_43_44.jpeg'];
+      
+      for (let i = 0; i < pathsToCheck.length; i++) {
+          stat(pathsToCheck[i], (err, stats) => {
+          console.log(stats.isDirectory());
+          console.log(stats);
+    }); */
+      //Asynchronous version
+      /*
+      //Synchronous version pas ouf 
+      fs.unlinkSync('../../public/frame_2021-11-23-20_43_44.jpeg');
+      console.log('successfully deleted /tmp/hello');*/
+  
+  }    
     
 
     return (

@@ -27,5 +27,54 @@ module.exports = function(app,client) {
         });
         
         })
+
+
+         /**
+ * Delete picture from local storage  
+ * @author Derwa Alexandre <he201886@students.ephec.be>
+ * @method DELETE
+ * @param {string} idPhoto file name of the picture to delete
+ **/    
+
+    
+  app.delete('/api/photos/:idPhoto', (req, res) =>{
+    console.log("oto")
+    const fs = require('fs');
+    idPhoto= req.params.idPhoto
+    console.log(idPhoto);
+    const pathToFile = '../frontend/public/' + idPhoto 
+    fs.unlink(pathToFile, (err) => {
+       if (err) {
+          throw err;
+       } else {
+          console.log("Successfully deleted the file.")
+          response.status(200);
+          response.send()
+       }
+    }) 
+    /*client.query(query, [idPhoto], (error, res) => {
+      if (error) {
+        response.statut(400);
+        response.send(error);
+      }
+      else{
+        response.status(200);
+        response.send({"message" : "ok"});
+      }
+
+    })*/
+
+    /*const fs = require('fs');
+    const pathToFile = '../../public/frame_2021-11-23-20_43_44.jpeg'
+    fs.unlink(pathToFile, (err) => {
+       if (err) {
+          throw err;
+       } else {
+          console.log("Successfully deleted the file.")
+       }
+    }) */
+
+
+  }) 
   
 }
