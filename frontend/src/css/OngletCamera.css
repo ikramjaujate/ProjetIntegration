@@ -6,8 +6,8 @@
 }
 
 .ON:hover{
-    background-color: hsl(0, 0%, 59%);
-    color:azure;
+    background-color: rgba(204, 200, 200, 0.733)!important;
+    color:rgb(107, 106, 105);
     cursor: pointer;
     
   }

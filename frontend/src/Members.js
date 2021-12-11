@@ -481,7 +481,7 @@ export default function Members() {
                                     <div style={{backgroundColor:val.color}} className="col-6">
                                     <button className="p-2 btn-close btn-close-grey float-end" id={val.id_member} onClick={event => {if(window.confirm("Voulez vous vraiment supprimer " + val.last_name + "?")) delMember(event.target.id)}} ></button>
                                     </div>                                    
-                                    <div style={{backgroundColor:"#ebebeb"}} className="rounded col-12 downPart" onClick={() => changeUser(val.id_member)} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <div style={{backgroundColor:"#ebebeb"}} className="bg-light shadow-sm rounded col-12 downPart" onClick={() => changeUser(val.id_member)} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 
                                         <div class="col-md-4 text-align">
                                             <img src="https://as2.ftcdn.net/v2/jpg/03/32/59/65/1000_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg" class="img-fluid rounded-start" alt="profile-pic"/>
