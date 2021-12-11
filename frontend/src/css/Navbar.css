@@ -1,7 +1,11 @@
 
-
+.navbar-main a {
+  text-decoration: none !important;
+}
 /* Small screens */
+
 @media only screen and (max-width: 991px) {
+
   .navbar-main {
     
     background-color: #457eaf !important;
@@ -16,6 +20,17 @@
 
 .navbar-main .nav-link{
   color : #fff !important;
+}
+.navbar__link {
+  color : #fff !important;
+}
+
+.navbar__link:hover {
+  color: rgb(31, 57, 90) !important;
+}
+
+.navbar__link--active {
+  color: #1d1f3d !important;
 }
 /* Large screens */
 @media (min-width: 991px) {
@@ -54,6 +69,7 @@
     height: 100%;
    
   }
+  
   
   
  

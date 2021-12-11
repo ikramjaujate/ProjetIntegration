@@ -1,5 +1,5 @@
 import '../css/Navbar.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 function ElementNavBar({ href, text, icon, setSelectRoot, selectRoot }) {
     return (
@@ -13,10 +13,10 @@ function ElementNavBar({ href, text, icon, setSelectRoot, selectRoot }) {
         // </li>   
 
         <li className="nav-item" onclick={() => { setSelectRoot(href); console.log("li") }}>
-            <Link to={`/${href}`} className="nav-link hoverNav" onclick={() => { setSelectRoot(href); console.log(href) }} >
+            <NavLink exact to={`/${href}`} activeClassName="navbar__link--active" className="navbar__link" onclick={() => { setSelectRoot(href); console.log(href) }} >
                 <i class={`bi ${icon} m-4`} style={{ "fontSize": "2rem" }} onclick={() => { setSelectRoot(href); console.log("i") }}></i>
                 <span className="link-text" style={{ fontWeight: "500" }} onclick={() => { setSelectRoot(href); console.log("span") }}>{text}</span>
-            </Link>
+            </NavLink>
         </li>
 
     );
