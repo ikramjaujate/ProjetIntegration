@@ -148,7 +148,6 @@ function Settings() {
                     setPasswordOld("") ;
                     setPasswordNew("") ;
                     toast.success("Votre mot de passe a été modifié avec succès !", optionsToast);
-                    localStorage.removeItem('access_token')
                 }
                 else if (data.count === "ancien mot de passe incorrect") {
                     setErrorOld("Mot de passe incorrect");
