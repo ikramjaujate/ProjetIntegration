@@ -168,7 +168,8 @@ module.exports = function (app, client) {
                 group by CO.id_color, CO.name_color);";
         client.query(query,(error, results) => {
             if (error) {
-                throw error;
+                response.status(500)
+                response.send({ 'message': 'An error occurred.'})
             }
             response.status(200).json(results.rows);
         });
@@ -237,7 +238,8 @@ module.exports = function (app, client) {
         where id_grade = ($2) and id_camera = ($3) ";
         client.query(query,[action, idGrade, camera],(error, results) => {
             if (error) {
-                throw error;
+                response.status(500)
+                response.send({ 'message': 'An error occurred.'})
             }
 
             response.send({"count": results.rowCount});
@@ -264,7 +266,8 @@ module.exports = function (app, client) {
         where id_grade = ($2) and id_camera = ($3) ";
             client.query(query2,[notification, idGrade, camera],(error, results) => {
                 if (error) {
-                    throw error;
+                    response.status(500)
+                    response.send({ 'message': 'An error occurred.'})
                 }
                 response.send({"count": results.rowCount});
             });

@@ -1,7 +1,7 @@
 import './css/Navbar.css';
 import ElementNavBar from './components/ElementNavbar';
 import { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     const deconnexion = () => {
@@ -26,10 +26,10 @@ function Navbar() {
                         <ElementNavBar href="photos" text="GALERIE" icon="bi-images" style={{"fontSize" : "2rem"}} />
                         <ElementNavBar href="settings" text="PARAMETRES" icon="bi-gear" style={{"fontSize" : "2rem"}} />
                         <li className="nav-item" >
-                            <a className="navbar__link" href="#" onClick={deconnexion}>
+                            <Link className="navbar__link" to="#" onClick={deconnexion}>
                                 <i class={`bi bi-box-arrow-left m-4`} style={{ "fontSize": "2rem" }} ></i>
                                 <span className="link-text" style={{ fontWeight: "500" }} >DECONNEXION</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>

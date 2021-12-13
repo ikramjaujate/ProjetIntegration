@@ -9,11 +9,15 @@ module.exports = function(app,client) {
  * @method GET
  **/
 
-  app.get('/api/photos', (req, res) =>{
+  app.get('/api/photos', (req, response) =>{
 
         const fs = require('fs');
         let list = [];
         fs.readdir('./build', (err, files) => {
+          /*if(err){
+            response.status(500)
+            response.send({ 'message': 'An error occurred.'})
+          }*/
           files.forEach(file => {
             
             var last3 = file.substr(file.length - 3); // permet d'obtenir les 3 derniers caractères du nom de fichier
@@ -23,7 +27,8 @@ module.exports = function(app,client) {
               
             }
           });
-          res.send(list);
+          response.status(200)
+          response.send(list);
         });
         
         })

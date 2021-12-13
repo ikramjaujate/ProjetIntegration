@@ -8,19 +8,19 @@ module.exports = function (app, client) {
      * @method : PUT
      *
      */
-    app.put('/api/client', (req, res) => {
+    app.put('/api/client', (req, response) => {
       const firstName = req.body.FirstName
       const lastName = req.body.LastName
       const grade = req.body.Grade
       let query = 'insert into member (id_grade, first_name, last_name) values (($1), ($2), ($3))';
-      client.query(query, [grade, firstName, lastName], (error, result) => {
+      client.query(query, [grade, firstName, lastName], (error, results) => {
         if(error){
-          res.status(400)
-          res.send(error)
+          response.status(500)
+          response.send({ 'message': 'An error occurred.'})
         }
         else{
-          res.status(200)
-          res.send({"message" : "ok"})
+          response.status(200)
+          response.send({"message" : "ok"})
         }
       })
     })
@@ -32,11 +32,12 @@ module.exports = function (app, client) {
                 join member as ME on ME.id_grade = GRM.id_grade \
                 join color as CO on GRM.id_color = CO.id_color \
                 order by GRM.id_grade ;"
-    client.query(query, (error, res) => {
+    client.query(query, (error, results) => {
       if (error) {
-        throw error
+        response.status(500)
+        response.send({ 'message': 'An error occurred.'})
       }
-      response.status(200).json(res.rows);
+      response.status(200).json(results.rows);
     })
   })
 
@@ -45,10 +46,10 @@ module.exports = function (app, client) {
 
     let query = "delete from member where id_member = ($1)"
 
-    client.query(query, [idMember], (error, res) => {
+    client.query(query, [idMember], (error, results) => {
       if (error) {
-        response.status(400)
-        response.send(error);
+        response.status(500)
+        response.send({ 'message': 'An error occurred.'})
       }
       else{
       response.status(200)
@@ -101,7 +102,10 @@ module.exports = function (app, client) {
       from member \
       where id_member = ($1)" ;
       client.query(query, [idMember], (error, results) => {
-        if (error) {}
+        if (error) {
+          response.status(500)
+          response.send({ 'message': 'An error occurred.'})
+        }
         response.status(200).json(results.rows)
       })
     })
@@ -121,7 +125,8 @@ module.exports = function (app, client) {
     where id_member = ($1)" ;
       client.query(query, [parseInt(idMember)], (error, results) => {
         if (error) {
-          throw error
+          response.status(500)
+          response.send({ 'message': 'An error occurred.'})
         }
         response.status(200).json(results.rows)
       })
@@ -143,6 +148,8 @@ module.exports = function (app, client) {
     where ME.id_member = ($1)" ;
       client.query(query, [idMember], (error, results) => {
         if (error) {
+          response.status(500)
+          response.send({ 'message': 'An error occurred.'})
         }
         response.status(200).json(results.rows)
       })
@@ -164,6 +171,8 @@ module.exports = function (app, client) {
     where ME.id_member = ($1)" ;
       client.query(query, [idMember], (error, results) => {
         if (error) {
+          response.status(500)
+          response.send({ 'message': 'An error occurred.'})
         }
         response.status(200).json(results.rows)
       })
@@ -184,6 +193,8 @@ module.exports = function (app, client) {
       where id_member = ($1)" ;
       client.query(query, [idMember, name, surname], (error, results) => {
         if (error) {
+          response.status(500)
+          response.send({ 'message': 'An error occurred.'})
         }
         response.status(200)
         response.send({"count" : results.rowCount});
@@ -205,6 +216,8 @@ module.exports = function (app, client) {
 
       client.query(query, [idMember, photo], (error, results) => {
         if (error) {
+          response.status(500)
+          response.send({ 'message': 'An error occurred.'})
         }
         response.status(200)
         response.send({ "count" : results.rowCount})
@@ -230,6 +243,8 @@ module.exports = function (app, client) {
                   order by GRM.id_grade ;"
       client.query(query, [idMember], (error, results) => {
         if (error) {
+          response.status(500)
+          response.send({ 'message': 'An error occurred.'})
         }
         response.status(200).json(results.rows)
       })
@@ -249,6 +264,8 @@ module.exports = function (app, client) {
     where id_member = ($2)" ;
     client.query(query, [idGrade, userNow ], (error, results) => {
       if (error) {
+        response.status(400)
+        response.send({ 'message': 'An error occurred.'})
       }
       response.status(200);
       response.send({ "count": results.rowCount });

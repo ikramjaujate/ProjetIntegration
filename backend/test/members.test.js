@@ -59,6 +59,22 @@ describe('GET /api/membres/:idMembre', function() {
         })
     });
 })
+describe('GET /api/membres/:idMembre', function() {
+    it('Test x', function(done) {
+        chai.request(server)
+        .get('/api/membres/x')
+        .end((err, res) => {
+            
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].id_member.should.be.eql(1);
+            res.body[0].first_name.should.be.eql('Jean');
+            res.body[0].last_name.should.be.eql('Ab');
+            res.body[0].id_grade.should.be.eql(1);
+            done();
+        })
+    });
+})
 
 describe('GET /api/membres/:idMembre/photos', () => {
     it('Obtenir les photos concernant un membre', (done) => {
