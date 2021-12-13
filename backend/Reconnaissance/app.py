@@ -19,7 +19,7 @@ etat = False #D"finition de l'état de la cam
 
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-path = './backend/Reconnaissance/images'
+path = './images'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
 
@@ -165,7 +165,7 @@ def gen(captur):
                     time.sleep(0.5)
                 """
                 name = className[matchIndex].upper()
-                #print(name)
+                print(name)
                 y1,x2,y2,x1 = faceLoc
                 y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
                 cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
@@ -209,8 +209,6 @@ def gen(captur):
 
 @app.route('/video')
 def video():
-
-
     """
     global cap
     

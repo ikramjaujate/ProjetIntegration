@@ -34,7 +34,7 @@ encodeListKnown = findEncodings(images)
 print('Encodings Complete')
 
 # capture vidéo
-cap = cv2.VideoCapture('http://192.168.1.43:9999/')
+cap = cv2.VideoCapture(0)
 
 # Convertir les resolutions 
 frame_width = int(cap.get(3))

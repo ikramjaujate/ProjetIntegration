@@ -6,7 +6,7 @@
  import { useEffect, useState } from "react";
 
 function CadreCameras ({idCam,nomCam, statusCam, nomStatus, index}){
-    const [etat, setEtat] = useState("https://video.4x4vert.be/video")
+    const [etat, setEtat] = useState("http://192.168.0.9:6060/video")
     let toto = index
     return ( 
        <div>

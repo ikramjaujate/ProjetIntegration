@@ -109,7 +109,7 @@ function Camera() {
                     <section class="streaming">
                         <h3>Camera</h3>
                         <div id="changement">
-                            <img id="test" alt="video surveillance" src='https://video.4x4vert.be/video'width="640" height="480" />
+                            <img id="test" alt="video surveillance" src='http://192.168.0.9:6060/video'width="640" height="480" />
                         </div>
                     </section>
 
