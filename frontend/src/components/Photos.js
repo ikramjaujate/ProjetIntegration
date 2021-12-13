@@ -6,7 +6,7 @@ import Biblio from "../Files";
 function Photos({nomPhoto}) {
     const [pictures, setPictures] = useState(null);
 
-
+    const Photos = ({supprimerPhoto})
 
     return (
         <>
