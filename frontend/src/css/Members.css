@@ -14,7 +14,7 @@ input[type="radio"] {
     display: block;
     position: absolute;
     box-sizing: border-box;
-    bottom: 13%;
+    bottom: 12%;
     left: 0;
     content:'';
     width: 0.7rem;
@@ -27,6 +27,6 @@ input[type="radio"] {
     background-color: #eee;
   }
   input[type="radio"]:checked + label::after {
-    background-image: url('https://cdn-icons.flaticon.com/png/512/1055/premium/1055183.png?token=exp=1638886537~hmac=03b8cb4ca8d11d2dbb29f5691b945d71');
+    background-image: url('https://as1.ftcdn.net/v2/jpg/02/92/85/46/1000_F_292854695_LPwCvK8gRt4saZvG06gwwYtOvzwohe5s.jpg');
     background-size: contain;
   }

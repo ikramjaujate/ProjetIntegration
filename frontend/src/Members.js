@@ -376,22 +376,6 @@ export default function Members() {
 
         })
     }
-
-    const Uncheck = (input) => {
-        
-        if(flag === 1){
-            setCurrentGrade(input)
-            flag = 0  
-            console.log(flag)
-        } 
-        else if (flag===0){
-            flag=1            
-            document.getElementById(input).checked = false;
-            setCurrentGrade("Tous")
-        }
-    }
-
-
     const popover = (
         <Popover id="popover-basic">
             <Popover.Body id="popover-test">
@@ -455,10 +439,12 @@ export default function Members() {
                     }}placeholder="chercher"></input>
                 </div>
 
-                <div className="rounded col-6 col-lg-6 col-sm-3">
+                <div className="rounded col-6 col-lg-5 col-sm-3">
                     <div className="form-check form-check-inline">
+                    <input type="radio" className="mx-1" id="Tous" onClick={e => (setCurrentGrade(e.target.id))} name="grade" value="Tous"/>
+                    <label style={{backgroundColor: "grey", width:"auto", borderRadius:"10px", fontSize:"calc(0.5vw + 0.5rem)"}} className="m-1 px-4 form-check-label" for="Tous">Tous</label>
                         {gradesList.map((val) => {
-                                                            return (<><input type="radio" className="mx-1" id={val.name_grade} onClick={e => (Uncheck(e.target.id))} name="grade" value={val.name_grade}/>
+                                                            return (<><input type="radio" className="mx-1" id={val.name_grade} onClick={e => (setCurrentGrade(e.target.id))} name="grade" value={val.name_grade}/>
                                                             <label style={{backgroundColor: val.colors, width:"auto", borderRadius:"10px", fontSize:"calc(0.5vw + 0.5rem)"}} className="m-1 px-4 form-check-label" for={val.name_grade}>{val.name_grade}</label></>)
                                                     })}
                     </div>
