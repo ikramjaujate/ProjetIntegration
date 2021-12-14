@@ -26,22 +26,6 @@ describe('PUT /api/client', function() {
         })
     })
 
-    it('Ne devrait pas ajouter un client sans nom de famille', function(done) {
-        let client ={
-            FirstName : "TestFN" ,
-            Grade : 1
-        };
-        chai.request(server)
-        .put('/api/client')
-        .send(client)
-        .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.be.a('object');
-            res.body.should.have.property('name').eql("error");
-            res.body.column.should.be.eql("last_name")
-            done();
-        })
-    })
 });
 
 describe('GET /api/membres/:idMembre', function() {
@@ -59,22 +43,7 @@ describe('GET /api/membres/:idMembre', function() {
         })
     });
 })
-describe('GET /api/membres/:idMembre', function() {
-    it('Test x', function(done) {
-        chai.request(server)
-        .get('/api/membres/x')
-        .end((err, res) => {
-            
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body[0].id_member.should.be.eql(1);
-            res.body[0].first_name.should.be.eql('Jean');
-            res.body[0].last_name.should.be.eql('Ab');
-            res.body[0].id_grade.should.be.eql(1);
-            done();
-        })
-    });
-})
+
 
 describe('GET /api/membres/:idMembre/photos', () => {
     it('Obtenir les photos concernant un membre', (done) => {
@@ -105,7 +74,7 @@ describe('GET /api/membres/:idMembre/photos/count', function() {
 describe('DELETE /api/membres/:idMember/eliminate/photo', function() {
     it('Supprime une photo qui correspond à un utilisateur', function(done) {
         let photo ={
-            photo : "ikram1.jpg"
+            photo : "ikram2.jpg"
         };
         chai.request(server)
         .delete('/api/membres/1/eliminate/photo')
