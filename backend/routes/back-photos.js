@@ -1,4 +1,5 @@
 const { response } = require("express");
+const _ = require('lodash');
 
 
 module.exports = function(app,client) {
@@ -28,4 +29,60 @@ module.exports = function(app,client) {
         
         })
   
+
+
+     /**
+ * Permet d'envoyer une photo en local sur le vps
+ * @author Aurélien Brille <a.brille@students.ephec.be>
+ * @method POST
+ **/
+  
+  app.post('/upload-photos', async (req, res) => {
+    try {
+        if(!req.files) {
+            res.send({
+                status: false,
+                message: 'No file uploaded'
+            });
+        } else if(req.files.photos.length == 2) {
+            let data = []; 
+            //loop all files
+            _.forEach(_.keysIn(req.files.photos), (key) => {
+                let photo = req.files.photos[key];
+                //move photo to uploads directory
+                photo.mv('./Reconnaissance/images/' + photo.name);
+
+                //push file details
+                data.push({
+                    name: photo.name,
+                    mimetype: photo.mimetype,
+                    size: photo.size
+                });
+            });
+    
+            //return response
+            res.send({
+                status: true,
+                message: 'Files are uploaded',
+                data: data
+            });
+        }
+        else if (typeof(req.files.photos) == "object") {
+          let photo = req.files.photos;
+          photo.mv('./Reconnaissance/images/' + photo.name);
+          //send response
+          res.send({
+              status: true,
+              message: 'File is uploaded',
+              data: {
+                  name: photo.name,
+                  mimetype: photo.mimetype,
+                  size: photo.size
+              }
+            })
+        }
+    } catch (err) {
+        res.status(500).send(err);
+    }
+  });
 }
