@@ -27,5 +27,11 @@ function sendMail(grade_personne) {
 sendMail()
 
 
-
-//emailjs.send("service_mail","template_anonyme");
+function sendMail_ano() {
+  
+    emailjs.send("service_mail","template_anonyme").then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+}
