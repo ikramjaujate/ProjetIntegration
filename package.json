@@ -26,6 +26,6 @@
     "react-responsive-carousel": "^3.2.22"
   },
   "devDependencies": {
-    "cypress": "^9.0.0"
+    "cypress": "^9.1.1"
   }
 }
