@@ -15,23 +15,30 @@ import{ init } from 'emailjs-com';
 function sendMail(grade_personne) {
 
     init("user_LHFMoI6uv3conWaZcO9j6");
-    emailjs.send("service_mail", "template_cajacci", {
-        grade: grade_personne,
-    }).then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
+    return emailjs.send("service_mail", "template_cajacci", {
+            grade: grade_personne,
+        }).then((result) => {
+              console.log(result.text);
+          }, (error) => {
+              console.log(error.text);
+          });
 }
 
-sendMail()
 
+/** 
+     * Sends an email when an anonymous person's in front of the camera
+     *
+     * @author juliefino
+     *
+     * @return the email sending  
+     */
 
 function sendMail_ano() {
   
-    emailjs.send("service_mail","template_anonyme").then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
+    init("user_LHFMoI6uv3conWaZcO9j6");
+    return emailjs.send("service_mail","template_anonyme").then((result) => {
+              console.log(result.text);
+          }, (error) => {
+              console.log(error.text);
+          });
 }
