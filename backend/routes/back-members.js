@@ -1,6 +1,6 @@
 const { response } = require("express")
 
-module.exports = function (app, client) {
+function routes(app, client) {
   
     /**
      *
@@ -169,6 +169,7 @@ module.exports = function (app, client) {
       })
     })
 
+    
   /**
    * Modify the first and last name of the designated member
    * 
@@ -177,6 +178,8 @@ module.exports = function (app, client) {
    * @param {integer} idMember identifier of the member for which we want to retrieve information
    */
     app.put('/api/membres/:idMember/update', (request, response) => {
+      console.log(validate(request.body, ['name', 'surname']));
+      
       const idMember = request.params.idMember;
       const name = request.body.name
       const surname = request.body.surname
@@ -256,3 +259,13 @@ module.exports = function (app, client) {
   })
 
 }
+
+function validate(body, params){
+  
+  for(const param of params){
+    if (!body[param]) return false
+  }
+  return true
+}
+
+module.exports = {routes, validate}
