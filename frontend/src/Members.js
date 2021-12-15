@@ -36,15 +36,7 @@ export const ImgContainer = styled.div`
   }
   
 `;
-// const optionsToast = {
-//     autoClose: 4000,
-//     position: "bottom-right",
-//     hideProgressBar: false,
-//     closeOnClick: true,
-//     pauseOnHover: true,
-//     draggable: true,
-//     theme: "colored"
-// };
+
 export default function Members() {
 
     
@@ -80,6 +72,12 @@ export default function Members() {
         setIsSelected(true);
 	};
 
+    /**
+     * add each photos added when creating a new member
+     * 
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     * @method POST
+     */
     const handleSubmission = () => {
         const formData = new FormData();
         console.log(selectedFile.length)
@@ -112,6 +110,11 @@ export default function Members() {
         theme:"colored"
     };
 
+     /**
+     * Retrieve all members and their grades on load
+     * 
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     */
     useEffect(()=> {
         getGrade() ;
         getMembers();
@@ -119,6 +122,12 @@ export default function Members() {
         .forEach(toastNode => new Toast(toastNode));
 	}, []);
 
+     /**
+     * retrieve all members
+     * 
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     * @method GET
+     */
     const getMembers = () => {
 		let informations = {
             method: 'GET',
@@ -132,6 +141,14 @@ export default function Members() {
                 setMembersList(response)
             })
 	}
+
+    /**
+     * Add a new member
+     * 
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     * @param {event} : event
+     * @method PUT
+     */
 
     const submitClient = (event) => {
         event.preventDefault();
@@ -147,6 +164,13 @@ export default function Members() {
         })
     }
 
+    /**
+     * Delete a member
+     * 
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     * @param {integer} id
+     * @method DELETE
+     */
 
     const delMember = (id) => {
         const idMember = id;
@@ -167,6 +191,12 @@ export default function Members() {
             })
     }
 
+    /**
+     * Retrieve all grades
+     * 
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     * @method GET
+     */
     const getGrade = () => {        
         let informations = {
             method: 'GET',
@@ -257,27 +287,6 @@ export default function Members() {
                 setAllGrade(res)
             });
     }
-
-    /*const updatePhoto = () => {
-        let informations = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        };
-        fetch(`/api/membres/${userNow}/photos`, informations)
-            .then(response => response.json())
-            .then(res => {
-                let images = []
-                for (let i in res) {
-                    photos.push(res[i]["pictures"])
-                    setAllPhotos(photos)
-                    setProfilePhoto(res[0]["pictures"])
-                }
-
-                setProfilePhoto(photos[0])
-                setHasValue(true)
-            })
-
-    }*/
 
     /**
      * Get user's first and last name

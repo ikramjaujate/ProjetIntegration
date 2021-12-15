@@ -3,7 +3,8 @@ const { response } = require("express")
 module.exports = function (app, client) {
   
     /**
-     *
+     *Add a new member withits fname, lname and grade
+     * 
      * @author : Aurélien
      * @method : PUT
      *
@@ -25,6 +26,13 @@ module.exports = function (app, client) {
       })
     })
 
+    /**
+     * Retrive all current members with their grade and color assiocated
+     * 
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     * @method GET
+     */
+
   app.get('/api/members', (request, response) => {
 
     let query = "select ME.id_member, GRM.id_grade, ME.first_name, ME.last_name, GRM.name_grade, CO.name_color as color \
@@ -39,6 +47,14 @@ module.exports = function (app, client) {
       response.status(200).json(res.rows);
     })
   })
+
+    /**
+     * Delete a member based on its ID
+     * 
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     * @method DELETE
+     * @param {integer} idMember Id of the member we want to delete
+     */
 
   app.delete('/api/members/:idMember', (req, response) => {
     idMember= req.params.idMember
@@ -57,36 +73,6 @@ module.exports = function (app, client) {
     })
 
   })
-
-
-  /**
-   * 
-   * @author : Aurélien
-   * 
-   */
-
-  /*let routes = (app) => {
-     router.post("/upload", controller.upload);
-     router.get("/files", controller.getListFiles);
-     router.get("/files/:name", controller.download);
-   
-     app.use(router);
-   };
-   
-   module.exports = routes;
-    global.__basedir = __dirname;
-    
-    const initRoutes = require("./src/routes");
-    
-    app.use(express.urlencoded({ extended: true }));
-    initRoutes(app);
-    
-    let port2 = 8080;  //listen on port 8080 for incoming requests.
-    app.listen(port, () => {
-      console.log(`Running at localhost:${port2}`);
-    });*/
-
-  
 
     /**
      * Retrieves all the information from a member
