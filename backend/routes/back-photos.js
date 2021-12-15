@@ -40,11 +40,13 @@ module.exports = function(app,client) {
   app.post('/upload-photos', async (req, res) => {
     try {
         if(!req.files) {
+            console.log("hellonotOK")
             res.send({
                 status: false,
                 message: 'No file uploaded'
             });
         } else if(req.files.photos.length == 2) {
+            console.log("hello--")
             let data = []; 
             //loop all files
             _.forEach(_.keysIn(req.files.photos), (key) => {
@@ -68,6 +70,7 @@ module.exports = function(app,client) {
             });
         }
         else if (typeof(req.files.photos) == "object") {
+          console.log(typeof(req.files.photos))
           let photo = req.files.photos;
           photo.mv('./Reconnaissance/images/' + photo.name);
           //send response
@@ -82,6 +85,7 @@ module.exports = function(app,client) {
             })
         }
     } catch (err) {
+      console.log(err)
         res.status(500).send(err);
     }
   });

@@ -7,7 +7,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useState, useEffect } from 'react';
 import 'reactjs-popup/dist/index.css'; 
-import UploadFiles from './components/File-upload.js';
 import Input from './components/Input';
 import Axios from 'axios';
 import {Toast} from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
@@ -73,7 +72,35 @@ export default function Members() {
     const [etatModification, setEtatModification] = useState(0)
     const [userNow, setUserNow] = useState("")
     const [allGrade, setAllGrade] = useState(null)
-    let flag = 1
+    const [selectedFile, setSelectedFile] = useState()
+    const [isSelected, setIsSelected] = useState(false);
+
+    const changeHandler = (event) => {
+		setSelectedFile(event.target.files);
+        setIsSelected(true);
+	};
+
+    const handleSubmission = () => {
+        const formData = new FormData();
+        console.log(selectedFile.length)
+        for(let e = 0; e < selectedFile.length; e++){
+            formData.append('photos', selectedFile[e]);
+        }
+        fetch(
+			'/upload-photos',
+			{
+				method: 'POST',
+				body: formData,
+			}
+		)
+			.then((response) => response.json())
+			.then((result) => {
+				console.log('Success:', result);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+	};
 
     const optionsToast = {
         autoClose: 5000,
@@ -107,14 +134,19 @@ export default function Members() {
 	}
 
     const submitClient = (event) => {
+        event.preventDefault();
         Axios.put(`/api/client`, {
             FirstName : clientFirstName,
             LastName : clientLastName,
             Grade : clientGrade
         }).then (() => {
             getMembers()
+            handleSubmission()
+        }).then (() => {
+            window.location.reload();
         })
     }
+
 
     const delMember = (id) => {
         const idMember = id;
@@ -486,6 +518,7 @@ export default function Members() {
 
                                     
                                         <form class="form m-2" onSubmit={submitClient}>
+                                            <h2>Nouveau client</h2>
                                             <label for="f-name">Prénom:</label><br/>
                                             <Input name="f-name" idName="f-name" max="50" min="1" type="texte" placeholder="Prénom" setFunc={setClientFirstName}/><br/>
                                             <label class="mt-2" for="l-name">Nom:</label><br/>
@@ -496,10 +529,9 @@ export default function Members() {
                                                 {gradesList.map((val) => {
                                                         return <option value={val.id_grade}>{val.id_grade + ". "}{val.name_grade}</option>
                                                 })}
-                                            </select><br/><br/>
-                                            <UploadFiles/>                                         
-                                            <button type="submit">Envoyer</button>
-                                                                    
+                                            </select><br/><br/>                                     
+                                            <input type="file" multiple name="file" onChange={changeHandler} /><br/><br/>                                            
+                                            <button type ="submit">Envoyer</button>                                            
                                         </form>
                                     
 
