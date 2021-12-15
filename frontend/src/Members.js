@@ -64,12 +64,11 @@ export default function Members() {
     const [etatModification, setEtatModification] = useState(0)
     const [userNow, setUserNow] = useState("")
     const [allGrade, setAllGrade] = useState(null)
-    const [selectedFile, setSelectedFile] = useState()
-    const [isSelected, setIsSelected] = useState(false);
+    const [selectedFile, setSelectedFile] = useState({})
+
 
     const changeHandler = (event) => {
 		setSelectedFile(event.target.files);
-        setIsSelected(true);
 	};
 
     /**
@@ -80,24 +79,23 @@ export default function Members() {
      */
     const handleSubmission = () => {
         const formData = new FormData();
-        console.log(selectedFile.length)
-        for(let e = 0; e < selectedFile.length; e++){
-            formData.append('photos', selectedFile[e]);
-        }
-        fetch(
-			'/upload-photos',
-			{
-				method: 'POST',
-				body: formData,
-			}
-		)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log('Success:', result);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
+        if(selectedFile.length !== 0){
+            for(let e = 0; e < selectedFile.length; e++){
+                formData.append('photos', selectedFile[e]);
+                console.log(selectedFile[e])
+            }
+            fetch(
+                '/api/upload-photos',
+                {
+                    method: 'POST',
+                    body: formData,
+                }
+            )
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+        else { console.log("pas de photos")}
 	};
 
     const optionsToast = {
@@ -152,14 +150,21 @@ export default function Members() {
 
     const submitClient = (event) => {
         event.preventDefault();
+        photos= []
+        for(let e = 0; e < selectedFile.length; e++){
+            photos.push(selectedFile[e].name);
+        }
         Axios.put(`/api/client`, {
             FirstName : clientFirstName,
             LastName : clientLastName,
-            Grade : clientGrade
+            Grade : clientGrade,
+            Photos : photos
         }).then (() => {
             getMembers()
+            
+        }).then(() => {
             handleSubmission()
-        }).then (() => {
+        }).then(() => {
             window.location.reload();
         })
     }

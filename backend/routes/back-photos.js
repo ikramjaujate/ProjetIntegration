@@ -1,4 +1,3 @@
-const { response } = require("express");
 const _ = require('lodash');
 
 
@@ -24,7 +23,7 @@ module.exports = function(app,client) {
               
             }
           });
-          res.send(list);
+          return res.send(list);
         });
         
         })
@@ -37,16 +36,14 @@ module.exports = function(app,client) {
  * @method POST
  **/
   
-  app.post('/upload-photos', async (req, res) => {
+  app.post('/api/upload-photos', async (req, res) => {
     try {
         if(!req.files) {
-            console.log("hellonotOK")
-            res.send({
+            return res.send({
                 status: false,
                 message: 'No file uploaded'
             });
         } else if(req.files.photos.length == 2) {
-            console.log("hello--")
             let data = []; 
             //loop all files
             _.forEach(_.keysIn(req.files.photos), (key) => {
@@ -65,18 +62,17 @@ module.exports = function(app,client) {
             //return response
             res.send({
                 status: true,
-                message: 'Files are uploaded',
+                message: 'File(s) uploaded',
                 data: data
             });
         }
         else if (typeof(req.files.photos) == "object") {
-          console.log(typeof(req.files.photos))
           let photo = req.files.photos;
           photo.mv('./Reconnaissance/images/' + photo.name);
           //send response
-          res.send({
+            res.send({
               status: true,
-              message: 'File is uploaded',
+              message: 'File(s) uploaded',
               data: {
                   name: photo.name,
                   mimetype: photo.mimetype,
@@ -84,9 +80,14 @@ module.exports = function(app,client) {
               }
             })
         }
+        else {
+            res.send({
+            status: false,
+            message: 'No files uploaded'
+        });
+        }
     } catch (err) {
-      console.log(err)
-        res.status(500).send(err);
+        return res.status(500).send(err);
     }
   });
 }

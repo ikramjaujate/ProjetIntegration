@@ -1,4 +1,5 @@
-const { response } = require("express")
+const _ = require('lodash');
+const { response } = require("express");
 
 module.exports = function (app, client) {
   
@@ -13,15 +14,31 @@ module.exports = function (app, client) {
       const firstName = req.body.FirstName
       const lastName = req.body.LastName
       const grade = req.body.Grade
+      const photos = req.body.Photos
       let query = 'insert into member (id_grade, first_name, last_name) values (($1), ($2), ($3))';
       client.query(query, [grade, firstName, lastName], (error, result) => {
-        if(error){
-          res.status(400)
-          res.send(error)
+        if (!error){
+          let query2 = 'select * from member where first_name=($1) and last_name=($2) and id_grade=($3)';
+          client.query(query2, [firstName, lastName, grade], (error, res2) => {
+            
+              let idCreated = Object.values(res2.rows[res2.rows.length - 1])
+              for(e in photos){
+                let query3 = 'INSERT into photos(id_member, pictures) VALUES (($1), ($2));';
+                client.query(query3, [idCreated[0], photos[e]], (error, res3) => {
+                  if(error){
+                    res.json(error)
+                  }
+                })
+              }
+            return res.status(200).json({ok : "ok"})
+            
+          })
         }
         else{
-          res.status(200)
-          res.send({"message" : "ok"})
+          console.log(error)
+          return res.status(400)
+          .json(error)
+          
         }
       })
     })
