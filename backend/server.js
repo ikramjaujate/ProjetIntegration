@@ -1,6 +1,8 @@
 "use strict";
 
 const express = require("express");
+
+const fileUpload = require('express-fileupload');
 const {Client} = require("pg");
 const app = express();
 const dotenv = require("dotenv");
@@ -17,7 +19,6 @@ const wafrules = require('mini-waf/wafrules'); //Règles de sécurisation associ
 
 const permissionsPolicy = require("permissions-policy");
 const expectCt = require("expect-ct");
-
 
 // Const http = require('http')
 /*
@@ -56,6 +57,13 @@ const client = new Client({
 //   next();
 // });
 
+//Allow file upload
+app.use(fileUpload({
+  createParentPath: true,
+  limits: { 
+    fileSize: 2 * 1024 * 1024 * 1024 //2MB max file(s) size
+},
+}));
 
 //X-Content-Type-Options
 app.use(helmet.noSniff());

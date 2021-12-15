@@ -1,3 +1,32 @@
 .members .shadow {
     box-shadow : 0 0rem 0rem rgba(0,0,0,.15)!important;
 }
+
+input[type="radio"] {
+    display: none;
+  }
+  input[type="radio"] + label {
+    position: relative;
+    padding-left: 1.3rem;
+  }
+  input[type="radio"] + label::before,
+  input[type="radio"] + label::after {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    bottom: 12%;
+    left: 0;
+    content:'';
+    width: 0.7rem;
+    height: 0.7rem; 
+    border-radius: 50px;
+    margin-left: 4%;
+  }
+  input[type="radio"] + label::before {
+    border: 1px solid #a0a0a0;
+    background-color: #eee;
+  }
+  input[type="radio"]:checked + label::after {
+    background-image: url('https://as1.ftcdn.net/v2/jpg/02/92/85/46/1000_F_292854695_LPwCvK8gRt4saZvG06gwwYtOvzwohe5s.jpg');
+    background-size: contain;
+  }
