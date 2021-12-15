@@ -64,13 +64,12 @@ function App() {
   }else{
     return(
       <Router>
-        <Navbar /> 
       <div className="App">
         <div className="content">
           <Switch>
-            <Route path='/members' exact component={Members}/>
+            <Route path='/login' exact component={Login}/>
             <Route >
-               <Redirect to="/members" exact component={Members} />
+               <Redirect to="/login" exact component={Login} />
             </Route>
           </Switch>
         </div>
