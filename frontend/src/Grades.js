@@ -54,6 +54,8 @@ function Grades() {
 
     let newActions = {} ;
     let newNotifications = {} ;
+    const [newActionsConst, setNewActionsConst] = useState({});
+    const [newNotificationsConst, setNewNotificationsConst] = useState({});
 
 
     /**
@@ -285,6 +287,8 @@ function Grades() {
             activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
             newActions = {} ;
             newNotifications = {} ;
+            setNewActionsConst({}) ;
+            setNewNotificationsConst({}) ;
             getGrades() ;
             openCameraInfo(currentColor,currentGrade,currentIdGrade) ;
             toast.success("Vous venez de modifier les actions des caméras du grade " + currentGrade + " !", optionsToast);
@@ -369,9 +373,11 @@ function Grades() {
      */
     const deleteModification = () => {
         activateButton("close-cancel");
-        activateButton("open-desc-grade-2");
+        // activateButton("open-desc-grade-2");
         newActions = {} ;
         newNotifications = {} ;
+        setNewActionsConst({});
+        setNewNotificationsConst({});
     }
 
     /**
@@ -456,7 +462,7 @@ function Grades() {
                                         <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
                                             {(provided, snapshot) => (
                                                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-10 col-md-9 col-lg-7 col-xl-6 justify-content-center">
-                                                <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} order={grade.order_place} 
+                                                <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} resetModal={resetModal} order={grade.order_place} 
                                                     allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} id={grade.id_grade} openCameraInfo={openCameraInfo} deleteGrade={deleteGrade}/>
                                                 </div>
                                             )}

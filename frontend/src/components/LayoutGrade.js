@@ -1,6 +1,6 @@
 import '../css/Grades.css';
 
-const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, openCameraInfo, order, deleteGrade}) => {
+const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, openCameraInfo, order, deleteGrade, resetModal}) => {
 
     
     const displayIcon = () => {
@@ -21,7 +21,7 @@ const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, 
                     <div type="button" className="frameSee frameActions col-3 p-0 rounded-circle shadow" data-bs-toggle="modal" data-bs-target="#gradeModal" onClick={() => openCameraInfo(color, name, id)}>
                         <i class="bi bi-eye seeIcon"></i>
                     </div>
-                    <div type="button" className="frameModify frameActions col-3 p-0 rounded-circle shadow">
+                    <div type="button" className="frameModify frameActions col-3 p-0 rounded-circle shadow" data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {resetModal();}}>
                         <i class="bi bi-pen modifyIcon"></i>
                     </div>
                     <div type="button" className="frameDelete frameActions col-3 p-0 rounded-circle shadow" onClick={() => {deleteGrade(id)}}>

@@ -74,10 +74,9 @@ body {
 
 
 /*Modal details cameras*/
-#gradeModal .modal-body {
+/* #gradeModal .modal-body {
     padding:0rem!important;
-    /* padding: 1rem 5rem 1rem 5rem; */
-}
+} */
 #gradeModal .m-2 {
     margin : 0.5rem 0.5rem 0.3rem 0.5rem!important;
 }

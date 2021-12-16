@@ -4,7 +4,7 @@ import TitleModalGrade from './TitleModalGrade' ;
 import { useState } from 'reactn';
 
 
-const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, saveAction, newNotifications, newActions, activateButton}) => {
+const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, saveAction, newNotifications, newActions, activateButton, setNewActionsConst, setNewNotificationsConst}) => {
 
     const [hover, setHover] = useState(false);
 
@@ -19,10 +19,12 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
         if (idCamera in newNotifications) {
             document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
             delete newNotifications[idCamera];
+            setNewNotificationsConst(newNotifications) ;
         }
         else {
             document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-slash-fill" : "bi bi-bell-fill" ;
             newNotifications[idCamera] = !notification ;
+            setNewNotificationsConst(newNotifications) ;
         }
     }
 
@@ -36,9 +38,11 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
         let action = document.getElementsByClassName("action-" + currentIdGrade + "-" + identifier)[0].checked ; 
         if (identifier in newActions) {
             delete newActions[identifier];
+            setNewActionsConst(newActions) ;
         }
         else {
             newActions[identifier] = action ; 
+            setNewActionsConst(newActions) ;
         }
     }
 
@@ -52,9 +56,6 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
         activateButton("close-modify");
         if (Object.keys(newActions).length > 0 || Object.keys(newNotifications).length > 0) {
             activateButton("open-confirmation");
-        }
-        else {
-            activateButton("open-desc-grade-1");
         }
     }
 
@@ -79,7 +80,7 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
                     </div>
                     <div className="modal-footer row justify-content-between">
                         <button type="button" className="btn modal-button bouton-close col-11 col-sm-5" onClick={() => cancelModification()}>Annuler</button>
-                        <button type="button" id="open-desc-grade-1" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir sur desc grade</button>
+                        {/* <button type="button" id="open-desc-grade-1" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir sur desc grade</button> */}
                         <button type="button" id="close-modify" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
                         <button type="button" id="open-confirmation" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-toggle="modal" data-bs-target="#confirmationCancelModal">Cancel</button>
                         <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" style={{backgroundColor: hover ? "var(--hover-color)" : currentColor}} onClick={() => {saveAction();}} onMouseEnter={()=>{setHover(true);}} onMouseLeave={()=>{setHover(false);}}>Enregistrer</button>
