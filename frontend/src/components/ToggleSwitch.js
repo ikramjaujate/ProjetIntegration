@@ -38,16 +38,6 @@ function Eteindre() {
     
   return (
     <div className='col-2 col-md-2 col-sm-2 offset-4 offset-md-5 offset-sm-4 offset-lg-7 switchcam'>
-      {/*<div className="toggle-switch">
-        {status===1?
-            <input type="checkbox" className="checkbox" id={id} defaultChecked onClick={() => changeStatusCam(id)}  /> : status===2? <input type="checkbox" className="checkbox" id={id} onClick={() => changeStatusCam(id)} />:<input type="checkbox" className="checkbox" id={nom} disabled style={{'backgroundColor':'grey'}} />
-        }
-        <label className="label" htmlFor={nom}>
-          <span className="inner" />
-          <span className="switch" />
-        </label>
-      </div>*/}
-
                         <div class="form-check form-switch">
                             {status === 1 ? <input class="form-check-input" type="checkbox" role="switch" id={id} defaultChecked onClick={() => changeStatusCam(id)} /> :
                                 status === 2 ? <input class="form-check-input" type="checkbox" role="switch" id={id} onClick={() => changeStatusCam(id)} /> :
