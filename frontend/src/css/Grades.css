@@ -304,15 +304,31 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .informations{font-size: 84%;}
     .name-grade{font-size: 150%;}
     #error-color{margin: 0rem 0rem 0.5rem 0rem;}
+    .modifyIcon {font-size: 0.6rem;}
+    .frameActions {width: 1.1rem!important;
+        height: 1.1rem!important;}
+    .seeIcon {top: -0.2rem!important;
+        font-size: 0.6rem!important;}
+    .modifyIcon {font-size: 0.5rem!important;
+        top: -0.23rem!important;}
+    .deleteIcon {font-size: 0.55rem!important;
+        top: -0.24rem!important;}
+}
+@media only screen and (max-width : 750px) {
+    .icon-person {font-size: 332%;}
 }
 @media only screen and (max-width: 650px) {
     .name-grade {font-size: 133%;}
+    .icon-person {font-size: 302%;}
 }
-@media only screen and (max-width: 635px) {
+/* @media only screen and (max-width: 635px) {
    .icon-person {font-size: 311%;}
+} */
+@media only screen and (max-width : 600px) {
+    .icon-person {font-size: 268%;}
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 575px) {
     #title-description{font-size: 1.8rem;}
     #description{font-size: 0.6rem;}
     #desription-page{padding-bottom: 1rem;}

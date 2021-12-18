@@ -17,7 +17,7 @@ const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, 
             </div>
             <div className="align-self-center name-grade col-8 col-sm-6">{name}</div>
             <div className="layout-nbr-camera p-0 col col-4 col-sm-3">
-                <div id={`actionsGrade-${id}`} className="actionsGrade row col-12 p-0 m-0 mb-2 justify-content-around hidden">
+                <div id={`actionsGrade-${id}`} className="actionsGrade row col-12 col-xxl-10 offset-xxl-2 p-0 mb-2 justify-content-around hidden">
                     <div type="button" className="frameSee frameActions col-3 p-0 rounded-circle shadow" data-bs-toggle="modal" data-bs-target="#gradeModal" onClick={() => openCameraInfo(color, name, id)}>
                         <i class="bi bi-eye seeIcon"></i>
                     </div>
