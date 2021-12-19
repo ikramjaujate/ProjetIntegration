@@ -19,16 +19,16 @@ module.exports = function(app,client) {
   //   })
   // })
 
-app.get('/api/cameras', (req, res) =>{
-
-  let query = "select id_camera, name_camera, name_status,ST.id_status \
-  from camera as CA \
-  join status as ST on CA.id_status = ST.id_status" ;
-  client.query(query, (err, result) => {
-      if(err) throw err ;
-      res.send(result.rows);
-    })
+  app.get('/api/cameras', (req, res) =>{
+    let query = "select id_camera, name_camera, name_status,ST.id_status \
+    from camera as CA \
+    join status as ST on CA.id_status = ST.id_status" ;
+    client.query(query, (err, result) => {
+        if(err) throw err ;
+        res.send(result.rows);
+      })
   })
+
   app.get('/api/pictureScreenshoot', (req, res) =>{
     const fs = require('fs');
     let list = []
@@ -37,7 +37,25 @@ app.get('/api/cameras', (req, res) =>{
         list.push(file)
       });
       res.send({"picture" : list[list.length -1]})
-    });
-    
-    })
+    });    
+  })
+  
+  app.get('/api/permission/:picture/:camera', (req, res) =>{
+    const picture = req.params.picture
+    const camera = req.params.camera
+    console.log(picture, camera)
+    const query = "SELECT pm.allowed, pm.notification, pm.id_camera \
+    from photos as ph \
+    inner join member as mb on ph.id_member = mb.id_member \
+    inner join permission as pm on mb.id_grade = pm.id_grade \
+    where pictures = ($1) and id_camera = ($2)";
+        client.query(query,[picture, camera],(error, results) => {
+            if (error) {
+                throw error;
+            }
+
+            res.send(results.rows);
+        });   
+  })
+  
 }

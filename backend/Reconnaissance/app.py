@@ -18,7 +18,7 @@ cap.set(4,680)
 etat = False #D"finition de l'état de la cam 
 
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
+id_cam = 1
 path = './images'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
@@ -164,18 +164,18 @@ def gen(captur):
                     print("la porte s'ouvre")
                     time.sleep(0.5)
                 """
+                
                 name = className[matchIndex].upper()
-                print(name)
+                picture = (name.lower() + '.jpg')
+                getPermission(picture, id_cam)
+                # print(name)
                 y1,x2,y2,x1 = faceLoc
                 y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
                 cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
                 cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
                 cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
-                # response = requests.get('https://google.com/')
-                # if response:
-                #     pass
-                # elif response == False:
-                #     sendNotificatyion()
+                time.sleep(1)
+               
 
 
                 
@@ -245,7 +245,10 @@ def photo():
     #res.headers['Cache-Control'] = 'no-cache'
     return res
 
-
+@app.route('/api/permission/<picture>/<camera>', methods = ['GET'])
+def getPermission(picture, camera):
+    print(camera, picture)
+    return picture, camera
 
 @app.route('/videoCptur')
 def videoCptur():

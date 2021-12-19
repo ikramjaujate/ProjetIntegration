@@ -151,7 +151,7 @@ waf.addModule('csrf-module', {
 });*/
 
 //app.use(waf.check);
-app.use(Waf.WafMiddleware(wafrules.DefaultSettings));
+// app.use(Waf.WafMiddleware(wafrules.DefaultSettings));
 
 
 module.exports = server;
