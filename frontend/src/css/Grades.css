@@ -348,8 +348,9 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .visible {top:-5rem; 
         /* display:; */
     }
-    .hidden {top:-5rem;
+    .hidden {top:0.3rem!important;
         display:none;}
+    .visible {top:0.3rem!important;}
 }
 
 @media only screen and (max-width: 550px) {
