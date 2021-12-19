@@ -199,12 +199,12 @@ module.exports = function (app, client) {
         const query2 = "update permission \
         set notification = ($1) \
         where id_grade = ($2) and id_camera = ($3) ";
-            client.query(query2,[notification, idGrade, camera],(error, results) => {
-                if (error) {
-                    throw error;
-                }
-                response.send({"count": results.rowCount});
-            });
+        client.query(query2,[notification, idGrade, camera],(error, results) => {
+            if (error) {
+                throw error;
+            }
+            response.send({"count": results.rowCount});
+        });
             
     });
 
@@ -217,7 +217,6 @@ module.exports = function (app, client) {
      * @param {integer} newPlace  new number of the place for the grade
      */
      app.post("/api/grades/:idGrade/order",(request, response) => {
-        //  console.log("rentre")
         const newPlace = request.body.newPlace ;
         const idGrade = request.params.idGrade ;
         const query = "update grade \
@@ -227,7 +226,6 @@ module.exports = function (app, client) {
             if (error) {
                 throw error;
             }
-            // console.log("results : ", results)
             response.status(200).json({"count" : results.rowCount});
         });
     });
@@ -240,24 +238,17 @@ module.exports = function (app, client) {
      * @param {integer} idGrade identifier of the grade for which we want to change the order place
      */
      app.delete("/api/grades/:idGrade",(request, response) => {
-        console.log("delete grade")
         const idGrade = request.params.idGrade ;
-        console.log("id : ", idGrade)
         const query = "delete from permission \
-        where id_grade = ($1); ";
-        client.query(query,[idGrade],(error, results) => {
+        where id_grade = ($1); \
+        delete from grade \
+        where id_grade = ($1);" ;
+        client.query(query2,[idGrade],(error, results) => {
             if (error) {
                 throw error;
             }
-            const query2 = "delete from grade \
-            where id_grade = ($1);" ;
-            client.query(query2,[idGrade],(error, results) => {
-                if (error) {
-                    throw error;
-                }
-                // console.log("results : ", results)
-                response.status(200).json({"count" : results.rowCount});
-            });
+            // console.log("results : ", results)
+            response.status(200).json({"count" : results.rowCount});
         });
     });
 
