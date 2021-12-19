@@ -197,10 +197,6 @@ function Grades() {
         })
         .then(dataCameras => {
             setinformationsCameras(dataCameras) ;
-            
-            // if (reset) {
-            //     resetModal(dataCameras);
-            // }
         });
     }
 
@@ -369,26 +365,6 @@ function Grades() {
 
 
     /**
-     * Update the action's camera when opening the modify modal
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    const resetModal = (allCameras) => {
-        console.log("informationsCameras : ", allCameras)
-        for (let camera in allCameras) {
-            if (allCameras[camera].id_camera in newActionsConst) {
-                document.getElementsByClassName("action-" + currentIdGrade+"-" + allCameras[camera].id_camera)[0].checked = newActionsConst[camera];
-            }
-            else {document.getElementsByClassName("action-" + currentIdGrade+"-" + allCameras[camera].id_camera)[0].checked = allCameras[camera].allowed;}
-            if (allCameras[camera].id_camera in newNotificationsConst) {
-                document.getElementById("notification-" + currentIdGrade + "-" + allCameras[camera].id_camera).className = newNotificationsConst[camera] ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";
-            }
-            else {document.getElementById("notification-" + currentIdGrade + "-" + allCameras[camera].id_camera).className = allCameras[camera].notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";}
-        }
-    }
-
-
-    /**
      * Don't save the modifications that have been made on the actions and notification
      * of camera
      * 
@@ -485,7 +461,7 @@ function Grades() {
                                         <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
                                             {(provided, snapshot) => (
                                                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-10 col-md-9 col-lg-7 col-xl-6 justify-content-center">
-                                                <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} resetModal={resetModal} order={grade.order_place} 
+                                                <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} order={grade.order_place} 
                                                     allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} id={grade.id_grade} openCameraInfo={openCameraInfo} deleteGrade={deleteGrade}/>
                                                 </div>
                                             )}
@@ -507,7 +483,7 @@ function Grades() {
             </div>
 
             <ModalDetailGrade informationsCameras={informationsCameras} colorModalDetails={colorModalDetails} titleModalDetails={titleModalDetails} 
-                activateButton={activateButton} resetModal={resetModal} />           
+                activateButton={activateButton} />           
             <ModalAddGrade nameGrade={textNewNameGrade} borderGrade={borderNewNameGrade} colorGrade={finalColor} idColorGrade={finalIdColor} 
                 colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} resetCreation={resetCreation} 
                 createGrade={createGrade} chooseColor={chooseColor}/>

@@ -7,11 +7,26 @@ import { useState, useEffect } from 'reactn';
 const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, saveAction, newNotifications, newActions, activateButton, setNewActionsConst, setNewNotificationsConst, newActionsConst, newNotificationsConst}) => {
 
     const [hover, setHover] = useState(false);
+    // useEffect(()=> {
+    //     console.log("changement newActionsConst")
+	// }, [newActionsConst]);
+
+    /**
+     * Update the action's camera when opening the modify modal
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     useEffect(()=> {
-        console.log("changement newActionsConst")
-	}, [newActionsConst]);
-    useEffect(()=> {
-        console.log("changement informationsCameras")
+        for (let camera in informationsCameras) {
+            if (informationsCameras[camera].id_camera in newActionsConst) {
+                document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = newActionsConst[camera];
+            }
+            else {document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = informationsCameras[camera].allowed;}
+            if (informationsCameras[camera].id_camera in newNotificationsConst) {
+                document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = newNotificationsConst[camera] ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";
+            }
+            else {document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = informationsCameras[camera].notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";}
+        }
 	}, [informationsCameras]);
 
     /**

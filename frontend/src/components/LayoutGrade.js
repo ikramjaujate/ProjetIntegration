@@ -1,6 +1,6 @@
 import '../css/Grades.css';
 
-const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, openCameraInfo, order, deleteGrade, resetModal}) => {
+const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, openCameraInfo, order, deleteGrade}) => {
 
     
     const displayIcon = () => {
