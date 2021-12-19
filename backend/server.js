@@ -124,6 +124,31 @@ const server = app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
 
+//create procedure to create a grade
+const query = "create or replace procedure grade_creation(grade_name varchar, grade_color int) \
+language plpgsql \
+as $$ \
+DECLARE \
+    camera record; \
+    tableId integer; \
+begin \
+    insert into grade (name_grade, id_color, order_place) \
+    VALUES (grade_name, grade_color, (select max(grade.order_place)+1 as order_place from grade)) \
+    RETURNING id_grade INTO tableId; \
+   for camera in  \
+        select id_camera \
+     from camera \
+   loop \
+     insert into permission (id_grade, id_camera, allowed, notification) \
+     VALUES (tableId, camera.id_camera, 'false', 'false'); \
+   end loop; \
+end; $$; ";
+client.query(query,(error, results) => {
+  if (error) {
+      throw error;
+  }
+});
+
 /*
 var emudb = new ExpressWaf.EmulatedDB();
 var waf = new ExpressWaf.ExpressWaf({

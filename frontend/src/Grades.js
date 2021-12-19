@@ -236,7 +236,7 @@ function Grades() {
         if (newColorok && newNameok) {
             deleteErrorMsg(true, true) ;
 
-            fetch ("/api/grades",{
+            fetch ("/api/grade",{
                 method: "PUT",
                 headers:{
                     "Content-type": "application/json"
@@ -249,7 +249,7 @@ function Grades() {
             .then(data => {
                 resetCreation() ;
                 document.getElementById("cancel-creation").click() ;
-                if (data.message === "ok") {
+                if (data.count === 1) {
                     getGrades() ;
                     getColor() ;
                     toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);

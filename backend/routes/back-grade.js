@@ -91,77 +91,6 @@ module.exports = function (app, client) {
     });
 
     /**
-     * Creates a new grade
-     *
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @method GET
-     * @param {integer} name name of the new grade
-     * @param {integer} color color of the new grade
-     */
-    app.put("/api/grades",(request, response, next) => {
-        const name = request.body.name;
-        const idColor = request.body.idcolor ;
-
-        // Request0 Get the order for this new grade
-        const query0 = "select max(grade.order_place) as order_place from grade;";
-        client.query(query0,(error, results0) => {
-            if (error) {
-                throw error;
-            }
-            const query = "insert into grade (name_grade, id_color, order_place) \
-            VALUES (($1), ($2), ($3))";
-            // Request1 Create grade
-            client.query(query,[name,idColor, results0.rows[0].order_place+1],(error, results1) => {
-                if (error) {
-                    throw error;
-                }
-
-                // Request2 - Get his id
-                const query2 = "select max(grade.id_grade) as id_grade from grade;";
-                client.query(query2,(error, results2) => {
-                    if (error) {
-                        throw error;
-                    }
-
-                    // Request3 - Get max number of camera
-                    const query3 = "select count(*) as number_camera from camera;";
-                    client.query(query3,(error, results3) => {
-                        if (error) {
-                            throw error;
-                        }
-
-                        // Request4 - Create action for each camera for the grade
-                        const query4 = "insert into permission (id_grade, id_camera, allowed, notification) \
-                        VALUES (($1), ($2), 'false', 'false')";
-                        const idgrade = results2.rows[0].id_grade;
-                        const nbrcamera = results3.rows[0].number_camera;
-                        for (let idCamera = 1; idCamera < parseInt(nbrcamera) + 1; idCamera++) {
-                            /*
-                                * Try {
-                                *     client.query(query4, [idgrade, idCamera], (error, results4) => {
-                                *     })
-                                *     throw error;
-                                *   }
-                                *   catch (err) {
-                                *     response.send({message:'ko'});
-                                *     return ;
-                                *   }
-                                */
-                            client.query(query4,[idgrade,idCamera],(error, results4) => {
-                                if (error) {
-                                    throw error;
-                                }
-                            });
-                        }
-                        // Response.status(200).json(results1.rows);
-                        response.send({"message": "ok"});
-                    });
-                });
-            });
-        });
-    });
-
-    /**
      * Get the different existing colors for grade creation/modification
      *
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
@@ -331,4 +260,35 @@ module.exports = function (app, client) {
             });
         });
     });
+
+    /**
+     * Creates a new grade
+     *
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @method PUT
+     * @param {integer} name name of the new grade
+     * @param {integer} color color of the new grade
+     */
+    app.put("/api/grade",(request, response) => {
+        //console.log("name :", request.body.name, " id : ", request.body.idcolor)
+        const name = request.body.name;
+        const idColor = request.body.idcolor ;
+        const query = "call grade_creation(($1), ($2));";
+
+        client.query(query,[name, idColor],(error, results) => {
+            if (error) {
+                response.status(400)
+                response.send({ 'message': 'An error occurred.' })
+            } 
+            else {
+                response.status(200).json({"count" : 1});
+            }
+        });
+    });
+
+
+
 };
+
+
+
