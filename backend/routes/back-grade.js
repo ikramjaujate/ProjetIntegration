@@ -249,15 +249,14 @@ module.exports = function (app, client, done) {
      */
      app.delete("/api/grades/:idGrade",(request, response) => {
         const idGrade = request.params.idGrade ;
-        const query = "delete from permission \
-        where id_grade = ($1); \
-        delete from grade \
-        where id_grade = ($1);" ;
+        const query = "call grade_suppression($1);" ;
         client.query(query,[idGrade],(error, results) => {
             if (error) {
                 throw error;
             }
-            response.status(200).json({"count" : results.rowCount});
+            else {
+                response.status(200).json({"count" : 1});
+            }
         });
     });
 

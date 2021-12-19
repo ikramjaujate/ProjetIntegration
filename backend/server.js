@@ -167,6 +167,24 @@ client.query(query2,(error, results) => {
 });
 
 
+const query3 = "create or replace procedure grade_suppression(grade_id int) \
+language plpgsql \
+as $$  \
+begin \
+	delete from permission \
+	where id_grade = grade_id; \
+	delete from grade \
+	where id_grade = grade_id; \
+end; $$;";
+client.query(query3,(error, results) => {
+  if (error) {
+      throw error;
+  }
+  else {
+    console.log("ok")
+  }
+});
+
 /*
 var emudb = new ExpressWaf.EmulatedDB();
 var waf = new ExpressWaf.ExpressWaf({

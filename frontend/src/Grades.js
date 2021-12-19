@@ -476,7 +476,7 @@ function Grades() {
                         <div ref={provided.innerRef} {...provided.droppableProps}>
                             {informationsGrade && informationsGrade.map((grade, i) => (
                                 <div className="row col-12 m-0">
-                                    <div className="row p-1 justify-content-center card-grade offset-md-1 offset-lg-1">
+                                    <div className="row p-1 justify-content-center card-grade offset-1 offset-lg-1 offset-xxl-0">
                                         <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
                                             {(provided, snapshot) => (
                                                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-10 col-md-9 col-lg-7 col-xl-6 justify-content-center">
