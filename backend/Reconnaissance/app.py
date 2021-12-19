@@ -7,6 +7,7 @@ import numpy as np
 import os # pour importer toutes les images d'un coup
 from datetime import datetime
 import time
+import requests
 app = Flask(__name__)
 
 """ Enlever le commentaire pour faire fonctionner sur raspi
@@ -30,6 +31,13 @@ for x,cl in enumerate(myList):
         curImg = cv2.imread(f'{path}/{cl}')
         images.append(curImg)
         className.append(os.path.splitext(cl)[0])
+
+
+# A modifier pour prnedre en parametre les valeurs du nom de la photo et de l'id camera (id_cam) plus haut + modifier la route pour avoir juste /api/permission/..
+def getPerms(picture, camera):
+    response = requests.get("http://localhost:3001/api/permission/ikram2.jpg/1")
+    print(response.json())
+    return response
 
 #les encoder
 def findEncodings(images):
@@ -167,7 +175,7 @@ def gen(captur):
                 
                 name = className[matchIndex].upper()
                 picture = (name.lower() + '.jpg')
-                getPermission(picture, id_cam)
+                getPerms(str(picture), int(id_cam))
                 # print(name)
                 y1,x2,y2,x1 = faceLoc
                 y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
