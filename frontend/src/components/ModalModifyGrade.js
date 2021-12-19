@@ -1,12 +1,18 @@
 import '../css/Grades.css';
 import ActionsCameras from './ActionsCameras';
 import TitleModalGrade from './TitleModalGrade' ;
-import { useState } from 'reactn';
+import { useState, useEffect } from 'reactn';
 
 
 const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, saveAction, newNotifications, newActions, activateButton, setNewActionsConst, setNewNotificationsConst, newActionsConst, newNotificationsConst}) => {
 
     const [hover, setHover] = useState(false);
+    useEffect(()=> {
+        console.log("changement newActionsConst")
+	}, [newActionsConst]);
+    useEffect(()=> {
+        console.log("changement informationsCameras")
+	}, [informationsCameras]);
 
     /**
      * Change the notification status (disable or enable)

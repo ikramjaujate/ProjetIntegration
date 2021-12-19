@@ -179,7 +179,7 @@ function Grades() {
      * @param {string} mainName   Name of the selected grade
      * @param {integer} grade     Identifier of the selected grade
      */
-    const openCameraInfo = (mainColor, mainName, grade) => {
+    const openCameraInfo = (mainColor, mainName, grade, reset=false) => {
         setColorModalDetails(mainColor);
         setTitleModalDetails(mainName);
 
@@ -197,6 +197,10 @@ function Grades() {
         })
         .then(dataCameras => {
             setinformationsCameras(dataCameras) ;
+            
+            // if (reset) {
+            //     resetModal(dataCameras);
+            // }
         });
     }
 
@@ -280,7 +284,7 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const verifyActions = () => {
-        if ((actionsModify === Object.keys(newActions).length) && (notificationsModify === Object.keys(newNotifications).length)) {
+        if ((actionsModify === Object.keys(newActionsConst).length) && (notificationsModify === Object.keys(newNotifications).length)) {
             actionsModify = 0 ;
             notificationsModify = 0 ;
             
@@ -369,16 +373,17 @@ function Grades() {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-    const resetModal = () => {
-        for (let camera in informationsCameras) {
-            if (informationsCameras[camera].id_camera in newActions) {
-                document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = newActions[camera];
+    const resetModal = (allCameras) => {
+        console.log("informationsCameras : ", allCameras)
+        for (let camera in allCameras) {
+            if (allCameras[camera].id_camera in newActionsConst) {
+                document.getElementsByClassName("action-" + currentIdGrade+"-" + allCameras[camera].id_camera)[0].checked = newActionsConst[camera];
             }
-            else {document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = informationsCameras[camera].allowed;}
-            if (informationsCameras[camera].id_camera in newNotifications) {
-                document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = newNotifications[camera] ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";
+            else {document.getElementsByClassName("action-" + currentIdGrade+"-" + allCameras[camera].id_camera)[0].checked = allCameras[camera].allowed;}
+            if (allCameras[camera].id_camera in newNotificationsConst) {
+                document.getElementById("notification-" + currentIdGrade + "-" + allCameras[camera].id_camera).className = newNotificationsConst[camera] ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";
             }
-            else {document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = informationsCameras[camera].notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";}
+            else {document.getElementById("notification-" + currentIdGrade + "-" + allCameras[camera].id_camera).className = allCameras[camera].notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";}
         }
     }
 
