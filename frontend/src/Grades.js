@@ -371,7 +371,7 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const deleteModification = () => {
-        activateButton("close-cancel");
+        //activateButton("close-cancel");
         // activateButton("open-desc-grade-2");
         newActions = {} ;
         newNotifications = {} ;
@@ -477,7 +477,7 @@ function Grades() {
 
                 <div id="layout-add" className="row p-1 text-center justify-content-center col-12">
                     <span className="col-12 row justify-content-center" title="Créer un grade" data-toggle="tooltip" data-placement="top">
-                        <i type="button" className="p-0 bi bi-plus-circle-fill add-user col-1 offset-2" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
+                        <i type="button" className="p-0 bi bi-plus-circle-fill add-user col-1 offset-2 offset-xxl-0" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
                     </span>
                 </div>  
             </div>

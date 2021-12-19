@@ -23,7 +23,7 @@
     --close-button-hover:#62666d ; 
 }
 body {
-    color: var(--writing) ;
+    color: var(--writing);
 }
 
 
@@ -180,6 +180,7 @@ body {
 /*Modication of camera's action*/
 .hidden-btn {
     display:none;
+    visibility: hidden;
 }
 #modifyGradeModalLabel {
     text-align: center;

@@ -38,11 +38,7 @@ const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDet
                         </div>
                     </div>
                     <div className="modal-footer row justify-content-center">
-                        {/* <button type="button" id="close-informations" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button> */}
-                        {/* <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" style={{backgroundColor: hover ? "var(--hover-color)" : colorModalDetails}} 
-                            data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations")}} 
-                            onMouseEnter={()=>{setHover(true);}} onMouseLeave={()=>{setHover(false);}}>Modifier</button> */}
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" id="close-informations" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
                     </div>
                 </div>
             </div>
