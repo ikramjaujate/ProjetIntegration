@@ -251,15 +251,16 @@ function Settings() {
     return (
         <div>
             {/* <Toggle /> */}
-            <div className="row settings justify-content-center offset-1">
+            <div className="row settings justify-content-center offset-lg-1">
 
-                <div className="row col-8 p-0 justify-content-evenly">
-                    <div className="row col-6 m-0 darkCard p-0">
-                        <div className="row col-12 rounded m-0 bg-light shadow-sm underCardDark">
+                <div className="row col-10 col-md-9  p-0 justify-content-evenly ">
+
+                    <div className="row col-12 m-0 darkCard p-0 col-md-6">
+                        <div className="row col-12 rounded m-0 mb-1 m-md-0 bg-light shadow-sm underCardDark">
                             <div className="col-7 m-0">Mode sombre</div>
                             <div className="row col-5 switch-dark-mode p-0 m-0">
-                                <div className="col-3 p-0"><i className="bi bi-brightness-high-fill"></i></div>
-                                <div className="col-4 form-check form-switch">
+                                <div className="col-1 p-0"><i className="bi bi-brightness-high-fill"></i></div>
+                                <div className="col-1 form-check form-switch ms-2 p-0 ps-5">
                                     {color === "dark" ?
                                     <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
                                     : color === "daltonism" ?
@@ -267,17 +268,17 @@ function Settings() {
                                     : <input id="dark-switch" onChange={() => {changeTheme("dark")}} className="form-check-input" type="checkbox" role="switch" />
                                     }
                                 </div>
-                                <div className="col-3 p-0"><i className="bi bi-moon-stars-fill"></i></div>
+                                <div className="col-2 p-0 ps-2"><i className="bi bi-moon-stars-fill"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="row col-6 m-0 daltonismCard">
+                    <div className="row col-12 m-0 daltonismCard col-md-6">
                         <div className="row col-12 rounded m-0 bg-light shadow-sm underCardDal">
                             <div className="col-7 m-0">Mode daltonien</div>
                             <div className="row col-5 switch-daltonism-mode p-0 m-0">
-                                <div className="col-3 p-0"><i className="bi bi-eye-slash"></i></div>
-                                <div className="col-4 form-check form-switch">
+                                <div className="col-1 p-0"><i className="bi bi-eye-slash"></i></div>
+                                <div className="col-1 form-check form-switch ms-2 p-0 ps-5">
                                 {color === "daltonism" ?
                                     <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" defaultChecked />
                                     : color === "dark" ? 
@@ -285,50 +286,56 @@ function Settings() {
                                     : <input id="daltonism-switch" onChange={() => {changeTheme("daltonism")}} className="form-check-input" type="checkbox" role="switch" />
                                     }
                                 </div>
-                                <div className="col-3 p-0"><i className="bi bi-eye-fill"></i></div>
+                                <div className="col-2 p-0 ps-2"><i className="bi bi-eye-fill"></i></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
+                <div className="row col-10 col-md-9 rounded bg-light shadow-sm m-1 p-2 justify-content-center">
                     <div className="col-12 mb-1">Modification du mot de passe</div>
-                    <div className="row col-12">
-                        <div className="col-4 offset-1">
+                    <div className="row col-12 justify-content-center">
+                        <div className="col-11 col-md-4">
                             <label for="oldPassword" className="form-label">Ancien mot de passe</label>
                             <input type="password" className="form-control m-1" id="oldPassword" required value={passwordOld} onChange={(e) => {setPasswordOld(e.target.value)}} style={{border:borderOldPassword}}/>
                         </div>
-                        <div className="col-4">
+                        <div className="errorMessageModify errorMessageOld col-10 errorLarge">{errorOld}</div>
+                        <div className="col-11 col-md-4">
                             <label for="newPassword" className="form-label">Nouveau mot de passe</label>
                             <input type="password" maxLength='20' className="form-control m-1" id="newPassword" required value={passwordNew} onChange={(e) => {setPasswordNew(e.target.value)}} style={{border:borderNewPassword}}/>
                         </div>
-                        <div className="col-3 mt-4">
+                        <div className="errorMessageModify errorMessageNew col-10 errorLarge">{errorNew}</div>
+                        <div className="col-11 col-md-3 mt-sm-4">
                             <button className="btn btn-sm m-1 save-button" type="button" onClick={modifyPassword}>Sauvegarder</button>
                         </div>
-                        <div className="errorMessageModify errorMessageOld col-4 offset-1">{errorOld}</div>
-                        <div className="errorMessageModify errorMessageNew col-4">{errorNew}</div>
+                        <div className="errorMessageModify errorMessageOld col-4 errorSmall">{errorOld}</div>
+                        <div className="errorMessageModify errorMessageNew col-4 errorSmall">{errorNew}</div>
+                        <div className="col-3"></div>
                     </div>
                 </div>
 
-                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
+                <div className="row col-10 col-md-9 rounded bg-light shadow-sm m-1 p-2 justify-content-center">
                     <div className="col-12 mb-1">Modification du nom d'utilisateur</div>
-                    <div className="row col-12">
-                        <div className="col-4 offset-1">
+                    <div className="row col-12 justify-content-center">
+                        <div className="col-11 col-md-4">
                             <label for="newUsername" className="form-label">Nouveau nom d'utilisateur</label>
                             <input type="text" maxLength="15" className="form-control m-1" id="newUsername" required value={newUsername} onChange={(e) => {setNewUsername(e.target.value)}} style={{border:borderNewUsername}}/>
                         </div>
-                        <div className="col-4">
+                        <div className="errorMessageModify errorMessageUsername col-10 errorLarge">{errorUsername}</div>
+                        <div className="col-11 col-md-4">
                             <label for="actualPassword" className="form-label">Mot de passe actuel</label>
                             <input type="password" className="form-control m-1" id="actualPassword" required value={actualPassword} onChange={(e) => {setActualPassword(e.target.value)}} style={{border:borderActualPassword}}/>
                         </div>
-                        <div className="col-3 mt-4">
+                        <div className="errorMessageModify errorMessagePassword col-10 errorLarge">{errorPassword}</div>
+                        <div className="col-11 col-md-3 mt-sm-4">
                             <button className="btn btn-sm m-1 save-button" type="button" onClick={modifyUsername}>Sauvegarder</button>
                         </div>
-                        <div className="errorMessageModify errorMessageUsername col-4 offset-1">{errorUsername}</div>
-                        <div className="errorMessageModify errorMessagePassword col-4">{errorPassword}</div>
+                        <div className="errorMessageModify errorMessageUsername col-4 errorSmall">{errorUsername}</div>
+                        <div className="errorMessageModify errorMessagePassword col-4 errorSmall">{errorPassword}</div>
+                        <div className="col-3"></div>
                     </div>
                 </div>
-                <div className="row col-8 rounded bg-light shadow-sm m-1 p-2">
+                <div className="row col-10 col-md-9 rounded bg-light shadow-sm m-1 p-2">
                     
                     <a href="gdpr" className="btn btn-light gdprLink">Conditions générales </a>
                 </div>
