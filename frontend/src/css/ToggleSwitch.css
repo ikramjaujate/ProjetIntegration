@@ -40,20 +40,20 @@
   font-weight: bold;
   box-sizing: border-box;
 }
-.cam2 .inner:before {
+.switch .form-check.form-check-input:before {
   content: "ON";
   padding-left: 10px;
-  background-color: rgb(124, 161, 56);
-  color: rgb(124, 161, 56);
+  background-color: #3aaa0e ;
+  color: #3aaa0e ; 
 }
-.cam2 .inner:after {
+.switch .form-check .form-check-input:after {
   content: "OFF";
   padding-right: 7px;
-  background-color: rgb(197, 90, 90);
-  color:rgb(197, 90, 90);
+  background-color: #aa2929  !important;
+  color:#aa2929 !important;
   /* text-align: right; */
 }
-.cam2 .inner:disabled {
+.perm .form-check .form-check-input:disabled {
   content: "OFFLINE";
   padding-right: 7px;
   background-color: #a19090;
