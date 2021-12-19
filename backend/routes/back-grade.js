@@ -1,4 +1,18 @@
-module.exports = function (app, client) {
+module.exports = function (app, client, done) {
+
+    const shouldAbort = err => {
+        if (err) {
+          console.error('Error in transaction', err.stack)
+          client.query('ROLLBACK', err => {
+            if (err) {
+              console.error('Error rolling back client', err.stack)
+            }
+            // release the client back to the pool
+            done()
+          })
+        }
+        return !!err
+      }
 
     /**
      * 
@@ -8,7 +22,6 @@ module.exports = function (app, client) {
      */
     app.get('/api/gradesInfos', (request, response) => {
         let query = "select id_grade, name_grade from grade";
-
         client.query(query, (error, results) => {
         if (error) {
             throw error;
@@ -35,7 +48,6 @@ module.exports = function (app, client) {
                 throw error;
             }
             response.status(200).json(results.rows);
-
         });
     });
 
@@ -62,7 +74,6 @@ module.exports = function (app, client) {
                 from grade as GRM \
                 join color as CO on GRM.id_color = CO.id_color \
                 order by GRM.order_place ;";
-
         client.query(query,(error, results) => {
             if (error) {
                 throw error;
@@ -176,7 +187,6 @@ module.exports = function (app, client) {
             if (error) {
                 throw error;
             }
-
             response.send({"count": results.rowCount});
         });
     });
@@ -243,11 +253,10 @@ module.exports = function (app, client) {
         where id_grade = ($1); \
         delete from grade \
         where id_grade = ($1);" ;
-        client.query(query2,[idGrade],(error, results) => {
+        client.query(query,[idGrade],(error, results) => {
             if (error) {
                 throw error;
             }
-            // console.log("results : ", results)
             response.status(200).json({"count" : results.rowCount});
         });
     });
@@ -261,7 +270,6 @@ module.exports = function (app, client) {
      * @param {integer} color color of the new grade
      */
     app.put("/api/grade",(request, response) => {
-        //console.log("name :", request.body.name, " id : ", request.body.idcolor)
         const name = request.body.name;
         const idColor = request.body.idcolor ;
         const query = "call grade_creation(($1), ($2));";
@@ -278,6 +286,116 @@ module.exports = function (app, client) {
     });
 
 
+    app.post("/api/grades/:idGrade/test",(request, response) => {
+        const idGrade = request.params.idGrade;
+        const actions = request.body.actions;
+        const notifications = request.body.notifications;
+        console.log("actions : ", actions, " notificatiosn ", notifications)
+
+        let allowed = allo(idGrade, actions) ;
+        let notification  = coucou(idGrade, notifications) ;
+        console.log("allowed : ", allowed, " notif : ", notification);
+        response.send({"message": "ok"});
+    });
+
+    function allo(idGrade, actions) {
+        console.log("allo actions : ", actions);
+        let coucou = 0 ;
+        const query = "update permission \
+        set allowed = ($1) \
+        where id_grade = ($2) and id_camera = ($3) ";
+        for (const camera in actions) {
+            // client.query(query,[actions[camera],idGrade,camera],(error, results) => {
+            //     if (error) {
+            //         throw error;
+            //     }
+            //     else {
+            //         // response.send({"message": "ok"});
+            //         coucou +=1;
+            //         console.log("coucou actions +=1")
+            //     }
+            // });
+            coucou +=1;
+            console.log("coucou actions +=1")
+        }
+        console.log("coucou fin actions");
+        return coucou ;
+    };
+
+    function coucou(idGrade, notifications) {
+        console.log("allo notifications : ", notifications);
+        let coucou = 0 ;
+        const query2 = "update permission \
+        set notification = ($1) \
+        where id_grade = ($2) and id_camera = ($3);";
+        let baba = "" ;
+        let index = 2 ;
+        let liste = [idGrade] ;
+        for (const camera in notifications) {
+            //baba += "update permission set notification = ($" + (Number(index)+1) +") where id_grade = ($1) and id_camera = ($" + index +");" ;
+            baba+= "call grade_modification(($1), ($" + index +"), ($" + (Number(index)+1) +"));"
+            liste.push(camera) ;
+            liste.push(notifications[camera]) ;
+            index += 2 ;
+            // client.query(query2,[notifications[camera],idGrade,camera],(error, results) => {
+            //     if (error) {
+            //         throw error;
+            //     }
+            //     else {
+            //         // response.send({"message": "ok"});
+            //         coucou += 1 ;
+            //         console.log("coucou notifications +=1")
+            //     }
+            // });
+
+            // client.query('BEGIN', (err) => {
+            //     if (shouldAbort(err)) return
+            //     const query2 = "update permission \
+            //     set notification = ($1) \
+            //     where id_grade = ($2) and id_camera = ($3);";
+            //     client.query(query2, [notifications[camera],idGrade,camera], (err, res) => {
+            //       if (shouldAbort(err)) return
+            //         client.query('COMMIT', err => {
+            //           if (err) {
+            //             console.error('Error committing transaction', err.stack)
+            //           }
+            //           else {
+            //             coucou += 1 ;
+            //             console.log("coucou notifications +=1")
+            //           }
+            //           done()
+            //         })
+            //     })
+            // })
+        }
+
+        console.log("------------------------")
+        console.log("baba : ", baba);
+        console.log("------------------------")
+        console.log("liste : ", liste);
+        console.log("coucou fin notifications");
+
+        // baba="call grade_modification(1, 2, 'false'); \
+        // call grade_modification(1, 3, 'true'); \
+        // call grade_modification(1, 4, 'false')"
+        client.query(baba, liste,(error, results) => {
+            if (error) {
+                throw error;
+            }
+            else {
+                // response.send({"message": "ok"});
+                coucou += 1 ;
+                console.log("coucou notifications +=1")
+                console.log("results : ", results)
+            }
+        });
+
+        return coucou ;
+
+
+        
+
+    };
 
 };
 

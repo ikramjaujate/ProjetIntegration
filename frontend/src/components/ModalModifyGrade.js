@@ -4,7 +4,7 @@ import TitleModalGrade from './TitleModalGrade' ;
 import { useState } from 'reactn';
 
 
-const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, saveAction, newNotifications, newActions, activateButton, setNewActionsConst, setNewNotificationsConst}) => {
+const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, saveAction, newNotifications, newActions, activateButton, setNewActionsConst, setNewNotificationsConst, newActionsConst, newNotificationsConst}) => {
 
     const [hover, setHover] = useState(false);
 
@@ -16,16 +16,27 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
      * @param {boolean} notification  Presence of a notification or not
      */
      const changeNotification = (idCamera, notification) => {
-        if (idCamera in newNotifications) {
+        let test ;
+        if (idCamera in newNotificationsConst) {
             document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
             delete newNotifications[idCamera];
-            setNewNotificationsConst(newNotifications) ;
+
+            test = {...newNotificationsConst} ;
+            delete test[idCamera];
+            setNewNotificationsConst(test) ;
         }
         else {
             document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-slash-fill" : "bi bi-bell-fill" ;
             newNotifications[idCamera] = !notification ;
-            setNewNotificationsConst(newNotifications) ;
+            
+            test = {...newNotificationsConst} ;
+            console.log("test avant ajout : ", test)
+            test[idCamera] = !notification ;
+            console.log("test apres ajout : ", test)
+            console.log("newac : ", newNotifications)
+            setNewNotificationsConst(test) ;
         }
+        console.log("notif modif : ", newNotifications)
     }
 
     /**
@@ -35,15 +46,25 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
      * @param {string} identifier  Identifier of the html switch that has just been switched
      */
      const changeAction = (identifier) => {
+        let test ;
         let action = document.getElementsByClassName("action-" + currentIdGrade + "-" + identifier)[0].checked ; 
-        if (identifier in newActions) {
+        if (identifier in newActionsConst) {
             delete newActions[identifier];
-            setNewActionsConst(newActions) ;
+
+            test = {...newActionsConst} ;
+            delete test[identifier];
+            setNewActionsConst(test) ;
         }
         else {
             newActions[identifier] = action ; 
-            setNewActionsConst(newActions) ;
+
+            test = {...newActionsConst} ;
+            console.log("test avant ajout : ", test)
+            test[identifier] = action ;
+            console.log("test apres ajout : ", test)
+            setNewActionsConst(test) ;
         }
+        console.log("action modif : ", newActions)
     }
 
     /**

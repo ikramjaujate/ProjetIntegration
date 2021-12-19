@@ -112,7 +112,7 @@ privatedata(app, client);
      .join(__dirname + '/build/', 'index.html'))
  });
 
-client.connect(err => {
+client.connect(err=> {
   if (err) {
     console.error('connection error', err.stack)
   } else {
@@ -148,6 +148,24 @@ client.query(query,(error, results) => {
       throw error;
   }
 });
+//second procedure
+const query2 = "create or replace procedure grade_modification(grade_id int, camera_id int, grade_notification bool) \
+language plpgsql \
+as $$  \
+begin \
+	update permission \
+    set notification = grade_notification \
+    where id_grade = grade_id and id_camera = camera_id ;\
+end; $$;";
+client.query(query2,(error, results) => {
+  if (error) {
+      throw error;
+  }
+  else {
+    console.log("ok")
+  }
+});
+
 
 /*
 var emudb = new ExpressWaf.EmulatedDB();

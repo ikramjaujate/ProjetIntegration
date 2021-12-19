@@ -301,48 +301,66 @@ function Grades() {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-     const saveAction = () => {     
-        for (let camera in newActions) {
-            let informations = { method: 'POST',
-               headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({camera: camera, action : newActions[camera]})
-            };
+     const saveAction = () => { 
+        console.log("action finale : ", newActionsConst)
+        console.log("notif finale : ", newNotificationsConst)
+        let cc1 = newActionsConst;
+        let cc2 = newNotificationsConst;
+        let informations = { method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({actions: cc1, notifications : cc2})
+        };
 
-            fetch(`/api/grades/${currentIdGrade}/action`, informations)
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                if (data.count === 1) {
-                    actionsModify++ ;
-                    verifyActions() ;
-                }
-                else {
-                    toast.error(errorMsgClient, optionsToast);
-                }
-            });
-        }
+        fetch(`/api/grades/${currentIdGrade}/test`, informations)
+        .then(result => {
+            return result.json();
+        })
+        .then(data => {
+            console.log("data : ", data);
+        }); 
+        
+        
+        // for (let camera in newActions) {
+        //     let informations = { method: 'POST',
+        //        headers: {'Content-Type': 'application/json'},
+        //        body: JSON.stringify({camera: camera, action : newActions[camera]})
+        //     };
 
-        for (let camera in newNotifications) {
-            let informations = { method: 'POST',
-               headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({camera: camera, notification : newNotifications[camera]})
-            };
+        //     fetch(`/api/grades/${currentIdGrade}/action`, informations)
+        //     .then(result => {
+        //         return result.json();
+        //     })
+        //     .then(data => {
+        //         if (data.count === 1) {
+        //             actionsModify++ ;
+        //             verifyActions() ;
+        //         }
+        //         else {
+        //             toast.error(errorMsgClient, optionsToast);
+        //         }
+        //     });
+        // }
 
-            fetch(`/api/grades/${currentIdGrade}/notification`, informations)
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                if (data.count === 1) {
-                    notificationsModify++ ;
-                    verifyActions() ;
-                }
-                else {
-                    toast.error(errorMsgClient, optionsToast);
-                }
-            });
-        }
+        // for (let camera in newNotifications) {
+        //     let informations = { method: 'POST',
+        //        headers: {'Content-Type': 'application/json'},
+        //        body: JSON.stringify({camera: camera, notification : newNotifications[camera]})
+        //     };
+
+        //     fetch(`/api/grades/${currentIdGrade}/notification`, informations)
+        //     .then(result => {
+        //         return result.json();
+        //     })
+        //     .then(data => {
+        //         if (data.count === 1) {
+        //             notificationsModify++ ;
+        //             verifyActions() ;
+        //         }
+        //         else {
+        //             toast.error(errorMsgClient, optionsToast);
+        //         }
+        //     });
+        // }
     }
 
 
@@ -489,7 +507,8 @@ function Grades() {
                 colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} resetCreation={resetCreation} 
                 createGrade={createGrade} chooseColor={chooseColor}/>
             <ModalModifyGrade currentColor={currentColor} currentIdGrade={currentIdGrade} currentGrade={currentGrade} informationsCameras={informationsCameras} 
-                saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}/>
+                saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}
+                setNewActionsConst={setNewActionsConst} setNewNotificationsConst={setNewNotificationsConst} newActionsConst={newActionsConst} newNotificationsConst={newNotificationsConst}/>
             <ModalConfirmationCancel activateButton={activateButton} deleteModification={deleteModification} />
 
             <ToastContainer style={{fontSize:"0.6rem"}}/>  
