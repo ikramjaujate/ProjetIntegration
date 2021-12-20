@@ -1,7 +1,34 @@
 const { response } = require("express");
+//import * as Encrypt from '../helpers/folder-encryption' ;
+//const fe = require('../helpers/folder-encryption.js')
+//import * as folderEncrypt from 'folder-encrypt';
+const folderEncrypt = require('folder-encrypt')
+const fs = require('fs') ;
 
-
+//TODO : faire try catch
+async function encryptFolder(folderPath) {
+  try {
+    await folderEncrypt.encrypt({
+        password: '123', //TODO : A METTRE DANS LE ENV
+        input: folderPath
+    })
+    fs.rmdirSync(folderPath, { recursive: true, force : true });
+  }
+  catch {}
+}
+async function decryptFolder(folderPath) {
+  try {
+    await folderEncrypt.decrypt({
+      password: '123', //TODO : A METTRE DANS LE ENV
+      input: folderPath
+    })
+    fs.rmdirSync(folderPath, { recursive: true, force : true });
+  }
+  catch {}
+}
 module.exports = function(app,client) {
+
+  
 
      /**
  * Récupère à l'aide d'un GET toutes les caméra et leur état 
@@ -19,7 +46,8 @@ module.exports = function(app,client) {
   //   })
   // })
 
-app.get('/api/cameras', (req, res) =>{
+app.get('/api/cameras', async (req, res) =>{
+  await decryptFolder("./Reconnaissance/images.encrypted");
 
   let query = "select id_camera, name_camera, name_status,ST.id_status \
   from camera as CA \
@@ -28,7 +56,15 @@ app.get('/api/cameras', (req, res) =>{
       if(err) throw err ;
       res.send(result.rows);
     })
+    await encryptFolder("./Reconnaissance/images");
+
   })
+
+
+
+
+
+
   app.get('/api/pictureScreenshoot', (req, res) =>{
     const fs = require('fs');
     let list = []

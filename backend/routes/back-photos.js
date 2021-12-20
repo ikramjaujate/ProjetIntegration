@@ -1,6 +1,7 @@
 const _ = require('lodash');
 
 
+
 module.exports = function(app,client) {
 
      /**
@@ -26,7 +27,7 @@ module.exports = function(app,client) {
           return res.send(list);
         });
         
-        })
+    })
   
 
 
@@ -60,6 +61,7 @@ module.exports = function(app,client) {
                     mimetype: photo.mimetype,
                     size: photo.size
                 });
+                
             });
     
             //return response
