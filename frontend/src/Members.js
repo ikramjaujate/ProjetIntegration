@@ -258,27 +258,6 @@ export default function Members() {
             });
     }
 
-    /*const updatePhoto = () => {
-        let informations = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        };
-        fetch(`/api/membres/${userNow}/photos`, informations)
-            .then(response => response.json())
-            .then(res => {
-                let images = []
-                for (let i in res) {
-                    photos.push(res[i]["pictures"])
-                    setAllPhotos(photos)
-                    setProfilePhoto(res[0]["pictures"])
-                }
-
-                setProfilePhoto(photos[0])
-                setHasValue(true)
-            })
-
-    }*/
-
     /**
      * Get user's first and last name
      * 
