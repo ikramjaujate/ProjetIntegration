@@ -35,7 +35,6 @@ module.exports = function (app, client) {
           })
         }
         else{
-          console.log(error)
           return res.status(400)
           .json(error)
           
@@ -74,20 +73,17 @@ module.exports = function (app, client) {
      */
 
   app.delete('/api/members', (req, response) => {
-    console.log("ici")
     idMember= req.body.idMember
 
     let query = "delete from member where id_member = ($1)"
 
     client.query(query, [idMember], (error, res) => {
       if (error) {
-        console.log(error)
         throw error
         // response.status(400)
         // response.send(error);
       }
       else{
-        console.log("ok")
         return response.status(200)
         .send({"message" : "ok"})
       }

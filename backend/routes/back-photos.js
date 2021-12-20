@@ -45,7 +45,7 @@ module.exports = function(app,client) {
                 status: false,
                 message: 'No file uploaded'
             });
-        } else if(req.files.photos.length == 2) {
+        } else if(req.files.photos.length >= 2) {
           console.log("ok3")
             let data = []; 
             //loop all files
