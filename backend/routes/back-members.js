@@ -73,17 +73,21 @@ module.exports = function (app, client) {
      * @param {integer} idMember Id of the member we want to delete
      */
 
-  app.delete('/api/members/:idMember', (req, response) => {
-    idMember= req.params.idMember
+  app.delete('/api/members', (req, response) => {
+    console.log("ici")
+    idMember= req.body.idMember
 
     let query = "delete from member where id_member = ($1)"
 
     client.query(query, [idMember], (error, res) => {
       if (error) {
-        response.status(400)
-        response.send(error);
+        console.log(error)
+        throw error
+        // response.status(400)
+        // response.send(error);
       }
       else{
+        console.log("ok")
         return response.status(200)
         .send({"message" : "ok"})
       }

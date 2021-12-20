@@ -10,8 +10,8 @@ dotenv.config();
 //var path = require('path');
 const helmet = require("helmet");
 // Ajout des fichier du waf
-const Waf = require('mini-waf/wafbase');  // Base du waf
-const wafrules = require('mini-waf/wafrules'); //Règles de sécurisation associer au waf
+// const Waf = require('mini-waf/wafbase');  // Base du waf
+// const wafrules = require('mini-waf/wafrules'); //Règles de sécurisation associer au waf
 
 
 //const express_waf_middleware = require("express-waf-middleware");
@@ -158,7 +158,7 @@ waf.addModule('csrf-module', {
 });*/
 
 //app.use(waf.check);
-app.use(Waf.WafMiddleware(wafrules.DefaultSettings));
+// app.use(Waf.WafMiddleware(wafrules.DefaultSettings));
 
 
 module.exports = server;
