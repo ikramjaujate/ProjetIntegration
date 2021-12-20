@@ -14,14 +14,13 @@ function Photos({nomPhoto,counta}) {
                 <div className="photo row col-xl-3 col-sm-12 justify-content-sm-center justify-content-center align-self-center">{nomPhoto}</div>
                 <div className="row col-xl-3 justify-content-sm-center justify-content-center photo align-self-center">{nomPhoto.substr(6,10)}</div>
                 <div className="row col-xl-3 justify-content-sm-center justify-content-center p-1">
-
                     <div type='button' className="col col-5 col-xl-5 col-sm-6 align-self-center frameDelete frameActions  p-0 rounded-circle shadow photo" type="button" onClick ={()=>console.log("supprimer")} >
-                        <i  class="bi bi-trash deleteIcon "></i>
+                        <i  class="bi bi-trash deleteIcon"></i>
                     </div>
                     <div type='button' className="col col-5 col-xl-5 align-self-center frameLoad frameActions  p-0 rounded-circle shadow photo" style={{'margin-left':'1rem'}}>
-                 
+                        
                             <a href={nomPhoto} classaName='m-2 download' download >
-                            <i class="bi bi-arrow-down-circle iconeDown">
+                            <i class="bi bi-arrow-down-circle">
                                 <></>
                             </i>
                             </a>

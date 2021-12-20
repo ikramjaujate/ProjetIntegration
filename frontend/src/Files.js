@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Photos from './components/Photos.js'
 import './css/Gallerie.css'
+import './css/Grades.css'
 import React from 'react';
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';

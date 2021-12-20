@@ -14,8 +14,8 @@ a:link{
   color: white;
 }
 
-.iconeDown{
-  color: #6c757d
+.frameDelete{
+  background-color: #fb4040 !important;
 }
 .titreCollone{
   vertical-align: middle;
@@ -53,7 +53,7 @@ a:link{
     }
     .boutonTri{
       text-align: left;
-      
+    }
 
 
     
