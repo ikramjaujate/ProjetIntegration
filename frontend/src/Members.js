@@ -489,7 +489,7 @@ export default function Members() {
                 </div>
 
                 <div className="rounded col-6 col-lg-5 col-sm-3">
-                    <div className="form-check form-check-inline">
+                    <div className="form-check form-check-inline" style={{'color':'white'}}>
                     <input type="radio" className="mx-1" id="Tous" onClick={e => (setCurrentGrade(e.target.id))} name="grade" value="Tous"/>
                     <label style={{backgroundColor: "grey", width:"auto", borderRadius:"10px", fontSize:"calc(0.5vw + 0.5rem)"}} className="m-1 px-4 form-check-label" for="Tous">Tous</label>
                         {gradesList.map((val) => {

@@ -11,6 +11,7 @@
 .cam2 .container::-webkit-scrollbar {
 	width: 4px; 
     display: block;
+    
 }
 
 .cam2 .container::-webkit-scrollbar-thumb {

@@ -306,8 +306,8 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .name-grade{font-size: 150%;}
     #error-color{margin: 0rem 0rem 0.5rem 0rem;}
     .modifyIcon {font-size: 0.6rem;}
-    .frameActions {width: 1.1rem!important;
-        height: 1.1rem!important;}
+    /* .frameActions {width: 1.1rem!important;
+        height: 1.1rem!important;} */
     .seeIcon {top: -0.2rem!important;
         font-size: 0.6rem!important;}
     .modifyIcon {font-size: 0.5rem!important;
@@ -439,6 +439,9 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 .frameDelete{
     background-color: #fb4040;
 }
+.frameLoad{
+    background-color:hsl(221, 74%, 59%)
+}
 
 .seeIcon {
     font-size: 0.8rem;
@@ -453,9 +456,10 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 .deleteIcon {
     font-size: 0.7rem;
     position: relative;
-    top:-0.1rem;
+    /* top:-0.1rem; */
 }
 
 .gradespage .bg-light {
     background-color: #f5f5f5!important;
 }
+
