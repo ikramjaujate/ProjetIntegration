@@ -1,0 +1,180 @@
+:root {
+    --validation : #45c160 ;
+    --save-button : #cfc3b0 ;/*#f79436;*/
+    --save-buttonHover : #9e9586 ;
+    --hover-color : #bdbdbd;
+}
+
+
+.errorMessageModify {
+    color:var(--error) ;
+    font-size: 0.6rem;
+    margin-left:1rem!important;
+}
+
+.validationMessagePassword {
+    color:var(--validation) ;
+    font-size: 0.6rem;
+}
+
+.settings .form-switch .form-check-input:checked {
+    background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    background-color : #df5531 ;
+}
+
+.settings .form-switch .form-check-input {
+    background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='%234c4c4c'/></svg>");
+    background-color : #cfc3b0 ;
+}
+
+.settings .form-switch .form-check-input:checked:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    background-color : #df5531 ;
+}
+.settings .form-switch .form-check-input:focus {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='%234c4c4c'/></svg>");
+    background-color : #cfc3b0 ;
+}
+
+.settings .form-control {
+    font-size: 0.8rem !important;
+}
+
+/* #20b1ff - #2fe786 */
+
+#cc {
+    background-color: purple!important;
+    fill : red!important;
+}
+
+
+.settings .form-label {
+    font-size:0.65rem!important;
+    margin-bottom: 0rem;
+    margin-left: 0.5rem;
+}
+
+.settings {
+    margin-top: 7rem!important;
+    font-size: 0.9rem;
+}
+
+.daltonismCard {
+    padding-right: 0rem!important;
+    margin-bottom:0.25rem!important; 
+    padding-left: 0.25rem!important;  
+}
+.underCardDal {
+    padding: 0.5rem!important;
+}
+.darkCard {
+    margin-bottom:0.25rem!important; 
+    padding-right: 0.3rem!important;  
+}
+.underCardDark {
+    padding: 0.5rem!important;
+}
+
+.save-button{
+    background-color: var(--save-button);
+    color:white;
+}
+.save-button:hover {
+    background-color: var(--save-buttonHover);
+    color: white;
+}
+
+.errorMessageNew{
+    margin-left: 0rem!important;
+}
+.errorMessagePassword{
+    margin-left: 0rem!important;
+}
+
+.settings .form-switch {
+    padding-right: 0.1rem;
+}
+
+
+.bi-brightness-high-fill {
+    color: #4c4c4c;
+}
+
+.bi-moon-stars-fill {
+    color:#cfc3b0;
+}
+
+.bi-eye-slash{
+    color: #4c4c4c;
+}
+
+.bi-eye-fill{
+    color:#cfc3b0;
+}
+
+#daltonism-switch:checked {
+    background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%235e5d5d'/%3e%3c/svg%3e");
+    background-color: #94adff!important;
+}
+/* .settings .form-switch .form-check-input:checked {
+    background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    background-color : #df5531 ;
+} */
+
+.settings .bi-brightness-high-fill {
+    font-size:0.8rem;
+    top:-0.05rem;
+    position:relative; 
+    left:0.5rem;
+}
+.settings .bi-moon-stars-fill {
+    font-size:0.6rem;
+    top:-0.2rem;
+    position:relative; 
+    left:-0.1rem;
+}
+.settings .bi-eye-slash {
+    font-size:0.7rem;
+    top:-0.1rem;
+    position:relative; 
+    left:0.5rem;
+}
+.settings .bi-eye-fill {
+    font-size:0.7rem;
+    top:-0.1rem;
+    position:relative; 
+    left:-0.1rem;
+}
+
+.gdprLink:hover{
+    text-decoration: underline;
+}
+
+.gdprLink{
+   
+    font-size:0.7rem;
+}
+
+/* Small screens */
+@media only screen and (max-width: 991px) {
+    .daltonismCard {
+        padding-right: 0rem!important;
+        padding-left: 0rem!important;  
+    }
+    .darkCard {
+        padding-right: 0rem!important;  
+    }
+   
+}
+
+@media only screen and (min-width: 768px) {
+    .errorLarge{
+        display:none;
+    }
+  }
+
+@media only screen and (max-width: 768px) {
+    .errorSmall{
+        display:none;
+    }
+}
