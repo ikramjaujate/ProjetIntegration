@@ -1,4 +1,5 @@
-function Photos({nomPhoto,counta}) {    
+import "../css/Gallerie.css";
+function Photos({nomPhoto,counta}) {   
     
     return (
         <>
@@ -16,8 +17,14 @@ function Photos({nomPhoto,counta}) {
                     <button className={"col col-5 col-xl-5 align-self-center btn btn-outline-secondary photo"} type="button" onClick ={()=>console.log("supprimer")} >
                         <i class="bi bi-trash"></i>
                     </button>
-                    <button className={"col col-5 col-xl-5 align-self-center btn btn-outline-secondary ms-2 photo"} type="button" onClick ={()=>console.log("télécharger")} >
-                        <i class="bi bi-arrow-down-circle"></i>
+                    <button className={"col col-5 col-xl-5 align-self-center btn btn-outline-secondary ms-2 photo"} type="button">
+                        
+                            <a href={nomPhoto} classaName='download' download >
+                            <i class="bi bi-arrow-down-circle">
+                                <></>
+                            </i>
+                            </a>
+                        
                     </button>
                 </div>
             </div>

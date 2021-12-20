@@ -10,6 +10,15 @@
   color :#457eaf;
 }
 
+.download{
+  /*color:white !important;*/
+  color:tomato !important;
+}
+.download :hover{
+  /*color : rgb(108, 117, 125) !important;*/
+  color:turquoise !important; 
+}
+
 
 
 @media only screen and (max-width: 576px) {
