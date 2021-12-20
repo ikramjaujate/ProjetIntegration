@@ -37,11 +37,11 @@ const ToggleSwitch = ({ nom, status, id, setEtat }) => {
     }
 
     return (
-        <div className='perm col-2 col-md-2 col-sm-2 offset-4 offset-md-5 offset-sm-0 offset-lg-7 switchcam'>
-            <div className="form-check form-switch">
-                {status === 1 ? <input className="form-check-input" type="checkbox" role="switch" id={id} defaultChecked onClick={() => changeStatusCam(id)} /> :
-                    status === 2 ? <input className="form-check-input" type="checkbox" role="switch" id={id} onClick={() => changeStatusCam(id)} /> :
-                        <input class="form-check-input" type="checkbox" role="switch" id={id} disabled />}
+        <div className='perm switchcam' >
+            <div className="form-check form-switch" >
+                {status === 1 ? <input className="form-check-input on "  type="checkbox" role="switch" id={id} defaultChecked onClick={() => console.log("etteint")} /> :
+                    status === 2 ? <input className="form-check-input off" type="checkbox" role="switch" id={id} onClick={() => console.log('allumé')} /> :
+                        <input className="form-check-input disco"  type="checkbox" role="switch" id={id} disabled />}
             </div>
 
         </div>

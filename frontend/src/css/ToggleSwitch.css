@@ -41,10 +41,10 @@
   box-sizing: border-box;
 }
 .switch .form-check.form-check-input:before {
-  content: "ON";
-  padding-left: 10px;
-  background-color: #3aaa0e ;
-  color: #3aaa0e ; 
+  /* content: "ON"; */
+  /* padding-left: 10px; */
+  /* background-color: #3aaa0e ; */
+  /* color: #3aaa0e ;  */
 }
 .switch .form-check .form-check-input:after {
   content: "OFF";
@@ -59,7 +59,9 @@
   background-color: #a19090;
   color: #a19090;
   text-align: right;
+  margin-left:20px;
 } 
+
 .cam2 .switch {
   display: block;
   width: 20px;
@@ -78,6 +80,55 @@
 }
 .cam2 .checkbox:checked + .label .switch {
   right: 0px;
+}
+
+
+
+@media only screen and (min-width: 1200px) {
+  .perm .form-check .form-check-input{
+    margin-left:10rem;
+
+  }
+  .form-switch {
+    margin-left:1rem;
+  }
+    
+}
+
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+
+  
+  .form-switch {
+    margin-left:10rem;
+  }
+   
+
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    
+
+  .form-switch {
+    margin-left:17rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+ 
+  .form-switch {
+    margin-left:12rem;
+  }
+
+}
+
+@media only screen and (max-width: 576px) {
+  
+  .form-switch {
+    margin-left:7rem;
+  }
+
 }
 
 
