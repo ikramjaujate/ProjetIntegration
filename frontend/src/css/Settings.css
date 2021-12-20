@@ -96,19 +96,19 @@
 }
 
 
-.bi-brightness-high-fill {
+.settings .bi-brightness-high-fill {
     color: #4c4c4c;
 }
 
-.bi-moon-stars-fill {
+.settings .bi-moon-stars-fill {
     color:#cfc3b0;
 }
 
-.bi-eye-slash{
+.settings .bi-eye-slash{
     color: #4c4c4c;
 }
 
-.bi-eye-fill{
+.settings .bi-eye-fill{
     color:#cfc3b0;
 }
 
@@ -177,4 +177,7 @@
     .errorSmall{
         display:none;
     }
+}
+.settings .bg-light {
+    background-color: #f5f5f5!important;
 }

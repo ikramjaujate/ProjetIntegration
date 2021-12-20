@@ -38,6 +38,8 @@ export const darkTheme = {
     nonUseIcon : "#df5531",
     desactivateIconLeft : "#787878",
     desactivateIconRight : "#827c73",
+    modificationIcon : "#a19f98",
+    seeingIcon : "#084f8d"
  }
 
 export const daltonismTheme = {

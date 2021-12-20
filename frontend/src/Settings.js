@@ -5,7 +5,6 @@ import'bootstrap/dist/js/bootstrap.min.js';
 import'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import {useEffect, useState} from "react" ;
-import Toggle from "./components/ChangeTheme/Toggler";
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -16,7 +15,7 @@ import './css/Settings.css';
 
 function Settings() {
 
-    const [theme, setTheme] = useThemeMode();
+    const [_, setTheme] = useThemeMode();
     const [color, setColor] = useGlobal("color");
 
     const [errorOld, setErrorOld] = useState("");

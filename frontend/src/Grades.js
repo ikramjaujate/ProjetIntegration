@@ -1,17 +1,18 @@
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.css';
-import'bootstrap/dist/css/bootstrap.min.css';
-import'bootstrap/dist/js/bootstrap.min.js';
-import'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Popover, Toast, Tooltip } from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
+import { Popover, Toast, Tooltip } from 'bootstrap/dist/js/bootstrap.esm.min.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 
 import './css/Grades.css';
 import LayoutGrade from './components/LayoutGrade';
-import {useEffect, useState} from "react" ;
+import { useEffect, useState } from "react";
 import ModalAddGrade from './components/ModalAddGrade';
 import ModalModifyGrade from './components/ModalModifyGrade';
 import ModalConfirmationCancel from './components/ModalConfirmationCancel';
@@ -26,7 +27,7 @@ function Grades() {
     const [currentColor, setCurrentColor] = useState("");
     const [currentGrade, setCurrentGrade] = useState("");
     const [currentIdGrade, setCurrentIdGrade] = useState("");
-    
+
     const [finalColor, setFinalColor] = useState("var(--empty-color)");
     const [finalIdColor, setFinalIdColor] = useState("empty");
     const [textErrorName, setTextErrorName] = useState("");
@@ -36,8 +37,8 @@ function Grades() {
     const [titleModalDetails, setTitleModalDetails] = useState("Chargement");
     const [colorModalDetails, setColorModalDetails] = useState("var(--text-loading)");
     //const [cc, setCC] = useState(0) ;
-    let actionsModify = 0 ;
-    let notificationsModify = 0 ;
+    let actionsModify = 0;
+    let notificationsModify = 0;
     //const [notificationsModify, setNotificationsModify] = useState(0) ;
 
     const optionsToast = {
@@ -46,13 +47,15 @@ function Grades() {
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        draggable: true, 
-        theme:"colored"
+        draggable: true,
+        theme: "colored"
     };
-    const errorMsgClient = "Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous." ;
+    const errorMsgClient = "Une erreur s'est produite. Veuillez réessayer. Si l'erreur persiste, contactez-nous.";
 
-    let newActions = {} ;
-    let newNotifications = {} ;
+    let newActions = {};
+    let newNotifications = {};
+    const [newActionsConst, setNewActionsConst] = useState({});
+    const [newNotificationsConst, setNewNotificationsConst] = useState({});
 
 
     /**
@@ -61,14 +64,14 @@ function Grades() {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-     useEffect(()=> {
+    useEffect(() => {
         Array.from(document.querySelectorAll('button[data-bs-toggle="popover"]'))
-        .forEach(popoverNode => new Popover(popoverNode)) ;
+            .forEach(popoverNode => new Popover(popoverNode));
         Array.from(document.querySelectorAll('.toast'))
-        .forEach(toastNode => new Toast(toastNode));
+            .forEach(toastNode => new Toast(toastNode));
         Array.from(document.querySelectorAll('button[data-bs-toggle="tooltip"]'))
-        .forEach(tooltipNode => new Tooltip(tooltipNode))
-	}, []);
+            .forEach(tooltipNode => new Tooltip(tooltipNode))
+    }, []);
 
 
     /**
@@ -77,10 +80,10 @@ function Grades() {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-    useEffect(()=> {
-        getGrades() ;
-        getColor() ;
-	}, []);
+    useEffect(() => {
+        getGrades();
+        getColor();
+    }, []);
 
 
     /**
@@ -89,24 +92,25 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const getGrades = () => {
-        let informations = { method: 'GET',
-               headers: {'Content-Type': 'application/json'},
+        let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
         };
         fetch(`/api/grades`, informations)
-        .then(result => {
-            return result.json();
-        })
-        .then(dataCamera => {
-            fetch(`/api/grades/members`, informations)
             .then(result => {
                 return result.json();
             })
-            .then(dataMembers => {
-                //dataCamera.map(grade => grade.members = data)
-                dataCamera.map(grade => grade.members = dataMembers.filter(gradeMembers =>gradeMembers.id_grade === grade.id_grade)[0].members) ;
-                setInformationsGrade(dataCamera) ;
+            .then(dataCamera => {
+                fetch(`/api/grades/members`, informations)
+                    .then(result => {
+                        return result.json();
+                    })
+                    .then(dataMembers => {
+                        //dataCamera.map(grade => grade.members = data)
+                        dataCamera.map(grade => grade.members = dataMembers.filter(gradeMembers => gradeMembers.id_grade === grade.id_grade)[0].members);
+                        setInformationsGrade(dataCamera);
+                    });
             });
-        });
     }
 
     /**
@@ -115,16 +119,17 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const getColor = () => {
-        let informations = { method: 'GET',
-               headers: {'Content-Type': 'application/json'},
+        let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
         };
         fetch(`/api/grades/colors`, informations)
-        .then(result => {
-            return result.json();
-        })
-        .then(data => {
-            setColorGrades(data);
-        });
+            .then(result => {
+                return result.json();
+            })
+            .then(data => {
+                setColorGrades(data);
+            });
     }
 
 
@@ -145,7 +150,7 @@ function Grades() {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-     const deleteErrorMsg = (nameError, colorError) => {
+    const deleteErrorMsg = (nameError, colorError) => {
         if (nameError) {
             setBorderNewNameGrade("1px solid #ced4da");
             setTextErrorName("");
@@ -162,8 +167,8 @@ function Grades() {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-     const resetCreation = () => {
-        deleteErrorMsg(true, true) ;
+    const resetCreation = () => {
+        deleteErrorMsg(true, true);
         chooseColor("empty", "var(--empty-color)")
         setTextNewNameGrade("");
     }
@@ -176,7 +181,7 @@ function Grades() {
      * @param {string} mainName   Name of the selected grade
      * @param {integer} grade     Identifier of the selected grade
      */
-    const openCameraInfo = (mainColor, mainName, grade) => {
+    const openCameraInfo = (mainColor, mainName, grade, reset = false) => {
         setColorModalDetails(mainColor);
         setTitleModalDetails(mainName);
 
@@ -184,17 +189,18 @@ function Grades() {
         setCurrentGrade(mainName);
         setCurrentIdGrade(grade);
 
-        let informations = { method: 'GET',
-               headers: {'Content-Type': 'application/json'},
+        let informations = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
         };
 
         fetch(`/api/grades/${grade}/cameras`, informations)
-        .then(result => {
-            return result.json();
-        })
-        .then(dataCameras => {
-            setinformationsCameras(dataCameras) ;
-        });
+            .then(result => {
+                return result.json();
+            })
+            .then(dataCameras => {
+                setinformationsCameras(dataCameras);
+            });
     }
 
 
@@ -203,10 +209,10 @@ function Grades() {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-     const createGrade = () => {
-        let newName = textNewNameGrade ;
-        let newColor = finalIdColor ;
-        let newNameok = false, newColorok = false ;
+    const createGrade = () => {
+        let newName = textNewNameGrade;
+        let newColor = finalIdColor;
+        let newNameok = false, newColorok = false;
         if (newName === "") {
             setBorderNewNameGrade("1px solid var(--error-border)");
             setTextErrorName("Veuillez choisir un nom");
@@ -217,9 +223,9 @@ function Grades() {
         }
         else {
             deleteErrorMsg(true, false);
-            newNameok = true ;
+            newNameok = true;
         }
-        
+
         if (newColor === "empty") {
             setTextErrorColor("Veuillez choisir une couleur");
             let styleElem = document.head.appendChild(document.createElement("style"));
@@ -227,34 +233,34 @@ function Grades() {
         }
         else {
             deleteErrorMsg(false, true);
-            newColorok = true ;
+            newColorok = true;
         }
 
         if (newColorok && newNameok) {
-            deleteErrorMsg(true, true) ;
+            deleteErrorMsg(true, true);
 
-            fetch ("/api/grades",{
+            fetch("/api/grade", {
                 method: "PUT",
-                headers:{
+                headers: {
                     "Content-type": "application/json"
                 },
-                body: JSON.stringify({name:newName, idcolor:newColor})
+                body: JSON.stringify({ name: newName, idcolor: newColor })
             })
-            .then((res)=> {
-                return res.json();
-            })
-            .then(data => {
-                resetCreation() ;
-                document.getElementById("cancel-creation").click() ;
-                if (data.message === "ok") {
-                    getGrades() ;
-                    getColor() ;
-                    toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
-                }
-                else {
-                    toast.error(errorMsgClient, optionsToast);
-                }
-            });    
+                .then((res) => {
+                    return res.json();
+                })
+                .then(data => {
+                    resetCreation();
+                    document.getElementById("cancel-creation").click();
+                    if (data.count === 1) {
+                        getGrades();
+                        getColor();
+                        toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
+                    }
+                    else {
+                        toast.error(errorMsgClient, optionsToast);
+                    }
+                });
         }
     }
 
@@ -265,8 +271,8 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {string} idButton  Identifier of the button to be activated
      */
-     const activateButton = (idButton) => {
-        document.getElementById(idButton).click() ;
+    const activateButton = (idButton) => {
+        document.getElementById(idButton).click();
     }
 
 
@@ -277,15 +283,17 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const verifyActions = () => {
-        if ((actionsModify === Object.keys(newActions).length) && (notificationsModify === Object.keys(newNotifications).length)) {
-            actionsModify = 0 ;
-            notificationsModify = 0 ;
-            
+        if ((actionsModify === Object.keys(newActionsConst).length) && (notificationsModify === Object.keys(newNotifications).length)) {
+            actionsModify = 0;
+            notificationsModify = 0;
+
             activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
-            newActions = {} ;
-            newNotifications = {} ;
-            getGrades() ;
-            openCameraInfo(currentColor,currentGrade,currentIdGrade) ;
+            newActions = {};
+            newNotifications = {};
+            setNewActionsConst({});
+            setNewNotificationsConst({});
+            getGrades();
+            openCameraInfo(currentColor, currentGrade, currentIdGrade);
             toast.success("Vous venez de modifier les actions des caméras du grade " + currentGrade + " !", optionsToast);
         }
     }
@@ -296,67 +304,67 @@ function Grades() {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-     const saveAction = () => {     
-        for (let camera in newActions) {
-            let informations = { method: 'POST',
-               headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({camera: camera, action : newActions[camera]})
-            };
+    const saveAction = () => {
+        console.log("action finale : ", newActionsConst)
+        console.log("notif finale : ", newNotificationsConst)
+        let cc1 = newActionsConst;
+        let cc2 = newNotificationsConst;
+        let informations = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ actions: cc1, notifications: cc2 })
+        };
 
-            fetch(`/api/grades/${currentIdGrade}/action`, informations)
+        fetch(`/api/grades/${currentIdGrade}/test`, informations)
             .then(result => {
                 return result.json();
             })
             .then(data => {
-                if (data.count === 1) {
-                    actionsModify++ ;
-                    verifyActions() ;
-                }
-                else {
-                    toast.error(errorMsgClient, optionsToast);
-                }
+                console.log("data : ", data);
             });
-        }
-
-        for (let camera in newNotifications) {
-            let informations = { method: 'POST',
-               headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({camera: camera, notification : newNotifications[camera]})
-            };
-
-            fetch(`/api/grades/${currentIdGrade}/notification`, informations)
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                if (data.count === 1) {
-                    notificationsModify++ ;
-                    verifyActions() ;
-                }
-                else {
-                    toast.error(errorMsgClient, optionsToast);
-                }
-            });
-        }
-    }
 
 
-    /**
-     * Update the action's camera when opening the modify modal
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    const resetModal = () => {
-        for (let camera in informationsCameras) {
-            if (informationsCameras[camera].id_camera in newActions) {
-                document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = newActions[camera];
-            }
-            else {document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = informationsCameras[camera].allowed;}
-            if (informationsCameras[camera].id_camera in newNotifications) {
-                document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = newNotifications[camera] ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";
-            }
-            else {document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = informationsCameras[camera].notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";}
-        }
+        // for (let camera in newActions) {
+        //     let informations = { method: 'POST',
+        //        headers: {'Content-Type': 'application/json'},
+        //        body: JSON.stringify({camera: camera, action : newActions[camera]})
+        //     };
+
+        //     fetch(`/api/grades/${currentIdGrade}/action`, informations)
+        //     .then(result => {
+        //         return result.json();
+        //     })
+        //     .then(data => {
+        //         if (data.count === 1) {
+        //             actionsModify++ ;
+        //             verifyActions() ;
+        //         }
+        //         else {
+        //             toast.error(errorMsgClient, optionsToast);
+        //         }
+        //     });
+        // }
+
+        // for (let camera in newNotifications) {
+        //     let informations = { method: 'POST',
+        //        headers: {'Content-Type': 'application/json'},
+        //        body: JSON.stringify({camera: camera, notification : newNotifications[camera]})
+        //     };
+
+        //     fetch(`/api/grades/${currentIdGrade}/notification`, informations)
+        //     .then(result => {
+        //         return result.json();
+        //     })
+        //     .then(data => {
+        //         if (data.count === 1) {
+        //             notificationsModify++ ;
+        //             verifyActions() ;
+        //         }
+        //         else {
+        //             toast.error(errorMsgClient, optionsToast);
+        //         }
+        //     });
+        // }
     }
 
 
@@ -367,15 +375,80 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const deleteModification = () => {
-        activateButton("close-cancel");
-        activateButton("open-desc-grade-2");
-        newActions = {} ;
-        newNotifications = {} ;
+        //activateButton("close-cancel");
+        // activateButton("open-desc-grade-2");
+        newActions = {};
+        newNotifications = {};
+        setNewActionsConst({});
+        setNewNotificationsConst({});
     }
 
-    
+    /**
+     * Change the order of every grade that have been impact by the move and save it
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {object} param  informations about the card that have been moved, like her source and her destination
+     */
+    const sortingGrade = (param) => {
+        if (param.destination !== null) {
+            let actualId;
+            const srcI = param.source.index;
+            const desI = param.destination.index;
+            informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0]);
+
+            let start = srcI > desI ? desI : srcI;
+            if (Math.abs(srcI - desI) > 0) {
+                for (let i = 0 + start; i < Math.abs(srcI - desI) + start + 1; i++) {
+                    actualId = informationsGrade[i].id_grade;
+                    let informations = {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ newPlace: i })
+                    };
+                    fetch(`/api/grades/${actualId}/order`, informations)
+                        .then(result => {
+                            return result.json();
+                        })
+                        .then(data => {
+                            if (i === Math.abs(srcI - desI)) {
+                                if (data.count === 1) {
+                                    toast.success("L'ordre de vos grades a bien été mis à jour !", optionsToast);
+                                }
+                                else {
+                                    toast.error(errorMsgClient, optionsToast);
+                                }
+                            }
+                        });
+                }
+            }
+        }
+    }
+
+    const deleteGrade = (idGrade) => {
+        console.log('delete : ', idGrade);
+        let informations = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        fetch(`/api/grades/${idGrade}`, informations)
+            .then(result => {
+                return result.json();
+            })
+            .then(data => {
+                console.log("data : ", data);
+                if (data.count === 1) {
+                    getGrades();
+                    toast.success("le grade a bien été supprimé !", optionsToast);
+                }
+                else {
+                    toast.error(errorMsgClient, optionsToast);
+                }
+            });
+    }
+
     return (
-        <div>
+        <div className="gradespage">
             <div className="row justify-content-center">
                 {/* <div id="desription-page" className="row col-11 col-sm-10 col-md-9 col-lg-7">
                     <div id="title-description" className="col-12">Grades</div>
@@ -384,32 +457,50 @@ function Grades() {
                     </div>
                 </div> */}
 
-                {informationsGrade && informationsGrade.map(grade => (
-                    <div className="col-12" onClick={() => openCameraInfo(grade.color, grade.name_grade, grade.id_grade)}>
-                        <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} 
-                            allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
-                    </div>
-                ))}
+                <DragDropContext onDragEnd={(param) => { sortingGrade(param) }}>
+                    <Droppable droppableId="droppable-1">
+                        {(provided, _) => (
+                            <div ref={provided.innerRef} {...provided.droppableProps}>
+                                {informationsGrade && informationsGrade.map((grade, i) => (
+                                    <div className="row col-12 m-0">
+                                        <div className="row p-1 justify-content-center card-grade offset-1 offset-lg-1 offset-xxl-0">
+                                            <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
+                                                {(provided, snapshot) => (
+                                                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-10 col-md-9 col-lg-7 col-xl-6 justify-content-center">
+                                                        <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} order={grade.order_place}
+                                                            allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} id={grade.id_grade} openCameraInfo={openCameraInfo} deleteGrade={deleteGrade} />
+                                                    </div>
+                                                )}
+                                            </ Draggable>
+                                        </div>
+                                    </div>
+                                ))}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </ Droppable>
+                </ DragDropContext>
 
                 <div id="layout-add" className="row p-1 text-center justify-content-center col-12">
-                    <span title="Créer un grade" data-toggle="tooltip" data-placement="top">
-                        <i type="button" className="p-0 bi bi-plus-circle-fill add-user col-1" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
+                    <span className="col-12 row justify-content-center" title="Créer un grade" data-toggle="tooltip" data-placement="top">
+                        <i type="button" className="p-0 bi bi-plus-circle-fill add-user col-1 offset-2 offset-xxl-0" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
                     </span>
-                </div>  
+                </div>
             </div>
 
-            <ModalDetailGrade informationsCameras={informationsCameras} colorModalDetails={colorModalDetails} titleModalDetails={titleModalDetails} 
-                activateButton={activateButton} resetModal={resetModal} />           
-            <ModalAddGrade nameGrade={textNewNameGrade} borderGrade={borderNewNameGrade} colorGrade={finalColor} idColorGrade={finalIdColor} 
-                colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} resetCreation={resetCreation} 
-                createGrade={createGrade} chooseColor={chooseColor}/>
-            <ModalModifyGrade currentColor={currentColor} currentIdGrade={currentIdGrade} currentGrade={currentGrade} informationsCameras={informationsCameras} 
-                saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}/>
+            <ModalDetailGrade informationsCameras={informationsCameras} colorModalDetails={colorModalDetails} titleModalDetails={titleModalDetails}
+                activateButton={activateButton} />
+            <ModalAddGrade nameGrade={textNewNameGrade} borderGrade={borderNewNameGrade} colorGrade={finalColor} idColorGrade={finalIdColor}
+                colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} resetCreation={resetCreation}
+                createGrade={createGrade} chooseColor={chooseColor} />
+            <ModalModifyGrade currentColor={currentColor} currentIdGrade={currentIdGrade} currentGrade={currentGrade} informationsCameras={informationsCameras}
+                saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}
+                setNewActionsConst={setNewActionsConst} setNewNotificationsConst={setNewNotificationsConst} newActionsConst={newActionsConst} newNotificationsConst={newNotificationsConst} />
             <ModalConfirmationCancel activateButton={activateButton} deleteModification={deleteModification} />
 
-            <ToastContainer style={{fontSize:"0.6rem"}}/>      
+            <ToastContainer style={{ fontSize: "0.6rem" }} />
         </div>
     );
-  }
-  
-  export default Grades;
+}
+
+export default Grades;

@@ -3,7 +3,7 @@ import Grades from './Grades';
 import Camera  from './components/Camera';
 import {ThemeProvider} from "styled-components";
 import Accueil from './Accueil.js';
-import {BrowserRouter as Router, Route, Switch, Link, Redirect} from 'react-router-dom'; 
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'; 
 import Modification from './components/Modification';
 import Login from './Login';
 import {isLoggedIn} from './components/auth.js';
