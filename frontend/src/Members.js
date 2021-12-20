@@ -590,7 +590,8 @@ export default function Members() {
                                             </svg>
                                         </div>
                                         <div style={{fontSize: "calc(0.5rem + 0.5vw)"}}>
-                                            #C2021{val.id_member} <br></br> {val.first_name} {val.last_name}
+                                             {val.first_name} {val.last_name}<br></br>
+                                             <div style={{fontSize: "calc(0.3rem + 0.2vw)"}}>#C2021{val.id_member}</div>
                                         </div>
                                     </div>
                                 </div>
