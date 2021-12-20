@@ -67,7 +67,7 @@ return(
           </div>
           <div class="modal-footer justify-content-center">
             
-            <button type="button" onClick={Capture} className=" col-3 btn btn-secondary"><i className="bi bi-camera"></i></button>
+            <button type="button" onClick={Capture} className="btn btn-sm m-2 save-button"><i className="bi bi-camera"></i></button>
           </div>
         </div>
       </div>

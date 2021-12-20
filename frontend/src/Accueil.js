@@ -41,7 +41,7 @@ function Cam2() {
   return (
 
     <div className="cam2">
-      <div className='titre text-center offset-1'>Page de gestion des caméras</div>
+      {/* <div className='titre text-center offset-1'>Page de gestion des caméras</div> */}
       <div class="container">
         <div className='row'>
           {etatCam && etatCam.map((camera, index) =>

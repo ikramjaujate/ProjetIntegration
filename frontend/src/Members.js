@@ -500,7 +500,7 @@ export default function Members() {
                                     </svg>
                                 </button>  
                             </div>                                    
-                            <div style={{backgroundColor:"#ebebeb", borderBottomLeftRadius:"10px", borderBottomRightRadius:"10px"}} className="col-12 downPart">
+                            <div style={{backgroundColor:"#ebebeb", borderBottomLeftRadius:"10px", borderBottomRightRadius:"10px"}} className=" bg-light shadow-sm col-12 downPart">
 
                                 <div class="col-md-4 text-align">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
@@ -558,7 +558,7 @@ export default function Members() {
                                         </svg>
                                     </button>
                                     </div>                                    
-                                    <div style={{backgroundColor:"#ebebeb", borderBottomLeftRadius:"10px", borderBottomRightRadius:"10px"}} className="col-12 downPart" onClick={() => changeUser(val.id_member)} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <div style={{backgroundColor:"#ebebeb", borderBottomLeftRadius:"10px", borderBottomRightRadius:"10px"}} className="bg-light shadow-sm col-12 downPart" onClick={() => changeUser(val.id_member)} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 
                                         <div class="col-md-4 text-align">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">

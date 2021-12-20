@@ -377,12 +377,12 @@ function Grades() {
     return (
         <div>
             <div className="row justify-content-center">
-                <div id="desription-page" className="row col-11 col-sm-10 col-md-9 col-lg-7">
+                {/* <div id="desription-page" className="row col-11 col-sm-10 col-md-9 col-lg-7">
                     <div id="title-description" className="col-12">Grades</div>
                     <div id="description" className="col-12">
                         Cette page vous permet de créer des grades, <br /> ainsi que de voir les détails de ces <br /> derniers !
                     </div>
-                </div>
+                </div> */}
 
                 {informationsGrade && informationsGrade.map(grade => (
                     <div className="col-12" onClick={() => openCameraInfo(grade.color, grade.name_grade, grade.id_grade)}>
