@@ -448,15 +448,9 @@ function Grades() {
     }
 
     return (
-        <div className="gradespage">
-            <div className="row justify-content-center">
-                {/* <div id="desription-page" className="row col-11 col-sm-10 col-md-9 col-lg-7">
-                    <div id="title-description" className="col-12">Grades</div>
-                    <div id="description" className="col-12">
-                        Cette page vous permet de créer des grades, <br /> ainsi que de voir les détails de ces <br /> derniers !
-                    </div>
-                </div> */}
-
+        <div className="gradespage" >
+            <div className="row justify-content-center" style={{'margin-top':'25px'}}>
+        
                 <DragDropContext onDragEnd={(param) => { sortingGrade(param) }}>
                     <Droppable droppableId="droppable-1">
                         {(provided, _) => (

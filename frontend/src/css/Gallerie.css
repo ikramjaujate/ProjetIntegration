@@ -10,14 +10,10 @@
   color :#457eaf;
 }
 
-.download{
-  /*color:white !important;*/
-  color:tomato !important;
+a:link{
+  color: white;
 }
-.download :hover{
-  /*color : rgb(108, 117, 125) !important;*/
-  color:turquoise !important; 
-}
+
 
 
 
@@ -44,6 +40,10 @@
 
     .voirPhoto .modal-title{
        font-size: medium;
+    }
+
+    .photo{
+      font-size: large;
     }
     
 }
@@ -78,6 +78,10 @@
       text-align: center;
       font-size:1.5rem !important;
     }
+    .photo{
+      font-size: large;
+    }
+
 }
 
 
@@ -99,6 +103,9 @@
     .voirPhoto .gallerie{
       width: 70%;
     }
+    .photo{
+      font-size: large;
+    }
 }
 @media only screen and (min-width: 1200px) {
     
@@ -114,6 +121,10 @@
     text-align: center;
     font-size: 0.8rem;
   }
+  .photo{
+    font-size: large;
+  }
+
 }
 
 .voirPhoto .hovereffect {
