@@ -91,24 +91,23 @@ describe('GET /api/grades/colors', function() {
     });
 })
 
-describe('PUT /api/grades', function() {
+describe('PUT /api/grade', function() {
     it('Ajouter un nouveau grade', function(done) {
         let grade = {
             "name" : "test",
-            "idcolor" : 3
+            "idcolor" : 3,
         }
         chai.request(server)
-        .put('/api/grades')
+        .put('/api/grade')
         .send(grade)
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            res.body.should.have.property("message").eql("ok")
+            res.body.should.have.property("count").eql(1)
             done();
         })
     })
 });
-
 describe('GET /api/grades', function() {
     it('Tester le nouveau grade ajouté', function(done) {
         chai.request(server)
