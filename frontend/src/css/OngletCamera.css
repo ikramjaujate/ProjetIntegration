@@ -167,7 +167,7 @@
 
 }
 
-/* @media only screen and (max-width: 576px) {
+@media only screen and (max-width: 576px) {
     .gene{
         width: 80%;
         margin-left:6%;
@@ -196,8 +196,8 @@
         width: 7rem;
     }
 
-} */
-@media (min-width: 200px) and(max-width: 516px) {
+}
+/* @media (min-width: 200px) and(max-width: 516px) {
     .gene{
         width: 10px;
         margin-left:6%;
@@ -231,13 +231,12 @@
         flex-wrap:wrap;
         justify-content:flex-start;
         /* margin-top: 1rem;   */
-    }
+    /* }
     .gene{
         margin-top: 1rem;
         display: flex;
         flex-direction:row;
         flex-wrap:wrap;
-    }
+    } */
 
-}
 

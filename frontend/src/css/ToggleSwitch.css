@@ -89,7 +89,7 @@
     margin-left:10rem;
 
   }
-  .form-switch {
+  .perm .form-switch {
     margin-left:1rem;
   }
     
@@ -100,7 +100,7 @@
 
 
   
-  .form-switch {
+  .perm .form-switch {
     margin-left:10rem;
   }
    
@@ -110,14 +110,14 @@
 @media (min-width: 768px) and (max-width: 992px) {
     
 
-  .form-switch {
+  .perm .form-switch {
     margin-left:17rem;
   }
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
  
-  .form-switch {
+  .perm .form-switch {
     margin-left:12rem;
   }
 
@@ -125,7 +125,7 @@
 
 @media only screen and (max-width: 576px) {
   
-  .form-switch {
+  .perm .form-switch {
     margin-left:7rem;
   }
 
