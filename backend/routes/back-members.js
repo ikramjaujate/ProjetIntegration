@@ -49,8 +49,8 @@ module.exports = function (app, client) {
         response.send(error);
       }
       else{
-      response.status(200)
-      response.send({"message" : "ok"})
+        return response.status(200)
+        .send({"message" : "ok"})
       }
     })
 

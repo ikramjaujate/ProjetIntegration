@@ -148,14 +148,13 @@ export default function Members() {
             headers: { 'Content-Type': 'application/json' }, 
         };
         fetch(`/api/members/${idMember}`, informations).then((response)=> {
-            if(response.status === 200){
-                console.log(response)
+            if(response.statuss === 200){
                 getGrade() ;
                 getMembers();            
                 (toast.success("Suppression réussie"  , optionsToast))
             }
-            else {
-                (toast.error("Erreur, supprimer d'abord les photos existantes de cette personne"  , optionsToast))
+            else if (response.status !== 200) {
+                (toast.error("Erreur lors de la suppression"  , optionsToast))
             }
             })
     }
