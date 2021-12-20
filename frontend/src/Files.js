@@ -53,17 +53,21 @@ function Biblio (){
           <div class="container row justify-content-center"> 
             <div  className={"row col col-lg-12 col-md-12 justify-content-center ml-1 "}>
               <div className={"row justify-content-sm-center justify-content-md-center  gallerie border-3"}>
-                <div className={"col col-lg-7 row p-1"}>
-                  <div className="col-5 col-xl-6">
+                <div className={"col col-lg-12 row justify-content-center"}>
+                <div className="col-xl-3" >
+                    
+                  </div>
+                  <div className="col-4 col-xl-2 titreCollone" >
                     <p>Nom</p>
                   </div>
-                  <div className="col-2 col-xl-2 ">
-                    <button class=" btn btn-outline-secondary" onClick={() => tri()}>
+                  
+                  <div className="col-7 col-xl-1 titreCollone" >
+                    <p >Date</p>
+                  </div>
+                  <div className="col-12 col-xl-1 justify-content-center " >
+                    <button class=" btn btn-outline-secondary boutonTri" onClick={() => tri()}>
                       <i id="boutonTri" class="bi bi-sort-numeric-up-alt"></i>
                     </button>
-                  </div>
-                  <div className="col-6 col-xl-3 ">
-                    <p >Date</p>
                   </div>
                 </div>
               </div>

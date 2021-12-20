@@ -10,21 +10,7 @@
   color :#457eaf;
 }
 
-.download{
-  /*color:white !important;*/
-  color:tomato !important;
-}
-.download :hover{
-  /*color : rgb(108, 117, 125) !important;*/
-  color:turquoise !important; 
-}
 
-.iconeDown{
-  color: #6c757d
-}
-.titreCollone{
-  vertical-align: middle;
-}
 
 @media only screen and (max-width: 576px) {
 
@@ -49,14 +35,6 @@
 
     .voirPhoto .modal-title{
        font-size: medium;
-    }
-    .titreCollone{
-      display: none;
-      
-    }
-    .boutonTri{
-      text-align: left;
-      
     }
     
 }
@@ -91,14 +69,6 @@
       text-align: center;
       font-size:1.5rem !important;
     }
-    .titreCollone{
-      display: none;
-      
-    }
-    .boutonTri{
-      text-align: left;
-      
-    }
 }
 
 
@@ -120,17 +90,9 @@
     .voirPhoto .gallerie{
       width: 70%;
     }
-    .titreCollone{
-      display: none;
-      
-    }
-    .boutonTri{
-      text-align: left;
-      
-    }
 }
 @media only screen and (min-width: 1200px) {
-  
+    
   .voirPhoto .imgModal{
     width: 100% !important;
   }

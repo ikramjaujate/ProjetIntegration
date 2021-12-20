@@ -17,10 +17,10 @@ function Photos({nomPhoto,counta}) {
                     <button className={"col col-5 col-xl-5 align-self-center btn btn-outline-secondary photo"} type="button" onClick ={()=>console.log("supprimer")} >
                         <i class="bi bi-trash"></i>
                     </button>
-                    <button className={"col col-5 col-xl-5 align-self-center btn btn-outline-secondary ms-2 photo"} type="button">
+                    <button className={"col col-5 col-xl-5 align-self-center btn btn-light btn-outline-secondary ms-2 photo"} type="button">
                         
                             <a href={nomPhoto} classaName='download' download >
-                            <i class="bi bi-arrow-down-circle">
+                            <i class="bi bi-arrow-down-circle iconeDown">
                                 <></>
                             </i>
                             </a>
