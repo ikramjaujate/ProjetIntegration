@@ -11,8 +11,6 @@ import'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { trim } from 'jquery';
 
-<Photos supprimerPhoto={supprimerPhoto} ></Photos>
-
 function Biblio (){
     const [pictures, setPictures] = useState(null);
 
@@ -89,7 +87,6 @@ function Biblio (){
 
     return (
         <div className="files row justify-content-center">
-        
         <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
         <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/lara-light-indigo/theme.css" />
         <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.min.css" />

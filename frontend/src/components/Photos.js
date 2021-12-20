@@ -1,6 +1,7 @@
 import { valHooks } from "jquery";
 import { useEffect, useState } from "react";
 import Biblio from "../Files";
+import supprimerPhoto from '../Files.js' ;
 //import { stat } from 'fs';
 //import { unlink } from 'fs';
 function Photos({nomPhoto}) {
@@ -28,7 +29,6 @@ function Photos({nomPhoto}) {
             <button className={"col col-5 col-xl-5 align-self-center btn btn-outline-secondary photo"} type="button" id={valHooks.idPhoto} onClick={event => {if(window.confirm("Voulez vous vraiment supprimer " + nomPhoto + "?")) supprimerPhoto(nomPhoto)}} ><i class="bi bi-trash"></i></button>
             <button className={"col col-5 col-xl-5 align-self-center btn btn-outline-secondary ms-2 photo"} type="button" onClick ={console.log("télécharger")} ><i class="bi bi-arrow-down-circle"></i></button>
             </div>
-            
             </div>
             <div class="modal fade" id="imgModal" tabindex="-1" aria-labelledby="imgModalLabel" aria-hidden="true">
 
