@@ -53,10 +53,10 @@ module.exports = function (app, client) {
   app.get('/api/members', (request, response) => {
 
     let query = "select ME.id_member, GRM.id_grade, ME.first_name, ME.last_name, GRM.name_grade, CO.name_color as color \
-                from grade as GRM \
-                join member as ME on ME.id_grade = GRM.id_grade \
-                join color as CO on GRM.id_color = CO.id_color \
-                order by GRM.id_grade ;"
+    from grade as GRM \
+    join member as ME on ME.id_grade = GRM.id_grade \
+    join color as CO on GRM.id_color = CO.id_color \
+    order by GRM.id_grade ;"
     client.query(query, (error, res) => {
       if (error) {
         throw error
@@ -84,12 +84,14 @@ module.exports = function (app, client) {
         response.send(error);
       }
       else{
-      response.status(200)
-      response.send({"message" : "ok"})
+        return response.status(200)
+        .send({"message" : "ok"})
       }
     })
 
   })
+
+  
 
     /**
      * Retrieves all the information from a member

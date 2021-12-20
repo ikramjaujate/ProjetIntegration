@@ -1,7 +1,6 @@
 "use strict";
 
 const express = require("express");
-
 const fileUpload = require('express-fileupload');
 const {Client} = require("pg");
 const app = express();
