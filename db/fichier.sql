@@ -185,8 +185,8 @@ VALUES
 CREATE TABLE public.photos
 (
     id_member SERIAL NOT NULL,
-    pictures varchar(255) NOT NULL,
-	FOREIGN KEY (id_member) REFERENCES member(id_member)
+    pictures VARCHAR(1024) NOT NULL,
+	FOREIGN KEY (id_member) REFERENCES member(id_member) ON DELETE CASCADE
 );
 
 INSERT INTO photos(id_member, pictures)

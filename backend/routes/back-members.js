@@ -1,9 +1,11 @@
-const { response } = require("express")
+const _ = require('lodash');
+const { response } = require("express");
 
 function routes(app, client) {
   
     /**
-     *
+     *Add a new member withits fname, lname and grade
+     * 
      * @author : Aurélien
      * @method : PUT
      *
@@ -12,26 +14,48 @@ function routes(app, client) {
       const firstName = req.body.FirstName
       const lastName = req.body.LastName
       const grade = req.body.Grade
+      const photos = req.body.Photos
       let query = 'insert into member (id_grade, first_name, last_name) values (($1), ($2), ($3))';
       client.query(query, [grade, firstName, lastName], (error, result) => {
-        if(error){
-          res.status(400)
-          res.send(error)
+        if (!error){
+          let query2 = 'select * from member where first_name=($1) and last_name=($2) and id_grade=($3)';
+          client.query(query2, [firstName, lastName, grade], (error, res2) => {
+            
+              let idCreated = Object.values(res2.rows[res2.rows.length - 1])
+              for(e in photos){
+                let query3 = 'INSERT into photos(id_member, pictures) VALUES (($1), ($2));';
+                client.query(query3, [idCreated[0], photos[e]], (error, res3) => {
+                  if(error){
+                    res.json(error)
+                  }
+                })
+              }
+            return res.status(200).json({ok : "ok"})
+            
+          })
         }
         else{
-          res.status(200)
-          res.send({"message" : "ok"})
+          return res.status(400)
+          .json(error)
+          
         }
       })
     })
 
+    /**
+     * Retrive all current members with their grade and color assiocated
+     * 
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     * @method GET
+     */
+
   app.get('/api/members', (request, response) => {
 
     let query = "select ME.id_member, GRM.id_grade, ME.first_name, ME.last_name, GRM.name_grade, CO.name_color as color \
-                from grade as GRM \
-                join member as ME on ME.id_grade = GRM.id_grade \
-                join color as CO on GRM.id_color = CO.id_color \
-                order by GRM.id_grade ;"
+    from grade as GRM \
+    join member as ME on ME.id_grade = GRM.id_grade \
+    join color as CO on GRM.id_color = CO.id_color \
+    order by GRM.id_grade ;"
     client.query(query, (error, res) => {
       if (error) {
         throw error
@@ -40,51 +64,32 @@ function routes(app, client) {
     })
   })
 
-  app.delete('/api/members/:idMember', (req, response) => {
-    idMember= req.params.idMember
+    /**
+     * Delete a member based on its ID
+     * 
+     * @author Aurélien Brille <a.brille@students.ephec.be>
+     * @method DELETE
+     * @param {integer} idMember Id of the member we want to delete
+     */
+
+  app.delete('/api/members', (req, response) => {
+    idMember= req.body.idMember
 
     let query = "delete from member where id_member = ($1)"
 
     client.query(query, [idMember], (error, res) => {
       if (error) {
-        response.status(400)
-        response.send(error);
+        throw error
+        // response.status(400)
+        // response.send(error);
       }
       else{
-      response.status(200)
-      response.send({"message" : "ok"})
+        return response.status(200)
+        .send({"message" : "ok"})
       }
     })
 
   })
-
-
-  /**
-   * 
-   * @author : Aurélien
-   * 
-   */
-
-  /*let routes = (app) => {
-     router.post("/upload", controller.upload);
-     router.get("/files", controller.getListFiles);
-     router.get("/files/:name", controller.download);
-   
-     app.use(router);
-   };
-   
-   module.exports = routes;
-    global.__basedir = __dirname;
-    
-    const initRoutes = require("./src/routes");
-    
-    app.use(express.urlencoded({ extended: true }));
-    initRoutes(app);
-    
-    let port2 = 8080;  //listen on port 8080 for incoming requests.
-    app.listen(port, () => {
-      console.log(`Running at localhost:${port2}`);
-    });*/
 
   
 
@@ -159,9 +164,9 @@ function routes(app, client) {
 
       const idMember = request.params.idMember;
       let query = "select count(distinct(PO.pictures )) \
-    from photos as PO\
-    join member as ME on PO.id_member = ME.id_member  \
-    where ME.id_member = ($1)" ;
+      from photos as PO\
+      join member as ME on PO.id_member = ME.id_member  \
+      where ME.id_member = ($1)" ;
       client.query(query, [idMember], (error, results) => {
         if (error) {
         }
