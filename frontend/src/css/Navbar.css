@@ -119,3 +119,26 @@
   }
   
 }
+
+.petitEcranBouton {
+  display:none;
+}
+
+@media only screen and (max-width: 991px) {
+  .petitEcranBouton {
+    display:block
+  }
+  .petitEcranFerme {
+  height: 4rem;
+  }
+  .petitEcranFermeElement {
+    display:none;
+  }
+
+  .petitEcranOuvert {
+    height: 10rem;
+    }
+  .petitEcranFermeOuvert {
+      display:block;
+   }
+}
