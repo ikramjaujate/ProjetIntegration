@@ -15,11 +15,11 @@ const ModalConfirmationCancel = ({activateButton, deleteModification}) => {
                         </div>
                     </div>
                     <div className="modal-footer row justify-content-between">
-                        <button type="button" className="btn modal-button bouton-close col-11 col-sm-5" onClick={() => {activateButton("close-cancel");activateButton("open-modify-grade")}}>Non</button>
-                        <button type="button" id="open-desc-grade-2" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir desc grades</button>
+                        <button type="button" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close" onClick={() => {activateButton("open-modify-grade")}}>Non</button>
+                        {/* <button type="button" id="open-desc-grade-2" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#gradeModal" data-bs-toggle="modal">Revenir desc grades</button> */}
                         <button type="button" id="open-modify-grade" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-target="#modifyGradeModal" data-bs-toggle="modal">Revenir modif grades</button>
-                        <button type="button" id="close-cancel" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer tout</button>
-                        <button type="button" className="btn modal-button bouton-warning col-11 col-sm-5" onClick={() => {deleteModification()}}>Oui</button>
+                        {/* <button type="button" id="close-cancel" className="btn hidden-btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer tout</button> */}
+                        <button type="button" className="btn modal-button bouton-warning col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close" onClick={() => {deleteModification()}}>Oui</button>
                     </div>
                 </div>
             </div>

@@ -4,13 +4,17 @@ import TitleModalGrade from './TitleModalGrade' ;
 import { useState } from 'reactn';
 
 
-const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDetails, activateButton, resetModal}) => {
+const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDetails, activateButton}) => {
 
     const [hover, setHover] = useState(false);
 
     return (
         <div id="gradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                {/* <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill rounded-circle" type="button" onClick={() => {console.log("oui")}}>
+                    <span className="visually-hidden">New alerts</span>
+                    <i className="bi bi-trash" type="button" onClick={() => {console.log("oui")}}></i>
+                </span> */}
                 <div className="modal-content">
                     <TitleModalGrade bgColor={colorModalDetails} text={titleModalDetails} />
                     <div className="modal-body">
@@ -33,9 +37,8 @@ const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDet
                             ))}
                         </div>
                     </div>
-                    <div className="modal-footer row justify-content-between">
+                    <div className="modal-footer row justify-content-center">
                         <button type="button" id="close-informations" className="btn modal-button bouton-close col-11 col-sm-5" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
-                        <button type="button" className="btn modal-button bouton-action col-11 col-sm-5" style={{backgroundColor: hover ? "var(--hover-color)" : colorModalDetails}} data-bs-target="#modifyGradeModal" data-bs-toggle="modal" onClick={() => {activateButton("close-informations");resetModal();}} onMouseEnter={()=>{setHover(true);}} onMouseLeave={()=>{setHover(false);}}>Modifier</button>
                     </div>
                 </div>
             </div>

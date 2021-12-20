@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.body};
     color : ${({ theme }) => theme.bodyColor};
   }
-  .gradeCard {
+  .gradespage .bg-light {
     background-color: ${({ theme }) => theme.carteGrade}!important;
   }
   .navbar-main {
@@ -48,7 +48,7 @@ export const GlobalStyles = createGlobalStyle`
   .bouton-close:hover {
     background-color: ${({ theme }) => theme.fermerModalBtnHover};
   }
-  .bg-light {
+  .settings .bg-light {
     background-color: ${({ theme }) => theme.newBgLight}!important;
   }
   .modal-body {
@@ -99,6 +99,12 @@ export const GlobalStyles = createGlobalStyle`
   }
   .bi-eye-fill {
     color: ${({ theme }) => theme.desactivateIconRight};
+  }
+  .frameModify {
+    background-color: ${({ theme }) => theme.modificationIcon};
+  }
+  .frameSee {
+    background-color: ${({ theme }) => theme.seeingIcon};
   }
 
 

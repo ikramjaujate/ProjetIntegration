@@ -23,7 +23,7 @@
     --close-button-hover:#62666d ; 
 }
 body {
-    color: var(--writing) ;
+    color: var(--writing);
 }
 
 
@@ -74,10 +74,9 @@ body {
 
 
 /*Modal details cameras*/
-#gradeModal .modal-body {
+/* #gradeModal .modal-body {
     padding:0rem!important;
-    /* padding: 1rem 5rem 1rem 5rem; */
-}
+} */
 #gradeModal .m-2 {
     margin : 0.5rem 0.5rem 0.3rem 0.5rem!important;
 }
@@ -181,6 +180,7 @@ body {
 /*Modication of camera's action*/
 .hidden-btn {
     display:none;
+    visibility: hidden;
 }
 #modifyGradeModalLabel {
     text-align: center;
@@ -289,25 +289,47 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 @media only screen and (max-width: 1250px) {
     .name-grade {font-size: 159%;}
 }
+@media only screen and (max-width: 1028px) {
+    .layout-nbr-camera {font-size: 94%;}
+}
 
 @media only screen and (max-width: 992px) {
     .modal-body {padding: 0rem;}
     .layout-legend {padding: 0.5rem 0rem 0.3rem 0.1rem;}
 }
 
+@media only screen and (max-width: 784px) {
+    .layout-nbr-camera {font-size: 88%;}
+}
 @media only screen and (max-width: 767px) {
     .informations{font-size: 84%;}
     .name-grade{font-size: 150%;}
     #error-color{margin: 0rem 0rem 0.5rem 0rem;}
+    .modifyIcon {font-size: 0.6rem;}
+    .frameActions {width: 1.1rem!important;
+        height: 1.1rem!important;}
+    .seeIcon {top: -0.2rem!important;
+        font-size: 0.6rem!important;}
+    .modifyIcon {font-size: 0.5rem!important;
+        top: -0.23rem!important;}
+    .deleteIcon {font-size: 0.55rem!important;
+        top: -0.24rem!important;}
+}
+@media only screen and (max-width : 750px) {
+    .icon-person {font-size: 332%;}
 }
 @media only screen and (max-width: 650px) {
     .name-grade {font-size: 133%;}
+    .icon-person {font-size: 302%;}
 }
-@media only screen and (max-width: 635px) {
+/* @media only screen and (max-width: 635px) {
    .icon-person {font-size: 311%;}
+} */
+@media only screen and (max-width : 600px) {
+    .icon-person {font-size: 268%;}
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 575px) {
     #title-description{font-size: 1.8rem;}
     #description{font-size: 0.6rem;}
     #desription-page{padding-bottom: 1rem;}
@@ -324,6 +346,12 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .modal-button{font-size: 0.8rem;}
     .card-grade{margin-bottom: 0.2rem;}
     .layout-legend { padding: 0.2rem 0rem 0.3rem 0.3rem;}
+    .visible {top:-5rem; 
+        /* display:; */
+    }
+    .hidden {top:0.3rem!important;
+        display:none;}
+    .visible {top:0.3rem!important;}
 }
 
 @media only screen and (max-width: 550px) {
@@ -362,3 +390,72 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
     .layout-legend {font-size: 0.54rem;}
 }
 /**/
+
+
+.draggable-element:active {
+    cursor: grabbing;
+    box-shadow: 0 0 1rem #666!important;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    left: 0rem;
+    transition: opacity 0.3s cubic-bezier(0.1,0.1,0.25,1) 0.1s, left 0.3s cubic-bezier(0.1,0.1,0.25,1) 0.1s, visibility 0.3s cubic-bezier(0.1,0.1,0.25,1) 0.1s;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    left: 3rem;
+    transition: opacity 0.6s cubic-bezier(0.1,0.1,0.25,1) 0.2s, left 0.6s cubic-bezier(0.1,0.1,0.25,1) 0.2s, visibility 0.6s cubic-bezier(0.1,0.1,0.25,1) 0.2s;
+}
+
+.actionsGrade {
+    color:white;
+    position: relative;
+}
+
+
+.gradeCard:hover{
+    box-shadow: 0 0 0.2rem #b1b0b0!important;
+}
+
+.frameActions {
+    text-align: center;
+    width: 1.4rem;
+    color:white!important;
+}
+.frameSee {
+    background-color:#86bff1 ;
+}
+.frameModify{
+    background-color: #e7dca8;
+}
+.frameDelete{
+    background-color: #fb4040;
+}
+
+.seeIcon {
+    font-size: 0.8rem;
+    position: relative;
+    top:-0.05rem;
+}
+.modifyIcon {
+    font-size: 0.7rem;
+    position: relative;
+    top:-0.1rem;
+}
+.deleteIcon {
+    font-size: 0.7rem;
+    position: relative;
+    top:-0.1rem;
+}
+
+.gradespage .bg-light {
+    background-color: #f5f5f5!important;
+}

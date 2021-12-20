@@ -7,6 +7,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Popover, Toast, Tooltip } from 'bootstrap/dist/js/bootstrap.esm.min.js' ;
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd'
 
 
 import './css/Grades.css';
@@ -49,10 +50,12 @@ function Grades() {
         draggable: true, 
         theme:"colored"
     };
-    const errorMsgClient = "Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous." ;
+    const errorMsgClient = "Une erreur s'est produite. Veuillez réessayer. Si l'erreur persiste, contactez-nous." ;
 
     let newActions = {} ;
     let newNotifications = {} ;
+    const [newActionsConst, setNewActionsConst] = useState({});
+    const [newNotificationsConst, setNewNotificationsConst] = useState({});
 
 
     /**
@@ -176,7 +179,7 @@ function Grades() {
      * @param {string} mainName   Name of the selected grade
      * @param {integer} grade     Identifier of the selected grade
      */
-    const openCameraInfo = (mainColor, mainName, grade) => {
+    const openCameraInfo = (mainColor, mainName, grade, reset=false) => {
         setColorModalDetails(mainColor);
         setTitleModalDetails(mainName);
 
@@ -233,7 +236,7 @@ function Grades() {
         if (newColorok && newNameok) {
             deleteErrorMsg(true, true) ;
 
-            fetch ("/api/grades",{
+            fetch ("/api/grade",{
                 method: "PUT",
                 headers:{
                     "Content-type": "application/json"
@@ -246,7 +249,7 @@ function Grades() {
             .then(data => {
                 resetCreation() ;
                 document.getElementById("cancel-creation").click() ;
-                if (data.message === "ok") {
+                if (data.count === 1) {
                     getGrades() ;
                     getColor() ;
                     toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
@@ -277,13 +280,15 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const verifyActions = () => {
-        if ((actionsModify === Object.keys(newActions).length) && (notificationsModify === Object.keys(newNotifications).length)) {
+        if ((actionsModify === Object.keys(newActionsConst).length) && (notificationsModify === Object.keys(newNotifications).length)) {
             actionsModify = 0 ;
             notificationsModify = 0 ;
             
             activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
             newActions = {} ;
             newNotifications = {} ;
+            setNewActionsConst({}) ;
+            setNewNotificationsConst({}) ;
             getGrades() ;
             openCameraInfo(currentColor,currentGrade,currentIdGrade) ;
             toast.success("Vous venez de modifier les actions des caméras du grade " + currentGrade + " !", optionsToast);
@@ -296,67 +301,66 @@ function Grades() {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-     const saveAction = () => {     
-        for (let camera in newActions) {
-            let informations = { method: 'POST',
-               headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({camera: camera, action : newActions[camera]})
-            };
+     const saveAction = () => { 
+        console.log("action finale : ", newActionsConst)
+        console.log("notif finale : ", newNotificationsConst)
+        let cc1 = newActionsConst;
+        let cc2 = newNotificationsConst;
+        let informations = { method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({actions: cc1, notifications : cc2})
+        };
 
-            fetch(`/api/grades/${currentIdGrade}/action`, informations)
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                if (data.count === 1) {
-                    actionsModify++ ;
-                    verifyActions() ;
-                }
-                else {
-                    toast.error(errorMsgClient, optionsToast);
-                }
-            });
-        }
+        fetch(`/api/grades/${currentIdGrade}/test`, informations)
+        .then(result => {
+            return result.json();
+        })
+        .then(data => {
+            console.log("data : ", data);
+        }); 
+        
+        
+        // for (let camera in newActions) {
+        //     let informations = { method: 'POST',
+        //        headers: {'Content-Type': 'application/json'},
+        //        body: JSON.stringify({camera: camera, action : newActions[camera]})
+        //     };
 
-        for (let camera in newNotifications) {
-            let informations = { method: 'POST',
-               headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({camera: camera, notification : newNotifications[camera]})
-            };
+        //     fetch(`/api/grades/${currentIdGrade}/action`, informations)
+        //     .then(result => {
+        //         return result.json();
+        //     })
+        //     .then(data => {
+        //         if (data.count === 1) {
+        //             actionsModify++ ;
+        //             verifyActions() ;
+        //         }
+        //         else {
+        //             toast.error(errorMsgClient, optionsToast);
+        //         }
+        //     });
+        // }
 
-            fetch(`/api/grades/${currentIdGrade}/notification`, informations)
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                if (data.count === 1) {
-                    notificationsModify++ ;
-                    verifyActions() ;
-                }
-                else {
-                    toast.error(errorMsgClient, optionsToast);
-                }
-            });
-        }
-    }
+        // for (let camera in newNotifications) {
+        //     let informations = { method: 'POST',
+        //        headers: {'Content-Type': 'application/json'},
+        //        body: JSON.stringify({camera: camera, notification : newNotifications[camera]})
+        //     };
 
-
-    /**
-     * Update the action's camera when opening the modify modal
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    const resetModal = () => {
-        for (let camera in informationsCameras) {
-            if (informationsCameras[camera].id_camera in newActions) {
-                document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = newActions[camera];
-            }
-            else {document.getElementsByClassName("action-" + currentIdGrade+"-" + informationsCameras[camera].id_camera)[0].checked = informationsCameras[camera].allowed;}
-            if (informationsCameras[camera].id_camera in newNotifications) {
-                document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = newNotifications[camera] ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";
-            }
-            else {document.getElementById("notification-" + currentIdGrade + "-" + informationsCameras[camera].id_camera).className = informationsCameras[camera].notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill";}
-        }
+        //     fetch(`/api/grades/${currentIdGrade}/notification`, informations)
+        //     .then(result => {
+        //         return result.json();
+        //     })
+        //     .then(data => {
+        //         if (data.count === 1) {
+        //             notificationsModify++ ;
+        //             verifyActions() ;
+        //         }
+        //         else {
+        //             toast.error(errorMsgClient, optionsToast);
+        //         }
+        //     });
+        // }
     }
 
 
@@ -367,47 +371,128 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const deleteModification = () => {
-        activateButton("close-cancel");
-        activateButton("open-desc-grade-2");
+        //activateButton("close-cancel");
+        // activateButton("open-desc-grade-2");
         newActions = {} ;
         newNotifications = {} ;
+        setNewActionsConst({});
+        setNewNotificationsConst({});
     }
 
+    /**
+     * Change the order of every grade that have been impact by the move and save it
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {object} param  informations about the card that have been moved, like her source and her destination
+     */
+    const sortingGrade = (param) => {
+        if (param.destination !== null) {
+            let actualId ;
+            const srcI = param.source.index;
+            const desI = param.destination.index;
+            informationsGrade.splice(desI, 0, informationsGrade.splice(srcI, 1)[0]) ;
+            
+            let start = srcI > desI ? desI : srcI ;
+            if (Math.abs(srcI - desI) > 0) {
+                for (let i=0+start ; i < Math.abs(srcI - desI)+start+1 ; i++) {
+                    actualId = informationsGrade[i].id_grade ;
+                    let informations = { method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({newPlace: i})
+                    };
+                    fetch(`/api/grades/${actualId}/order`, informations)
+                    .then(result => {
+                        return result.json();
+                    })
+                    .then(data => {
+                        if (i === Math.abs(srcI - desI)) {
+                            if (data.count === 1) {
+                                toast.success("L'ordre de vos grades a bien été mis à jour !", optionsToast);
+                            }
+                            else {
+                                toast.error(errorMsgClient, optionsToast);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    const deleteGrade = (idGrade) => {
+        console.log('delete : ', idGrade);
+        let informations = { method: 'DELETE',
+               headers: {'Content-Type': 'application/json'},
+        };
+
+        fetch(`/api/grades/${idGrade}`, informations)
+        .then(result => {
+            return result.json();
+        })
+        .then(data => {
+            console.log("data : ", data);
+            if (data.count === 1) {
+                getGrades() ;
+                toast.success("le grade a bien été supprimé !", optionsToast);
+            }
+            else {
+                toast.error(errorMsgClient, optionsToast);
+            }
+        });
+    }
     
     return (
-        <div>
+        <div className="gradespage">
             <div className="row justify-content-center">
-                <div id="desription-page" className="row col-11 col-sm-10 col-md-9 col-lg-7">
+                <div id="desription-page" className="row offset-1 col-11 col-sm-10 col-md-9 col-lg-7">
                     <div id="title-description" className="col-12">Grades</div>
                     <div id="description" className="col-12">
                         Cette page vous permet de créer des grades, <br /> ainsi que de voir les détails de ces <br /> derniers !
                     </div>
-                </div>
+                </div> 
 
-                {informationsGrade && informationsGrade.map(grade => (
-                    <div className="col-12" onClick={() => openCameraInfo(grade.color, grade.name_grade, grade.id_grade)}>
-                        <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} 
-                            allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera}/>
-                    </div>
-                ))}
+                <DragDropContext onDragEnd={(param) => {sortingGrade(param)}}>
+                    <Droppable droppableId="droppable-1">
+                        {(provided, _) => (
+                        <div ref={provided.innerRef} {...provided.droppableProps}>
+                            {informationsGrade && informationsGrade.map((grade, i) => (
+                                <div className="row col-12 m-0">
+                                    <div className="row p-1 justify-content-center card-grade offset-1 offset-lg-1 offset-xxl-0">
+                                        <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
+                                            {(provided, snapshot) => (
+                                                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-10 col-md-9 col-lg-7 col-xl-6 justify-content-center">
+                                                <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} order={grade.order_place} 
+                                                    allowed_camera={grade.allowedcamera} refused_camera={grade.refusedcamera} id={grade.id_grade} openCameraInfo={openCameraInfo} deleteGrade={deleteGrade}/>
+                                                </div>
+                                            )}
+                                        </ Draggable>
+                                    </div>
+                                </div> 
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                        )}
+                    </ Droppable>
+                </ DragDropContext>
 
                 <div id="layout-add" className="row p-1 text-center justify-content-center col-12">
-                    <span title="Créer un grade" data-toggle="tooltip" data-placement="top">
-                        <i type="button" className="p-0 bi bi-plus-circle-fill add-user col-1" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
+                    <span className="col-12 row justify-content-center" title="Créer un grade" data-toggle="tooltip" data-placement="top">
+                        <i type="button" className="p-0 bi bi-plus-circle-fill add-user col-1 offset-2 offset-xxl-0" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
                     </span>
                 </div>  
             </div>
 
             <ModalDetailGrade informationsCameras={informationsCameras} colorModalDetails={colorModalDetails} titleModalDetails={titleModalDetails} 
-                activateButton={activateButton} resetModal={resetModal} />           
+                activateButton={activateButton} />           
             <ModalAddGrade nameGrade={textNewNameGrade} borderGrade={borderNewNameGrade} colorGrade={finalColor} idColorGrade={finalIdColor} 
                 colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} resetCreation={resetCreation} 
                 createGrade={createGrade} chooseColor={chooseColor}/>
             <ModalModifyGrade currentColor={currentColor} currentIdGrade={currentIdGrade} currentGrade={currentGrade} informationsCameras={informationsCameras} 
-                saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}/>
+                saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}
+                setNewActionsConst={setNewActionsConst} setNewNotificationsConst={setNewNotificationsConst} newActionsConst={newActionsConst} newNotificationsConst={newNotificationsConst}/>
             <ModalConfirmationCancel activateButton={activateButton} deleteModification={deleteModification} />
 
-            <ToastContainer style={{fontSize:"0.6rem"}}/>      
+            <ToastContainer style={{fontSize:"0.6rem"}}/>  
         </div>
     );
   }
