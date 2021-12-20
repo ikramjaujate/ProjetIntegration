@@ -162,9 +162,9 @@ module.exports = function (app, client) {
 
       const idMember = request.params.idMember;
       let query = "select count(distinct(PO.pictures )) \
-    from photos as PO\
-    join member as ME on PO.id_member = ME.id_member  \
-    where ME.id_member = ($1)" ;
+      from photos as PO\
+      join member as ME on PO.id_member = ME.id_member  \
+      where ME.id_member = ($1)" ;
       client.query(query, [idMember], (error, results) => {
         if (error) {
         }
