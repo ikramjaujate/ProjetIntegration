@@ -127,102 +127,7 @@ module.exports = function (app, client, done) {
         });
     });
 
-    /**
-     * Modifies the actions of the cameras for a grade
-     *
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @method POST
-     * @param {integer} idGrade identifier of the grade for which we want to get the information
-     * @param {dictionnary} actions  contains a dictionary with the camera ID as key and the new camera action as value (= opposite of the old value)
-     * @param {dictionnary} notifications contains a dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
-     */
-    app.post("/api/grades/:idGrade/acces",(request, response) => {
-        let reponse = 0, requete1=false, requete2=false;
-        const idGrade = request.params.idGrade;
-        const actions = request.body.actions;
-        const notifications = request.body.notifications;
-        const query = "update permission \
-        set allowed = ($1) \
-        where id_grade = ($2) and id_camera = ($3) ";
-        for (const camera in actions) {
-            client.query(query,[actions[camera],idGrade,camera],(error, results) => {
-                if (error) {
-                    throw error;
-                }
-                reponse++ ;
-            });
-            requete1 = true ;
-        }
-        const query2 = "update permission \
-        set notification = ($1) \
-        where id_grade = ($2) and id_camera = ($3) ";
-        for (const camera in notifications) {
-            client.query(query2,[notifications[camera],idGrade,camera],(error, results) => {
-                if (error) {
-                    throw error;
-                }
-                reponse ++ ;
-                response.send({"message": "ok"});
-            });
-            requete2=true ;
-            
-        }
-        while (requete1==false || requete2==false) {
-        }
-        response.send({"message": "ok"});
-    });
-
-    /**
-     * Modifies the action of a cameras for a grade
-     *
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @method POST
-     * @param {integer} idGrade identifier of the grade for which we want to get the information
-     * @param {dictionnary} actions  contains a dictionary with the camera ID as key and the new camera action as value (= opposite of the old value)
-     * @param {dictionnary} notifications contains a dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
-     */
-     app.post("/api/grades/:idGrade/action",(request, response) => {
-        const idGrade = request.params.idGrade;
-        const action = request.body.action;
-        const camera = request.body.camera;
-        const query = "update permission \
-        set allowed = ($1) \
-        where id_grade = ($2) and id_camera = ($3) ";
-        client.query(query,[action, idGrade, camera],(error, results) => {
-            if (error) {
-                throw error;
-            }
-            response.send({"count": results.rowCount});
-        });
-    });
-
-
-    /**
-     * Modifies the notification of a cameras for a grade
-     *
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     * @method POST
-     * @param {integer} idGrade identifier of the grade for which we want to get the information
-     * @param {dictionnary} actions  contains a dictionary with the camera ID as key and the new camera action as value (= opposite of the old value)
-     * @param {dictionnary} notifications contains a dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
-     */
-     app.post("/api/grades/:idGrade/notification",(request, response) => {
-        console.log("access3");
-        const idGrade = request.params.idGrade;
-        const notification = request.body.notification;
-        const camera = request.body.camera;
-        const query2 = "update permission \
-        set notification = ($1) \
-        where id_grade = ($2) and id_camera = ($3) ";
-        client.query(query2,[notification, idGrade, camera],(error, results) => {
-            if (error) {
-                throw error;
-            }
-            response.send({"count": results.rowCount});
-        });
-            
-    });
-
+    
     /**
      * Change the order place of a grade
      *
@@ -290,156 +195,85 @@ module.exports = function (app, client, done) {
     });
 
 
-    app.post("/api/grades/:idGrade/test",async (request, response) => {
-        const idGrade = request.params.idGrade;
-        const actions = request.body.actions;
-        const notifications = request.body.notifications;
-        console.log("actions : ", actions, " notificatiosn ", notifications)
+    /**
+     * Modifies the permissions of cameras for a grade by calling the right functions
+     *
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @method POST
+     * @param {integer} idGrade identifier of the grade for which we want to modify the information
+     * @param {object} actions dictionary with the camera ID as key and the new camera's action as value (= opposite of the old value)
+     * @param {object} notifications dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
+     */
+    app.post("/api/grades/:idGrade/permissions", async (request, response) => {
+        const idGrade = request.params.idGrade ;
+        const actions = request.body.actions ;
+        const notifications = request.body.notifications ;
+        let actionsSucceed = 0, notificationsSucceed = 0 ;
 
-        let allowed =await allo(idGrade, actions) ;
-        let notification  = await coucou(idGrade, notifications) ;
-        console.log("allowed : ", allowed, " notif : ", notification);
-        //console.log("allowed : ", allowed);
-        response.send({"actions": allowed, "notifications" : notification});
+        if (Object.keys(actions).length !== 0) {
+            actionsSucceed = await setActions(idGrade, actions) ;
+        }
+        if (Object.keys(notifications).length !== 0) {
+            notificationsSucceed  = await setNotifications(idGrade, notifications) ;
+        }
+
+        response.send({"actions": actionsSucceed, "notifications" : notificationsSucceed});
     });
 
-    // async function allo(idGrade, actions) {
-    //     console.log("allo actions : ", actions);
-    //     let coucou = 0 ;
-    //     const query = "update permission \
-    //     set allowed = ($1) \
-    //     where id_grade = ($2) and id_camera = ($3) ";
-    //     for (const camera in actions) {
-    //         await client.query(query,[actions[camera],idGrade,camera],(error, results) => {
-    //             if (error) {
-    //                 throw error;
-    //             }
-    //             else {
-    //                 // response.send({"message": "ok"});
-    //                 coucou +=1;
-    //                 console.log("coucou actions +=1")
-    //             }
-    //         });
-    //     }
-    //     console.log("coucou fin actions");
-    //     return coucou ;
-    // };
-    async function allo(idGrade, actions) {
-        console.log("allo actions : ", actions);
-        let coucou = 0 ;
+
+    /**
+     * Modifies the actions of cameras for a grade
+     *
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {integer} idGrade identifier of the grade for which we want to modify the information
+     * @param {object} actions dictionary with the camera ID as key, and the new camera's action as value (= opposite of the old value)
+     */
+    async function setActions(idGrade, actions) {
+        let actionsModify = 0 ;
         for (const camera in actions) {
             try {
-                await client.query('BEGIN')
+                await client.query('BEGIN') ;
                 const queryText = 'update permission \
                 set allowed = ($1) \
-                where id_grade = ($2) and id_camera = ($3)'
-                const res = await client.query(queryText, [actions[camera],idGrade,camera])
-                await client.query('COMMIT')
-                coucou +=1 ;
-                console.log("coucou modifie : ", coucou)
-            } catch (e) {
-                await client.query('ROLLBACK')
-                throw e
+                where id_grade = ($2) and id_camera = ($3)' ;
+                const res = await client.query(queryText, [actions[camera],idGrade,camera]) ;
+                await client.query('COMMIT') ;
+                actionsModify += 1 ;
+            } 
+            catch (e) {
+                await client.query('ROLLBACK') ;
+                throw e ;
             }
         }
-        console.log("coucou à la fin : ", coucou)
-        return coucou ;
+        return actionsModify ;
     };
 
-    async function coucou(idGrade, notifications) {
 
-        console.log("allo notifications : ", notifications);
-        let coucou = 0 ;
+     /**
+     * Modifies the notifications of cameras for a grade
+     *
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {integer} idGrade identifier of the grade for which we want to modify the information
+     * @param {object} notifications dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
+     */
+    async function setNotifications(idGrade, notifications) {
+        let notificationsModify = 0 ;
         for (const camera in notifications) {
             try {
-                await client.query('BEGIN')
+                await client.query('BEGIN') ;
                 const queryText = "update permission \
                 set notification = ($1) \
-                where id_grade = ($2) and id_camera = ($3);"
-                const res = await client.query(queryText, [notifications[camera],idGrade,camera])
-                await client.query('COMMIT')
-                coucou +=1 ;
-                console.log("coucou modifie : ", coucou)
-            } catch (e) {
-                await client.query('ROLLBACK')
-                throw e
+                where id_grade = ($2) and id_camera = ($3);" ;
+                const res = await client.query(queryText, [notifications[camera],idGrade,camera]) ;
+                await client.query('COMMIT') ;
+                notificationsModify += 1 ;
+            } 
+            catch (e) {
+                await client.query('ROLLBACK') ;
+                throw e ;
             }
         }
-        console.log("coucou à la fin : ", coucou)
-        return coucou ;
-
-        // console.log("allo notifications : ", notifications);
-        // let coucou = 0 ;
-        // const query2 = "update permission \
-        // set notification = ($1) \
-        // where id_grade = ($2) and id_camera = ($3);";
-        // let baba = "" ;
-        // let index = 2 ;
-        // let liste = [idGrade] ;
-        // for (const camera in notifications) {
-        //     //baba += "update permission set notification = ($" + (Number(index)+1) +") where id_grade = ($1) and id_camera = ($" + index +");" ;
-        //     baba+= "call grade_modification(($1), ($" + index +"), ($" + (Number(index)+1) +"));"
-        //     liste.push(camera) ;
-        //     liste.push(notifications[camera]) ;
-        //     index += 2 ;
-        //     // client.query(query2,[notifications[camera],idGrade,camera],(error, results) => {
-        //     //     if (error) {
-        //     //         throw error;
-        //     //     }
-        //     //     else {
-        //     //         // response.send({"message": "ok"});
-        //     //         coucou += 1 ;
-        //     //         console.log("coucou notifications +=1")
-        //     //     }
-        //     // });
-
-        //     // client.query('BEGIN', (err) => {
-        //     //     if (shouldAbort(err)) return
-        //     //     const query2 = "update permission \
-        //     //     set notification = ($1) \
-        //     //     where id_grade = ($2) and id_camera = ($3);";
-        //     //     client.query(query2, [notifications[camera],idGrade,camera], (err, res) => {
-        //     //       if (shouldAbort(err)) return
-        //     //         client.query('COMMIT', err => {
-        //     //           if (err) {
-        //     //             console.error('Error committing transaction', err.stack)
-        //     //           }
-        //     //           else {
-        //     //             coucou += 1 ;
-        //     //             console.log("coucou notifications +=1")
-        //     //           }
-        //     //           done()
-        //     //         })
-        //     //     })
-        //     // })
-        // }
-
-        // console.log("------------------------")
-        // console.log("baba : ", baba);
-        // console.log("------------------------")
-        // console.log("liste : ", liste);
-        // console.log("coucou fin notifications");
-
-        // // baba="call grade_modification(1, 2, 'false'); \
-        // // call grade_modification(1, 3, 'true'); \
-        // // call grade_modification(1, 4, 'false')"
-        // client.query(baba, liste,(error, results) => {
-        //     if (error) {
-        //         throw error;
-        //     }
-        //     else {
-        //         // response.send({"message": "ok"});
-        //         coucou += 1 ;
-        //         console.log("coucou notifications +=1")
-        //         console.log("results : ", results)
-        //     }
-        // });
-
-        // return coucou ;
-
-
-        
-
+        return notificationsModify ;
     };
 
 };

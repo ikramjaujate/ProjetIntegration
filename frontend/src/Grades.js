@@ -36,10 +36,8 @@ function Grades() {
     const [borderNewNameGrade, setBorderNewNameGrade] = useState("null");
     const [titleModalDetails, setTitleModalDetails] = useState("Chargement");
     const [colorModalDetails, setColorModalDetails] = useState("var(--text-loading)");
-    //const [cc, setCC] = useState(0) ;
     let actionsModify = 0;
     let notificationsModify = 0;
-    //const [notificationsModify, setNotificationsModify] = useState(0) ;
 
     const optionsToast = {
         autoClose: 8000,
@@ -52,8 +50,6 @@ function Grades() {
     };
     const errorMsgClient = "Une erreur s'est produite. Veuillez réessayer. Si l'erreur persiste, contactez-nous.";
 
-    let newActions = {};
-    let newNotifications = {};
     const [newActionsConst, setNewActionsConst] = useState({});
     const [newNotificationsConst, setNewNotificationsConst] = useState({});
 
@@ -92,25 +88,26 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const getGrades = () => {
-        let informations = {
+        fetch(`/api/grades`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-        };
-        fetch(`/api/grades`, informations)
+        })
+        .then(result => {
+            return result.json();
+        })
+        .then(dataCamera => {
+            fetch(`/api/grades/members`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            })
             .then(result => {
                 return result.json();
             })
-            .then(dataCamera => {
-                fetch(`/api/grades/members`, informations)
-                    .then(result => {
-                        return result.json();
-                    })
-                    .then(dataMembers => {
-                        //dataCamera.map(grade => grade.members = data)
-                        dataCamera.map(grade => grade.members = dataMembers.filter(gradeMembers => gradeMembers.id_grade === grade.id_grade)[0].members);
-                        setInformationsGrade(dataCamera);
-                    });
+            .then(dataMembers => {
+                dataCamera.map(grade => grade.members = dataMembers.filter(gradeMembers => gradeMembers.id_grade === grade.id_grade)[0].members);
+                setInformationsGrade(dataCamera);
             });
+        });
     }
 
     /**
@@ -119,17 +116,16 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const getColor = () => {
-        let informations = {
+        fetch(`/api/grades/colors`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-        };
-        fetch(`/api/grades/colors`, informations)
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                setColorGrades(data);
-            });
+        })
+        .then(result => {
+            return result.json();
+        })
+        .then(data => {
+            setColorGrades(data);
+        });
     }
 
 
@@ -189,18 +185,16 @@ function Grades() {
         setCurrentGrade(mainName);
         setCurrentIdGrade(grade);
 
-        let informations = {
+        fetch(`/api/grades/${grade}/cameras`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-        };
-
-        fetch(`/api/grades/${grade}/cameras`, informations)
-            .then(result => {
-                return result.json();
-            })
-            .then(dataCameras => {
-                setinformationsCameras(dataCameras);
-            });
+        })
+        .then(result => {
+            return result.json();
+        })
+        .then(dataCameras => {
+            setinformationsCameras(dataCameras);
+        });
     }
 
 
@@ -241,32 +235,30 @@ function Grades() {
 
             fetch("/api/grade", {
                 method: "PUT",
-                headers: {
-                    "Content-type": "application/json"
-                },
+                headers: {"Content-type": "application/json"},
                 body: JSON.stringify({ name: newName, idcolor: newColor })
             })
-                .then((res) => {
-                    return res.json();
-                })
-                .then(data => {
-                    resetCreation();
-                    document.getElementById("cancel-creation").click();
-                    if (data.count === 1) {
-                        getGrades();
-                        getColor();
-                        toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
-                    }
-                    else {
-                        toast.error(errorMsgClient, optionsToast);
-                    }
-                });
+            .then((res) => {
+                return res.json();
+            })
+            .then(data => {
+                resetCreation();
+                document.getElementById("cancel-creation").click();
+                if (data.count === 1) {
+                    getGrades();
+                    getColor();
+                    toast.success("Vous venez de créer le grade " + newName + " !", optionsToast);
+                }
+                else {
+                    toast.error(errorMsgClient, optionsToast);
+                }
+            });
         }
     }
 
 
     /**
-     * Activate the button that allows you to close your modal
+     * Activate a button
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {string} idButton  Identifier of the button to be activated
@@ -282,22 +274,20 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const saveAction = () => {
-        let cc1 = newActionsConst;
-        let cc2 = newNotificationsConst;
-        let informations = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ actions: cc1, notifications: cc2 })
-        };
-        console.log("cc1 : ", cc1, " cc2 : ", cc2)
-        if (Object.keys(cc1).length !== 0 || Object.keys(cc2).length !== 0) {
-            fetch(`/api/grades/${currentIdGrade}/test`, informations)
+        let listOfNewActions = newActionsConst ;
+        let listOfNewNotifications = newNotificationsConst ;
+
+        if (Object.keys(listOfNewActions).length !== 0 || Object.keys(listOfNewNotifications).length !== 0) {
+            fetch(`/api/grades/${currentIdGrade}/permissions`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ actions: listOfNewActions, notifications: listOfNewNotifications })
+            })
             .then(result => {
                 return result.json();
             })
             .then(data => {
-                console.log("data : ", data);
-                if (data.actions === Object.keys(cc1).length && data.notifications === Object.keys(cc2).length) {
+                if (data.actions === Object.keys(listOfNewActions).length && data.notifications === Object.keys(listOfNewNotifications).length) {
                     activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
                     setNewActionsConst({});
                     setNewNotificationsConst({});
@@ -313,8 +303,8 @@ function Grades() {
 
 
     /**
-     * Don't save the modifications that have been made on the actions and notification
-     * of camera
+     * Delete the modifications that have been made on the actions and notifications
+     * on cameras for a grade
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
@@ -340,51 +330,52 @@ function Grades() {
             if (Math.abs(srcI - desI) > 0) {
                 for (let i = 0 + start; i < Math.abs(srcI - desI) + start + 1; i++) {
                     actualId = informationsGrade[i].id_grade;
-                    let informations = {
+                    fetch(`/api/grades/${actualId}/order`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ newPlace: i })
-                    };
-                    fetch(`/api/grades/${actualId}/order`, informations)
-                        .then(result => {
-                            return result.json();
-                        })
-                        .then(data => {
-                            if (i === Math.abs(srcI - desI)) {
-                                if (data.count === 1) {
-                                    toast.success("L'ordre de vos grades a bien été mis à jour !", optionsToast);
-                                }
-                                else {
-                                    toast.error(errorMsgClient, optionsToast);
-                                }
+                    })
+                    .then(result => {
+                        return result.json();
+                    })
+                    .then(data => {
+                        if (i === Math.abs(srcI - desI)) {
+                            if (data.count === 1) {
+                                toast.success("L'ordre de vos grades a bien été mis à jour !", optionsToast);
                             }
-                        });
+                            else {
+                                toast.error(errorMsgClient, optionsToast);
+                            }
+                        }
+                    });
                 }
             }
         }
     }
 
+    /**
+     * Delete a grade
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {integer} idGrade  indentifier of the grade that needs to be deleted
+     */
     const deleteGrade = (idGrade) => {
-        console.log('delete : ', idGrade);
-        let informations = {
+        fetch(`/api/grades/${idGrade}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
-        };
-
-        fetch(`/api/grades/${idGrade}`, informations)
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                console.log("data : ", data);
-                if (data.count === 1) {
-                    getGrades();
-                    toast.success("le grade a bien été supprimé !", optionsToast);
-                }
-                else {
-                    toast.error(errorMsgClient, optionsToast);
-                }
-            });
+        })
+        .then(result => {
+            return result.json();
+        })
+        .then(data => {
+            if (data.count === 1) {
+                getGrades();
+                toast.success("le grade a bien été supprimé !", optionsToast);
+            }
+            else {
+                toast.error(errorMsgClient, optionsToast);
+            }
+        });
     }
 
     return (
