@@ -13,7 +13,7 @@ module.exports = function(app,client) {
     await Encryption.decryptFolder("../frontend/public/imgClient.encrypted");
     const fs = require('fs');
     let list = [];
-    fs.readdir('../frontend/public/imgClient', (err, files) => {
+    fs.readdir('../frontend/public/imgClient', async(err, files) => {
       files.forEach(file => {
         
         var last3 = file.substr(file.length - 3); // permet d'obtenir les 3 derniers caractères du nom de fichier
@@ -23,19 +23,13 @@ module.exports = function(app,client) {
           
         }
       });
-      return res.send(list);
+      
+      res.send(list);
+      await Encryption.encryptFolder("../frontend/public/imgClient");   
     });   
   })
 
-  /**
-  * X
-  * @author Dallenogare Corentin <corentda@hotmail.fr>
-  * @method GET
-  **/
-  app.get('/api/encrypt', async(req, res) =>{
-    await Encryption.encryptFolder("../frontend/public/imgClient");          
-  })
-  
+
 
 
   /**

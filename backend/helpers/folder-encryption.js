@@ -28,6 +28,7 @@ function sleep(ms) {
 //TODO : faire try catch
 async function encryptFolder(folderPath) {
   await sleep(1000);
+  console.log('encryption')
   try {
     await folderEncrypt.encrypt({
         password: process.env.PASSWORD_FOLDER,
@@ -53,6 +54,7 @@ async function encryptFolder(folderPath) {
  * @param {string} folderPath path of the file to decrypt
  */
 async function decryptFolder(folderPath) {
+  console.log('DEencryption')
   try {
     await folderEncrypt.decrypt({
       password: process.env.PASSWORD_FOLDER,
