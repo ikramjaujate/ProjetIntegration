@@ -45,11 +45,11 @@ function Biblio (){
         document.getElementById("boutonTri").className = triIcon
 
     }  
-    const supprimerPhoto = (photo) =>{
+    const supprimerPhoto = (photo) => {
       console.log("Supprimer photo fct");
       
       const idPhoto = photo;
-      console.log(idPhoto)
+      console.log(idPhoto);
       let informations = {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' }, 
@@ -59,10 +59,10 @@ function Biblio (){
               // var element = document.getElementById(idPhoto);
               // element.parentNode.removeChild(element);
               // window.location.reload(false);
-              let a = [...pictures];
-              a.reverse()
-              setPictures(a)
-              console.log(response)            
+              //let a = [...pictures];
+              //a.reverse()
+              //setPictures(a)
+              //console.log(response)           
               console.log("supression réussis")
           }
           else {
@@ -117,7 +117,8 @@ function Biblio (){
           </div>
         {pictures&&pictures.map(phot=> 
           
-            <Photos nomPhoto={phot} />
+            <Photos nomPhoto={phot} supprimerPhoto={supprimerPhoto}/>
+
           
         )} 
         </div>

@@ -1,17 +1,15 @@
 import { valHooks } from "jquery";
 import { useEffect, useState } from "react";
 import Biblio from "../Files";
-import supprimerPhoto from '../Files.js' ;
 //import { stat } from 'fs';
 //import { unlink } from 'fs';
-function Photos({nomPhoto}) {
+function Photos({nomPhoto, supprimerPhoto}) {
     const [pictures, setPictures] = useState(null);
 
-    const Photos = ({supprimerPhoto})
 
     return (
         <>
-        <div className="container row justify-content-center col-xl-12 ">
+        <div id={nomPhoto} className="container row justify-content-center col-xl-12 ">
             <div className="row bg-light shadow rounded m-1 col-12 col-md-8 col-sm-8 col-lg-8 justify-content-center   ">
             <div   className="row col-xl-4 justify-content-center mx-auto d-block hovereffect p-1" data-bs-toggle="modal" data-bs-target="#imgModal">
                 <img class = "img-responsive" href={nomPhoto} src={nomPhoto}></img>
@@ -26,7 +24,7 @@ function Photos({nomPhoto}) {
             
             </div>
             <div className="row col-xl-3 justify-content-sm-center justify-content-center p-1">
-            <button className={"col col-5 col-xl-5 align-self-center btn btn-outline-secondary photo"} type="button" id={valHooks.idPhoto} onClick={event => {if(window.confirm("Voulez vous vraiment supprimer " + nomPhoto + "?")) supprimerPhoto(nomPhoto)}} ><i class="bi bi-trash"></i></button>
+            <button className={"col col-5 col-xl-5 align-self-center btn btn-outline-secondary photo"} type="button" id={valHooks.idPhoto} onClick={event => {if(window.confirm("Voulez vous vraiment supprimer " + nomPhoto + "?")) supprimerPhoto(nomPhoto); document.getElementById(nomPhoto).remove()}} ><i class="bi bi-trash"></i></button>
             <button className={"col col-5 col-xl-5 align-self-center btn btn-outline-secondary ms-2 photo"} type="button" onClick ={console.log("télécharger")} ><i class="bi bi-arrow-down-circle"></i></button>
             </div>
             </div>
