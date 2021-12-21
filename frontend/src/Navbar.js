@@ -76,7 +76,7 @@ function Navbar() {
         // </>
 
 
-        <nav id="id-nav" className="petitEcranFerme navbar navbar-main navbar-expand-lg navbar-light navExpand">
+        <nav id="id-nav" className="petitEcranFerme navbar navbar-main navbar-light navExpand">
             <div class="container-fluid etirement row "> 
                 {/* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -91,7 +91,7 @@ function Navbar() {
                         <ElementNavBar href="members" text="MEMBRES" icon="bi-people" style={{"fontSize" : "2rem"}} />
                         <ElementNavBar href="photos" text="GALERIE" icon="bi-images" style={{"fontSize" : "2rem"}} />
                         <ElementNavBar href="settings" text="PARAMETRES" icon="bi-gear" style={{"fontSize" : "2rem"}} />
-                        <li className="nav-item" >
+                        <li className="nav-item deconnection-button">
                             <Link className="navbar__link" to="#" onClick={deconnexion}>
                                 <i class={`bi bi-box-arrow-left m-4`} style={{ "fontSize": "2rem" }} ></i>
                                 <span className="link-text" style={{ fontWeight: "500" }} >DECONNEXION</span>

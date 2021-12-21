@@ -2,16 +2,14 @@
 .navbar-main a {
   text-decoration: none !important;
 }
+.navbar-main {
+  background-color: #457eaf !important;
+}
+
+
 /* Small screens */
 
 @media only screen and (max-width: 991px) {
-
-  .navbar-main {
-    
-    background-color: #457eaf !important;
-    
-   
-  }
   a.hoverNav:hover{
     color: rgb(31, 57, 90) !important;
   }
@@ -62,16 +60,18 @@
   .navbar-main {
     position: fixed;
     background-color: var(--bg-primary) !important;
-    transition: width .6s;
     z-index: 1;
     top: 0;
-    /* width: 6rem; */
     height: 100%;
    
   }
   
   
-  
+  .navExpand {
+    width: 5rem;
+    transition: width .6s;
+    
+  }
  
   .navExpand:hover {
     width: 14rem;
@@ -117,12 +117,20 @@
   a.hoverNav:hover{
     color: rgb(31, 57, 90) !important;
   }
+
+  .navbar-nav {
+    margin-top: 9.8rem ;
+  }
+  .deconnection-button {
+    padding-top: 7.5rem ;
+  }
   
 }
 
 .petitEcranBouton {
   display:none;
 }
+
 
 @media only screen and (max-width: 991px) {
   .petitEcranBouton {
@@ -148,10 +156,12 @@
     display:none;
     opacity: 0;
     transition: display .3s ease-in-out, opacity .3s ease-in-out 1s;
+    position: relative;
+    top: 2rem;
   }
 
   .petitEcranOuvert {
-    height: 22rem;
+    height: 24rem;
     transition: height .3s ease-in-out;
   }
 
@@ -159,6 +169,8 @@
       display:block;
       opacity: 1;
       transition: display .3s ease-in-out, opacity .3s ease-in-out 1s;
+      position: relative;
+      top: 2rem;
    }
    .petitEcranLayoutFerme{}
    .petitEcranLayoutOuvert {

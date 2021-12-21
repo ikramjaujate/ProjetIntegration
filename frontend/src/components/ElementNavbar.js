@@ -13,10 +13,12 @@ function ElementNavBar({ href, text, icon }) {
         // </li>   
 
         <li className="nav-item" >
+            <span style={{textAlign:"left", width:"5rem"}}>
             <NavLink exact to={`/${href}`} activeClassName="navbar__link--active" className="navbar__link">
-                <i class={`bi ${icon} m-4`} style={{ "fontSize": "2rem" }} ></i>
+                <i class={`bi ${icon} me-4`} style={{ "fontSize": "2rem" }} ></i>
                 <span className="link-text" style={{ fontWeight: "500" }} >{text}</span>
             </NavLink>
+            </span>
         </li>
 
     );
