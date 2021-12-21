@@ -1,5 +1,66 @@
 const _ = require('lodash');
 
+const folderEncrypt = require('folder-encrypt')
+const fs = require('fs') ;
+const dotenv = require("dotenv");
+dotenv.config();
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+
+//TODO : faire try catch
+async function encryptFolder(folderPath) {
+  await sleep(1000);
+  console.log("encrypt : ", folderPath)
+  try {
+    
+    await folderEncrypt.encrypt({
+        password: '123', //TODO : A METTRE DANS LE ENV
+        input: folderPath
+    })
+    .then(() => {
+      try {
+        console.log("avant")
+        fs.rmSync(folderPath, { recursive: true, force : true });
+        console.log("apres")
+      }
+      catch(e) {console.log("fs encrypt : ", e)}
+      console.log('encrypted!');})
+    .catch((err) => {console.log("err encrypt : ", err);});
+    
+  }
+  catch(e) {console.log("error encrypt : ", e)}
+}
+
+
+async function decryptFolder(folderPath) {
+  console.log("decrypt : ", folderPath)
+  try {
+    await folderEncrypt.decrypt({
+      password: '123', //TODO : A METTRE DANS LE ENV
+      input: folderPath
+    })
+    .then(() => {
+      try {
+        
+        fs.rmSync(folderPath, { recursive: true});
+      }
+      catch (e) {console.log("fs decrypt : ", e)}
+      console.log('decrypted!');})
+    .then(() => {
+      console.log("promesse finie")
+    })
+    .catch((err) => {console.log("err decrypt : ", err);});
+    
+  }
+  catch (e) {console.log("error decrypt : ", e)}
+}
+
+
 
 
 module.exports = function(app,client) {
@@ -10,11 +71,12 @@ module.exports = function(app,client) {
  * @method GET
  **/
 
-  app.get('/api/photos', (req, res) =>{
+  app.get('/api/photos', async(req, res) =>{
 
+    await decryptFolder("../frontend/public/imgClient.encrypted");
         const fs = require('fs');
         let list = [];
-        fs.readdir('../frontend/public', (err, files) => {
+        fs.readdir('../frontend/public/imgClient', (err, files) => {
           files.forEach(file => {
             
             var last3 = file.substr(file.length - 3); // permet d'obtenir les 3 derniers caractères du nom de fichier
@@ -28,6 +90,11 @@ module.exports = function(app,client) {
         });
         
     })
+app.get('/api/encrypt', async(req, res) =>{
+
+    await encryptFolder("../frontend/public/imgClient");
+          
+  })
   
 
 
