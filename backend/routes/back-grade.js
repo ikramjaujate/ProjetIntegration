@@ -290,111 +290,152 @@ module.exports = function (app, client, done) {
     });
 
 
-    app.post("/api/grades/:idGrade/test",(request, response) => {
+    app.post("/api/grades/:idGrade/test",async (request, response) => {
         const idGrade = request.params.idGrade;
         const actions = request.body.actions;
         const notifications = request.body.notifications;
         console.log("actions : ", actions, " notificatiosn ", notifications)
 
-        let allowed = allo(idGrade, actions) ;
-        let notification  = coucou(idGrade, notifications) ;
+        let allowed =await allo(idGrade, actions) ;
+        let notification  = await coucou(idGrade, notifications) ;
         console.log("allowed : ", allowed, " notif : ", notification);
-        response.send({"message": "ok"});
+        //console.log("allowed : ", allowed);
+        response.send({"actions": allowed, "notifications" : notification});
     });
 
-    function allo(idGrade, actions) {
+    // async function allo(idGrade, actions) {
+    //     console.log("allo actions : ", actions);
+    //     let coucou = 0 ;
+    //     const query = "update permission \
+    //     set allowed = ($1) \
+    //     where id_grade = ($2) and id_camera = ($3) ";
+    //     for (const camera in actions) {
+    //         await client.query(query,[actions[camera],idGrade,camera],(error, results) => {
+    //             if (error) {
+    //                 throw error;
+    //             }
+    //             else {
+    //                 // response.send({"message": "ok"});
+    //                 coucou +=1;
+    //                 console.log("coucou actions +=1")
+    //             }
+    //         });
+    //     }
+    //     console.log("coucou fin actions");
+    //     return coucou ;
+    // };
+    async function allo(idGrade, actions) {
         console.log("allo actions : ", actions);
         let coucou = 0 ;
-        const query = "update permission \
-        set allowed = ($1) \
-        where id_grade = ($2) and id_camera = ($3) ";
         for (const camera in actions) {
-            // client.query(query,[actions[camera],idGrade,camera],(error, results) => {
-            //     if (error) {
-            //         throw error;
-            //     }
-            //     else {
-            //         // response.send({"message": "ok"});
-            //         coucou +=1;
-            //         console.log("coucou actions +=1")
-            //     }
-            // });
-            coucou +=1;
-            console.log("coucou actions +=1")
+            try {
+                await client.query('BEGIN')
+                const queryText = 'update permission \
+                set allowed = ($1) \
+                where id_grade = ($2) and id_camera = ($3)'
+                const res = await client.query(queryText, [actions[camera],idGrade,camera])
+                await client.query('COMMIT')
+                coucou +=1 ;
+                console.log("coucou modifie : ", coucou)
+            } catch (e) {
+                await client.query('ROLLBACK')
+                throw e
+            }
         }
-        console.log("coucou fin actions");
+        console.log("coucou à la fin : ", coucou)
         return coucou ;
     };
 
-    function coucou(idGrade, notifications) {
+    async function coucou(idGrade, notifications) {
+
         console.log("allo notifications : ", notifications);
         let coucou = 0 ;
-        const query2 = "update permission \
-        set notification = ($1) \
-        where id_grade = ($2) and id_camera = ($3);";
-        let baba = "" ;
-        let index = 2 ;
-        let liste = [idGrade] ;
         for (const camera in notifications) {
-            //baba += "update permission set notification = ($" + (Number(index)+1) +") where id_grade = ($1) and id_camera = ($" + index +");" ;
-            baba+= "call grade_modification(($1), ($" + index +"), ($" + (Number(index)+1) +"));"
-            liste.push(camera) ;
-            liste.push(notifications[camera]) ;
-            index += 2 ;
-            // client.query(query2,[notifications[camera],idGrade,camera],(error, results) => {
-            //     if (error) {
-            //         throw error;
-            //     }
-            //     else {
-            //         // response.send({"message": "ok"});
-            //         coucou += 1 ;
-            //         console.log("coucou notifications +=1")
-            //     }
-            // });
-
-            // client.query('BEGIN', (err) => {
-            //     if (shouldAbort(err)) return
-            //     const query2 = "update permission \
-            //     set notification = ($1) \
-            //     where id_grade = ($2) and id_camera = ($3);";
-            //     client.query(query2, [notifications[camera],idGrade,camera], (err, res) => {
-            //       if (shouldAbort(err)) return
-            //         client.query('COMMIT', err => {
-            //           if (err) {
-            //             console.error('Error committing transaction', err.stack)
-            //           }
-            //           else {
-            //             coucou += 1 ;
-            //             console.log("coucou notifications +=1")
-            //           }
-            //           done()
-            //         })
-            //     })
-            // })
+            try {
+                await client.query('BEGIN')
+                const queryText = "update permission \
+                set notification = ($1) \
+                where id_grade = ($2) and id_camera = ($3);"
+                const res = await client.query(queryText, [notifications[camera],idGrade,camera])
+                await client.query('COMMIT')
+                coucou +=1 ;
+                console.log("coucou modifie : ", coucou)
+            } catch (e) {
+                await client.query('ROLLBACK')
+                throw e
+            }
         }
-
-        console.log("------------------------")
-        console.log("baba : ", baba);
-        console.log("------------------------")
-        console.log("liste : ", liste);
-        console.log("coucou fin notifications");
-
-        // baba="call grade_modification(1, 2, 'false'); \
-        // call grade_modification(1, 3, 'true'); \
-        // call grade_modification(1, 4, 'false')"
-        client.query(baba, liste,(error, results) => {
-            if (error) {
-                throw error;
-            }
-            else {
-                // response.send({"message": "ok"});
-                coucou += 1 ;
-                console.log("coucou notifications +=1")
-                console.log("results : ", results)
-            }
-        });
-
+        console.log("coucou à la fin : ", coucou)
         return coucou ;
+
+        // console.log("allo notifications : ", notifications);
+        // let coucou = 0 ;
+        // const query2 = "update permission \
+        // set notification = ($1) \
+        // where id_grade = ($2) and id_camera = ($3);";
+        // let baba = "" ;
+        // let index = 2 ;
+        // let liste = [idGrade] ;
+        // for (const camera in notifications) {
+        //     //baba += "update permission set notification = ($" + (Number(index)+1) +") where id_grade = ($1) and id_camera = ($" + index +");" ;
+        //     baba+= "call grade_modification(($1), ($" + index +"), ($" + (Number(index)+1) +"));"
+        //     liste.push(camera) ;
+        //     liste.push(notifications[camera]) ;
+        //     index += 2 ;
+        //     // client.query(query2,[notifications[camera],idGrade,camera],(error, results) => {
+        //     //     if (error) {
+        //     //         throw error;
+        //     //     }
+        //     //     else {
+        //     //         // response.send({"message": "ok"});
+        //     //         coucou += 1 ;
+        //     //         console.log("coucou notifications +=1")
+        //     //     }
+        //     // });
+
+        //     // client.query('BEGIN', (err) => {
+        //     //     if (shouldAbort(err)) return
+        //     //     const query2 = "update permission \
+        //     //     set notification = ($1) \
+        //     //     where id_grade = ($2) and id_camera = ($3);";
+        //     //     client.query(query2, [notifications[camera],idGrade,camera], (err, res) => {
+        //     //       if (shouldAbort(err)) return
+        //     //         client.query('COMMIT', err => {
+        //     //           if (err) {
+        //     //             console.error('Error committing transaction', err.stack)
+        //     //           }
+        //     //           else {
+        //     //             coucou += 1 ;
+        //     //             console.log("coucou notifications +=1")
+        //     //           }
+        //     //           done()
+        //     //         })
+        //     //     })
+        //     // })
+        // }
+
+        // console.log("------------------------")
+        // console.log("baba : ", baba);
+        // console.log("------------------------")
+        // console.log("liste : ", liste);
+        // console.log("coucou fin notifications");
+
+        // // baba="call grade_modification(1, 2, 'false'); \
+        // // call grade_modification(1, 3, 'true'); \
+        // // call grade_modification(1, 4, 'false')"
+        // client.query(baba, liste,(error, results) => {
+        //     if (error) {
+        //         throw error;
+        //     }
+        //     else {
+        //         // response.send({"message": "ok"});
+        //         coucou += 1 ;
+        //         console.log("coucou notifications +=1")
+        //         console.log("results : ", results)
+        //     }
+        // });
+
+        // return coucou ;
 
 
         

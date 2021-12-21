@@ -321,6 +321,25 @@ function Grades() {
             })
             .then(data => {
                 console.log("data : ", data);
+                if (data.actions === Object.keys(cc1).length && data.notifications === Object.keys(cc2).length) {
+                    //actionsModify++ ;
+                    //verifyActions() ;
+                    console.log("ok");
+                    actionsModify = 0;
+                    notificationsModify = 0;
+
+                    activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
+                    newActions = {};
+                    newNotifications = {};
+                    setNewActionsConst({});
+                    setNewNotificationsConst({});
+                    getGrades();
+                    openCameraInfo(currentColor, currentGrade, currentIdGrade);
+                    toast.success("Vous venez de modifier les actions des caméras du grade " + currentGrade + " !", optionsToast);
+                }
+                else {
+                    toast.error(errorMsgClient, optionsToast);
+                }
             });
 
 
