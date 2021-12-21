@@ -288,8 +288,8 @@ function Grades() {
             notificationsModify = 0;
 
             activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
-            newActions = {};
-            newNotifications = {};
+            // newActions = {};
+            // newNotifications = {};
             setNewActionsConst({});
             setNewNotificationsConst({});
             getGrades();
@@ -305,8 +305,6 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const saveAction = () => {
-        console.log("action finale : ", newActionsConst)
-        console.log("notif finale : ", newNotificationsConst)
         let cc1 = newActionsConst;
         let cc2 = newNotificationsConst;
         let informations = {
@@ -314,8 +312,9 @@ function Grades() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ actions: cc1, notifications: cc2 })
         };
-
-        fetch(`/api/grades/${currentIdGrade}/test`, informations)
+        console.log("cc1 : ", cc1, " cc2 : ", cc2)
+        if (Object.keys(cc1).length !== 0 || Object.keys(cc2).length !== 0) {
+            fetch(`/api/grades/${currentIdGrade}/test`, informations)
             .then(result => {
                 return result.json();
             })
@@ -324,24 +323,24 @@ function Grades() {
                 if (data.actions === Object.keys(cc1).length && data.notifications === Object.keys(cc2).length) {
                     //actionsModify++ ;
                     //verifyActions() ;
-                    console.log("ok");
-                    actionsModify = 0;
-                    notificationsModify = 0;
+                    //console.log("ok");
+                    //actionsModify = 0;
+                    //notificationsModify = 0;
 
                     activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
-                    newActions = {};
-                    newNotifications = {};
+                    // newActions = {};
+                    // newNotifications = {};
                     setNewActionsConst({});
                     setNewNotificationsConst({});
                     getGrades();
-                    openCameraInfo(currentColor, currentGrade, currentIdGrade);
+                    //openCameraInfo(currentColor, currentGrade, currentIdGrade);
                     toast.success("Vous venez de modifier les actions des caméras du grade " + currentGrade + " !", optionsToast);
                 }
                 else {
                     toast.error(errorMsgClient, optionsToast);
                 }
             });
-
+        }
 
         // for (let camera in newActions) {
         //     let informations = { method: 'POST',
@@ -396,8 +395,8 @@ function Grades() {
     const deleteModification = () => {
         //activateButton("close-cancel");
         // activateButton("open-desc-grade-2");
-        newActions = {};
-        newNotifications = {};
+        // newActions = {};
+        // newNotifications = {};
         setNewActionsConst({});
         setNewNotificationsConst({});
     }
