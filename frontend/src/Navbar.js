@@ -20,10 +20,20 @@ function Navbar() {
         localStorage.removeItem('access_token') ;
         window.location.reload();
     }
-    const [hover, setHover] = useState(false);
+    const [hover, setHover] = useState(true);
 
     const changement = () => {
         console.log("changement");
+        if (hover) {
+            document.getElementById("id-ul").className = "petitEcranOuvertElement navbar-nav me-auto mb-2 mb-lg-0";
+            document.getElementById("id-nav").className = "petitEcranOuvert navbar navbar-main navbar-expand-lg navbar-light bg-secondary navExpand";
+            document.getElementById("navbarSupportedContent").className = "etirement petitEcranLayoutOuvert" ;
+        }
+        else {
+            document.getElementById("id-ul").className = "petitEcranFermeElement navbar-nav me-auto mb-2 mb-lg-0";
+            document.getElementById("id-nav").className = "petitEcranFerme navbar navbar-main navbar-expand-lg navbar-light bg-secondary navExpand";
+            document.getElementById("navbarSupportedContent").className = "etirement petitEcranLayoutFerme" ;
+        }
     }
 
     return (
@@ -66,14 +76,16 @@ function Navbar() {
         // </>
 
 
-        <nav className="petitEcranFerme navbar navbar-main navbar-expand-lg navbar-light bg-secondary navExpand">
-            <div class="container-fluid  etirement"> 
+        <nav id="id-nav" className="petitEcranFerme navbar navbar-main navbar-expand-lg navbar-light navExpand">
+            <div class="container-fluid etirement row "> 
                 {/* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button> */}
-                <button class="petitEcranBouton" onClick={() => {setHover(!hover);changement()}}>test</button>
-                <div class="etirement" id="navbarSupportedContent"> 
-                    <ul class="petitEcranFermeElement navbar-nav me-auto mb-2 mb-lg-0">
+                <button class="petitEcranBouton " onClick={() => {setHover(!hover);changement()}}>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="etirement petitEcranLayoutFerme" id="navbarSupportedContent"> 
+                    <ul id="id-ul" class="petitEcranFermeElement navbar-nav me-auto mb-2 mb-lg-0">
                         <ElementNavBar href="home" text="ACCUEIL" icon="bi-house" style={{"fontSize" : "2rem"}} />
                         <ElementNavBar href="grades" text="GRADES" icon="bi-diagram-3" style={{"fontSize" : "2rem"}} />
                         <ElementNavBar href="members" text="MEMBRES" icon="bi-people" style={{"fontSize" : "2rem"}} />

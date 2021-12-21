@@ -33,7 +33,7 @@
   color: #1d1f3d !important;
 }
 /* Large screens */
-@media (min-width: 991px) {
+@media (min-width: 992px) {
 
   .navbar-nav {
     display: flex;
@@ -65,7 +65,7 @@
     transition: width .6s;
     z-index: 1;
     top: 0;
-    width: 6rem;
+    /* width: 6rem; */
     height: 100%;
    
   }
@@ -126,19 +126,46 @@
 
 @media only screen and (max-width: 991px) {
   .petitEcranBouton {
-    display:block
+    display:block;
+    color: rgba(0,0,0,.55)!important;
+    border-color: rgba(0,0,0,.1)!important;
+    width: 4rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    transition: box-shadow .15s ease-in-out;
+    position: absolute;
+    top: 0.75rem;
   }
   .petitEcranFerme {
-  height: 4rem;
+    height: 4rem;
+    transition: height .3s ease-in-out;
   }
   .petitEcranFermeElement {
     display:none;
+    opacity: 0;
+    transition: display .3s ease-in-out, opacity .3s ease-in-out 1s;
   }
 
   .petitEcranOuvert {
-    height: 10rem;
-    }
-  .petitEcranFermeOuvert {
+    height: 22rem;
+    transition: height .3s ease-in-out;
+  }
+
+  .petitEcranOuvertElement {
       display:block;
+      opacity: 1;
+      transition: display .3s ease-in-out, opacity .3s ease-in-out 1s;
    }
+   .petitEcranLayoutFerme{}
+   .petitEcranLayoutOuvert {
+      text-align: center!important;
+   }
+   /* .petitEcranEtirement {
+    position: absolute;
+    top: 0.75rem;
+   } */
 }
