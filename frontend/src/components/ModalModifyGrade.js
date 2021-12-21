@@ -4,12 +4,9 @@ import TitleModalGrade from './TitleModalGrade' ;
 import { useState, useEffect } from 'reactn';
 
 
-const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, saveAction, newNotifications, newActions, activateButton, setNewActionsConst, setNewNotificationsConst, newActionsConst, newNotificationsConst}) => {
+const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, currentIdGrade, saveAction, activateButton, setNewActionsConst, setNewNotificationsConst, newActionsConst, newNotificationsConst}) => {
 
     const [hover, setHover] = useState(false);
-    // useEffect(()=> {
-    //     console.log("changement newActionsConst")
-	// }, [newActionsConst]);
 
     /**
      * Update the action's camera when opening the modify modal
@@ -40,7 +37,6 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
         let test ;
         if (idCamera in newNotificationsConst) {
             document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-fill" : "bi bi-bell-slash-fill" ;
-            // delete newNotifications[idCamera];
 
             test = {...newNotificationsConst} ;
             delete test[idCamera];
@@ -48,16 +44,11 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
         }
         else {
             document.getElementById("notification-" + currentIdGrade + "-" + idCamera).className = notification ? "bi bi-bell-slash-fill" : "bi bi-bell-fill" ;
-            // newNotifications[idCamera] = !notification ;
             
             test = {...newNotificationsConst} ;
-            console.log("test avant ajout : ", test)
             test[idCamera] = !notification ;
-            console.log("test apres ajout : ", test)
-            console.log("newac : ", newNotifications)
             setNewNotificationsConst(test) ;
         }
-        // console.log("notif modif : ", newNotifications)
     }
 
     /**
@@ -70,22 +61,15 @@ const ModalModifyGrade = ({currentGrade, currentColor, informationsCameras, curr
         let test ;
         let action = document.getElementsByClassName("action-" + currentIdGrade + "-" + identifier)[0].checked ; 
         if (identifier in newActionsConst) {
-            //delete newActions[identifier];
-
             test = {...newActionsConst} ;
             delete test[identifier];
             setNewActionsConst(test) ;
         }
         else {
-            //newActions[identifier] = action ; 
-
             test = {...newActionsConst} ;
-            console.log("test avant ajout : ", test)
             test[identifier] = action ;
-            console.log("test apres ajout : ", test)
             setNewActionsConst(test) ;
         }
-        //console.log("action modif : ", newActions)
     }
 
     /**

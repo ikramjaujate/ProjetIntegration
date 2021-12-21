@@ -277,29 +277,6 @@ function Grades() {
 
 
     /**
-     * Verify if all the fetch api have been done, for the modification
-     * of the access and the notification for a grade.
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    const verifyActions = () => {
-        if ((actionsModify === Object.keys(newActionsConst).length) && (notificationsModify === Object.keys(newNotifications).length)) {
-            actionsModify = 0;
-            notificationsModify = 0;
-
-            activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
-            // newActions = {};
-            // newNotifications = {};
-            setNewActionsConst({});
-            setNewNotificationsConst({});
-            getGrades();
-            openCameraInfo(currentColor, currentGrade, currentIdGrade);
-            toast.success("Vous venez de modifier les actions des caméras du grade " + currentGrade + " !", optionsToast);
-        }
-    }
-
-
-    /**
      * Save new camera action and new presence/absence of notification for a grade
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
@@ -321,19 +298,10 @@ function Grades() {
             .then(data => {
                 console.log("data : ", data);
                 if (data.actions === Object.keys(cc1).length && data.notifications === Object.keys(cc2).length) {
-                    //actionsModify++ ;
-                    //verifyActions() ;
-                    //console.log("ok");
-                    //actionsModify = 0;
-                    //notificationsModify = 0;
-
                     activateButton("close-modify"); //à voir si on ferme le modal quand c'est ok ou si on renvoie qqpart
-                    // newActions = {};
-                    // newNotifications = {};
                     setNewActionsConst({});
                     setNewNotificationsConst({});
                     getGrades();
-                    //openCameraInfo(currentColor, currentGrade, currentIdGrade);
                     toast.success("Vous venez de modifier les actions des caméras du grade " + currentGrade + " !", optionsToast);
                 }
                 else {
@@ -341,48 +309,6 @@ function Grades() {
                 }
             });
         }
-
-        // for (let camera in newActions) {
-        //     let informations = { method: 'POST',
-        //        headers: {'Content-Type': 'application/json'},
-        //        body: JSON.stringify({camera: camera, action : newActions[camera]})
-        //     };
-
-        //     fetch(`/api/grades/${currentIdGrade}/action`, informations)
-        //     .then(result => {
-        //         return result.json();
-        //     })
-        //     .then(data => {
-        //         if (data.count === 1) {
-        //             actionsModify++ ;
-        //             verifyActions() ;
-        //         }
-        //         else {
-        //             toast.error(errorMsgClient, optionsToast);
-        //         }
-        //     });
-        // }
-
-        // for (let camera in newNotifications) {
-        //     let informations = { method: 'POST',
-        //        headers: {'Content-Type': 'application/json'},
-        //        body: JSON.stringify({camera: camera, notification : newNotifications[camera]})
-        //     };
-
-        //     fetch(`/api/grades/${currentIdGrade}/notification`, informations)
-        //     .then(result => {
-        //         return result.json();
-        //     })
-        //     .then(data => {
-        //         if (data.count === 1) {
-        //             notificationsModify++ ;
-        //             verifyActions() ;
-        //         }
-        //         else {
-        //             toast.error(errorMsgClient, optionsToast);
-        //         }
-        //     });
-        // }
     }
 
 
@@ -393,10 +319,6 @@ function Grades() {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     const deleteModification = () => {
-        //activateButton("close-cancel");
-        // activateButton("open-desc-grade-2");
-        // newActions = {};
-        // newNotifications = {};
         setNewActionsConst({});
         setNewNotificationsConst({});
     }
@@ -506,8 +428,8 @@ function Grades() {
                 colors={colorGrades} errorName={textErrorName} errorColor={textErrorColor} setNameGrade={setTextNewNameGrade} resetCreation={resetCreation}
                 createGrade={createGrade} chooseColor={chooseColor} />
             <ModalModifyGrade currentColor={currentColor} currentIdGrade={currentIdGrade} currentGrade={currentGrade} informationsCameras={informationsCameras}
-                saveAction={saveAction} newNotifications={newNotifications} newActions={newActions} activateButton={activateButton}
-                setNewActionsConst={setNewActionsConst} setNewNotificationsConst={setNewNotificationsConst} newActionsConst={newActionsConst} newNotificationsConst={newNotificationsConst} />
+                saveAction={saveAction} activateButton={activateButton} setNewActionsConst={setNewActionsConst} setNewNotificationsConst={setNewNotificationsConst} 
+                newActionsConst={newActionsConst} newNotificationsConst={newNotificationsConst} />
             <ModalConfirmationCancel activateButton={activateButton} deleteModification={deleteModification} />
 
             <ToastContainer style={{ fontSize: "0.6rem" }} />
