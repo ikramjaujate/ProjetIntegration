@@ -4,8 +4,8 @@ const { response } = require("express");
 //import * as folderEncrypt from 'folder-encrypt';
 const folderEncrypt = require('folder-encrypt')
 const fs = require('fs') ;
-
-
+const dotenv = require("dotenv");
+dotenv.config();
 
 function sleep(ms) {
   return new Promise((resolve) => {
@@ -16,19 +16,18 @@ function sleep(ms) {
 
 //TODO : faire try catch
 async function encryptFolder(folderPath) {
-  await sleep(2000);
+  await sleep(1000);
   console.log("encrypt : ", folderPath)
   try {
-    console.log("coucou")
+    
     await folderEncrypt.encrypt({
         password: '123', //TODO : A METTRE DANS LE ENV
-        input: "./Reconnaissance/images", 
-        output: "./Reconnaissance/images.encrypted"
+        input: folderPath
     })
     .then(() => {
       try {
         console.log("avant")
-        fs.rmdirSync(folderPath, { recursive: true, force : true });
+        fs.rmSync(folderPath, { recursive: true, force : true });
         console.log("apres")
       }
       catch(e) {console.log("fs encrypt : ", e)}
@@ -45,14 +44,12 @@ async function decryptFolder(folderPath) {
   try {
     await folderEncrypt.decrypt({
       password: '123', //TODO : A METTRE DANS LE ENV
-      input: "./Reconnaissance/images.encrypted",
-      output: "./Reconnaissance/images"
+      input: folderPath
     })
     .then(() => {
       try {
-        console.log("avant decrypt")
-        fs.rmdirSync("./Reconnaissance/images.encrypted", { recursive: true});
-        console.log("apres decrypt")
+        
+        fs.rmSync(folderPath, { recursive: true});
       }
       catch (e) {console.log("fs decrypt : ", e)}
       console.log('decrypted!');})
