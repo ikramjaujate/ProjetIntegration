@@ -5,26 +5,64 @@ const { response } = require("express");
 const folderEncrypt = require('folder-encrypt')
 const fs = require('fs') ;
 
+
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+
 //TODO : faire try catch
 async function encryptFolder(folderPath) {
+  await sleep(2000);
+  console.log("encrypt : ", folderPath)
   try {
+    console.log("coucou")
     await folderEncrypt.encrypt({
         password: '123', //TODO : A METTRE DANS LE ENV
-        input: folderPath
+        input: "./Reconnaissance/images", 
+        output: "./Reconnaissance/images.encrypted"
     })
-    fs.rmdirSync(folderPath, { recursive: true, force : true });
+    .then(() => {
+      try {
+        console.log("avant")
+        fs.rmdirSync(folderPath, { recursive: true, force : true });
+        console.log("apres")
+      }
+      catch(e) {console.log("fs encrypt : ", e)}
+      console.log('encrypted!');})
+    .catch((err) => {console.log("err encrypt : ", err);});
+    
   }
-  catch {}
+  catch(e) {console.log("error encrypt : ", e)}
 }
+
+
 async function decryptFolder(folderPath) {
+  console.log("decrypt : ", folderPath)
   try {
     await folderEncrypt.decrypt({
       password: '123', //TODO : A METTRE DANS LE ENV
-      input: folderPath
+      input: "./Reconnaissance/images.encrypted",
+      output: "./Reconnaissance/images"
     })
-    fs.rmdirSync(folderPath, { recursive: true, force : true });
+    .then(() => {
+      try {
+        console.log("avant decrypt")
+        fs.rmdirSync("./Reconnaissance/images.encrypted", { recursive: true});
+        console.log("apres decrypt")
+      }
+      catch (e) {console.log("fs decrypt : ", e)}
+      console.log('decrypted!');})
+    .then(() => {
+      console.log("promesse finie")
+    })
+    .catch((err) => {console.log("err decrypt : ", err);});
+    
   }
-  catch {}
+  catch (e) {console.log("error decrypt : ", e)}
 }
 module.exports = function(app,client) {
 
@@ -47,18 +85,19 @@ module.exports = function(app,client) {
   // })
 
 app.get('/api/cameras', async (req, res) =>{
+  //fs.rmdirSync("./Reconnaissance/images.encrypted", { recursive: true, force : true });
   await decryptFolder("./Reconnaissance/images.encrypted");
 
   let query = "select id_camera, name_camera, name_status,ST.id_status \
   from camera as CA \
   join status as ST on CA.id_status = ST.id_status" ;
   client.query(query, (err, result) => {
-      if(err) throw err ;
-      res.send(result.rows);
-    })
-    await encryptFolder("./Reconnaissance/images");
-
+    if(err) throw err ;
+    res.send(result.rows);
   })
+  await encryptFolder("./Reconnaissance/images");
+  console.log("fin--------------------------")
+})
 
 
 
