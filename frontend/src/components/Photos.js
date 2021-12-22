@@ -1,9 +1,12 @@
 import "../css/Gallerie.css";
+import Biblio from "../Files";
+import { valHooks } from "jquery";
+import { useEffect, useState } from "react";
 function Photos({nomPhoto,counta}) {   
     
     return (
         <>
-        <div className="container row justify-content-center col-xl-12 ">
+        <div id={nomPhoto} className="container row justify-content-center col-xl-12 ">
             <div className="cardPicture row bg-light shadow rounded m-1 col-12 col-md-8 col-sm-8 col-lg-8 justify-content-center   ">
                 <div className="row col-xl-4 justify-content-center mx-auto d-block hovereffect p-1" data-bs-toggle="modal" data-bs-target={`#modal-${counta}`}>
                     <img class = "img-responsive" href={nomPhoto} src={nomPhoto}></img>
@@ -14,7 +17,7 @@ function Photos({nomPhoto,counta}) {
                 <div className="photo row col-xl-3 col-sm-12 justify-content-sm-center justify-content-center align-self-center">{nomPhoto}</div>
                 <div className="row col-xl-3 justify-content-sm-center justify-content-center photo align-self-center">{nomPhoto.substr(6,10)}</div>
                 <div className="row col-xl-3 justify-content-sm-center justify-content-center p-1">
-                    <div type='button' className="col col-5 col-xl-5 col-sm-6 align-self-center frameDelete frameActions  p-0 rounded-circle shadow photo" type="button" onClick ={()=>console.log("supprimer")} >
+                    <div type='button' className="col col-5 col-xl-5 col-sm-6 align-self-center frameDelete frameActions  p-0 rounded-circle shadow photo" type="button" id={valHooks.idPhoto} onClick={event => {if(window.confirm("Voulez vous vraiment supprimer " + nomPhoto + "?")) supprimerPhoto(nomPhoto); document.getElementById(nomPhoto).remove()}} >
                         <i  class="bi bi-trash deleteIcon"></i>
                     </div>
                     <div type='button' className="col col-5 col-xl-5 align-self-center frameLoad frameActions  p-0 rounded-circle shadow photo" style={{'margin-left':'1rem'}}>

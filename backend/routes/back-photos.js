@@ -27,8 +27,29 @@ module.exports = function(app,client) {
     });   
   })
 
+         /**
+ * Delete picture from local storage  
+ * @author Derwa Alexandre <he201886@students.ephec.be>
+ * @method DELETE
+ * @param {string} idPhoto file name of the picture to delete
+ **/    
 
-
+    
+  app.delete('/api/photos/:idPhoto', (req, res) =>{
+    const fs = require('fs');
+    idPhoto= req.params.idPhoto
+    console.log(idPhoto);
+    const pathToFile = '../frontend/public/' + idPhoto 
+    fs.unlink(pathToFile, (err) => {
+       if (err) {
+          throw err;
+       } else {
+          response.status(200);
+          response.send()
+       }
+    }) 
+  }) 
+  
 
   /**
   * Permet d'envoyer une photo en local sur le vps
