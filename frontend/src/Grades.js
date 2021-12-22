@@ -175,7 +175,8 @@ function Grades() {
      * @param {string} mainName   Name of the selected grade
      * @param {integer} grade     Identifier of the selected grade
      */
-    const openCameraInfo = (mainColor, mainName, grade, reset = false) => {
+    const openCameraInfo = (mainColor, mainName, grade) => {
+        console.log("grade : ", informationsGrade[grade])
         setColorModalDetails(mainColor);
         setTitleModalDetails(mainName);
 
@@ -358,27 +359,42 @@ function Grades() {
      * @param {integer} idGrade  indentifier of the grade that needs to be deleted
      */
     const deleteGrade = (idGrade) => {
-        fetch(`/api/grades/${idGrade}`, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-        })
-        .then(result => {
-            return result.json();
-        })
-        .then(data => {
-            if (data.count === 1) {
-                getGrades();
-                toast.success("le grade a bien été supprimé !", optionsToast);
-            }
-            else {
-                toast.error(errorMsgClient, optionsToast);
-            }
-        });
+        if (informationsGrade.filter(x => x.id_grade === idGrade)[0]["members"] == 0) {
+            console.log("delete")
+            fetch(`/api/grades/${idGrade}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+            })
+            .then(result => {
+                return result.json();
+            })
+            .then(data => {
+                if (data.count === 1) {
+                    getGrades();
+                    toast.success("le grade a bien été supprimé !", optionsToast);
+                }
+                else {
+                    toast.error(errorMsgClient, optionsToast);
+                }
+            });
+        }
+        else {
+            toast.error("Vous ne pouvez pas supprimer ce grade car un ou plusieurs membres le possède(nt) encore.", optionsToast);
+        }
     }
 
     return (
         <div className="gradespage" >
-            <div className="row justify-content-center" style={{'margin-top':'25px'}}>
+            <div>
+            {informationsGrade && informationsGrade.map((grade, i) => (
+                <div>
+                    <div>{grade.id_grade}</div>
+                    <div>{grade.name_grade}</div>
+                <div>{i}</div>
+                </div>
+            ))}
+            </div>
+            <div className="row justify-content-center" style={{'margin-top':'8rem'}}>
         
                 <DragDropContext onDragEnd={(param) => { sortingGrade(param) }}>
                     <Droppable droppableId="droppable-1">
@@ -387,7 +403,7 @@ function Grades() {
                                 {informationsGrade && informationsGrade.map((grade, i) => (
                                     <div className="row col-12 m-0">
                                         <div className="row p-1 justify-content-center card-grade offset-0 offset-lg-1 offset-xxl-0">
-                                            <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
+                                            <Draggable key={`key-${grade.id_grade}`} draggableId={`draggable-${grade.id_grade}`} index={i}>
                                                 {(provided, snapshot) => (
                                                     <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-10 col-md-9 col-lg-7 col-xl-6 justify-content-center">
                                                         <LayoutGrade key={`prop-${grade.id_grade}`} name={grade.name_grade} color={grade.color} members={grade.members} order={grade.order_place}

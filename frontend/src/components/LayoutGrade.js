@@ -1,7 +1,6 @@
 import '../css/Grades.css';
 
 const LayoutGrade = ({name, color, members, allowed_camera, refused_camera, id, openCameraInfo, order, deleteGrade}) => {
-
     
     const displayIcon = () => {
         document.getElementById("actionsGrade-" + id).className = "actionsGrade row col-12 p-0 m-0 mb-2 justify-content-around visible" ; 
