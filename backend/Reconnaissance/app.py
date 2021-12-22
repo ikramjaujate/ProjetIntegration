@@ -20,7 +20,7 @@ etat = False #D"finition de l'état de la cam
 
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
 id_cam = 1
-path = './images'
+path = './images2'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
 

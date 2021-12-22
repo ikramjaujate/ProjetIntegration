@@ -30,7 +30,7 @@ jobs:
           node-version: 16.x
       - name: Run migrations
         run: psql -f ./db/fichier.sql postgresql://postgres:123@localhost:5432/ProjetIntegration
-      - name: Installation des dépendences de node
+      - name: Installation des dépendances de node
         working-directory: ./backend
         run: |
           npm install

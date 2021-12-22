@@ -384,7 +384,7 @@ function Grades() {
 
     return (
         <div className="gradespage" >
-            <div className="row justify-content-center" style={{'margin-top':'8rem'}}>
+            <div className="row justify-content-center" style={{'margin-top':'4rem'}}>
         
                 <DragDropContext onDragEnd={(param) => { sortingGrade(param) }}>
                     <Droppable droppableId="droppable-1">

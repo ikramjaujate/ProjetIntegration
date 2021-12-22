@@ -64,7 +64,7 @@ function Biblio (){
 
     return (
         
-        <div className="files row justify-content-center voirPhoto">
+        <div className="files mt-4 row justify-content-center voirPhoto">
           <div class="container row justify-content-center"> 
             <div  className={"row col col-lg-12 col-md-12 justify-content-center ml-1 "}>
               <div className={"row justify-content-sm-center justify-content-md-center  gallerie border-3"}>

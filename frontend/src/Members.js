@@ -517,7 +517,7 @@ export default function Members() {
                     <div className="modal fade" id="addUser" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered">
 
-                            <div className="modal-content" style={{ backgroundColor: color }}>
+                            <div className="modal-content" style={{ backgroundColor: 'white' }}>
 
                                 <div className="modal-body">
 

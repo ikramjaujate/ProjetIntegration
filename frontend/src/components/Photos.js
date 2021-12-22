@@ -9,7 +9,7 @@ function Photos({nomPhoto,counta, supprimerPhoto}) {
         <div id={nomPhoto} className="container row justify-content-center col-xl-12 ">
             <div className="cardPicture row bg-light shadow rounded m-1 col-12 col-md-8 col-sm-8 col-lg-8 justify-content-center   ">
                 <div className="row col-xl-4 justify-content-center mx-auto d-block hovereffect p-1" data-bs-toggle="modal" data-bs-target={`#modal-${counta}`}>
-                    <img class = "img-responsive" href={nomPhoto} src={nomPhoto}></img>
+                    <img class = "img-responsive" href={nomPhoto} src={'imgClient/'+nomPhoto}></img>
                     <div class="row col-12 justify-content-center overlay mx-auto" >
                         <i class="col-7 col-md-7 align-self-center bi bi-eye info p-0"></i>
                     </div>
@@ -22,7 +22,7 @@ function Photos({nomPhoto,counta, supprimerPhoto}) {
                     </div>
                     <div type='button' className="col col-5 col-xl-5 align-self-center frameLoad frameActions  p-0 rounded-circle shadow photo" style={{'margin-left':'1rem'}}>
                         
-                            <a href={nomPhoto} classaName='m-2 download' download >
+                            <a href={'imgClient/'+nomPhoto} classaName='m-2 download' download >
                             <i class="bi bi-arrow-down-circle">
                                 <></>
                             </i>
@@ -40,7 +40,7 @@ function Photos({nomPhoto,counta, supprimerPhoto}) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img class="imgModal" href={nomPhoto} src={nomPhoto}></img>
+                            <img class="imgModal" href={nomPhoto} src={'imgClient/'+nomPhoto}></img>
                         </div>
                     </div>
                 </div>
