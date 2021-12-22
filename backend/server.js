@@ -116,7 +116,7 @@ console.log(__dirname)
 // ROUTE FOR API
 grade(app, client);
 cameras(app, client);
-members.routes(app, client);
+members(app, client);
 privatedata(app, client);
 photos(app,client);
 

@@ -19,7 +19,6 @@ module.exports = function(app,client) {
         var last3 = file.substr(file.length - 3); // permet d'obtenir les 3 derniers caractères du nom de fichier
         if ((last3 == "peg") && (file[0] ==="f")) { // ne prend que les fichiers en jpg           
           list.push(file); // ajoute les fichiers à la liste
-          
         }
       });
       

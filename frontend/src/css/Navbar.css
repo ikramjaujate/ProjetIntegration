@@ -1,16 +1,36 @@
+
+.navbar-main a {
+  text-decoration: none !important;
+}
+.navbar-main {
+  background-color: #457eaf !important;
+}
+
+
 /* Small screens */
+
 @media only screen and (max-width: 991px) {
-  .navbar-main {
-    background-color: #457eaf !important;}
   a.hoverNav:hover{
     color: rgb(31, 57, 90) !important;}
 }
 
 .navbar-main .nav-link{
-  color : #fff !important;}
+  color : #fff !important;
+}
+.navbar__link {
+  color : #fff !important;
+}
 
+.navbar__link:hover {
+  color: rgb(31, 57, 90) !important;
+}
+
+.navbar__link--active {
+  color: #1d1f3d !important;
+}
 /* Large screens */
-@media (min-width: 991px) {
+@media (min-width: 992px) {
+
   .navbar-nav {
     display: flex;
     flex-direction: column !important;}
@@ -24,21 +44,49 @@
   .navbar-main {
     position: fixed;
     background-color: var(--bg-primary) !important;
-    transition: width .6s;
     z-index: 1;
     top: 0;
-    width: 6rem;
     height: 100%;
-    color: black;
+    /* color: black;
     margin: 0;
-    padding: 0;}
+    padding: 0;} */
+   
+  }
+  
+  
+  .navExpand {
+    width: 5rem;
+    transition: width .6s;
+    
+  }
+ 
   .navExpand:hover {
     width: 14rem;
     transition: width .6s;}
   .navExpand:hover .link-text {
-    display:-webkit-inline-box;}  
+    display:-webkit-inline-box;
+    transition :  display 0.4s linear 0.3s;
+  }  
+  
+  
   .link-text {
-    display: none;}
+    display: none;
+    transition :  display 0.4s linear 0.3s;
+  }
+
+  /* .navExpand:hover .link-text {
+    display:inline;
+    opacity: 1;
+    transition : display 0.4s linear 0.3s, opacity 0.4s linear 0.3s;
+  }  
+  
+  
+  .navExpand .link-text {
+    display: none;
+    opacity: 0;
+    transition : display 0.4s linear 0.3s, opacity 0.4s linear 0.3s;
+  } */
+  
   .container-fluid{
     padding: 0 !important;}
   .etirement:hover{
@@ -46,5 +94,80 @@
   .etirement{
     height: 100%;}
   a.hoverNav:hover{
-    color: rgb(31, 57, 90) !important;}
+    color: rgb(31, 57, 90) !important;
+  }
+
+  .navbar-nav {
+    margin-top: 9.8rem ;
+    margin-left: 1.2rem!important;
+    align-items: flex-start;
+  }
+  .deconnection-button {
+    padding-top: 6.5rem ;
+  }
+  
+}
+
+.petitEcranBouton {
+  display:none;
+}
+
+
+@media only screen and (max-width: 991px) {
+  .petitEcranLinkFerme {
+    text-align: left; 
+    width:11rem
+  }
+  .petitEcranBouton {
+    display:block;
+    color: rgba(0,0,0,.55)!important;
+    border-color: rgba(0,0,0,.1)!important;
+    width: 4rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    transition: box-shadow .15s ease-in-out;
+    position: absolute;
+    top: 0.75rem;
+  }
+  .petitEcranBouton:hover {
+    cursor: pointer;
+  }
+  .petitEcranFerme {
+    height: 4rem;
+    transition: height .3s ease-in-out;
+  }
+  .petitEcranFermeElement {
+    display:none;
+    visibility: hidden ;
+    opacity: 0;
+    transition: display 1s ease-in-out, opacity 1s ease-in-out 1s, visibility 1s ease-in-out 1s, top 1s ease-in-out 1s!important;
+    position: relative;
+    top: 8rem;
+  }
+
+  .petitEcranOuvert {
+    height: 23rem;
+    transition: height .3s ease-in-out;
+  }
+
+  .petitEcranOuvertElement {
+      display:flex;
+      visibility: visible ;
+      opacity: 1;
+      transition: display 1s ease-in-out, opacity 1s ease-in-out 1s, visibility 1s ease-in-out 1s, top 1s ease-in-out 1s!important;
+      position: relative;
+      top: 1.7rem;
+   }
+   .petitEcranLayoutFerme{}
+   .petitEcranLayoutOuvert {
+      text-align: center!important;
+   }
+   /* .petitEcranEtirement {
+    position: absolute;
+    top: 0.75rem;
+   } */
 }

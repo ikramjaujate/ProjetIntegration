@@ -235,13 +235,9 @@ export default function Members() {
             }
             else {
                 toast.error("Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous");
-            }
-            
+            } 
 
         })
-        
-        
-
 
     }
     /**
