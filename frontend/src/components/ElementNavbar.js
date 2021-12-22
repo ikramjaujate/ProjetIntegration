@@ -16,7 +16,7 @@ function ElementNavBar({ href, text, icon }) {
             <div className="petitEcranLinkFerme">
             <NavLink exact to={`/${href}`} activeClassName="navbar__link--active" className="navbar__link">
                 <i class={`bi ${icon} me-4`} style={{ "fontSize": "2rem" }} ></i>
-                <span className="link-text" style={{ fontWeight: "500" }} >{text}</span>
+                <span className="link-text" style={{ fontWeight: "500", position:"relative", top:"-0.3rem" }} >{text}</span>
             </NavLink>
             </div>
         </li>

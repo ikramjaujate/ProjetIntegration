@@ -106,7 +106,7 @@ function Navbar() {
                             <div className="petitEcranLinkFerme">
                                 <Link className="navbar__link" to="#" onClick={deconnexion}>
                                     <i class={`bi bi-box-arrow-left me-4`} style={{ "fontSize": "2rem" }} ></i>
-                                    <span className="link-text" style={{ fontWeight: "500" }} >DECONNEXION</span>
+                                    <span className="link-text" style={{ fontWeight: "500",position:"relative", top:"-0.3rem" }} >DECONNEXION</span>
                                 </Link>
                             </div>
                         </li>

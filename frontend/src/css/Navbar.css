@@ -120,6 +120,8 @@
 
   .navbar-nav {
     margin-top: 9.8rem ;
+    margin-left: 1.2rem!important;
+    align-items: flex-start;
   }
   .deconnection-button {
     padding-top: 7.5rem ;
@@ -151,6 +153,9 @@
     transition: box-shadow .15s ease-in-out;
     position: absolute;
     top: 0.75rem;
+  }
+  .petitEcranBouton:hover {
+    cursor: pointer;
   }
   .petitEcranFerme {
     height: 4rem;
