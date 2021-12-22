@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
+import { trim } from 'jquery';
 
 
 function Biblio (){
@@ -45,6 +45,21 @@ function Biblio (){
         document.getElementById("boutonTri").className = triIcon
 
     }  
+     const supprimerPhoto = (photo) => {
+      const idPhoto = photo;
+      let informations = {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' }, 
+      };
+      fetch(`/api/photos/${idPhoto}`, informations).then((response)=> {
+          if(response.status === 200){         
+              console.log("suppression réussie")
+          }
+          else {
+              console.log("suppression ratée")
+          }
+          })
+  }
     
 
     return (
@@ -72,7 +87,7 @@ function Biblio (){
                 </div>
               </div>
                 {pictures&&pictures.map((phot, index)=> 
-                    <Photos nomPhoto={phot} counta={index} />
+                    <Photos nomPhoto={phot} counta={index} supprimerPhoto={supprimerPhoto}/>
                 )} 
             </div>
           </div>
