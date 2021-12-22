@@ -23,6 +23,7 @@
     "express-fileupload": "^1.2.1",
     "express-waf": "^0.1.6",
     "express-waf-middleware": "0.0.4",
+    "folder-encrypt": "^1.1.7",
     "framer-motion": "^4.1.17",
     "fs": "^0.0.1-security",
     "helmet": "^4.6.0",

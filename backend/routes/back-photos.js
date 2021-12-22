@@ -1,41 +1,42 @@
 const _ = require('lodash');
+const Encryption = require("../helpers/folder-encryption.js");
 
 
 module.exports = function(app,client) {
 
-     /**
- * Récupère à l'aide d'un GET toutes les photos 
- * @author Dallenogare Corentin <corentda@hotmail.fr>
- * @method GET
- **/
-
-  app.get('/api/photos', (req, res) =>{
-
-        const fs = require('fs');
-        let list = [];
-        fs.readdir('./build', (err, files) => {
-          files.forEach(file => {
-            
-            var last3 = file.substr(file.length - 3); // permet d'obtenir les 3 derniers caractères du nom de fichier
-            if ((last3 == "peg") && (file[0] ==="f")) { // ne prend que les fichiers en jpg
-              console.log()              
-              list.push(file); // ajoute les fichiers à la liste
-              
-            }
-          });
-          return res.send(list);
-        });
+  /**
+  * Récupère à l'aide d'un GET toutes les photos 
+  * @author Dallenogare Corentin <corentda@hotmail.fr>
+  * @method GET
+  **/
+  app.get('/api/photos', async(req, res) =>{
+    await Encryption.decryptFolder("../build/imgClient.encrypted");
+    const fs = require('fs');
+    let list = [];
+    fs.readdir('../frontend/public/imgClient', async(err, files) => {
+      files.forEach(file => {
         
-        })
-  
+        var last3 = file.substr(file.length - 3); // permet d'obtenir les 3 derniers caractères du nom de fichier
+        if ((last3 == "peg") && (file[0] ==="f")) { // ne prend que les fichiers en jpg
+          console.log()              
+          list.push(file); // ajoute les fichiers à la liste
+          
+        }
+      });
+      
+      res.send(list);
+      await Encryption.encryptFolder("../build/imgClient");   
+    });   
+  })
 
 
-     /**
- * Permet d'envoyer une photo en local sur le vps
- * @author Aurélien Brille <a.brille@students.ephec.be>
- * @method POST
- **/
-  
+
+
+  /**
+  * Permet d'envoyer une photo en local sur le vps
+  * @author Aurélien Brille <a.brille@students.ephec.be>
+  * @method POST
+  **/
   app.post('/api/upload-photos', async (req, res) => {
     console.log("ok")
     try {
@@ -60,6 +61,7 @@ module.exports = function(app,client) {
                     mimetype: photo.mimetype,
                     size: photo.size
                 });
+                
             });
     
             //return response

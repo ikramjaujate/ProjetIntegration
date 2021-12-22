@@ -22,10 +22,16 @@ function Live({etat,index,nomCam}){
     theme: "colored"
 };
 
-  function Capture() {
+  async function Capture() {
     //event.preventDefault()
     console.log("capture")
-    fetch("http://192.168.1.3:6060/photo", {
+    await fetch("/api/photos/decrypt", {
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
+        mode: 'no-cors'
+    })
+     fetch("http://0.0.0.0:6060/photo", {
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
@@ -39,15 +45,23 @@ function Live({etat,index,nomCam}){
                     'Content-Type': 'application/json'
                 }
             }).then(res => res.json())
-                .then(data => {
+                .then(async(data) => {
                     setScreenshoot(data.picture)
+
                     const ScreenshotToast = () => (
                         <div >
-                            <img class="layout-screenshot" data-bs-toggle="modal" data-bs-target="#openscreenshotmodal" src={`image-client/${data.picture}`} alt="video surveillance" width="100" height="auto" />
+                            <img class="layout-screenshot" data-bs-toggle="modal" data-bs-target="#openscreenshotmodal" src={`imgClient/${data.picture}`} alt="video surveillance" width="100" height="auto" />
                         </div>
                     )
                     toast.info(<ScreenshotToast />, optionsToast);
+                     fetch("/api/photos/encrypt", {
+                      headers: {
+                          'Access-Control-Allow-Origin': '*'
+                      },
+                      mode: 'no-cors'
+                  })
                 })
+               
         })
 
 }
@@ -63,7 +77,7 @@ return(
             <button type="button" class=" btn-secondary btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <img className="img-thumbnail" alt='visu_live' src='https://video.4x4vert.be/video' width="440" height="300" title="Foscam FI8905W" />
+            <img className="img-thumbnail" alt='visu_live' src='http://0.0.0.0:6060/video' width="440" height="300" title="Foscam FI8905W" />
           </div>
           <div class="modal-footer justify-content-center">
             
@@ -78,7 +92,7 @@ return(
                     <div className="modal-content">
 
                         <div className="modal-body">
-                            <img class="modal-screenshot" src={`image-client/${screenshoot}`} alt="video surveillance" width="100%" height="100%" />
+                            <img class="modal-screenshot" src={`imgClient/${screenshoot}`} alt="video surveillance" width="100%" height="100%" />
                         </div>
 
                     </div>
