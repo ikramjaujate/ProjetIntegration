@@ -4,7 +4,7 @@ function Photos({nomPhoto,counta}) {
     return (
         <>
         <div className="container row justify-content-center col-xl-12 ">
-            <div className="row bg-light shadow rounded m-1 col-12 col-md-8 col-sm-8 col-lg-8 justify-content-center   ">
+            <div className="cardPicture row bg-light shadow rounded m-1 col-12 col-md-8 col-sm-8 col-lg-8 justify-content-center   ">
                 <div className="row col-xl-4 justify-content-center mx-auto d-block hovereffect p-1" data-bs-toggle="modal" data-bs-target={`#modal-${counta}`}>
                     <img class = "img-responsive" href={nomPhoto} src={nomPhoto}></img>
                     <div class="row col-12 justify-content-center overlay mx-auto" >
