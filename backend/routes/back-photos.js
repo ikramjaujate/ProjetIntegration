@@ -13,7 +13,7 @@ module.exports = function(app,client) {
     await Encryption.decryptFolder("../build/imgClient.encrypted");
     const fs = require('fs');
     let list = [];
-    fs.readdir('../frontend/public/imgClient', async(err, files) => {
+    fs.readdir('../build/imgClient', async(err, files) => {
       files.forEach(file => {
         
         var last3 = file.substr(file.length - 3); // permet d'obtenir les 3 derniers caractères du nom de fichier
