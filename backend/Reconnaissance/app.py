@@ -7,6 +7,7 @@ import numpy as np
 import os # pour importer toutes les images d'un coup
 from datetime import datetime
 import time
+import requests
 app = Flask(__name__)
 
 """ Enlever le commentaire pour faire fonctionner sur raspi
@@ -18,8 +19,8 @@ cap.set(4,680)
 etat = False #D"finition de l'état de la cam 
 
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
-path = './backend/Reconnaissance/images2'
+id_cam = 1
+path = './images'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
 
@@ -30,6 +31,14 @@ for x,cl in enumerate(myList):
         curImg = cv2.imread(f'{path}/{cl}')
         images.append(curImg)
         className.append(os.path.splitext(cl)[0])
+
+
+# A modifier pour prnedre en parametre les valeurs du nom de la photo et de l'id camera (id_cam) plus haut + modifier la route pour avoir juste /api/permission/..
+def getPerms(picture, camera):
+    route = ('http://localhost:3001/api/permission/' + picture + '/' + str(camera))
+    response = requests.get(route)
+    #print(response.json())
+    return response.json()
 
 #les encoder
 def findEncodings(images):
@@ -151,26 +160,45 @@ def gen(captur):
             
 
             if faceDis[matchIndex]< 0.50:
-                """ # Permet la réouverture après 20secondes
-                if (round(time.time()) >= temps +20) :
-                    GPIO.output(LEDRefuse, GPIO.LOW)
-                    GPIO.output(LEDaccepte, GPIO.HIGH)
-                    servo1.ChangeDutyCycle(12)
-                    time.sleep(0.5)
-                    servo1.ChangeDutyCycle(0)
-                    tempsFermeture =round(time.time())
-                    
-                    temps = round(time.time())
-                    print("la porte s'ouvre")
-                    time.sleep(0.5)
-                """
                 name = className[matchIndex].upper()
-                #print(name)
-                y1,x2,y2,x1 = faceLoc
-                y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
-                cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
-                cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
-                cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+                picture = (name.lower() + '.jpg')
+                autorized = getPerms(str(picture), int(id_cam))
+                
+                
+                
+                print(autorized)
+                if ((len(autorized) >0) and (autorized[0]["allowed"] ==True )):
+                    print("toto")
+                    """ # Permet la réouverture après 20secondes
+                    if (round(time.time()) >= temps +20) :
+                        GPIO.output(LEDRefuse, GPIO.LOW)
+                        GPIO.output(LEDaccepte, GPIO.HIGH)
+                        servo1.ChangeDutyCycle(12)
+                        time.sleep(0.5)
+                        servo1.ChangeDutyCycle(0)
+                        tempsFermeture =round(time.time())
+                        
+                        temps = round(time.time())
+                        print("la porte s'ouvre")
+                        time.sleep(0.5)
+                    """
+
+                    # print(name)
+                    y1,x2,y2,x1 = faceLoc
+                    y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
+                    cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
+                    cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
+                    cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+                    time.sleep(1)
+                
+                else :
+                    y1,x2,y2,x1 = faceLoc
+                    y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
+                    cv2.rectangle(img,(x1,y1),(x2,y2),(0,0,255),2)
+                    cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,0,255),cv2.FILLED)
+                    cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+                    time.sleep(1)
+
 
                 
                 
@@ -209,8 +237,6 @@ def gen(captur):
 
 @app.route('/video')
 def video():
-
-
     """
     global cap
     
@@ -241,7 +267,10 @@ def photo():
     #res.headers['Cache-Control'] = 'no-cache'
     return res
 
-
+@app.route('/api/permission/<picture>/<camera>', methods = ['GET'])
+def getPermission(picture, camera):
+    print(camera, picture)
+    return picture, camera
 
 @app.route('/videoCptur')
 def videoCptur():

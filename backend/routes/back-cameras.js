@@ -7,14 +7,24 @@ const Encryption = require("../helpers/folder-encryption.js");
 
 module.exports = function (app, client) {
 
-  /**
-  * Récupère à l'aide d'un GET toutes les caméra et leur état 
-  * @author Cécile Bonnet <c.bonnet@gmail.com>
-  * @method GET
-  **/
-  app.get('/api/cameras', (req, res) => {
-    //await Encryption.decryptFolder("./Reconnaissance/images.encrypted");
+  
+     /**
+ * Récupère à l'aide d'un GET toutes les caméra et leur état 
+ * @author Cécile Bonnet <c.bonnet@gmail.com>
+ * @method GET
+ **/
 
+ 
+  // app.get('/api/camera', (req, response) =>{
+  //   client.query('select * from camera  left join status on status.id_status = camera.id_status', (err, result) => {
+      
+  //     if(err) throw err ;
+  //     response.send(result.rows);
+     
+  //   })
+  // })
+
+  app.get('/api/cameras', (req, res) =>{
     let query = "select id_camera, name_camera, name_status,ST.id_status \
     from camera as CA \
     join status as ST on CA.id_status = ST.id_status" ;
@@ -26,12 +36,9 @@ module.exports = function (app, client) {
   })
 
 
-  app.get('/api/pictureScreenshoot',  (req, res) => {
-    /*await Encryption.decryptFolder('../frontend/public/imgClient.encrypted');
-    const fs = require('fs');
-    const util = require('util');
-    const readdir = util.promisify(fs.readdir);
-    const rename = util.promisify(fs.rename);*/
+  
+
+  app.get('/api/pictureScreenshoot', (req, res) =>{
     const fs = require('fs');
     let list = []
     /*fs.readdir('../frontend/public/imgTemp/',  async(err, files) => {
@@ -63,4 +70,24 @@ module.exports = function (app, client) {
     await Encryption.decryptFolder("./build/imgClient.encrypted");
     res.send('decrypt')
   })
+      
+  
+  app.get('/api/permission/:picture/:camera', (req, res) =>{
+    const picture = req.params.picture
+    const camera = req.params.camera
+    console.log(picture, camera)
+    const query = "SELECT pm.allowed, pm.notification, pm.id_camera \
+    from photos as ph \
+    inner join member as mb on ph.id_member = mb.id_member \
+    inner join permission as pm on mb.id_grade = pm.id_grade \
+    where pictures = ($1) and id_camera = ($2)";
+        client.query(query,[picture, camera],(error, results) => {
+            if (error) {
+                throw error;
+            }
+
+            res.send(results.rows);
+        });   
+  })
+  
 }
