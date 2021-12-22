@@ -133,7 +133,6 @@ export default function Members() {
             .then(response => {
 				return response.json()
 			}).then(response => {
-                // console.log(response)
                 setMembersList(response)
             })
 	}
@@ -149,8 +148,10 @@ export default function Members() {
     const submitClient = (event) => {
         event.preventDefault();
         photos= []
-        for(let e = 0; e < selectedFile.length; e++){
-            photos.push(selectedFile[e].name);
+        if(selectedFile !== null){
+            for(let e = 0; e < selectedFile.length; e++){
+                photos.push(selectedFile[e].name);
+            }
         }
         Axios.put(`/api/client`, {
             FirstName : clientFirstName,
@@ -174,15 +175,11 @@ export default function Members() {
      */
 
     const delMember = (id) => {
-        let idMember = id;
         let informations = {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            idMember: idMember, 
+            headers: { 'Content-Type': 'application/json' }, 
         };
-        fetch(`/api/members`, informations).then((response)=> {
-
-            console.log(response)
+        fetch(`/api/members/${id}`, informations).then((response)=> {
             if(response.status === 200){
                 getGrade() ;
                 getMembers();            
@@ -231,7 +228,6 @@ export default function Members() {
             },
             body: JSON.stringify({ name, surname })
         }).then((response) => {
-            console.log(response)
             if (response.status === 200) {
                 toast.success("Vous venez de modifier le nom et prénom de cet utilisateur", optionsToast);
                 getGrade() ;
@@ -239,13 +235,9 @@ export default function Members() {
             }
             else {
                 toast.error("Une erreur s'est produite. Veuillez réessayer. Si l'erreur persite, contactez-nous");
-            }
-            
+            } 
 
         })
-        
-        
-
 
     }
     /**
@@ -267,7 +259,6 @@ export default function Members() {
                 setNameGrade(response[0]["name_grade"])
                 setColor(response[0]["color"])
                 setValueGrade(response["id_grade"])
-                //console.log(color, nameGrade, valueGrade)
                 setHasValue(true)
 
             });
@@ -402,7 +393,6 @@ export default function Members() {
     */
 
     const eliminate = (photo) => {
-        console.log(photo)
         fetch(`/api/membres/${userNow}/eliminate/photo`, {
             method: 'DELETE',
             headers: {
@@ -410,7 +400,6 @@ export default function Members() {
             },
             body: JSON.stringify({ photo })
         }).then((response) => {
-            console.log(response)
             if (response.status === 200) {
                 toast.success("Vous venez d'effacer la photo", optionsToast);
                 photoMembre(userNow)
@@ -461,7 +450,6 @@ export default function Members() {
             },
             body: JSON.stringify({ userNow })
         }).then((response) => {
-            console.log(response)
             if (response.status === 200) {
                 toast.success("Vous venez de modifier le grade de l'utilisateur", optionsToast);
                 getGrade() ;
@@ -572,7 +560,7 @@ export default function Members() {
                                             </svg> 
                                         </div>
                                         <div className="mx-1" style={{border :'0', float:"right", verticalAlign: "middle"}}>
-                                            <button id={val.id_member} style={{border :'0', float:"right", backgroundColor:"transparent"}} onClick={event => {if(window.confirm("Voulez vous vraiment supprimer " + val.last_name + "?")) delMember(event.target.id)}} >
+                                            <button id={val.id_member} style={{border :'0', float:"right", backgroundColor:"transparent"}} onClick={event => {if(window.confirm("Voulez vous vraiment supprimer " + val.last_name + "?")) delMember(val.id_member)}} >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                                                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                                 </svg>

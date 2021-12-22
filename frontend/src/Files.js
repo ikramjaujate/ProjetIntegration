@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
+import { trim } from 'jquery';
 
 
 function Biblio (){
@@ -45,12 +45,26 @@ function Biblio (){
         document.getElementById("boutonTri").className = triIcon
 
     }  
+     const supprimerPhoto = (photo) => {
+      const idPhoto = photo;
+      let informations = {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' }, 
+      };
+      fetch(`/api/photos/${idPhoto}`, informations).then((response)=> {
+          if(response.status === 200){         
+              console.log("suppression réussie")
+          }
+          else {
+              console.log("suppression ratée")
+          }
+          })
+  }
     
 
     return (
         
         <div className="files row justify-content-center voirPhoto">
-          <div className='gallerie text-center offset-1 '>Page de gestion des photos</div><br/><br/>
           <div class="container row justify-content-center"> 
             <div  className={"row col col-lg-12 col-md-12 justify-content-center ml-1 "}>
               <div className={"row justify-content-sm-center justify-content-md-center  gallerie border-3"}>
@@ -65,7 +79,7 @@ function Biblio (){
                   <div className="col-7 col-xl-1 titreCollone" >
                     <p >Date</p>
                   </div>
-                  <div className="col-12 col-xl-1 justify-content-center " >
+                  <div className="col-12 col-xl-1 justify-content-center " style={{'margin-top':'2rems'}}>
                     <button class=" btn btn-outline-secondary boutonTri" onClick={() => tri()}>
                       <i id="boutonTri" class="bi bi-sort-numeric-up-alt"></i>
                     </button>
@@ -73,7 +87,7 @@ function Biblio (){
                 </div>
               </div>
                 {pictures&&pictures.map((phot, index)=> 
-                    <Photos nomPhoto={phot} counta={index} />
+                    <Photos nomPhoto={phot} counta={index} supprimerPhoto={supprimerPhoto}/>
                 )} 
             </div>
           </div>

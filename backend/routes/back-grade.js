@@ -28,10 +28,12 @@ module.exports = function (app, client, done) {
 		order by GR.id_grade ;"
 
         client.query(query, (error, results) => {
-        if (error) {
-            throw error;
-        }
-        response.status(200).json(results.rows);
+            if (error) {
+                response.status(400)
+                response.send({ 'message': 'An error occurred.' })
+            } else {
+                response.status(200).json(results.rows);
+            }
         })
     });
 
@@ -42,8 +44,8 @@ module.exports = function (app, client, done) {
      * @method GET
      * @param {integer} idGrade identifier of the grade for which we want to retrieve information
      */
-    app.get("/api/grades/:idGrade/cameras",(request, response) => {
-        const idGrade = request.params.idGrade ;
+    app.get("/api/grades/:idGrade/cameras", (request, response) => {
+        const idGrade = request.params.idGrade;
         const query = "select PE.id_permission, PE.id_camera, CA.name_camera, allowed, notification \
         from permission as PE \
         join camera as CA on PE.id_camera = CA.id_camera \
@@ -51,9 +53,12 @@ module.exports = function (app, client, done) {
         order by id_permission";
         client.query(query,[idGrade],(error, results) => {
             if (error) {
-                throw error;
+                response.status(400)
+                response.send({ 'message': 'An error occurred.' })
+            } 
+            else {
+                response.status(200).json(results.rows);
             }
-            response.status(200).json(results.rows);
         });
     });
 
@@ -82,9 +87,12 @@ module.exports = function (app, client, done) {
                 order by GRM.order_place ;";
         client.query(query,(error, results) => {
             if (error) {
-                throw error;
+                response.status(400)
+                response.send({ 'message': 'An error occurred.' })
+            } 
+            else {
+                response.status(200).json(results.rows);
             }
-            response.status(200).json(results.rows);
         });
     });
 
@@ -94,18 +102,21 @@ module.exports = function (app, client, done) {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @method GET
      */
-    app.get("/api/grades/members",(request, response) => {
+    app.get("/api/grades/members", (request, response) => {
         const query = "select GR.id_grade, count(ME.id_member) as members \
         from grade as GR \
         left join member as ME on GR.id_grade = ME.id_grade \
         group by GR.id_grade ;";
-        client.query(query,(error, results) => {
+        client.query(query, (error, results) => {
             if (error) {
-                throw error;
+                response.status(400)
+                response.send({ 'message': 'An error occurred.' })
+            } else {
+                response.status(200).json(results.rows);
             }
-            response.status(200).json(results.rows);
         });
     });
+
 
     /**
      * Get the different existing colors for grade creation/modification
@@ -113,18 +124,21 @@ module.exports = function (app, client, done) {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @method GET
      */
-    app.get("/api/grades/colors",(request, response) => {
+    app.get("/api/grades/colors", (request, response) => {
         const query = "select * \
         from color \
         where id_color not in (select CO.id_color \
                 from color as CO \
                 join grade as GR on CO.id_color = GR.id_color \
                 group by CO.id_color, CO.name_color);";
-        client.query(query,(error, results) => {
+        client.query(query, (error, results) => {
             if (error) {
-                throw error;
+                response.status(400)
+                response.send({ 'message': 'An error occurred.' })
+            } 
+            else {
+                response.status(200).json(results.rows);
             }
-            response.status(200).json(results.rows);
         });
     });
 
@@ -145,9 +159,12 @@ module.exports = function (app, client, done) {
         where id_grade = ($2);" ;
         client.query(query,[newPlace, idGrade],(error, results) => {
             if (error) {
-                throw error;
+                response.status(400)
+                response.send({ 'message': 'An error occurred.' })
+            } 
+            else {
+                response.status(200).json({"count" : results.rowCount});
             }
-            response.status(200).json({"count" : results.rowCount});
         });
     });
 
@@ -163,8 +180,9 @@ module.exports = function (app, client, done) {
         const query = "call grade_suppression($1);" ;
         client.query(query,[idGrade],(error, results) => {
             if (error) {
-                throw error;
-            }
+                response.status(400)
+                response.send({ 'message': 'An error occurred.' })
+            } 
             else {
                 response.status(200).json({"count" : 1});
             }

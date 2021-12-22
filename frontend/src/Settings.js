@@ -147,7 +147,6 @@ function Settings() {
                     setPasswordOld("") ;
                     setPasswordNew("") ;
                     toast.success("Votre mot de passe a été modifié avec succès !", optionsToast);
-                    localStorage.removeItem('access_token')
                 }
                 else if (data.count === "ancien mot de passe incorrect") {
                     setErrorOld("Mot de passe incorrect");
@@ -336,7 +335,7 @@ function Settings() {
                 </div>
                 <div className="row col-10 col-md-9 rounded bg-light shadow-sm m-1 p-2">
                     
-                    <a href="gdpr" className="btn btn-light gdprLink">Conditions générales </a>
+                    <a href="gdpr" className="btn gdprLink">Conditions générales </a>
                 </div>
             </div>
 
