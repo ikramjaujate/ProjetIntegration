@@ -64,7 +64,7 @@ function Biblio (){
                   <div className="col-7 col-xl-1 titreCollone" >
                     <p >Date</p>
                   </div>
-                  <div className="col-12 col-xl-1 justify-content-center " >
+                  <div className="col-12 col-xl-1 justify-content-center " style={{'margin-top':'2rems'}}>
                     <button class=" btn btn-outline-secondary boutonTri" onClick={() => tri()}>
                       <i id="boutonTri" class="bi bi-sort-numeric-up-alt"></i>
                     </button>
