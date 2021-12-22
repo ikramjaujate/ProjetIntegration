@@ -2,7 +2,7 @@ import "../css/Gallerie.css";
 import Biblio from "../Files";
 import { valHooks } from "jquery";
 import { useEffect, useState } from "react";
-function Photos({nomPhoto,counta}) {   
+function Photos({nomPhoto,counta, supprimerPhoto}) {   
     
     return (
         <>
