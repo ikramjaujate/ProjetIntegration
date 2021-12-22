@@ -2,7 +2,7 @@ name: Backend
 on:
   push:
     branches:
-      - handleError
+      - develop
 
 jobs:
   test-backend:
