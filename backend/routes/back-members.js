@@ -55,7 +55,7 @@ function routes(app, client) {
     from grade as GRM \
     join member as ME on ME.id_grade = GRM.id_grade \
     join color as CO on GRM.id_color = CO.id_color \
-    order by GRM.id_grade ;"
+    order by ME.id_member ;"
     client.query(query, (error, res) => {
       if (error) {
         throw error
@@ -72,16 +72,12 @@ function routes(app, client) {
      * @param {integer} idMember Id of the member we want to delete
      */
 
-  app.delete('/api/members', (req, response) => {
-    idMember= req.body.idMember
-
+  app.delete('/api/members/:idMember', (req, response) => {
+    idMember= req.params.idMember
     let query = "delete from member where id_member = ($1)"
-
     client.query(query, [idMember], (error, res) => {
       if (error) {
         throw error
-        // response.status(400)
-        // response.send(error);
       }
       else{
         return response.status(200)

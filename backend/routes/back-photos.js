@@ -17,8 +17,7 @@ module.exports = function(app,client) {
       files.forEach(file => {
         
         var last3 = file.substr(file.length - 3); // permet d'obtenir les 3 derniers caractères du nom de fichier
-        if ((last3 == "peg") && (file[0] ==="f")) { // ne prend que les fichiers en jpg
-          console.log()              
+        if ((last3 == "peg") && (file[0] ==="f")) { // ne prend que les fichiers en jpg           
           list.push(file); // ajoute les fichiers à la liste
           
         }
@@ -38,16 +37,13 @@ module.exports = function(app,client) {
   * @method POST
   **/
   app.post('/api/upload-photos', async (req, res) => {
-    console.log("ok")
     try {
         if(!req.files) {
-            console.log("ok2")
             return res.send({
                 status: false,
                 message: 'No file uploaded'
             });
         } else if(req.files.photos.length >= 2) {
-          console.log("ok3")
             let data = []; 
             //loop all files
             _.forEach(_.keysIn(req.files.photos), (key) => {
@@ -72,7 +68,6 @@ module.exports = function(app,client) {
             });
         }
         else if (typeof(req.files.photos) == "object") {
-          console.log("ok4")
           let photo = req.files.photos;
           photo.mv('./Reconnaissance/images/' + photo.name);
           //send response
@@ -87,7 +82,6 @@ module.exports = function(app,client) {
             })
         }
         else {
-          console.log("ok5")
             res.send({
             status: false,
             message: 'No files uploaded'
