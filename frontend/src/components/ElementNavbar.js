@@ -3,15 +3,6 @@ import { Link, NavLink } from 'react-router-dom';
 
 function ElementNavBar({ href, text, icon }) {
     return (
-        // <li className="nav-item">
-        //     <a href={href} className="nav-link-main">  
-        //         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon={dataIcon} className={`svg-inline--fa ${className}`} role="img" xmlns="http://www.w3.org/2000/svg" viewBox={viewBox}>
-        //             <path fill="currentColor" d={d}></path>
-        //         </svg>
-        //         <span className="link-text">{text}</span>
-        //     </a>                 
-        // </li>   
-
         <li className="nav-item" style={{textAlign: "-webkit-center"}}>
             <div className="petitEcranLinkFerme">
             <NavLink exact to={`/${href}`} activeClassName="navbar__link--active" className="navbar__link">
@@ -20,16 +11,6 @@ function ElementNavBar({ href, text, icon }) {
             </NavLink>
             </div>
         </li>
-
-        // <li className="nav-item">
-        //     <div>
-        //     <NavLink exact to={`/${href}`} activeClassName="navbar__link--active" className="navbar__link">
-        //         <i class={`bi ${icon} m-4`} style={{ "fontSize": "2rem" }} ></i>
-        //         <span className="link-text" style={{ fontWeight: "500" }} >{text}</span>
-        //     </NavLink>
-        //     </div>
-        // </li>
-
     );
 }
 
