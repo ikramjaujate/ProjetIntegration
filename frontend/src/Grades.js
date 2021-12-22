@@ -388,7 +388,7 @@ function Grades() {
                             <div ref={provided.innerRef} {...provided.droppableProps}>
                                 {informationsGrade && informationsGrade.map((grade, i) => (
                                     <div className="row col-12 m-0">
-                                        <div className="row p-1 justify-content-center card-grade offset-1 offset-lg-1 offset-xxl-0">
+                                        <div className="row p-1 justify-content-center card-grade offset-0 offset-lg-1 offset-xxl-0">
                                             <Draggable key={grade.id_grade} draggableId={`draggable-${grade.id_grade}`} index={i}>
                                                 {(provided, snapshot) => (
                                                     <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="row col-10 col-md-9 col-lg-7 col-xl-6 justify-content-center">
@@ -408,7 +408,7 @@ function Grades() {
 
                 <div id="layout-add" className="row p-1 text-center justify-content-center col-12">
                     <span className="col-12 row justify-content-center" title="Créer un grade" data-toggle="tooltip" data-placement="top">
-                        <i type="button" className="p-0 bi bi-plus-circle-fill add-user col-1 offset-2 offset-xxl-0" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
+                        <i type="button" className="p-0 bi bi-plus-circle-fill add-user col-1 offset-0 offset-lg-2 offset-xxl-0" data-bs-toggle="modal" data-bs-target="#addGradeModal"></i>
                     </span>
                 </div>
             </div>

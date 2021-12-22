@@ -464,6 +464,6 @@ html body::-webkit-scrollbar:horizontal { display: none; width: 0; height: 0; }
 }
 
 
-.gradespage .modal-dialog-scrollable .modal-body {
-    overflow-y: unset!important;
+.gradespage .modal-body {
+    padding: 1rem!important;
 }
