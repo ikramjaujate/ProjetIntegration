@@ -19,7 +19,7 @@ etat = False #D"finition de l'état de la cam
 
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-path = './backend/Reconnaissance/images'
+path = './backend/Reconnaissance/images2'
 images = []     # listes contenant toutes les images
 className = []    # listes contenant toutes les nom de classe
 
@@ -111,7 +111,7 @@ def gen(captur):
             d = datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
 
             
-            img_name = "frontend/public/image-client/frame_{}.jpeg".format(str(d).replace(" ", "-"))
+            img_name = "frontend/public/imgClient/frame_{}.jpeg".format(str(d).replace(" ", "-"))
 
             cv2.imwrite(img_name, img)
             print(" written!")

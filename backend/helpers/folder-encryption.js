@@ -71,4 +71,4 @@ async function decryptFolder(folderPath) {
   catch (e) {console.log("error decrypt : ", e)}
 }
 
-module.exports = {encryptFolder, decryptFolder} ;
+module.exports = {encryptFolder, decryptFolder, sleep} ;
