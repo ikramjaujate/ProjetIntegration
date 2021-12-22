@@ -10,10 +10,10 @@ module.exports = function(app,client) {
   * @method GET
   **/
   app.get('/api/photos', async(req, res) =>{
-    await Encryption.decryptFolder("../build/imgClient.encrypted");
+    await Encryption.decryptFolder("./build/imgClient.encrypted");
     const fs = require('fs');
     let list = [];
-    fs.readdir('../build/imgClient', async(err, files) => {
+    fs.readdir('./build/imgClient', async(err, files) => {
       files.forEach(file => {
         
         var last3 = file.substr(file.length - 3); // permet d'obtenir les 3 derniers caractères du nom de fichier
@@ -24,7 +24,7 @@ module.exports = function(app,client) {
       });
       
       res.send(list);
-      await Encryption.encryptFolder("../build/imgClient");   
+      await Encryption.encryptFolder("./build/imgClient");   
     });   
   })
 
