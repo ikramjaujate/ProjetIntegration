@@ -47,7 +47,8 @@ module.exports = function (app, client, done) {
         const query = "select PE.id_permission, PE.id_camera, CA.name_camera, allowed, notification \
         from permission as PE \
         join camera as CA on PE.id_camera = CA.id_camera \
-        where id_grade = ($1)";
+        where id_grade = ($1) \
+        order by id_permission";
         client.query(query,[idGrade],(error, results) => {
             if (error) {
                 throw error;
