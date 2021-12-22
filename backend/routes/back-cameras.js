@@ -44,7 +44,7 @@ module.exports = function (app, client) {
         console.log('finiiiii')
     });*/
     
-    fs.readdir('../frontend/public/imgClient/',  (err, files) => {
+    fs.readdir('../build/imgClient/',  (err, files) => {
       files.forEach(file => {
         list.push(file)
       });
@@ -55,12 +55,12 @@ module.exports = function (app, client) {
   })
 
   app.get('/api/photos/encrypt', async(req, res) => {
-    await Encryption.encryptFolder("../frontend/public/imgClient");
-    res.send('tototototo')
+    await Encryption.encryptFolder("../build/imgClient");
+    res.send('encrypt')
   })
 
   app.get('/api/photos/decrypt', async(req, res) => {
-    await Encryption.decryptFolder("../frontend/public/imgClient.encrypted");
-    res.send('eeeeeeeeee')
+    await Encryption.decryptFolder("../build/imgClient.encrypted");
+    res.send('decrypt')
   })
 }

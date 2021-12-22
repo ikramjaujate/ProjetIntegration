@@ -10,7 +10,7 @@ module.exports = function(app,client) {
   * @method GET
   **/
   app.get('/api/photos', async(req, res) =>{
-    await Encryption.decryptFolder("../frontend/public/imgClient.encrypted");
+    await Encryption.decryptFolder("../build/imgClient.encrypted");
     const fs = require('fs');
     let list = [];
     fs.readdir('../frontend/public/imgClient', async(err, files) => {
@@ -25,7 +25,7 @@ module.exports = function(app,client) {
       });
       
       res.send(list);
-      await Encryption.encryptFolder("../frontend/public/imgClient");   
+      await Encryption.encryptFolder("../build/imgClient");   
     });   
   })
 
