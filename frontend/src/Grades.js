@@ -36,8 +36,6 @@ function Grades() {
     const [borderNewNameGrade, setBorderNewNameGrade] = useState("null");
     const [titleModalDetails, setTitleModalDetails] = useState("Chargement");
     const [colorModalDetails, setColorModalDetails] = useState("var(--text-loading)");
-    let actionsModify = 0;
-    let notificationsModify = 0;
 
     const optionsToast = {
         autoClose: 8000,

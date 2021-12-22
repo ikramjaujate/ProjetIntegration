@@ -6,8 +6,6 @@ import { useState } from 'reactn';
 
 const ModalDetailGrade = ({informationsCameras, colorModalDetails, titleModalDetails, activateButton}) => {
 
-    const [hover, setHover] = useState(false);
-
     return (
         <div id="gradeModal" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">

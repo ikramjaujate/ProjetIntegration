@@ -51,15 +51,11 @@ const ModalAddGrade = ({nameGrade, borderGrade, colorGrade, idColorGrade, colors
                                         <div className="container-final-color col-12">
                                             <i id={idColorGrade} className="bi bi-square-fill final-color" style={{color:colorGrade, fontSize:"175%"}}></i>
                                         </div>
-                                        {colors && colors.map(color => (
-                                            <div className="container-choosing-color col-1">
+                                        {colors && colors.map((color, index) => (
+                                            <div key={index} className="container-choosing-color col-1">
                                                 <i type="button" id={`little-square-${color.id_color}`} className={`bi bi-square-fill ${color.id_color}`} style={{color:color.name_color}} onClick={() => {highlithColor(color.id_color);chooseColor(color.id_color, color.name_color)}}></i>
                                             </div>
                                         ))}
-                                        <div className="container-choosing-color col-1">
-                                            <i type="button" className={`bi bi-plus-square square-selection`} style={{color:colorCreation}} onClick={() => setShowColorPicker(showColorPicker => !showColorPicker)}></i>
-                                            {showColorPicker && (<ChromePicker color={colorCreation} onChange={updatedColor => setColorCreation(updatedColor.hex)}></ChromePicker>)}
-                                        </div>
                                     </div>
                                 </div>
                                 <div id="error-name" className="errorMessage col-12 col-md-6 order-2 order-md-3">{errorName}</div>
