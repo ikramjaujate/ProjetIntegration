@@ -176,7 +176,6 @@ function Grades() {
      * @param {integer} grade     Identifier of the selected grade
      */
     const openCameraInfo = (mainColor, mainName, grade) => {
-        console.log("grade : ", informationsGrade[grade])
         setColorModalDetails(mainColor);
         setTitleModalDetails(mainName);
 
@@ -385,15 +384,6 @@ function Grades() {
 
     return (
         <div className="gradespage" >
-            <div>
-            {informationsGrade && informationsGrade.map((grade, i) => (
-                <div>
-                    <div>{grade.id_grade}</div>
-                    <div>{grade.name_grade}</div>
-                <div>{i}</div>
-                </div>
-            ))}
-            </div>
             <div className="row justify-content-center" style={{'margin-top':'8rem'}}>
         
                 <DragDropContext onDragEnd={(param) => { sortingGrade(param) }}>
