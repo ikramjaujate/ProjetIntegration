@@ -37,8 +37,8 @@ for x,cl in enumerate(myList):
 def getPerms(picture, camera):
     route = ('http://localhost:3001/api/permission/' + picture + '/' + str(camera))
     response = requests.get(route)
-    print(response.json())
-    return response
+    #print(response.json())
+    return response.json()
 
 #les encoder
 def findEncodings(images):
@@ -160,31 +160,44 @@ def gen(captur):
             
 
             if faceDis[matchIndex]< 0.50:
-                """ # Permet la réouverture après 20secondes
-                if (round(time.time()) >= temps +20) :
-                    GPIO.output(LEDRefuse, GPIO.LOW)
-                    GPIO.output(LEDaccepte, GPIO.HIGH)
-                    servo1.ChangeDutyCycle(12)
-                    time.sleep(0.5)
-                    servo1.ChangeDutyCycle(0)
-                    tempsFermeture =round(time.time())
-                    
-                    temps = round(time.time())
-                    print("la porte s'ouvre")
-                    time.sleep(0.5)
-                """
-                
                 name = className[matchIndex].upper()
                 picture = (name.lower() + '.jpg')
-                getPerms(str(picture), int(id_cam))
-                # print(name)
-                y1,x2,y2,x1 = faceLoc
-                y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
-                cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
-                cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
-                cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
-                time.sleep(1)
-               
+                autorized = getPerms(str(picture), int(id_cam))
+                
+                
+                
+                print(autorized)
+                if ((len(autorized) >0) and (autorized[0]["allowed"] ==True )):
+                    print("toto")
+                    """ # Permet la réouverture après 20secondes
+                    if (round(time.time()) >= temps +20) :
+                        GPIO.output(LEDRefuse, GPIO.LOW)
+                        GPIO.output(LEDaccepte, GPIO.HIGH)
+                        servo1.ChangeDutyCycle(12)
+                        time.sleep(0.5)
+                        servo1.ChangeDutyCycle(0)
+                        tempsFermeture =round(time.time())
+                        
+                        temps = round(time.time())
+                        print("la porte s'ouvre")
+                        time.sleep(0.5)
+                    """
+
+                    # print(name)
+                    y1,x2,y2,x1 = faceLoc
+                    y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
+                    cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
+                    cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
+                    cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+                    time.sleep(1)
+                
+                else :
+                    y1,x2,y2,x1 = faceLoc
+                    y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
+                    cv2.rectangle(img,(x1,y1),(x2,y2),(0,0,255),2)
+                    cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,0,255),cv2.FILLED)
+                    cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+                    time.sleep(1)
 
 
                 
