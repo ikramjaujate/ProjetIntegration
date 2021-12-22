@@ -35,7 +35,8 @@ for x,cl in enumerate(myList):
 
 # A modifier pour prnedre en parametre les valeurs du nom de la photo et de l'id camera (id_cam) plus haut + modifier la route pour avoir juste /api/permission/..
 def getPerms(picture, camera):
-    response = requests.get("http://localhost:3001/api/permission/ikram2.jpg/1")
+    route = ('http://localhost:3001/api/permission/' + picture + '/' + str(camera))
+    response = requests.get(route)
     print(response.json())
     return response
 
