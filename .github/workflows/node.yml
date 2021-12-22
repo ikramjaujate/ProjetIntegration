@@ -24,10 +24,10 @@ jobs:
           --health-retries 5
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node 16.x
+      - name: Setup Node 14.15.4
         uses: actions/setup-node@v1
         with:
-          node-version: 16.x
+          node-version: 14.15.4
       - name: Run migrations
         run: psql -f ./db/fichier.sql postgresql://postgres:123@localhost:5432/ProjetIntegration
       - name: Installation des dépendances de node

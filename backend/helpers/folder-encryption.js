@@ -1,7 +1,7 @@
-const folderEncrypt = require('folder-encrypt') ;
+/*const folderEncrypt = require('folder-encrypt') ;
 const fs = require('fs') ;
 const dotenv = require("dotenv") ;
-dotenv.config() ;
+dotenv.config() ;*/
 
 
 /**
@@ -11,11 +11,11 @@ dotenv.config() ;
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @param {integer} ms number of milliseconds during which the program must sleep
  */
-function sleep(ms) {
+/*function sleep(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
-}
+}*/
 
 
 /**
@@ -25,7 +25,7 @@ function sleep(ms) {
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @param {string} folderPath path of the folder to encrypt
  */
-//TODO : faire try catch
+/*//TODO : faire try catch
 async function encryptFolder(folderPath) {
   await sleep(1000);
   console.log('encryption')
@@ -43,7 +43,7 @@ async function encryptFolder(folderPath) {
     .catch((err) => {console.log("err encrypt : ", err);});
   }
   catch(e) {console.log("error encrypt : ", e)}
-}
+}*/
 
 
 /**
@@ -53,7 +53,7 @@ async function encryptFolder(folderPath) {
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @param {string} folderPath path of the file to decrypt
  */
-async function decryptFolder(folderPath) {
+/*async function decryptFolder(folderPath) {
   console.log('DEencryption')
   try {
     await folderEncrypt.decrypt({
@@ -71,4 +71,4 @@ async function decryptFolder(folderPath) {
   catch (e) {console.log("error decrypt : ", e)}
 }
 
-module.exports = {encryptFolder, decryptFolder, sleep} ;
+module.exports = {encryptFolder, decryptFolder, sleep} ;*/

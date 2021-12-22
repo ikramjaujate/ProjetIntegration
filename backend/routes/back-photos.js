@@ -1,4 +1,4 @@
-const _ = require('lodash');
+//const _ = require('lodash');
 const Encryption = require("../helpers/folder-encryption.js");
 const validateToken = require('../middleware/validateToken.js')
 

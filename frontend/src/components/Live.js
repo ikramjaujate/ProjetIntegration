@@ -25,12 +25,12 @@ function Live({etat,index,nomCam}){
   async function Capture() {
     //event.preventDefault()
     console.log("capture")
-    await fetch("/api/photos/decrypt", {
+    /*await fetch("/api/photos/decrypt", {
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
         mode: 'no-cors'
-    })
+    })*/
      fetch("http://0.0.0.0:6060/photo", {
         headers: {
             'Access-Control-Allow-Origin': '*'
@@ -54,12 +54,12 @@ function Live({etat,index,nomCam}){
                         </div>
                     )
                     toast.info(<ScreenshotToast />, optionsToast);
-                     fetch("/api/photos/encrypt", {
+                     /*fetch("/api/photos/encrypt", {
                       headers: {
                           'Access-Control-Allow-Origin': '*'
                       },
                       mode: 'no-cors'
-                  })
+                  })*/
                 })
                
         })

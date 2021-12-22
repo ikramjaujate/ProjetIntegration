@@ -1,5 +1,6 @@
-const _ = require('lodash');
+//const _ = require('lodash');
 const { response } = require("express");
+const validateToken = require('../middleware/validateToken.js')
 
   
     
@@ -12,7 +13,7 @@ module.exports = function (app, client) {
      * @method : PUT
      *
      */
-     app.put('/api/client', (req, res) => {
+     app.put('/api/client', validateToken,(req, res) => {
       const firstName = req.body.FirstName
       const lastName = req.body.LastName
       const grade = req.body.Grade
@@ -48,7 +49,7 @@ module.exports = function (app, client) {
      * @method GET
      */
 
-  app.get('/api/members', (request, response) => {
+  app.get('/api/members', validateToken,(request, response) => {
 
     let query = "select ME.id_member, GRM.id_grade, ME.first_name, ME.last_name, GRM.name_grade, CO.name_color as color \
                 from grade as GRM \
@@ -72,7 +73,7 @@ module.exports = function (app, client) {
    * @method DELETE
    * @param {integer} idMember Id of the member we want to delete
    */
-  app.delete('/api/members/:idMember', (req, response) => {
+  app.delete('/api/members/:idMember', validateToken,(req, response) => {
     idMember = req.params.idMember
     let query = "delete from member where id_member = ($1)"
     client.query(query, [idMember], (error, results) => {
@@ -96,7 +97,7 @@ module.exports = function (app, client) {
    * @method GET
    * @param {integer} idMember identifier of the member for which we want to retrieve information
    */
-  app.get('/api/membres/:idMember', (request, response) => {
+  app.get('/api/membres/:idMember', validateToken,(request, response) => {
     const idMember = request.params.idMember;
     let query = "select *  \
       from member \
@@ -120,7 +121,7 @@ module.exports = function (app, client) {
    * @method GET
    * @param {integer} idMember identifier of the member for which we want to retrieve information
    */
-  app.get('/api/membres/:idMember/name', (request, response) => {
+  app.get('/api/membres/:idMember/name', validateToken,(request, response) => {
 
     const idMember = request.params.idMember;
     let query = "select first_name, last_name  \
@@ -143,7 +144,7 @@ module.exports = function (app, client) {
    * @method GET
    * @param {integer} idMember identifier of the member for which we want to retrieve the picture
    */
-  app.get('/api/membres/:idMember/photos', (request, response) => {
+  app.get('/api/membres/:idMember/photos', validateToken,(request, response) => {
 
     const idMember = request.params.idMember;
     let query = "select PO.pictures  \
@@ -167,7 +168,7 @@ module.exports = function (app, client) {
    * @method GET
    * @param {integer} idMember identifier of the member for which we want to retrieve information
    */
-  app.get('/api/membres/:idMember/photos/count', (request, response) => {
+  app.get('/api/membres/:idMember/photos/count', validateToken,(request, response) => {
 
     const idMember = request.params.idMember;
     let query = "select count(distinct(PO.pictures )) \
@@ -193,7 +194,7 @@ module.exports = function (app, client) {
    * @method PUT
    * @param {integer} idMember identifier of the member for which we want to retrieve information
    */
-  app.put('/api/membres/:idMember/update', (request, response) => {
+  app.put('/api/membres/:idMember/update', validateToken,(request, response) => {
     const idMember = request.params.idMember;
     const name = request.body.name
     const surname = request.body.surname
@@ -217,7 +218,7 @@ module.exports = function (app, client) {
    * @method DELETE
    * @param {integer} idMember identifier of the member for which we want to eliminate photo
    */
-  app.delete('/api/membres/:idMember/eliminate/photo', (request, response) => {
+  app.delete('/api/membres/:idMember/eliminate/photo', validateToken,(request, response) => {
     const idMember = request.params.idMember;
     const photo = request.body.photo
     let query = "delete from photos \
@@ -244,7 +245,7 @@ module.exports = function (app, client) {
    * @method GET
    * @param {integer} idMember identifier of the member for which we want to retrieve the grade
    */
-  app.get('/api/membres/:idMember/grade', (request, response) => {
+  app.get('/api/membres/:idMember/grade', validateToken,(request, response) => {
 
     const idMember = request.params.idMember;
     let query = "select ME.id_member, GRM.id_grade, GRM.name_grade, CO.name_color as color \
@@ -271,7 +272,7 @@ module.exports = function (app, client) {
    * @method PUT
    * @param {integer} idMember identifier of the member for which we want to change the grade
    */
-  app.put('/api/membres/:idGrade', (request, response) => {
+  app.put('/api/membres/:idGrade', validateToken,(request, response) => {
     const idGrade = request.params.idGrade;
     const userNow = request.body.userNow
     let query = "update member set id_grade = ($1)   \ \

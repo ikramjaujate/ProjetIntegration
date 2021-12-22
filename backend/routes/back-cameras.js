@@ -57,20 +57,20 @@ module.exports = function (app, client) {
   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
   * @method GET
   **/
-  app.get('/api/photos/encrypt', validateToken,async(req, res) => {
+  /*app.get('/api/photos/encrypt', validateToken,async(req, res) => {
     await Encryption.encryptFolder("./build/imgClient");
     res.send('encrypt')
-  })
+  })*/
 
   /**
   * Decrypt a folder/file
   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
   * @method GET
   **/
-  app.get('/api/photos/decrypt', validateToken,async(req, res) => {
+  /*app.get('/api/photos/decrypt', validateToken,async(req, res) => {
     await Encryption.decryptFolder("./build/imgClient.encrypted");
     res.send('decrypt')
-  })
+  })*/
       
   
   app.get('/api/permission/:picture/:camera', (req, res) =>{
