@@ -67,9 +67,10 @@ export const GlobalStyles = createGlobalStyle`
   .addMember {
     background-color: ${({ theme }) => theme.addMember}!important;
   }
-  .cardMember {
-    border: ${({ theme }) => theme.borderCardMember}!important;
+  .cardPicture {
+    background-color: ${({ theme }) => theme.carteGrade}!important;
   }
+
   .members .shadow {
     box-shadow : ${({ theme }) => theme.shadowMember}!important;
   }
@@ -105,6 +106,31 @@ export const GlobalStyles = createGlobalStyle`
   }
   .frameSee {
     background-color: ${({ theme }) => theme.seeingIcon};
+  }
+  .settings a:link {
+    color : ${({ theme }) => theme.text};
+  }
+  .settings a:active {
+      color : ${({ theme }) => theme.text};
+  }
+  .settings a:focus {
+      color : ${({ theme }) => theme.text};
+  }
+  .settings a:hover {
+      color : ${({ theme }) => theme.text};
+  }
+  .settings a:visited {
+      color : ${({ theme }) => theme.text};
+  }
+  .cam2  .bg-light {
+    background-color: ${({ theme }) => theme.carteGrade}!important;
+  }
+  .form-check-input:checked {
+    background-color: ${({ theme }) => theme.cameraAllowed};
+    border-color: ${({ theme }) => theme.cameraAllowed};
+  }
+  .voirPhoto #imgModalLabel {
+    color: ${({ theme }) => theme.text} !important;
   }
 
 
