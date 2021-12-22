@@ -47,10 +47,10 @@ module.exports = function (app, client) {
     fs.readdir('../build/imgClient/',  (err, files) => {
       files.forEach(file => {
         list.push(file)
+
       });
       res.send({ "picture": list[list.length - 1] })
-  
-      //await Encryption.encryptFolder('../frontend/public/imgClient');
+
     });
   })
 
