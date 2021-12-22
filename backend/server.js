@@ -15,7 +15,8 @@ const helmet = require("helmet");
 
 
 //const express_waf_middleware = require("express-waf-middleware");
-
+//const validateToken = require('./middleware/validateToken')
+const router = express.Router()
 const permissionsPolicy = require("permissions-policy");
 const expectCt = require("expect-ct");
 
@@ -23,7 +24,7 @@ const expectCt = require("expect-ct");
 /*
  * Const cors = require('cors')
  * const mysql = require('mysql')
- * const router = express.Router()
+
  * const controller = require('./src/controller/file.controller')
  * const { request, response } = require('express')
  */
@@ -113,6 +114,7 @@ app.use(express.json())
 app.use(express.static(__dirname + '/build/'));
 
 console.log(__dirname)
+
 // ROUTE FOR API
 grade(app, client);
 cameras(app, client);

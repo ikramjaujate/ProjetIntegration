@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const Encryption = require("../helpers/folder-encryption.js");
+const validateToken = require('../middleware/validateToken.js')
 
 
 module.exports = function(app,client) {
@@ -9,7 +10,7 @@ module.exports = function(app,client) {
   * @author Dallenogare Corentin <corentda@hotmail.fr>
   * @method GET
   **/
-  app.get('/api/photos', async(req, res) =>{
+  app.get('/api/photos', validateToken,async(req, res) =>{
     //await Encryption.decryptFolder("./build/imgClient.encrypted");
     const fs = require('fs');
     let list = [];
@@ -35,7 +36,7 @@ module.exports = function(app,client) {
  **/    
 
     
-  app.delete('/api/photos/:idPhoto', (req, res) =>{
+  app.delete('/api/photos/:idPhoto', validateToken,(req, res) =>{
     const fs = require('fs');
     idPhoto= req.params.idPhoto
     console.log(idPhoto);
@@ -56,7 +57,7 @@ module.exports = function(app,client) {
   * @author Aurélien Brille <a.brille@students.ephec.be>
   * @method POST
   **/
-  app.post('/api/upload-photos', async (req, res) => {
+  app.post('/api/upload-photos', validateToken,async (req, res) => {
     try {
         if(!req.files) {
             return res.send({

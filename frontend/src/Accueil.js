@@ -23,7 +23,9 @@ function Cam2() {
     //Get qui va chercher toutes les caméras et leur état 
     var etatCamera = {
       method: 'GET',
-      headers: { 'Content-type': 'application/json' }
+      headers: { 'Content-type': 'application/json',
+      'Authorization': localStorage.getItem('access_token')
+     }
     }
 
     fetch('/api/cameras', etatCamera)

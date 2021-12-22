@@ -88,7 +88,7 @@ function Grades() {
     const getGrades = () => {
         fetch(`/api/grades`, {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('access_token') },
         })
         .then(result => {
             return result.json();
@@ -96,7 +96,7 @@ function Grades() {
         .then(dataCamera => {
             fetch(`/api/grades/members`, {
                 method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('access_token') },
             })
             .then(result => {
                 return result.json();
@@ -116,7 +116,7 @@ function Grades() {
     const getColor = () => {
         fetch(`/api/grades/colors`, {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('access_token')},
         })
         .then(result => {
             return result.json();
@@ -185,7 +185,7 @@ function Grades() {
 
         fetch(`/api/grades/${grade}/cameras`, {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('access_token') },
         })
         .then(result => {
             return result.json();
@@ -233,7 +233,7 @@ function Grades() {
 
             fetch("/api/grade", {
                 method: "PUT",
-                headers: {"Content-type": "application/json"},
+                headers: {"Content-type": "application/json", 'Authorization': localStorage.getItem('access_token')},
                 body: JSON.stringify({ name: newName, idcolor: newColor })
             })
             .then((res) => {
@@ -278,7 +278,7 @@ function Grades() {
         if (Object.keys(listOfNewActions).length !== 0 || Object.keys(listOfNewNotifications).length !== 0) {
             fetch(`/api/grades/${currentIdGrade}/permissions`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('access_token') },
                 body: JSON.stringify({ actions: listOfNewActions, notifications: listOfNewNotifications })
             })
             .then(result => {
@@ -330,7 +330,7 @@ function Grades() {
                     actualId = informationsGrade[i].id_grade;
                     fetch(`/api/grades/${actualId}/order`, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('access_token') },
                         body: JSON.stringify({ newPlace: i })
                     })
                     .then(result => {
@@ -362,7 +362,7 @@ function Grades() {
             console.log("delete")
             fetch(`/api/grades/${idGrade}`, {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('access_token')},
             })
             .then(result => {
                 return result.json();

@@ -1,3 +1,4 @@
+const validateToken = require('../middleware/validateToken.js')
 module.exports = function (app, client) {
     var jwt = require('jsonwebtoken');
   
@@ -53,7 +54,7 @@ module.exports = function (app, client) {
      * @param {string} oldPassword  old password of the user
      * @param {string} newPassword new password choose by the user
      */
-    app.post('/api/:user/password', (request, response) => {
+    app.post('/api/:user/password', validateToken,(request, response) => {
       const oldPassword = request.body.oldPassword;
       const newPassword = request.body.newPassword;
       const user = request.params.user;
@@ -93,7 +94,7 @@ module.exports = function (app, client) {
      * @param {string} username  old password of the user
      * @param {string} password new password choose by the user
      */
-     app.post('/api/:user/username', (request, response) => {
+     app.post('/api/:user/username', validateToken,(request, response) => {
       const username = request.body.username;
       const password = request.body.password;
       const user = request.params.user;

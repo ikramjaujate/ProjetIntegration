@@ -20,7 +20,7 @@ function Biblio (){
       
         //Get qui va chercher toutes les photos 
         var allFiles = {method : 'GET',
-              headers:{'Content-type':'application/json'}
+              headers:{'Content-type':'application/json', 'Authorization': localStorage.getItem('access_token')}
               }
         
               fetch('/api/photos', allFiles)
@@ -49,7 +49,7 @@ function Biblio (){
       const idPhoto = photo;
       let informations = {
           method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' }, 
+          headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('access_token') }, 
       };
       fetch(`/api/photos/${idPhoto}`, informations).then((response)=> {
           if(response.status === 200){         

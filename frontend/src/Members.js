@@ -85,8 +85,12 @@ export default function Members() {
             fetch(
                 '/api/upload-photos',
                 {
+                    headers : {
+                        'Authorization': localStorage.getItem('access_token')
+                    },
                     method: 'POST',
                     body: formData,
+                    
                 }
             )
                 .catch((error) => {
@@ -127,7 +131,7 @@ export default function Members() {
     const getMembers = () => {
 		let informations = {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' }, 
+            headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('access_token') }, 
         };
         fetch(`/api/members`, informations)
             .then(response => {
@@ -177,7 +181,7 @@ export default function Members() {
     const delMember = (id) => {
         let informations = {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' }, 
+            headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('access_token') }, 
         };
         fetch(`/api/members/${id}`, informations).then((response)=> {
             if(response.status === 200){
@@ -201,7 +205,8 @@ export default function Members() {
     const getGrade = () => {        
         let informations = {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' }, 
+            headers: { 'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('access_token') }, 
         };
         fetch(`/api/gradesInfos`, informations).then((response)=> {
             return response.json()
@@ -224,7 +229,7 @@ export default function Members() {
         fetch(`/api/membres/${userNow}/update`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json','Authorization': localStorage.getItem('access_token')
             },
             body: JSON.stringify({ name, surname })
         }).then((response) => {
@@ -251,7 +256,7 @@ export default function Members() {
     const gradeMembre = (userNow) => {
         let informations = {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json','Authorization': localStorage.getItem('access_token') },
         };
         fetch(`/api/membres/${userNow}/grade`, informations)
             .then(response => response.json())
@@ -275,7 +280,7 @@ export default function Members() {
     const gradeAll = (userNow) => {
         let informations = {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json','Authorization': localStorage.getItem('access_token') },
         };
         fetch(`/api/grades`, informations)
             .then(response => response.json())
@@ -297,6 +302,7 @@ export default function Members() {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('access_token')
             },
         };
         fetch(`/api/membres/${userNow}`, informations)
@@ -344,7 +350,7 @@ export default function Members() {
     const countPhoto = (userNow) => {
         let informations = {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json','Authorization': localStorage.getItem('access_token') },
         };
         fetch(`/api/membres/${userNow}/photos/count`, informations)
             .then(response => response.json())
@@ -363,7 +369,7 @@ export default function Members() {
     const photoMembre = (userNow) => {
         let informations = {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json','Authorization': localStorage.getItem('access_token') },
         };
         fetch(`/api/membres/${userNow}/photos`, informations)
             .then(response => response.json())
@@ -396,7 +402,7 @@ export default function Members() {
         fetch(`/api/membres/${userNow}/eliminate/photo`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json','Authorization': localStorage.getItem('access_token')
             },
             body: JSON.stringify({ photo })
         }).then((response) => {
@@ -446,7 +452,7 @@ export default function Members() {
         fetch(`/api/membres/${idGrade}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json','Authorization': localStorage.getItem('access_token')
             },
             body: JSON.stringify({ userNow })
         }).then((response) => {

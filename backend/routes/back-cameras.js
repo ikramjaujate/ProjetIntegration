@@ -4,6 +4,7 @@ const { response } = require("express");
 //const fe = require('../helpers/folder-encryption.js')
 //import * as folderEncrypt from 'folder-encrypt';
 const Encryption = require("../helpers/folder-encryption.js");
+const validateToken = require('../middleware/validateToken.js')
 
 module.exports = function (app, client) {
 
@@ -12,7 +13,7 @@ module.exports = function (app, client) {
   * @author Cécile Bonnet <c.bonnet@gmail.com>
   * @method GET
   **/
-  app.get('/api/cameras', (req, response) => {
+   app.get('/api/cameras', validateToken ,(req, response) => {
     let query = "select id_camera, name_camera, name_status,ST.id_status \
   from camera as CA \
   join status as ST on CA.id_status = ST.id_status" ;
@@ -56,7 +57,7 @@ module.exports = function (app, client) {
   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
   * @method GET
   **/
-  app.get('/api/photos/encrypt', async(req, res) => {
+  app.get('/api/photos/encrypt', validateToken,async(req, res) => {
     await Encryption.encryptFolder("./build/imgClient");
     res.send('encrypt')
   })
@@ -66,7 +67,7 @@ module.exports = function (app, client) {
   * @author Ikram Jaujate Ouldkhala <i.jaujateouldkhala@students.ephec.be>
   * @method GET
   **/
-  app.get('/api/photos/decrypt', async(req, res) => {
+  app.get('/api/photos/decrypt', validateToken,async(req, res) => {
     await Encryption.decryptFolder("./build/imgClient.encrypted");
     res.send('decrypt')
   })

@@ -1,3 +1,5 @@
+const validateToken = require('../middleware/validateToken.js')
+
 module.exports = function (app, client, done) {
 
     const shouldAbort = err => {
@@ -20,7 +22,7 @@ module.exports = function (app, client, done) {
      * @method : GET
      * 
      */
-    app.get('/api/gradesInfos', (request ,response) => {
+    app.get('/api/gradesInfos', validateToken,(request ,response) => {
         let query = "  select GR.id_grade, GR.name_grade, CO.name_color as colors\
 		from public.grade as GR\
 		join color as CO on GR.id_color = CO.id_color\
@@ -44,7 +46,7 @@ module.exports = function (app, client, done) {
      * @method GET
      * @param {integer} idGrade identifier of the grade for which we want to retrieve information
      */
-    app.get("/api/grades/:idGrade/cameras", (request, response) => {
+    app.get("/api/grades/:idGrade/cameras", validateToken,(request, response) => {
         const idGrade = request.params.idGrade;
         const query = "select PE.id_permission, PE.id_camera, CA.name_camera, allowed, notification \
         from permission as PE \
@@ -69,7 +71,7 @@ module.exports = function (app, client, done) {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @method GET
      */
-    app.get("/api/grades",(request, response) => {
+    app.get("/api/grades",validateToken,(request, response) => {
         const query = "select GRM.id_grade, GRM.name_grade, GRM.order_place, CO.name_color as color, \
                     (select count(*) \
                     from camera as CA \
@@ -102,7 +104,7 @@ module.exports = function (app, client, done) {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @method GET
      */
-    app.get("/api/grades/members", (request, response) => {
+    app.get("/api/grades/members", validateToken,(request, response) => {
         const query = "select GR.id_grade, count(ME.id_member) as members \
         from grade as GR \
         left join member as ME on GR.id_grade = ME.id_grade \
@@ -124,7 +126,7 @@ module.exports = function (app, client, done) {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @method GET
      */
-    app.get("/api/grades/colors", (request, response) => {
+    app.get("/api/grades/colors", validateToken,(request, response) => {
         const query = "select * \
         from color \
         where id_color not in (select CO.id_color \
@@ -151,7 +153,7 @@ module.exports = function (app, client, done) {
      * @param {integer} idGrade identifier of the grade for which we want to change the order place
      * @param {integer} newPlace  new number of the place for the grade
      */
-     app.post("/api/grades/:idGrade/order",(request, response) => {
+     app.post("/api/grades/:idGrade/order",validateToken,(request, response) => {
         const newPlace = request.body.newPlace ;
         const idGrade = request.params.idGrade ;
         const query = "update grade \
@@ -175,7 +177,7 @@ module.exports = function (app, client, done) {
      * @method POST
      * @param {integer} idGrade identifier of the grade for which we want to change the order place
      */
-     app.delete("/api/grades/:idGrade",(request, response) => {
+     app.delete("/api/grades/:idGrade",validateToken,(request, response) => {
         const idGrade = request.params.idGrade ;
         const query = "call grade_suppression($1);" ;
         client.query(query,[idGrade],(error, results) => {
@@ -197,7 +199,7 @@ module.exports = function (app, client, done) {
      * @param {integer} name name of the new grade
      * @param {integer} color color of the new grade
      */
-    app.put("/api/grade",(request, response) => {
+    app.put("/api/grade", validateToken,(request, response) => {
         const name = request.body.name;
         const idColor = request.body.idcolor ;
         const query = "call grade_creation(($1), ($2));";
@@ -223,7 +225,7 @@ module.exports = function (app, client, done) {
      * @param {object} actions dictionary with the camera ID as key and the new camera's action as value (= opposite of the old value)
      * @param {object} notifications dictionary with the camera ID as key, and the presence of a notification or not as a value (= opposite of the old value)
      */
-    app.post("/api/grades/:idGrade/permissions", async (request, response) => {
+    app.post("/api/grades/:idGrade/permissions", validateToken,async (request, response) => {
         const idGrade = request.params.idGrade ;
         const actions = request.body.actions ;
         const notifications = request.body.notifications ;
