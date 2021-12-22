@@ -19,18 +19,16 @@ function Navbar() {
     const [hover, setHover] = useState(true);
 
     const changement = () => {
-        console.log("changement");
         if (hover) {
-            console.log("hover")
             document.getElementById("id-ul").className = "petitEcranOuvertElement navbar-nav me-auto mb-2 mb-lg-0";
             document.getElementById("id-nav").className = "petitEcranOuvert navbar navbar-main navbar-expand-lg navbar-light bg-secondary navExpand";
-            document.getElementById("navbarSupportedContent").className = "etirement petitEcranLayoutOuvert" ;
+            document.getElementById("navbarSupportedContent").className = "etirement petitEcranLayoutOuvert row align-items-center" ;
         }
         else {
             console.log("hover")
             document.getElementById("id-ul").className = "petitEcranFermeElement navbar-nav me-auto mb-2 mb-lg-0";
             document.getElementById("id-nav").className = "petitEcranFerme navbar navbar-main navbar-expand-lg navbar-light bg-secondary navExpand";
-            document.getElementById("navbarSupportedContent").className = "etirement petitEcranLayoutFerme" ;
+            document.getElementById("navbarSupportedContent").className = "etirement petitEcranLayoutFerme row align-items-center" ;
         }
     }
 
@@ -41,7 +39,7 @@ function Navbar() {
                 <button class="petitEcranBouton " onClick={() => {setHover(!hover);changement()}}>
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="etirement petitEcranLayoutFerme" id="navbarSupportedContent"> 
+                <div class="etirement petitEcranLayoutFerme row align-items-center" id="navbarSupportedContent"> 
                     <ul id="id-ul" class="petitEcranFermeElement navbar-nav me-auto mb-2 mb-lg-0">
                         <ElementNavBar href="home" text="ACCUEIL" icon="bi-house" style={{"fontSize" : "2rem"}} />
                         <ElementNavBar href="grades" text="GRADES" icon="bi-diagram-3" style={{"fontSize" : "2rem"}} />

@@ -59,6 +59,10 @@
     transition: width .6s;
     
   }
+  
+  .navbar-main .row{
+    margin-left: 0rem!important;
+  }
  
   .navExpand:hover {
     width: 14rem;
@@ -98,12 +102,8 @@
   }
 
   .navbar-nav {
-    margin-top: 9.8rem ;
-    margin-left: 1.2rem!important;
+    margin-left: 0.5rem!important;
     align-items: flex-start;
-  }
-  .deconnection-button {
-    padding-top: 6.5rem ;
   }
   
 }
