@@ -3,6 +3,15 @@ import ElementNavBar from './components/ElementNavbar';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import $ from 'jquery'; 
+
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap/dist/css/bootstrap.css';
+import'bootstrap/dist/css/bootstrap.min.css';
+import'bootstrap/dist/js/bootstrap.min.js';
+import'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import NavbarTT from 'react-bootstrap/Navbar';
 
   import Container from 'react-bootstrap/Container';
@@ -25,11 +34,13 @@ function Navbar() {
     const changement = () => {
         console.log("changement");
         if (hover) {
+            console.log("hover")
             document.getElementById("id-ul").className = "petitEcranOuvertElement navbar-nav me-auto mb-2 mb-lg-0";
             document.getElementById("id-nav").className = "petitEcranOuvert navbar navbar-main navbar-expand-lg navbar-light bg-secondary navExpand";
             document.getElementById("navbarSupportedContent").className = "etirement petitEcranLayoutOuvert" ;
         }
         else {
+            console.log("hover")
             document.getElementById("id-ul").className = "petitEcranFermeElement navbar-nav me-auto mb-2 mb-lg-0";
             document.getElementById("id-nav").className = "petitEcranFerme navbar navbar-main navbar-expand-lg navbar-light bg-secondary navExpand";
             document.getElementById("navbarSupportedContent").className = "etirement petitEcranLayoutFerme" ;
@@ -91,12 +102,22 @@ function Navbar() {
                         <ElementNavBar href="members" text="MEMBRES" icon="bi-people" style={{"fontSize" : "2rem"}} />
                         <ElementNavBar href="photos" text="GALERIE" icon="bi-images" style={{"fontSize" : "2rem"}} />
                         <ElementNavBar href="settings" text="PARAMETRES" icon="bi-gear" style={{"fontSize" : "2rem"}} />
-                        <li className="nav-item deconnection-button">
-                            <Link className="navbar__link" to="#" onClick={deconnexion}>
-                                <i class={`bi bi-box-arrow-left m-4`} style={{ "fontSize": "2rem" }} ></i>
-                                <span className="link-text" style={{ fontWeight: "500" }} >DECONNEXION</span>
-                            </Link>
+                        <li className="nav-item deconnection-button" style={{textAlign: "-webkit-center"}}>
+                            <div className="petitEcranLinkFerme">
+                                <Link className="navbar__link" to="#" onClick={deconnexion}>
+                                    <i class={`bi bi-box-arrow-left me-4`} style={{ "fontSize": "2rem" }} ></i>
+                                    <span className="link-text" style={{ fontWeight: "500" }} >DECONNEXION</span>
+                                </Link>
+                            </div>
                         </li>
+                        {/* <li className="nav-item deconnection-button">
+                            <div >
+                                <Link className="navbar__link" to="#" onClick={deconnexion}>
+                                    <i class={`bi bi-box-arrow-left m-4`} style={{ "fontSize": "2rem" }} ></i>
+                                    <span className="link-text" style={{ fontWeight: "500" }} >DECONNEXION</span>
+                                </Link>
+                            </div>
+                        </li> */}
                     </ul>
                 </div>
             </div>

@@ -133,6 +133,10 @@
 
 
 @media only screen and (max-width: 991px) {
+  .petitEcranLinkFerme {
+    text-align: left; 
+    width:11rem
+  }
   .petitEcranBouton {
     display:block;
     color: rgba(0,0,0,.55)!important;
@@ -154,23 +158,25 @@
   }
   .petitEcranFermeElement {
     display:none;
+    visibility: hidden ;
     opacity: 0;
-    transition: display .3s ease-in-out, opacity .3s ease-in-out 1s;
+    transition: display 1s ease-in-out, opacity 1s ease-in-out 1s, visibility 1s ease-in-out 1s, top 1s ease-in-out 1s!important;
     position: relative;
-    top: 2rem;
+    top: 8rem;
   }
 
   .petitEcranOuvert {
-    height: 24rem;
+    height: 23rem;
     transition: height .3s ease-in-out;
   }
 
   .petitEcranOuvertElement {
-      display:block;
+      display:flex;
+      visibility: visible ;
       opacity: 1;
-      transition: display .3s ease-in-out, opacity .3s ease-in-out 1s;
+      transition: display 1s ease-in-out, opacity 1s ease-in-out 1s, visibility 1s ease-in-out 1s, top 1s ease-in-out 1s!important;
       position: relative;
-      top: 2rem;
+      top: 1.7rem;
    }
    .petitEcranLayoutFerme{}
    .petitEcranLayoutOuvert {
