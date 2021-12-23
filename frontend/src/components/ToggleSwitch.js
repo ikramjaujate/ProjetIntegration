@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const ToggleSwitch = ({ nom, status, id, setEtat }) => {
     //const [etat, setEtat] = useState("http://0.0.0.0:6060/video")
     function Allumer() {
-        console.log("up")
+       
         fetch("http://0.0.0.0:6060/up", {
             headers: {
                 'Access-Control-Allow-Origin': '*'
@@ -16,7 +16,7 @@ const ToggleSwitch = ({ nom, status, id, setEtat }) => {
         })
     }
     function Eteindre() {
-        console.log("éteindre")
+        
         fetch("http://0.0.0.0:6060/shutdown", {
             headers: {
                 'Access-Control-Allow-Origin': '*'
@@ -30,17 +30,19 @@ const ToggleSwitch = ({ nom, status, id, setEtat }) => {
         let statut = document.getElementById(identifiant).checked
         if (statut) {
             Allumer();
+            
         }
         else {
             Eteindre();
+            
         }
     }
 
     return (
         <div className='perm switchcam' >
             <div className="form-check form-switch" >
-                {status === 1 ? <input className="form-check-input on "  type="checkbox" role="switch" id={id} defaultChecked onClick={() => console.log("etteint")} /> :
-                    status === 2 ? <input className="form-check-input off" type="checkbox" role="switch" id={id} onClick={() => console.log('allumé')} /> :
+                {status === 1 ? <input className="form-check-input on "  type="checkbox" role="switch" id={id} defaultChecked onClick={() => Eteindre(id)} /> :
+                    status === 2 ? <input className="form-check-input off" type="checkbox" role="switch" id={id} onClick={() => Allumer(id)} /> :
                         <input className="form-check-input disco"  type="checkbox" role="switch" id={id} disabled />}
             </div>
 

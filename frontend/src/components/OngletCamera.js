@@ -18,7 +18,7 @@ function CadreCameras({ idCam, nomCam, statusCam, nomStatus, index }) {
                     <div className='cont'>
                         <i className="bi bi-camera-video logo_allow" ></i>
                         <div className='nom_cam_allow' >{nomCam}</div>
-                        <i data-bs-toggle="modal" data-bs-target={`#modal-${index}`} className="bi bi-eye oeil"></i>
+                        <i data-bs-toggle="modal" data-bs-target={`#modal-${index}`} className="frameSee frameActions col-3 p-0 rounded-circle shadow bi bi-eye oeil" style={{'height':'1.4rem','margin-top':'0.2rem','margin-bottom':'0.6'}}></i>
                         </div>
                         <ToggleSwitch nom={nomCam} setEtat={setEtat} status={statusCam} id={idCam} />
                     
