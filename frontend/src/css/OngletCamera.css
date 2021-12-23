@@ -55,7 +55,7 @@
     }
     .logo_allow{
         margin-left:20px;
-        margin-right: 20px;
+        margin-right: 10px;
     }
     .logo_disco{
         margin-left:20px;
@@ -80,12 +80,12 @@
 @media (min-width: 992px) and (max-width: 1200px) {
     
     .gene{
-        width: 85%;
-        margin-left:17%;
+        width: 80%;
+        margin-left:16%;
     }
     .logo_allow{
         margin-left:20px;
-        margin-right: 20px;
+        margin-right: 10px;
     }
     .logo_disco{
         margin-left:20px;
@@ -110,11 +110,11 @@
 @media (min-width: 768px) and (max-width: 992px) {
     .gene{
         width: 80%;
-        margin-left:14%;
+        margin-left:10%;
     }
     .logo_allow{
         margin-left:20px;
-        margin-right: 20px;
+        margin-right: 10px;
     }
     .logo_disco{
         margin-left:20px;
@@ -138,12 +138,12 @@
 
 @media (min-width: 576px) and (max-width: 768px) {
     .gene{
-        width: 100%;
+        width: 90%;
         margin-left:8%;
     }
     .logo_allow{
         margin-left:20px;
-        margin-right: 20px;
+        margin-right: 10px;
     }
     .logo_disco{
         margin-left:20px;
@@ -157,7 +157,7 @@
         width: 10rem;
     }
     .nom_cam_off{
-        width: 11rem;
+        width: 10.6rem;
     }
     .nom_cam_disco{
         width: 7rem;
@@ -167,14 +167,14 @@
 
 }
 
-@media only screen and (max-width: 576px) {
+@media (min-width: 500px) and (max-width: 576px) {
     .gene{
         width: 80%;
         margin-left:6%;
     }
     .logo_allow{
         margin-left:20px;
-        margin-right: 20px;
+        margin-right: 10px;
     }
     .logo_disco{
         margin-left:20px;
@@ -197,33 +197,132 @@
     }
 
 }
-/* @media (min-width: 200px) and(max-width: 516px) {
+@media  (min-width :400px ) and (max-width: 500px) {
     .gene{
-        width: 10px;
-        margin-left:6%;
+        width: 80%;
+        margin-left:7%;
     }
     .logo_allow{
-        margin-left:5px;
-        margin-right: 20px;
+        text-align: center;
+        margin-right: 1rem;
     }
     .logo_disco{
-        margin-left:20px;
-        margin-right: 20px;
+       text-align: center;
+       margin-right: 1rem;
     }
     .logo_off{
-        margin-left:20px;
-        margin-right: 20px;
+        text-align: center;
+        margin-right: 1rem;
     }
     .nom_cam_allow{
-        width: 10rem;
+        /* margin-left:4rem; */
+        /* text-align: center; */
+        width: 6rem;
     }
     .nom_cam_off{
-        width: 10rem;
-        margin-right: 12px;
+        /* margin-left:3.5rem; */
+        /* text-align: center; */
+        width: 7.3rem;
 
     }
     .nom_cam_disco{
-        width: 7rem;
+        /* margin-left:3.5rem; */
+        /* text-align: center; */
+        width: 3.5rem;
+    }
+    .cont {
+        display: flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:flex-start;
+        /* margin-top: 1rem;   */
+    }
+    .gene{
+        margin-top: 1rem;
+        display: flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+    } 
+    .cadreCamera .oeil{
+        /* margin-left: 4.5rem; */
+    }
+}
+@media  (min-width :300px ) and (max-width: 400px) {
+    .gene{
+        width: 80%;
+        margin-left:7%;
+    }
+    .logo_allow{
+        text-align: center;
+        margin-right: 1rem;
+    }
+    .logo_disco{
+       text-align: center;
+       margin-right: 1rem;
+    }
+    .logo_off{
+        text-align: center;
+        margin-right: 1rem;
+    }
+    .nom_cam_allow{
+        /* margin-left:4rem; */
+        /* text-align: center; */
+        width: 6rem;
+    }
+    .nom_cam_off{
+        /* margin-left:3.5rem; */
+        /* text-align: center; */
+        width: 7.3rem;
+
+    }
+    .nom_cam_disco{
+        /* margin-left:3.5rem; */
+        /* text-align: center; */
+        width: 3.5rem;
+    }
+    .cont {
+        display: flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:flex-start;
+        /* margin-top: 1rem;   */
+    }
+    .gene{
+        margin-top: 1rem;
+        display: flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+    } 
+    .cadreCamera .oeil{
+        /* margin-left: 4.5rem; */
+    }
+}
+@media  (min-width :200px ) and (max-width: 300px) {
+    .gene{
+        width: 80%;
+        margin-left:7%;
+    }
+    .logo_allow{
+        text-align: center;
+        /* margin-right: 5px; */
+    }
+    .logo_disco{
+       text-align: center;
+    }
+    .logo_off{
+        text-align: center;
+    }
+    .nom_cam_allow{
+        margin-left:3.5rem;
+    }
+    .nom_cam_off{
+        /* margin-left:3.5rem; */
+        text-align: center;
+
+    }
+    .nom_cam_disco{
+        /* margin-left:3.5rem; */
+        text-align: center;
     }
     .cont {
         display: flex;
@@ -231,12 +330,16 @@
         flex-wrap:wrap;
         justify-content:flex-start;
         /* margin-top: 1rem;   */
-    /* }
+    }
     .gene{
         margin-top: 1rem;
         display: flex;
-        flex-direction:row;
+        flex-direction:column;
         flex-wrap:wrap;
-    } */
+    } 
+    .cadreCamera .oeil{
+        margin-left: 4.5rem;
+    }
+}
 
 

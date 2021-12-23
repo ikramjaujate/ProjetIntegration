@@ -85,10 +85,9 @@
 
 
 @media only screen and (min-width: 1200px) {
-  .perm .form-check .form-check-input{
-    margin-left:10rem;
+  
 
-  }
+  
   .perm .form-switch {
     margin-left:1rem;
   }
@@ -123,12 +122,25 @@
 
 }
 
-@media only screen and (max-width: 576px) {
+@media (min-width :500px ) and (max-width: 576px) {
   
   .perm .form-switch {
-    margin-left:7rem;
+    margin-left:5rem;
   }
 
 }
-
-
+@media  (min-width :400px ) and (max-width: 500px) {
+  .perm .form-switch {
+    margin-left:4rem;
+  }
+}
+@media  (min-width :300px ) and (max-width: 400px) {
+  .perm .form-switch {
+    margin-left:4rem;
+  }
+}
+@media  (min-width :200px ) and (max-width: 300px) {
+  .perm .form-switch {
+    margin-left:4.5rem;
+  }
+}
